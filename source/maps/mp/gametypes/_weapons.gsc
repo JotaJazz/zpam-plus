@@ -943,7 +943,7 @@ isShotgun(weaponname)
 
 getRandomWeapon()
 {
-	for (;;)
+	for (attempt = 0; attempt < 100; attempt++)
 	{
 		weaponname = level.weaponnames[randomInt(level.weaponnames.size)];
 		weapon = level.weapons[weaponname];
@@ -954,7 +954,7 @@ getRandomWeapon()
 		if (weapon.allow == false)
 			continue;
 
-		if(!level.scr_rifle_mode && weapon.team != self.pers["team"])
+		if(!level.scr_rifle_mode && weapon.team != "both" && weapon.team != self.pers["team"])
 			continue;
 
 		// Check if random selected weapon is free and allowed
@@ -963,6 +963,8 @@ getRandomWeapon()
 
 		return weaponname;
 	}
+
+	return "";
 }
 
 

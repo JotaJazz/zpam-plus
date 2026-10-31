@@ -1,6 +1,8 @@
 // String starts with substring
 startsWith(string, substring)
 {
+	if (substring.size > string.size)
+		return false;
 	for (i = 0; i < string.size && i < substring.size; i++)
 	{
 		if (string[i] != substring[i])
@@ -37,12 +39,15 @@ contains(string, substring)
 // If string starts with dash and number, like -1337, true is returned
 isDigitalNumber(string)
 {
+	if (string.size == 0)
+		return false;
+
 	for (i = 0; i < string.size; i++)
 	{
 		char = string[i];
 		charNext = "";
 		if ((i+1) < string.size)
-			char = string[i+1];
+			charNext = string[i+1];
 
 		if (isDigit(char)  ||  (i == 0 && char == "-" && isDigit(charNext)))
 			continue;
@@ -218,4 +223,25 @@ format_fractional(num, fixedPositions, precision)
 		sign = "-";
 
 	return sign + whole + "." + fraction2;
+}
+
+// Runs only with developer_script 1
+selfTest()
+{
+	if (!startsWith("abc", "ab"))
+		assertMsg("string selfTest: startsWith abc/ab");
+	if (startsWith("ab", "abc"))
+		assertMsg("string selfTest: startsWith ab/abc");
+	if (!isDigitalNumber("12"))
+		assertMsg("string selfTest: 12");
+	if (!isDigitalNumber("-5"))
+		assertMsg("string selfTest: -5");
+	if (isDigitalNumber("x5"))
+		assertMsg("string selfTest: x5");
+	if (isDigitalNumber("5x"))
+		assertMsg("string selfTest: 5x");
+	if (isDigitalNumber(""))
+		assertMsg("string selfTest: empty");
+	if (isDigitalNumber("-"))
+		assertMsg("string selfTest: dash");
 }

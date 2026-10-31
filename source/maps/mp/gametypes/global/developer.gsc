@@ -15,6 +15,7 @@ init()
 
 	// This is called only if developer_script is set to 1
 	/#
+	maps\mp\gametypes\global\string::selfTest();
   	//addEventListener("onConnected",     ::onConnected);
 	//addEventListener("onConnected",     ::onConnected2);
 	//addEventListener("onConnected",     ::onConnected3);

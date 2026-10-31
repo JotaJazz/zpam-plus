@@ -1633,7 +1633,7 @@ menuAutoAssign()
 menuAllies()
 {
 	// If team is already axis or we cannot join axis (to keep team balance), open team menu again
-	if(self.pers["team"] == "allies")
+	if(self.pers["team"] == "allies" || !maps\mp\gametypes\_teams::getJoinTeamPermissions("allies"))
 	{
 		return;
 	}
@@ -1663,7 +1663,7 @@ menuAllies()
 menuAxis()
 {
 	// If team is already axis or we cannot join axis (to keep team balance), open team menu again
-	if(self.pers["team"] == "axis")
+	if(self.pers["team"] == "axis" || !maps\mp\gametypes\_teams::getJoinTeamPermissions("axis"))
 	{
 		return;
 	}
