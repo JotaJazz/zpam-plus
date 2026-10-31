@@ -948,6 +948,9 @@ getRandomWeapon()
 		weaponname = level.weaponnames[randomInt(level.weaponnames.size)];
 		weapon = level.weapons[weaponname];
 
+		if (weaponname == "bar_buffed_mp" && !level.scr_bar_buffed)
+			continue;
+
 		if (weapon.allow == false)
 			continue;
 
