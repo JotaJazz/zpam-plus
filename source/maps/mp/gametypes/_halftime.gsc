@@ -39,7 +39,7 @@ Do_Half_Time()
 	axis_score = game["axis_score"];
 	game["axis_score"] = game["allies_score"];
 	game["allies_score"] = axis_score;
-	setTeamScore("axis", game["allies_score"]);
+	setTeamScore("axis", game["axis_score"]);
 	setTeamScore("allies", game["allies_score"]);
 
 	// Switch total called time-outs

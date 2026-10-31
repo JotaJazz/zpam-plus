@@ -61,7 +61,7 @@ handleAxis(cvar, value, isRegisterTime)
 
 handle(team, roundsplayed, value)
 {
-	if (level.gametype != "sd")
+	if (level.gametype != "sd" && level.gametype != "re")
 	{
 		iprintln("^1Score changing is available only in S&D gametype.");
 		return false;
@@ -71,7 +71,7 @@ handle(team, roundsplayed, value)
 		iprintln("^1Invalid attempt to change score. Score can be changed only in first ready-up time");
 		return false;
 	}
-	if (roundsplayed > level.matchround && level.matchround > 0)
+	if (roundsplayed >= level.matchround && level.matchround > 0)
 	{
 		iprintln("^1Value " + value + " is not acceptable, because its more than maximum playable rounds - " + level.matchround);
 		return false;

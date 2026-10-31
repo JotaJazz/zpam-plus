@@ -246,29 +246,21 @@ processPreviousMapToHistory()
 	{
 		// Move 2. saved map to 3. (removing the third)
 		setCvar("sv_map3_name", 	getCvar("sv_map2_name"));
-		setCvar("sv_map3_team1", 	getCvar("sv_map2_team1"));
-		setCvar("sv_map3_team2", 	getCvar("sv_map2_team2"));
 		setCvar("sv_map3_score1", 	getCvar("sv_map2_score1"));
 		setCvar("sv_map3_score2", 	getCvar("sv_map2_score2"));
 
 		// Move 1. saved map to 2. (removing the second)
 		setCvar("sv_map2_name", 	getCvar("sv_map1_name"));
-		setCvar("sv_map2_team1", 	getCvar("sv_map1_team1"));
-		setCvar("sv_map2_team2", 	getCvar("sv_map1_team2"));
 		setCvar("sv_map2_score1", 	getCvar("sv_map1_score1"));
 		setCvar("sv_map2_score2", 	getCvar("sv_map1_score2"));
 
 		// Save previous map to history at first location
 		setCvar("sv_map1_name", prevMap_map);
-		setCvar("sv_map1_team1", getCvar("sv_map_team1"));
-		setCvar("sv_map1_team2", getCvar("sv_map_team2"));
 		setCvar("sv_map1_score1", getCvar("sv_map_score1"));
 		setCvar("sv_map1_score2", getCvar("sv_map_score2"));
 
 		// remove prev map info
 		setCvar("sv_map_name", "");
-		setCvar("sv_map_team1", "");
-		setCvar("sv_map_team2", "");
 		setCvar("sv_map_score1", "");
 		setCvar("sv_map_score2", "");
 	}
@@ -354,8 +346,6 @@ determineTeamByFirstConnected()
 resetAll()
 {
 	setCvar("sv_map_name", "");
-	setCvar("sv_map_team1", "");
-	setCvar("sv_map_team2", "");
 	setCvar("sv_map_score1", "");
 	setCvar("sv_map_score2", "");
 
@@ -373,8 +363,6 @@ resetAll()
 	for (i = 1; i <= 3; i++)
 	{
 		setCvar("sv_map" + i + "_name", 	"");
-		setCvar("sv_map" + i + "_team1", 	"");
-		setCvar("sv_map" + i + "_team2", 	"");
 		setCvar("sv_map" + i + "_score1", 	"");
 		setCvar("sv_map" + i + "_score2", 	"");
 	}
@@ -631,7 +619,7 @@ UpdatePlayerCvars()
 		// Half
 		self setClientCvarIfChanged("ui_matchinfo_halfInfo", "");
 		// Map history
-		for (j = 1; j <= 2; j++)
+		for (j = 1; j <= 3; j++)
 		{
 			self setClientCvarIfChanged("ui_matchinfo_map" + j, "");
 		}

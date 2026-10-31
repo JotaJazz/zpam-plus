@@ -714,8 +714,8 @@ hitDataAutoRestart(eAttacker, self_num)
 	//self endon("disconnect");
 	eAttacker endon("disconnect");
 
-	self notify("hitDataAutoRestart_end");
-	self endon("hitDataAutoRestart_end");
+	self notify("hitDataAutoRestart_end" + eAttacker getEntityNumber());
+	self endon("hitDataAutoRestart_end" + eAttacker getEntityNumber());
 
 	// Reset data related to a single frame only
 	waittillframeend;

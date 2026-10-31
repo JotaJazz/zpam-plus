@@ -1192,10 +1192,10 @@ startRound()
 
 
 	logPrint("RoundStart;\n");
-	logPrint("RoundInfo;score:"+game["allies_score"]+":"+game["axis_score"]+";round:"+game["round"]+"\n");
 
 	// Define round number
 	game["round"] = game["roundsplayed"] + 1;
+	logPrint("RoundInfo;score:"+game["allies_score"]+":"+game["axis_score"]+";round:"+game["round"]+"\n");
 
 
 	// If is bash, there is no time-limit

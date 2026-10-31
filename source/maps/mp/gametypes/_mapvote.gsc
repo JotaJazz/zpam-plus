@@ -14,11 +14,12 @@ Init()
 		precacheString2("STRING_MAPVOTE_HEADER", &"Next Map Vote");
 	}
 
+	level.mapvotetime = 13;
+
 	// Map voting
 	if(!level.mapvote)
 		return;
 
-	level.mapvotetime = 13;
 	//level.mapvotereplay	= 0;
 
 }
@@ -178,7 +179,7 @@ RunMapVote()
 	}
 
 	// Any maps?
-	if(!isdefined(maps))
+	if(!isdefined(maps) || maps.size == 0)
 	{
 		wait level.frame;
 		level notify("VotingComplete");
