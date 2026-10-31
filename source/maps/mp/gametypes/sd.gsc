@@ -2283,8 +2283,11 @@ bombzone_think(bombzone_other)
 		self waittill("trigger", player);
 
 		// If timeout was called during strattime
-		if(!level.roundstarted || level.in_timeout)
+		if(level.in_timeout)
 			return;
+
+		if(!level.roundstarted)
+			continue;
 
 		// Another bombzone is already planting
 		if(isdefined(bombzone_other) && isdefined(bombzone_other.planting))
@@ -2300,7 +2303,7 @@ bombzone_think(bombzone_other)
 			positionOk = false;
 
 		// check for having been triggered by a valid player
-		if(isPlayer(player) && (player.pers["team"] == team) && player isOnGround() && positionOk)
+		if(isDefined(player) && isPlayer(player) && (player.pers["team"] == team) && player isOnGround() && positionOk)
 		{
 			while(player istouching(self) && isAlive(player) && player useButtonPressed())
 			{
@@ -2528,7 +2531,7 @@ bomb_think()
 		self waittill("trigger", player);
 
 		// check for having been triggered by a valid player
-		if(isPlayer(player) && (player.pers["team"] != level.planting_team) && player isOnGround())
+		if(isDefined(player) && isPlayer(player) && (player.pers["team"] != level.planting_team) && player isOnGround())
 		{
 			while(isAlive(player) && player useButtonPressed())
 			{

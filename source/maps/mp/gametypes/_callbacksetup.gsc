@@ -662,7 +662,7 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 			return;
 	}
 
-	if (level.balance_ppsh && isDefined(sWeapon) && sWeapon == "ppsh_stick30_mp")
+	if (level.balance_ppsh && isDefined(eAttacker) && isPlayer(eAttacker) && isDefined(sWeapon) && sWeapon == "ppsh_stick30_mp")
 	{
 		dist = distance(eAttacker.origin , self.origin);
 		if (dist > 800)

@@ -28,15 +28,21 @@ onSpawnedIntermission()
 onTimeoutCalled()
 {
     // Timeout can be called durring stratTime (SD) or in middle of the game (other gametypes) - so set correct objective text
-    level waittill("running_timeout");
-    level thread maps\mp\gametypes\_objective::setAllPlayersObjective();
+    for(;;)
+    {
+        level waittill("running_timeout");
+        level thread maps\mp\gametypes\_objective::setAllPlayersObjective();
+    }
 }
 
 onTimeoutCancel()
 {
     // Timeout an be called in middle of the game - so after timeout we need to restore original objective text
-    level waittill("timeoutover");
-    level thread maps\mp\gametypes\_objective::setAllPlayersObjective();
+    for(;;)
+    {
+        level waittill("timeoutover");
+        level thread maps\mp\gametypes\_objective::setAllPlayersObjective();
+    }
 }
 
 

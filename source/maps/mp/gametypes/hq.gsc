@@ -1073,7 +1073,7 @@ checkScoreLimit()
 	if(level.mapended) return;
 
 	// Is it a score-based Halftime?
-	if(!game["is_halftime"] && level.halfscore != 0)
+	if(level.halftime_enabled && !game["is_halftime"] && level.halfscore != 0)
 	{
 		if(game["half_1_allies_score"] >= level.halfscore || game["half_1_axis_score"] >= level.halfscore)
 		{

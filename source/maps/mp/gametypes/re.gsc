@@ -922,7 +922,7 @@ onDisconnect()
 				if(isdefined(self.hasobj[i]))
 				{
 					//if(self isonground())
-						self.hasobj[i] drop_objective_on_disconnect_or_death(self);
+						self.hasobj[i] thread drop_objective_on_disconnect_or_death(self);
 					//else
 					//	self.hasobj[i] drop_objective_on_disconnect_or_death(self, "trace");
 				}
@@ -1995,6 +1995,7 @@ endRound(roundwinner)
 	if (level.in_bash)
 	{
 		wait level.fps_multiplier * 4;
+		players = getentarray("player", "classname");
 
 		game["Do_Ready_up"] = undefined; // will restart readyup
 
@@ -2858,8 +2859,8 @@ drop_objective(player, endround)
 			self notify("completed");
 			level thread clear_player_dropbar(player);
 
-			self delete();
 			self.obj delete();
+			self delete();
 
 
 			//	End round statement
@@ -3263,8 +3264,8 @@ drop_objective_on_disconnect_or_death(player)
 		self notify("completed");
 		level thread clear_player_dropbar(player);
 
-		self delete();
 		self.obj delete();
+		self delete();
 
 	//	End round statement
 	if(game["attackers"] == "allies")

@@ -131,8 +131,11 @@ onRoundEnd()
             else if((isdefined(players[i].pers["team"])) && (players[i].pers["team"] == roundlooser))
                 losers = (losers + ";" + lpGuid + ";" + players[i].name);
         }
-        logPrint("Winners;"+roundwinner + winners + "\n");
-        logPrint("Losers;"+roundlooser + losers + "\n");
+        if (roundwinner != "draw")
+        {
+            logPrint("Winners;"+roundwinner + winners + "\n");
+            logPrint("Losers;"+roundlooser + losers + "\n");
+        }
 
     	logPrint("Score;allies;" + getTeamScore("allies") + ";axis;" + getTeamScore("axis") + "\n");
     }

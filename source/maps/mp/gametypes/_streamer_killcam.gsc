@@ -512,9 +512,9 @@ HUD_SetRowsInMenu()
 	}
 
 	if (str == "")
-		self setClientCvar2("ui_spectatorsystem_menu_text", "No record to play!");
+		self setClientCvarIfChanged("ui_spectatorsystem_menu_text", "No record to play!");
 	else
-		self setClientCvar2("ui_spectatorsystem_menu_text", str);
+		self setClientCvarIfChanged("ui_spectatorsystem_menu_text", str);
 }
 
 
