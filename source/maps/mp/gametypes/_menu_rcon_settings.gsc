@@ -226,6 +226,9 @@ settingsOptions(response)
 
 		if (key == "0" || key == "1" || key == "2" || key == "3" || key == "4" || key == "5" || key == "6" || key == "7" || key == "8" || key == "9" || key == ".")
 		{
+			if (self.pers[pers_cvar_value].size >= 16)
+				return;
+
 			self.pers[pers_cvar_value] += key;
 		}
 		else if (key == "enter")
@@ -278,6 +281,10 @@ settingsOptions(response)
 
 			else
 			{
+				// Limit size or the client cvar string would overrun va
+				if (value.size > 16)
+					break;
+
 				self.pers["rcon_settings_keyboard_for"] = "";
 
 				self.pers["rcon_settings_" + cvar_name] = value;

@@ -385,9 +385,9 @@ setClientCvarIfChanged(cvar, value)
 	if (valueStr.size > 1000)
 	{
 		/#
-		assertmsg("setClientCvarIfChanged() value.size " + value.size + " > 1000");
+		assertmsg("setClientCvarIfChanged() value.size " + valueStr.size + " > 1000");
 		#/
-		value = getsubstr(value, 0, 1000);
+		valueStr = getsubstr(valueStr, 0, 1000);
 	}
 
 
