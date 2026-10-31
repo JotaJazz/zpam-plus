@@ -1369,7 +1369,6 @@ dropFlag()
 		objective_position(self.flag.objective, self.flag.origin);
 		objective_team(self.flag.objective, "none");
 
-		level.flagtime = undefined;
 		self.flag thread autoReturn();
 		self detachFlag(self.flag);
 
@@ -1419,45 +1418,20 @@ returnFlag()
 autoReturn()
 {
 	self endon("end_autoreturn");
-	self endon("timeoutflag");
-	if (isDefined(level.flagtime) && level.flagtime < level.flag_auto_return)
-	{
-		level.flag_auto_return = level.flagtime;
-	}
-	level.flagtime = undefined;
+
 	if (level.flag_auto_return < 0)
 		return;
-	self thread monitorTO();
-	self thread flagTime();
-	wait level.fps_multiplier * level.flag_auto_return;
-	self thread returnFlag();
-}
 
-monitorTO()
-{
-	self endon("end_autoreturn");
-	level endon("timeoutover");
-	while(!level.in_timeout)
-		wait level.fps_multiplier * 1;
-	self notify("timeoutflag");
-}
-
-flagTime()
-{
-	self endon("end_autoreturn");
-
-	if (level.flag_auto_return == 0)
-		return;
-
-	level.flagtime = level.flag_auto_return;
-	start = getTime();
-
-	while (!level.in_timeout)
+	time = 0;
+	while (time < level.flag_auto_return)
 	{
-		passed = (getTime() - start) / 1000;
-		level.flagtime = level.flag_auto_return - passed;
 		wait level.fps_multiplier * 1;
+
+		if (!level.in_timeout)
+			time++;
 	}
+
+	self thread returnFlag();
 }
 
 attachFlag()
