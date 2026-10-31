@@ -3257,8 +3257,11 @@ drop_objective_on_disconnect_or_death(player)
 			}
 		}
 
-		player.pers["score"] += 1;
-		player.score = player.pers["score"];
+		if(isDefined(player) && isPlayer(player))
+		{
+			player.pers["score"] += 1;
+			player.score = player.pers["score"];
+		}
 		//level.objectives_done++;
 
 		self notify("completed");
