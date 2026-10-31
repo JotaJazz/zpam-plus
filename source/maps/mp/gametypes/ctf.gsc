@@ -598,7 +598,7 @@ respawn()
 			self.respawntimer destroy();
 	}
 
-	if(isDefined(self.pers["weapon"]))
+	if(isDefined(self.pers["weapon"]) && self.sessionstate != "playing")
 		self thread spawnPlayer();
 }
 
