@@ -58,6 +58,8 @@ Do_Overtime()
 	// Reset called timeouts in this half
 	game["axis_called_timeouts_half"] = 0;
 	game["allies_called_timeouts_half"] = 0;
+	game["axis_called_timeouts"] = 0;
+	game["allies_called_timeouts"] = 0;
 
 	// Other variables
 	game["roundsplayed"] = 0;

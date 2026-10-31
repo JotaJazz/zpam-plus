@@ -2298,8 +2298,8 @@ updateTeamStatus()
 	// if both allies and axis were alive and now they are both dead in the same instance
 	if(oldvalue["allies"] && !level.exist["allies"] && oldvalue["axis"] && !level.exist["axis"])
 	{
-		iprintln(&"MP_ALLIEDMISSIONACCOMPLISHED");
-		level thread endRound("allies");
+		iprintln(&"MP_ROUNDDRAW");
+		level thread endRound("draw");
 		return;
 	}
 

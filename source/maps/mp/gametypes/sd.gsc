@@ -1752,6 +1752,7 @@ endRound(roundwinner)
 	if (level.in_bash)
 	{
 		wait level.fps_multiplier * 4;
+		players = getentarray("player", "classname");
 
 		game["Do_Ready_up"] = undefined; // will restart readyup
 
@@ -2357,7 +2358,7 @@ bombzone_think(bombzone_other)
 				player.triggerRelease2 = undefined;
 
 				// If "F" was holded enoguht to plant bomb
-				if(self.progresstime >= level.planttime)
+				if(self.progresstime >= level.planttime && isAlive(player))
 				{
 					player.progressbackground destroy2();
 					player.progressbar destroy2();
