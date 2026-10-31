@@ -1,5 +1,5 @@
-zPAM3.36
-Released 2025/09/15
+zPAM3.37
+Released 2026/10/31
 
 This mod was created by EYZA and Fjozek
 

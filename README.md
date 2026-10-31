@@ -1,13 +1,13 @@
 # Introduction
 
-Mod zPAM3.36 is a new version of PAM mode for CoD2. <br>
+Mod zPAM3.37 is a new version of PAM mode for CoD2. <br>
 
 The code from the previous version zPAM 2.07 was completely rewritten and ported to a new code base, which helped in the implementation of new features and bug fixes.
 
 Work on this PAM was initiated by me in 2015 and was never fully finished. On corona days, I decided to finish it.
 
 ❗ Note ❗ <br>
-*This page describe only actual version zPAM 3.36.<br>
+*This page describe only actual version zPAM 3.37.<br>
 To see description of previous versions, click on the links in [Version list](#version-list).*
 
 ## Download
@@ -15,6 +15,7 @@ To see description of previous versions, click on the links in [Version list](#v
 	- 2025/09/15 - <b><a href="https://github.com/eyza-cod2/zpam3/releases/download/3.36/zpam336.zip">zPAM 3.36 - zpam336.zip</a></b>
 
 ## Version list
+- 2026/10/31 - <b>zPAM 3.37</b>
 - 2025/09/15 - <b>zPAM 3.36</b>
 - 2025/09/02 - <b><a href="https://github.com/eyza-cod2/zpam3/tree/2f22c5afbe6ba1a471e9a2cbbd98eee2025cd1de">zPAM 3.35</a></b>
 - 2024/08/25 - <b><a href="https://github.com/eyza-cod2/zpam3/tree/e73c0fd786781238b6ee5f3e1b81580da84cbf76">zPAM 3.34</a></b>
@@ -35,6 +36,19 @@ To see description of previous versions, click on the links in [Version list](#v
 
 ## Changelog
 
+
+<details><summary>zPAM 3.37 changes (click to open)</summary>
+<p>
+
+**Changes / Fixes / Improvements:**
+- server crash fix - client cvar length limit is enforced
+- Retrieval: draw on double elimination is handled correctly
+- planting while dead is no longer possible
+- overtime timeouts are reset correctly
+- pistol bash restart on disconnect fixed
+- buffed BAR is blocked from forbidden selection and excluded from random weapon
+</p>
+</details>
 
 <details><summary>zPAM 3.36 changes (click to open)</summary>
 <p>
@@ -382,7 +396,7 @@ r_polygonOffsetScale and r_polygonOffsetBias warning appears even if they were c
 ## Installation
 
 - Download <b><a href="https://github.com/eyza-cod2/zpam3/releases/download/3.36/zpam336.zip">zPAM 3.36</a></b> and extract files into following locations:
-	- ./Call of Duty 2/main/zpam336.iwd
+	- ./Call of Duty 2/main/zpam337.iwd
 	- ./Call of Duty 2/main/zpam_maps_v6.iwd <i>(*required only for 1.3 game version)</i>
 	- ./Call of Duty 2/main/server.cfg
 
