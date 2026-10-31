@@ -662,7 +662,7 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 			return;
 	}
 
-	if (level.balance_ppsh && isDefined(sWeapon) && sWeapon == "ppsh_mp")
+	if (level.balance_ppsh && isDefined(sWeapon) && sWeapon == "ppsh_stick30_mp")
 	{
 		dist = distance(eAttacker.origin , self.origin);
 		if (dist > 800)
@@ -672,7 +672,7 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 	if (level.prevent_single_shot_pistol && isDefined(sWeapon) && maps\mp\gametypes\_weapons::isPistol(sWeapon) && isdefined(sHitLoc) && sHitLoc == "head")
 		iDamage = int(iDamage * .85);
 	// Prevents a ppsh from killing in one shot if active
-	if (level.prevent_single_shot_ppsh && isDefined(sWeapon) && sWeapon == "ppsh_mp" && isdefined(sHitLoc) && sHitLoc == "head")
+	if (level.prevent_single_shot_ppsh && isDefined(sWeapon) && sWeapon == "ppsh_stick30_mp" && isdefined(sHitLoc) && sHitLoc == "head")
 		iDamage = int(iDamage * .9);
 
 

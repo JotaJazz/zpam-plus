@@ -700,7 +700,7 @@ watchPlayerDamageForStats(enemy, damage, sMeansOfDeath, sWeapon)
 	weapons["mosin_nagant_mp"] = 		100;
 	weapons["SVT40_mp"] = 			50;
 	weapons["PPS42_mp"] = 			50;
-	weapons["ppsh_mp"] = 			50;
+	weapons["ppsh_stick30_mp"] = 			50;
 	weapons["mosin_nagant_sniper_mp"] = 	100;
 	weapons["kar98k_mp"] = 			100;
 	weapons["g43_mp"] = 			50;

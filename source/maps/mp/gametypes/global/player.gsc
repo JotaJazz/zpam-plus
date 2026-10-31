@@ -278,7 +278,7 @@ getFOV()
 	weapon_fov["mosin_nagant_mp"] = 50;
 	weapon_fov["SVT40_mp"] = 50;
 	weapon_fov["PPS42_mp"] = 65;
-	weapon_fov["ppsh_mp"] = 65;
+	weapon_fov["ppsh_stick30_mp"] = 65;
 	weapon_fov["mosin_nagant_sniper_mp"] = 15;
 	weapon_fov["kar98k_mp"] = 50;
 	weapon_fov["g43_mp"] = 50;

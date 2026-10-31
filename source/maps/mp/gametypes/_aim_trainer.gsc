@@ -731,7 +731,7 @@ generateMeNewTargetPosition(reason)
 	weapons["mosin_nagant_mp"] = 		  1;
 	weapons["SVT40_mp"] = 			2;
 	weapons["PPS42_mp"] = 			2;
-	weapons["ppsh_mp"] = 			2;
+	weapons["ppsh_stick30_mp"] = 			2;
 	weapons["mosin_nagant_sniper_mp"] = 	  1;
 	weapons["kar98k_mp"] = 			  1;
 	weapons["g43_mp"] = 			2;

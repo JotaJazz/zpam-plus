@@ -450,7 +450,7 @@ getWeapon(sMeansOfDeath, sWeapon)
 	weaponsTexts["mosin_nagant_mp"] = "Mosin Nagant";
 	weaponsTexts["SVT40_mp"] = "SVT40";
 	weaponsTexts["PPS42_mp"] = "PPS42";
-	weaponsTexts["ppsh_mp"] = "PPSH";
+	weaponsTexts["ppsh_stick30_mp"] = "PPSH";
 	weaponsTexts["mosin_nagant_sniper_mp"] = "Mosin Nagant Scoped";
 	weaponsTexts["kar98k_mp"] = "Kar98k";
 	weaponsTexts["g43_mp"] = "Gewehr";
