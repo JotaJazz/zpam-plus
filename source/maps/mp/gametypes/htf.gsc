@@ -1385,6 +1385,8 @@ dropFlag()
 returnFlag()
 {
 	self notify("end_autoreturn");
+	self.access = false;
+	self.flagmodel hide();
 
 	self deleteFlagWaypoint();
 
@@ -2123,7 +2125,10 @@ getSpawnpoint(spawnpoints)
 			}
 
 			if(isDefined(level.flag.occupation) && spawnpoints[i].origin == level.flag.occupation)
+			{
+				weights[i] = -100000;
 				continue;
+			}
 
 			weights[i] = (enemyDistSum - 2*allyDistSum) / numplayers; // high enemy distance is good, high ally distance is bad
 		}
