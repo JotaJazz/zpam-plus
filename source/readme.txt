@@ -1,4 +1,4 @@
-zPAM3.37
+zPAM3.38
 Released 2026/10/31
 
 This mod was created by EYZA and Fjozek

@@ -63,7 +63,7 @@ handle(team, roundsplayed, value)
 {
 	if (level.gametype != "sd" && level.gametype != "re")
 	{
-		iprintln("^1Score changing is available only in S&D gametype.");
+		iprintln("^1Score changing is available only in S&D and Retrieval gametypes.");
 		return false;
 	}
 	if (!game["readyup_first_run"])
