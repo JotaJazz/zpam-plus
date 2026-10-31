@@ -1237,12 +1237,10 @@ updateAllowed(cvarName, cvarValue)
 
 			// Disable or enable weapon to all clients
 			players = getentarray("player", "classname");
-			for(i = 0; i < players.size; i++)
+			for(p = 0; p < players.size; p++)
 			{
-				players[i] setClientCvar2(level.weapons[weaponname].client_allowcvar, cvarvalue);
+				players[p] setClientCvar2(level.weapons[weaponname].client_allowcvar, cvarvalue);
 			}
-
-			break;
 		}
 	}
 }

@@ -346,6 +346,7 @@ onMenuResponse(menu, response)
 	}
 	else if(menu == game["menu_weapon_allies"] || menu == game["menu_weapon_axis"])
 	{
+		if (response == "bar_buffed_mp") response = "";
 		if (level.scr_bar_buffed && response == "bar_mp") {
 			response = "bar_buffed_mp";
 		}
