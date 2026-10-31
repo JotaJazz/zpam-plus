@@ -44,10 +44,10 @@ To see description of previous versions, click on the links in [Version list](#v
 **Changes / Fixes / Improvements:**
 - CTF/HTF respawn when changing team
 - CTF flag returns after timeout
-- HTF flag is hidden until respawn, and players spawn far from it
+- HTF flag is hidden until respawn, and players do not spawn on it
 - `random` no longer loops infinitely
 - team limit is validated in tdm, ctf, htf and hq
-- grenades and smokes are set per class; in rifle mode snipers go from 2 to 0 grenades
+- grenades and smokes are set per class
 - PPSh rules are active
 - score restore in Retrieval and rejection of full scores
 - map vote no longer blocks

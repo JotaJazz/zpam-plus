@@ -544,7 +544,7 @@ onAfterPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir,
 	if(!isdefined(self.switching_teams))
 	{
 		body = self cloneplayer(deathAnimDuration);
-		self.respawnAt = getTime() + level.respawndelay * 1000;
+		self.respawnAt = getTime() + (level.respawndelay + 1.5) * 1000;
 	}
 	self.switching_teams = undefined;
 

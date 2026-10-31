@@ -200,6 +200,9 @@ getTeamBalance()
 
 balanceTeams()
 {
+	if (game["state"] == "intermission")
+		return;
+
 	iprintlnbold(&"MP_AUTOBALANCE_NOW");
 	//Create/Clear the team arrays
 	AlliedPlayers = [];

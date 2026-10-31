@@ -73,7 +73,7 @@ handle(team, roundsplayed, value)
 	}
 	if (roundsplayed >= level.matchround && level.matchround > 0)
 	{
-		iprintln("^1Value " + value + " is not acceptable, because its more than maximum playable rounds - " + level.matchround);
+		iprintln("^1Value " + value + " is not acceptable, because it must be less than the maximum playable rounds - " + level.matchround);
 		return false;
 	}
 	if (value >= level.scorelimit && level.scorelimit > 0)
