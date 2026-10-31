@@ -544,7 +544,10 @@ onAfterPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir,
 
 	body = undefined;
 	if(!isdefined(self.switching_teams))
+	{
 		body = self cloneplayer(deathAnimDuration);
+		self.respawnAt = getTime() + level.respawndelay * 1000;
+	}
 	self.switching_teams = undefined;
 
 	delay = level.fps_multiplier * 1.5;
@@ -617,6 +620,23 @@ respawn_timer()
 		wait level.fps_multiplier * 1;
 
 	self notify("end_respawn");
+}
+
+respawn_wait_remaining()
+{
+	self endon("disconnect");
+	self notify("end_respawn_wait");
+	self endon("end_respawn_wait");
+
+	remaining = int((self.respawnAt - getTime()) / 1000) + 1;
+	self iprintln("You will respawn in " + remaining + " seconds.");
+	wait level.fps_multiplier * (self.respawnAt - getTime()) / 1000;
+
+	while(level.in_timeout)
+		wait level.fps_multiplier * 1;
+
+	if(isDefined(self.pers["weapon"]) && self.sessionstate != "playing")
+		self thread spawnPlayer();
 }
 
 respawn_spawned()
@@ -1855,7 +1875,10 @@ menuWeapon(response)
 		{
 			self.pers["weapon"] = weapon;
 
-			spawnPlayer();
+			if(isDefined(self.respawnAt) && getTime() < self.respawnAt)
+				self thread respawn_wait_remaining();
+			else
+				spawnPlayer();
 		}
 	}
 
