@@ -18,3 +18,7 @@ Changes since zPAM 3.38. Earlier history:
   Time-out call/cancel (2 s), the team-change message (2 s) and scoreboard
   clicks (0.5 s) are rate-limited per player.
 - `pam_mode` with a suffix after `pub` (such as `pub_mr12`) is refused as an invalid value; before, it crashed the map with a script error.
+- Reconnecting restores stats only from the same IP; before, any player with
+  the same name got them. Renaming to the name of a disconnected player no
+  longer deletes that player's stats: the renamed player keeps his own under the
+  old name.

@@ -98,13 +98,10 @@ handleRename()
       dataId = findData(self.pers["lastName"], self getEntityNumber());
       if (dataId >= 0)
       {
-        // if we rename to name that is already in stat unconnected, we need to delete them
+        // A disconnected player owns the new name: keep our stats under the old name, so neither loses them
         dataId2 = findData(self.name);
         if (dataId2 >= 0 && game["playerstats"][dataId2]["isConnected"] == false)
-        {
-          game["playerstats"][dataId2]["deleted"] = true;
-          //setCvar("sv_playerstats_" + dataId2 + "_deleted", 1);
-        }
+          return;
 
         game["playerstats"][dataId]["name"] = self.name;
         //setCvar("sv_playerstats_" + dataId + "_name", self.name);
@@ -122,7 +119,7 @@ getStatId()
 {
   handleRename();
 
-  return findData(self.name, self getEntityNumber());
+  return findData(self.pers["lastName"], self getEntityNumber());
 }
 
 getStats()
@@ -206,7 +203,8 @@ onConnected()
 		waittillframeend;
 
 		dataId = findData(self.name);
-		if (dataId >= 0 && game["playerstats"][dataId]["isConnected"] == false)
+		// same name from another IP is another player
+		if (dataId >= 0 && game["playerstats"][dataId]["isConnected"] == false && game["playerstats"][dataId]["ip"] == self getip())
 		{
 			game["playerstats"][dataId]["player"] = self;
 			game["playerstats"][dataId]["entityId"] = id;
@@ -225,6 +223,7 @@ onConnected()
 			game["playerstats"][newIndex]["player"] = self;
 			game["playerstats"][newIndex]["deleted"] = false;
 			game["playerstats"][newIndex]["entityId"] = id;
+			game["playerstats"][newIndex]["ip"] = self getip();
 			game["playerstats"][newIndex]["name"] = self.name;
 			game["playerstats"][newIndex]["team"] = self.sessionteam;
 			game["playerstats"][newIndex]["isConnected"] = true;
@@ -244,7 +243,7 @@ onConnected()
 
 onJoinedTeam(team)
 {
-	dataId = findData(self.name, self getEntityNumber());
+	dataId = findData(self.pers["lastName"], self getEntityNumber());
 	if (dataId >= 0)
 	{
 		game["playerstats"][dataId]["team"] = team;
@@ -254,13 +253,14 @@ onJoinedTeam(team)
 
 onDisconnect()
 {
-  dataId = findData(self.name, self getEntityNumber());
+  handleRename();
+
+  dataId = findData(self.pers["lastName"], self getEntityNumber());
   if (dataId >= 0)
   {
     game["playerstats"][dataId]["isConnected"] = false;
     game["playerstats"][dataId]["player"] = undefined;
     game["playerstats"][dataId]["lastTime"] = getTime();
-    game["playerstats"][dataId]["name"] = self.name;		// in case player renamed since connect
   }
 }
 
