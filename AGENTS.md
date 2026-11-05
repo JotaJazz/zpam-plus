@@ -8,8 +8,10 @@ OpenCoD2-Plus Server, which serves only the OpenCoD2-Plus client
 ## Read first
 
 1. [docs/ai/README_AI.md](docs/ai/README_AI.md), then the files it lists.
-2. Server side: `~/CoD2rev_Server/docs/architecture/plus-protocol.md` is the
-   source of truth for the Plus protocol; this mod follows it.
+2. For a change in an area: [docs/architecture/](docs/architecture/overview.md)
+   and [docs/architecture/boundaries.md](docs/architecture/boundaries.md).
+3. Server side: `plus-protocol.md` in OpenCoD2-Plus Server's architecture docs is
+   the source of truth for the Plus protocol; this mod follows it.
 
 ## Hard rules
 
@@ -26,5 +28,9 @@ OpenCoD2-Plus Server, which serves only the OpenCoD2-Plus client
 
 ## Doc-sync
 
-A change that makes a document wrong updates it in the same commit; finished
-work adds a stage to [docs/ai/PROJECT_MEMORY.md](docs/ai/PROJECT_MEMORY.md).
+- A change that makes a document wrong updates it in the same commit; the
+  table is in [docs/ai/DEVELOPMENT_GUIDE.md](docs/ai/DEVELOPMENT_GUIDE.md#doc-sync).
+- User-visible changes get a [docs/CHANGES.md](docs/CHANGES.md) entry.
+- Finished work adds a stage to [docs/ai/PROJECT_MEMORY.md](docs/ai/PROJECT_MEMORY.md).
+- Run `python3 scripts/check_docs.py` and
+  `python3 -m unittest discover -s scripts` before committing documentation.

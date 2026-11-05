@@ -5,7 +5,7 @@ zPAM Plus is the competition mod of the OpenCoD2-Plus family:
 | Member | Repository | Role |
 |---|---|---|
 | OpenCoD2-Plus Server | `JotaJazz/OpenCoD2-Plus-Server` | dedicated server; `make PLUS=1` is the Plus build |
-| OpenCoD2-Plus | `opencod2-plus` | the client ("1.3 Plus") |
+| OpenCoD2-Plus | `JotaJazz/OpenCoD2-Plus` | the client ("1.3 Plus") |
 | zPAM Plus | `JotaJazz/zpam-plus` | this mod |
 
 Base: zPAM 3.38, a fork of eyza-cod2/zpam3, kept fully compatible with its rules

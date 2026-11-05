@@ -1,5 +1,5 @@
 zPAM Plus 1
-Released 2026/11/05
+Unreleased
 
 Competition mod of the OpenCoD2-Plus family, based on zPAM 3.38.
 zPAM was created by EYZA and Fjozek.

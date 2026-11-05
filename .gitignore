@@ -4,3 +4,4 @@ source_compiled
 /*.iwd
 /*.txt
 .server
+__pycache__/

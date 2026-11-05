@@ -1,19 +1,21 @@
 # Project memory
 
-Append-only. Newest first.
+Append-only. Newest first. Template in
+[DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
+
+## 2026-11-05 — documentation system
+
+- The 1,468-line zPAM 3.38 README moved unchanged to `docs/upstream/zpam-3.38.md` (image links fixed); a short Plus README, `docs/CHANGES.md`, architecture, development, debt, glossary and the full AI layer replace it.
+- `scripts/check_docs.py` and its tests come from OpenCoD2-Plus Server, skipping `docs/upstream` and `.server`.
+- Rejected: rewriting the upstream manual now; its Plus parts are debt.
+
+## 2026-11-05 — renamed zPAM Plus, versions from 1
+
+- Shown as "zPAM Plus 1", iwd `zpamplus1.iwd`, serverinfo `_zpam` = `Plus 1`, help links to JotaJazz/zpam-plus; `zpam338` joins the blacklist so both cannot load together.
+- Rejected: `zpamplus10` for 1.0, which reads like 10; versions are whole numbers.
 
 ## 2026-11-05 — zPAM Plus joins the OpenCoD2-Plus family
 
-- Repository identity, agent rules and this memory layer added on top of zPAM
-  3.38 (audit fixes in `8ba7504`..`dad08c5`).
-- Decided: Plus server only ([ADR 0001](../architecture/adr/0001-plus-server-only.md)).
-- The mod checks `sv_plus` (OpenCoD2-Plus Server `f5697e8`) in
-  `CheckInstallation` and refuses with the installation error when it is below
-  122. Checked with `tools/run-server.sh`: the stock 1.0 build shows the Plus
-  error, and a `make PLUS=1` build of `f5697e8` passes it and stops at the next
-  1.3 check (`sv_wwwDownload`), as expected without www download.
-- Renamed to zPAM Plus, versioned from 1: shown as "zPAM Plus 1", iwd
-  `zpamplus1.iwd`, serverinfo `_zpam` = `Plus 1`, help links to
-  JotaJazz/zpam-plus. `zpam338` joins the blacklist so the two cannot load
-  together. Each version raises the number in every `ZPAM_RENAME` line.
-- Left: `README.md` still describes zPAM 3.38 upstream.
+- Agent rules and memory layer added on top of zPAM 3.38 (audit fixes `8ba7504`..`dad08c5`); Plus server only ([ADR 0001](../architecture/adr/0001-plus-server-only.md)).
+- `CheckInstallation` requires `sv_plus` 122 or later (server `f5697e8`): stock 1.0 shows the Plus error, a local `make PLUS=1` build passes it and stops at the www check.
+- Accepted: an admin can fake `sv_plus` on a non-Plus build; only they are fooled.
