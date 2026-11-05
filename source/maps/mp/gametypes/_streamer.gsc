@@ -614,8 +614,6 @@ openStreamerMenu()
 		self.sessionteam = "spectator";
 		self.sessionstate = "spectator";
 
-		//else
-
 		self spawn(origin, angles);
 
 		self.pers["streamerSystem_menu_opened"] = true;

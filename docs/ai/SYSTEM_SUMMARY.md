@@ -1,6 +1,6 @@
 # System summary
 
-Updated 2026-11-05. Version: zPAM Plus 1, unreleased, on `fix/plus-audit`.
+Updated 2026-11-05. Version: zPAM Plus 1, unreleased.
 
 ## Tree
 
@@ -10,7 +10,7 @@ source/                     the iwd content
 ├── maps/mp/                map scripts
 ├── ui_mp/                  menus
 └── default_mp.cfg          serverinfo _zpam
-tools/                      build-iwd.sh, run-server.sh
+tools/                      build-iwd.sh, run-server.sh, rcon.py
 scripts/                    check_docs.py and its tests
 docs/upstream/              zPAM 3.38 manual, kept as written
 images/                     pictures used by the upstream manual
@@ -31,7 +31,7 @@ images/                     pictures used by the upstream manual
 | Task | Command |
 |---|---|
 | Build | `tools/build-iwd.sh` |
-| Test server | `tools/run-server.sh [gametype] [map]` |
+| Test server | `tools/run-server.sh [gametype] [map] [+set ...]`; `python3 tools/rcon.py <command>` |
 | Docs | `python3 scripts/check_docs.py` |
 | Checker tests | `python3 -m unittest discover -s scripts` |
 

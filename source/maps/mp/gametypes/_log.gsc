@@ -127,9 +127,9 @@ onRoundEnd()
         {
             lpGuid = players[i] getGuid();
             if((isdefined(players[i].pers["team"])) && (players[i].pers["team"] == roundwinner))
-                winners = (winners + ";" + lpGuid + ";" + players[i].name);
+                winners = (winners + ";" + lpGuid + ";" + logSafe(players[i].name));
             else if((isdefined(players[i].pers["team"])) && (players[i].pers["team"] == roundlooser))
-                losers = (losers + ";" + lpGuid + ";" + players[i].name);
+                losers = (losers + ";" + lpGuid + ";" + logSafe(players[i].name));
         }
         if (roundwinner != "draw")
         {
