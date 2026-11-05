@@ -26,6 +26,7 @@ init()
 		// Errors
 		precacheString2("STRING_PAM_DONT_STEAL", &"This version of pam is only for testing! Dont steal!");
 		precacheString2("STRING_PAM_FS_GAME", &"Cvar /fs_game is not empty!)");
+		precacheString2("STRING_PAM_PLUS_REQUIRED", &"zPAM Plus runs only on OpenCoD2-Plus Server built with PLUS=1.");
 		precacheString2("STRING_PAM_MUST_EXISTS_UNDER_MAIN", &"Iwd file ^9zpam338.iwd^7 must be installed in ^9main^7 folder."); // ZPAM_RENAME
 		precacheString2("STRING_PAM_GETTING_IWD_FILES_ERROR", &"Error while getting loaded iwd files. Make sure iwd files does not contains spaces.");
 		precacheString2("STRING_PAM_MAPS_MISSING", &"Iwd file ^9zpam_maps_v6.iwd^7 does not exists in ^9main^7 folder"); // ZPAM_RENAME
@@ -155,6 +156,15 @@ CheckInstallation()
 		level thread printTextInLoop("Cvar /fs_game = '" + level.fs_game + "'. It needs to be empty", "Make sure IWD files are installed in main folder, not in mod folder.");
 
 		setError(game["STRING_PAM_FS_GAME"]);
+		return;
+	}
+
+	// sv_plus is a read-only dvar of the Plus build (docs/architecture/adr/0001-plus-server-only.md)
+	if (getCvarInt("sv_plus") < 122)
+	{
+		level thread printTextInLoop("Diagnostics info: sv_plus = '" + getCvar("sv_plus") + "', needs 122 or later");
+
+		setError(game["STRING_PAM_PLUS_REQUIRED"]);
 		return;
 	}
 
