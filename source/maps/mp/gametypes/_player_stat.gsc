@@ -62,12 +62,13 @@ removeOld()
   }
 }
 
-findData(name, entityId)
+findData(name, entityId, ip)
 {
   for (i = 0; i < game["playerstats"].size; i++)
   {
     data = game["playerstats"][i];
     if (data["deleted"]) continue;
+    if (isDefined(ip) && data["ip"] != ip) continue;
 
     if (isDefined(entityId))
     {
@@ -90,7 +91,7 @@ handleRename()
     if (self.pers["lastName"] != self.name)
     {
 
-      dataId = findData(self.pers["lastName"], self getEntityNumber());
+      dataId = findData(self.pers["lastName"], self getEntityNumber(), self getip());
       if (dataId >= 0)
       {
         // A disconnected player owns the new name: keep our stats under the old name, so neither loses them
@@ -113,7 +114,7 @@ getStatId()
 {
   handleRename();
 
-  return findData(self.pers["lastName"], self getEntityNumber());
+  return findData(self.pers["lastName"], self getEntityNumber(), self getip());
 }
 
 onConnected()
@@ -122,8 +123,8 @@ onConnected()
 
 	id = self getEntityNumber();
 
-	dataId = findData(self.pers["lastName"], id);
-	if (dataId >= 0 && game["playerstats"][dataId]["isConnected"] == false && game["playerstats"][dataId]["ip"] == self getip()) // note: isConnected is reseted every map_restart
+	dataId = findData(self.pers["lastName"], id, self getip());
+	if (dataId >= 0 && game["playerstats"][dataId]["isConnected"] == false) // note: isConnected is reseted every map_restart
 	{
 		game["playerstats"][dataId]["player"] = self;
 		game["playerstats"][dataId]["isConnected"] = true;
@@ -137,9 +138,9 @@ onConnected()
 		// Player was not found via name and id, give other players connecting in same time time to identified them via name and id before this player will be found only by name.. (to avoid stat steal by duplicating name)
 		waittillframeend;
 
-		dataId = findData(self.pers["lastName"]);
+		dataId = findData(self.pers["lastName"], undefined, self getip());
 		// same name from another IP is another player
-		if (dataId >= 0 && game["playerstats"][dataId]["isConnected"] == false && game["playerstats"][dataId]["ip"] == self getip())
+		if (dataId >= 0 && game["playerstats"][dataId]["isConnected"] == false)
 		{
 			game["playerstats"][dataId]["player"] = self;
 			game["playerstats"][dataId]["entityId"] = id;
@@ -177,7 +178,7 @@ onConnected()
 
 onJoinedTeam(team)
 {
-	dataId = findData(self.pers["lastName"], self getEntityNumber());
+	dataId = findData(self.pers["lastName"], self getEntityNumber(), self getip());
 	if (dataId >= 0)
 	{
 		game["playerstats"][dataId]["team"] = team;
@@ -189,7 +190,7 @@ onDisconnect()
 {
   handleRename();
 
-  dataId = findData(self.pers["lastName"], self getEntityNumber());
+  dataId = findData(self.pers["lastName"], self getEntityNumber(), self getip());
   if (dataId >= 0)
   {
     game["playerstats"][dataId]["isConnected"] = false;
