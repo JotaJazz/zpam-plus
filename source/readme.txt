@@ -1,6 +1,8 @@
-zPAM3.38
-Released 2026/10/31
+zPAM Plus 1
+Released 2026/11/05
 
-This mod was created by EYZA and Fjozek
+Competition mod of the OpenCoD2-Plus family, based on zPAM 3.38.
+zPAM was created by EYZA and Fjozek.
 
-More info: https://github.com/eyza-cod2/zpam3
+Runs only on OpenCoD2-Plus Server built with PLUS=1.
+More info: https://github.com/JotaJazz/zpam-plus

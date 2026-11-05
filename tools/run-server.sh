@@ -30,7 +30,7 @@ die() { echo "ERROR: $*" >&2; exit 1; }
 [ -f "$MAPS_IWD" ] || die "map pack not found: $MAPS_IWD"
 
 mkdir -p "$HOME_DIR/main"
-rm -f "$HOME_DIR"/main/zpam[0-9]*.iwd
+rm -f "$HOME_DIR"/main/zpam[0-9]*.iwd "$HOME_DIR"/main/zpamplus*.iwd
 ln -sf "$MAPS_IWD" "$HOME_DIR/main/"
 "$ROOT/tools/build-iwd.sh" --out "$HOME_DIR/main/$(sed -n 's|.*level\.pam_folder = "main/\([^"]*\)".*|\1|p' "$ROOT/source/maps/mp/gametypes/global/pam.gsc").iwd"
 

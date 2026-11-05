@@ -29,7 +29,7 @@ itemDef
 	visible			1
 	origin			0 51
 	forecolor		GLOBAL_UNFOCUSED_COLOR
-	text			"Check changes on ^9github.com/eyza-cod2/zpam3"
+	text			"Check changes on ^9github.com/JotaJazz/zpam-plus"
 	textfont		UI_FONT_NORMAL
 	textscale		0.25
 	textstyle		ITEM_TEXTSTYLE_SHADOWED

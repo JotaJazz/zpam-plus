@@ -12,5 +12,8 @@ Append-only. Newest first.
   122. Checked with `tools/run-server.sh`: the stock 1.0 build shows the Plus
   error, and a `make PLUS=1` build of `f5697e8` passes it and stops at the next
   1.3 check (`sv_wwwDownload`), as expected without www download.
-- Left: the in-game name is still "zPAM 3.38" and the help URL points to
-  eyza-cod2/zpam3.
+- Renamed to zPAM Plus, versioned from 1: shown as "zPAM Plus 1", iwd
+  `zpamplus1.iwd`, serverinfo `_zpam` = `Plus 1`, help links to
+  JotaJazz/zpam-plus. `zpam338` joins the blacklist so the two cannot load
+  together. Each version raises the number in every `ZPAM_RENAME` line.
+- Left: `README.md` still describes zPAM 3.38 upstream.
