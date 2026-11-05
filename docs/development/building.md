@@ -8,7 +8,7 @@ Needs `zip`.
 
 ## Test server
 
-`tools/run-server.sh [gametype] [map]` (default `sd mp_toujane_fix`) builds the
+`tools/run-server.sh [gametype] [map] [+set ...]` (default `sd mp_toujane_fix`) builds the
 iwd into `.server/main/` and runs a LAN server with `fs_homepath` there, so the
 game folder stays untouched.
 
@@ -20,10 +20,20 @@ game folder stays untouched.
 | `COD2_PORT` | 28960 | UDP port |
 
 The game folder must hold only stock iwds: a downloaded mod or map in `main`
-changes what loads. The script sets no www download and takes no extra `+set`
-arguments, so on a 1.3 or Plus binary the run always stops at the www check;
-that error proves every check before it passed. Getting past it needs
-`sv_wwwDownload 1` and `sv_wwwBaseURL` added to the script's command line.
+changes what loads. Everything after the map goes to the binary unchanged.
+
+The standard way to test with a Plus binary, which passes the installation
+check (it needs the www download set):
+
+    COD2_PORT=28981 tools/run-server.sh sd mp_toujane_fix \
+        +set sv_wwwDownload 1 +set sv_wwwBaseURL http://127.0.0.1/ +set sv_fps 40
+
+A healthy start has no `zPAM Errors` in the console log. In another shell,
+`COD2_PORT=28981 python3 tools/rcon.py <command...>` sends one rcon command
+(password from `.server/rcon_password.txt`) and prints the reply; it exits 1
+without reply after 2 s. Stop the server by its PID. The mod's rules reset some
+cvars at map load (`sv_fps` reads back 30, not 40), so read a cvar back before
+trusting a `+set`.
 
 ## Checks
 

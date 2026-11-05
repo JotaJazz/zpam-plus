@@ -2,7 +2,8 @@
 # Builds the mod and runs a local LAN test server with it.
 #
 # Usage:
-#   tools/run-server.sh [gametype] [map]     # defaults: sd mp_toujane_fix
+#   tools/run-server.sh [gametype] [map] [+set ...]   # defaults: sd mp_toujane_fix
+#   Anything after the map goes to the binary unchanged.
 #
 # Environment:
 #   COD2_GAME_DIR    folder with main/iw_*.iwd (stock files only)
@@ -21,6 +22,7 @@ MAPS_IWD="${COD2_MAPS_IWD:-/mnt/e/Servers/COD2-MAPAS/zpam_maps_v6.iwd}"
 PORT="${COD2_PORT:-28960}"
 GAMETYPE="${1:-sd}"
 MAP="${2:-mp_toujane_fix}"
+shift $(( $# < 2 ? $# : 2 ))
 HOME_DIR="$ROOT/.server"
 
 die() { echo "ERROR: $*" >&2; exit 1; }
@@ -53,4 +55,5 @@ exec "$SERVER_BIN" \
 	+set logfile 2 \
 	+set rcon_password "$(cat "$RCON_FILE")" \
 	+set g_gametype "$GAMETYPE" \
+	"$@" \
 	+map "$MAP"
