@@ -117,20 +117,21 @@ onCvarChanged(cvar, value, isRegisterTime)
 	{
 		case "sv_fps":
 
+			// OpenCoD2-Plus Server's wait follows sv_fps, so waits need no scaling
 			if (value == 30)
 			{
-				level.fps_multiplier = 1.51382;
+				level.fps_multiplier = 1;
 				level.frame = .033;
 			}
 			else if (value == 25)
 			{
-				level.fps_multiplier = 1.26110;
+				level.fps_multiplier = 1;
 				level.frame = .039;
 			}
 			else
 			{
 				level.frame = 1 / value;
-				level.fps_multiplier = 0.05 / level.frame;
+				level.fps_multiplier = 1;
 			}
 			level.sv_fps = value;
 			//println("Server FPS is: " + value);

@@ -16,6 +16,7 @@ init()
 	// This is called only if developer_script is set to 1
 	/#
 	maps\mp\gametypes\global\string::selfTest();
+	thread timingSelfTest();
   	//addEventListener("onConnected",     ::onConnected);
 	//addEventListener("onConnected",     ::onConnected2);
 	//addEventListener("onConnected",     ::onConnected3);
@@ -69,6 +70,18 @@ init()
 	#/
 }
 
+
+// Runs only with developer_script 1. A wait of N lasts N real seconds.
+timingSelfTest()
+{
+	// The first wait spans the end of the map load, so measure the second
+	wait level.fps_multiplier * 1;
+	t = getTime();
+	wait level.fps_multiplier * 1;
+	d = getTime() - t;
+	if (d < 950 || d > 1050)
+		assertMsg("timing selfTest: wait 1 lasted " + d + " ms");
+}
 
 scvar()
 {

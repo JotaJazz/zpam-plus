@@ -98,7 +98,7 @@ playersWeaponDrop()
 		timer = 0;
 		while (self UseButtonPressed() && !(level.gametype == "sd" && self.bombinteraction) && !(level.gametype == "re" && self.obj_carrier))
 		{
-			timer += level.fps_multiplier * .1;
+			timer += .1;
 
 			if (!isAlive(self))
 				return;
