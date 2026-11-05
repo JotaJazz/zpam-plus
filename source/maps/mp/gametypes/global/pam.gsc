@@ -221,51 +221,46 @@ CheckInstallation()
 		return;
 	}
 
-	isLatestPatchOrCoD2x = getCvar("shortversion") == "1.3" || getCvarInt("g_cod2x") > 0;
-
-	if (isLatestPatchOrCoD2x && (getCvarInt("sv_wwwDownload") == 0 || getCvar("sv_wwwBaseURL") == ""))
+	if (getCvarInt("sv_wwwDownload") == 0 || getCvar("sv_wwwBaseURL") == "")
 	{
 		setError(game["STRING_PAM_WWW_DOWNLOADING"]);
 		return;
 	}
 
-	if (isLatestPatchOrCoD2x && !arrayContains(nameArray, level.pam_map_iwd))
+	if (!arrayContains(nameArray, level.pam_map_iwd))
 	{
 		setError(game["STRING_PAM_MAPS_MISSING"]);
 		return;
 	}
 
-	if (isLatestPatchOrCoD2x)
+	maps = [];
+
+	maps[maps.size] = "mp_toujane_fix";
+	maps[maps.size] = "mp_burgundy_fix";
+	maps[maps.size] = "mp_dawnville_fix";
+	maps[maps.size] = "mp_matmata_fix";
+	maps[maps.size] = "mp_carentan_fix";
+	maps[maps.size] = "mp_chelm_fix";
+	maps[maps.size] = "mp_breakout_tls";
+	maps[maps.size] = "mp_dawnville_sun";
+	maps[maps.size] = "mp_leningrad_tls";
+	maps[maps.size] = "mp_vallente_fix";
+	maps[maps.size] = "mp_trainstation_fix";
+	maps[maps.size] = "mp_carentan_bal";
+	maps[maps.size] = "mp_railyard_mjr";
+	maps[maps.size] = "mp_leningrad_mjr";
+	maps[maps.size] = "wawa_3daim";
+
+
+	for(i = 0; i < maps.size; i++)
 	{
-		maps = [];
-
-		maps[maps.size] = "mp_toujane_fix";
-		maps[maps.size] = "mp_burgundy_fix";
-		maps[maps.size] = "mp_dawnville_fix";
-		maps[maps.size] = "mp_matmata_fix";
-		maps[maps.size] = "mp_carentan_fix";
-		maps[maps.size] = "mp_chelm_fix";
-		maps[maps.size] = "mp_breakout_tls";
-		maps[maps.size] = "mp_dawnville_sun";
-		maps[maps.size] = "mp_leningrad_tls";
-		maps[maps.size] = "mp_vallente_fix";
-		maps[maps.size] = "mp_trainstation_fix";
-		maps[maps.size] = "mp_carentan_bal";
-		maps[maps.size] = "mp_railyard_mjr";
-		maps[maps.size] = "mp_leningrad_mjr";
-		maps[maps.size] = "wawa_3daim";
-
-
-		for(i = 0; i < maps.size; i++)
+		if (!MapExists(maps[i]))
 		{
-			if (!MapExists(maps[i]))
-			{
-				setError(game["STRING_PAM_MAPS_LOAD_ERROR"]);
+			setError(game["STRING_PAM_MAPS_LOAD_ERROR"]);
 
-				level thread printTextInLoop(maps[i]);
+			level thread printTextInLoop(maps[i]);
 
-				return;
-			}
+			return;
 		}
 	}
 

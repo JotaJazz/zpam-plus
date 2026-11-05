@@ -11,121 +11,6 @@ Init()
 	level.teamname["axis"] = "";
 
 	// Team names are updated only if its needed for other functions (matchinfo, recording, ...)
-/*
-	// Testing
-	names[0] = "UGNC | eyza UG";
-	names[1] = "UGNC | aske";
-	names[2] = "UGNC | tomik";
-	names[3] = "UGNC | nostry";
-	names[4] = "UGNC | lampy";
-	println(getBestNameFromArray(names));
-
-	names[0] = "FRUGO craven";
-	names[1] = "FRUGO law";
-	names[2] = "FRUGO pix";
-	names[3] = "FRUGO crash";
-	names[4] = "FRUGO Fakir";
-	println(getBestNameFromArray(names));
-
-	names[0] = "aaa TEAM NAME";
-	names[1] = "bbb TEAM NAME";
-	names[2] = "ccc TEAM NAME";
-	names[3] = "ddd noclan";
-	names[4] = "eee TEAM NAME";
-	println(getBestNameFromArray(names));
-
-	names[0] = "aaa TEAM NAME";
-	names[1] = "bbb TEAM NAME";
-	names[2] = "ccc 1111";
-	names[3] = "ddd 2222";
-	names[4] = "eee TEAM NAME";
-	println(getBestNameFromArray(names));
-
-	names[0] = "aaa TEAM NAME";
-	names[1] = "bbb TEAM NAME";
-	names[2] = "ccc TEAM NAME";
-	names[3] = "dcc 111";
-	names[4] = "eee TEAM NAME";
-	println(getBestNameFromArray(names));
-
-	names[0] = "ONLINEGAMERS | dymatize";
-	names[1] = "ONLINEGAMERS | DudlajS";
-	names[2] = "ONLINEGAMERS | C A A -";
-	names[3] = "ONLINEGAMERS | VITY";
-	names[4] = "ONLINEGAMERS | hurvajz";
-	println(getBestNameFromArray(names));
-
-	names[0] = "CITRO()NS ajxera";
-	names[1] = "CITRO()NS network";
-	names[2] = "CITRO()NS Za$$kodn1K__";
-	names[3] = "CITRO()NS dur1el -";
-	names[4] = "CITRO()NS CHACHARUS";
-	println(getBestNameFromArray(names));
-
-	names[0] = "Reanimation Sp1RiT";
-	names[1] = "Reanimation pawadox-";
-	names[2] = "Reanimation G4box(..!..)";
-	names[3] = "Reanimation blavex";
-	names[4] = "Reanimation Sk1lzZ<3";
-	println(getBestNameFromArray(names));
-
-	names[0] = "BoMbSQUad vioqor";
-	names[1] = "BoMbSQUad mavalam";
-	names[2] = "BoMbSQUad domz";
-	names[3] = "BoMbSQUad iconz";
-	names[4] = "BoMbSQUad SANTAN";
-	println(getBestNameFromArray(names));
-
-	names[0] = "[ < T N F > ] Blinde";
-	names[1] = "[ < T N F > ] deb1lek";
-	names[2] = "[ < T N F > ] CHARVIS";
-	names[3] = "[ < T N F > ] Fazi";
-	names[4] = "[ < T N F > ] inhox";
-	println(getBestNameFromArray(names));
-
-	names[0] = "(.Y.) seko";
-	names[1] = "(.Y.) l e r i X";
-	names[2] = "(.Y.) C E R K Y S";
-	names[3] = "(.Y.) A N T O N I N";
-	names[4] = "(.Y.)Mekgajver";
-	println(getBestNameFromArray(names));
-
-	names = [];
-
-	names[0] = "";
-	println(getBestNameFromArray(names));
-
-	names[0] = "Single player";
-	println(getBestNameFromArray(names));
-
-	names[0] = "a|";
-	names[1] = "b|";
-	println(getBestNameFromArray(names));
-
-	names[0] = "aa|";
-	names[1] = "bb|";
-	println(getBestNameFromArray(names));
-
-	names[0] = "abc";
-	names[1] = "cba";
-	println(getBestNameFromArray(names));
-
-	names[0] = ".";
-	names[1] = "-";
-	println(getBestNameFromArray(names));
-
-	names[0] = "aa";
-	names[1] = "bb";
-	println(getBestNameFromArray(names));
-
-	names[0] = "";
-	names[1] = "";
-	println(getBestNameFromArray(names));
-
-	names[0] = " ";
-	names[1] = " ";
-	println(getBestNameFromArray(names));
-*/
 }
 
 
@@ -211,26 +96,6 @@ getBestNameFromArray(names)
 		}
 	}
 
-/*
-	// Debug name separes
-	println("-------------------");
-	for(i = 0; i < separes.size; i++)
-	{
-		println("-------------------");
-		for (j = 0; j < separes[i].size; j++)
-		{
-			print("separes["+i+"]["+j+"] = [\"");
-			for (k = 0; k < separes[i][j].size; k++)
-			{
-				if (k!=0)
-					print(", \"");
-				print(separes[i][j][k] + "\"");
-			}
-			println("]");
-		}
-	}
-*/
-
 	// Marge name separes
 	separes_marged = [];
 	separes_marged_count = [];
@@ -271,21 +136,6 @@ getBestNameFromArray(names)
 		}
 	}
 
-/*
-	// Debuging
-	for (i = 0; i < separes_marged.size; i++)
-	{
-		println("Most used words of length " + (i+1) + " are: ");
-		for (l = 0; l < separes_marged[i].size; l++)
-		{
-			if (l != 0)
-				print(", ");
-			print(separes_marged_count[i][l] + ":\"" + separes_marged[i][l] + "\"");
-		}
-		println("\n");
-	}
-*/
-
 
 	// Find the most used word in marged separes and save it
 	most_used_word = [];
@@ -306,15 +156,6 @@ getBestNameFromArray(names)
 		most_used_word[i] = last_word;
 		most_used_count[i] = last_count;
 	}
-
-/*
-	// Debuging
-	println("");
-	for (i = 0; i < most_used_word.size; i++)
-	{
-		println("Most used word of length " + (i+1) + " is \"" + most_used_word[i] + "\" ("+most_used_count[i]+")");
-	}
-*/
 
 	table_array = [];
 	final_word = "";
@@ -341,14 +182,6 @@ getBestNameFromArray(names)
 		table_array[0] = "";
 	}
 
-/*
-	// Debuging
-	println("");
-	for (i = 0; i < table_array.size; i++)
-	{
-		println("i " + (i+1) + " is \"" + table_array[i] + "\"");
-	}
-*/
 	// Find the final most used word by percentage
 	index = int(table_array.size * 0.3);
 	final_word = table_array[index];

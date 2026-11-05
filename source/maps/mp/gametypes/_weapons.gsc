@@ -323,7 +323,6 @@ precacheWeapons()
 		precacheItem("m1carbine_mp");
 		precacheItem("m1garand_mp");
 		precacheItem("springfield_mp");
-		//precacheItem("shotgun_mp");
 		precacheItem("thompson_mp");
 		precacheItem("bar_mp");
 		precacheItem("bar_buffed_mp");
@@ -350,7 +349,6 @@ precacheWeapons()
 		precacheItem("enfield_mp");
 		precacheItem("m1garand_mp");
 		precacheItem("enfield_scope_mp");
-		//precacheItem("shotgun_mp");
 		precacheItem("thompson_mp");
 		precacheItem("bren_mp");
 
@@ -376,7 +374,6 @@ precacheWeapons()
 		precacheItem("mosin_nagant_mp");
 		precacheItem("SVT40_mp");
 		precacheItem("mosin_nagant_sniper_mp");
-		//precacheItem("shotgun_mp");
 		//precacheItem("ppsh_mp"); PPSH_CHANGE
 		precacheItem("ppsh_stick30_mp");
 
@@ -402,7 +399,6 @@ precacheWeapons()
 	precacheItem("kar98k_mp");
 	precacheItem("g43_mp");
 	precacheItem("kar98k_sniper_mp");
-	//precacheItem("shotgun_mp");
 	precacheItem("mp44_mp");
 	precacheItem("fg42_mp");
 
@@ -540,7 +536,6 @@ addClass(className, cvarLimit, cvarNades, cvarSmokes, cvarAllowDrop)
 	if (!isDefined(level.weaponclass))
 		level.weaponclass = [];
 
-	//iprintln("------adding weapon class: "+className);
 
 	level.weaponclasses[level.weaponclasses.size] = className;
 
@@ -574,7 +569,6 @@ deletePlacedEntity(entity)
 	entities = getentarray(entity, "classname");
 	for(i = 0; i < entities.size; i++)
 	{
-		//println("DELETED: ", entities[i].classname);
 		entities[i] delete();
 	}
 }
@@ -625,7 +619,6 @@ givePistol()
 		if (!level.allow_pistols)
 			return;
 
-		//self giveWeapon(pistoltype);
 		self setWeaponSlotWeapon("primaryb", pistoltype);
 		self giveMaxAmmo(pistoltype);
 	}
@@ -720,7 +713,6 @@ dropWeapon()
 {
 	current = self getcurrentweapon();
 
-	//iprintln(current);
 
 	if (current == "sprint_weap_mp")
 		return;
@@ -799,7 +791,6 @@ dropNade()
 				// This grenade is close to player
 				if (distanceZ > 39 && distanceZ < 41) // cooked grenade is always spawned with 40 offset in Z coordinate
 				{
-					//self iprintln("^1This was cooked grenade! " + distanceZ);
 
 					// Remove this type of grenade from slot so this grenade is not dropped
 					currentGrenadeType = self getcurrentoffhand();
@@ -812,9 +803,7 @@ dropNade()
 						{
 							self setWeaponClipAmmo(currentGrenadeType, count - 1); // remove 1 grenade of this type
 
-							//countAfter = self getammocount(currentGrenadeType);
 
-							//self iprintln("^3 Removed 1 grenade of type " + currentGrenadeType + " (before:" + count + " after:" + countAfter + ")");
 						}
 					}
 
@@ -1282,103 +1271,3 @@ updateDrop(cvarName, cvarValue)
 	}
 }
 
-
-keepMaxAmmo()
-{
-	self endon("disconnect");
-	self endon("keepMaxAmmo_end");
-
-	last_weapon1 = "";
-	last_weapon2 = "";
-
-	last_weapon1_clipAmmo = 0;
-	last_weapon2_clipAmmo = 0;
-
-	weapon1_maxClipAmmo = 1;
-	weapon2_maxClipAmmo = 1;
-
-	weapon1_pauseGivingMaxAmmo = 0;
-	weapon2_pauseGivingMaxAmmo = 0;
-
-	for (;;)
-	{
-		wait level.frame;
-
-
-		if (weapon1_pauseGivingMaxAmmo > 0) weapon1_pauseGivingMaxAmmo--;
-		if (weapon2_pauseGivingMaxAmmo > 0) weapon2_pauseGivingMaxAmmo--;
-
-
-		if((self.pers["team"] != "allies" && self.pers["team"] != "axis") || self.sessionstate != "playing")
-		{
-			last_weapon1 = "";
-			last_weapon2 = "";
-			weapon1_maxClipAmmo = 1;
-			weapon2_maxClipAmmo = 1;
-			continue;
-		}
-
-		weapon1 = self getweaponslotweapon("primary");
-		weapon2 = self getweaponslotweapon("primaryb");
-
-		weapon1_clipAmmo = self getweaponslotclipammo("primary");
-		weapon2_clipAmmo = self getweaponslotclipammo("primaryb");
-
-
-		// If weapons changed in slots, save the maximum ammo in slot
-		if (weapon1 != last_weapon1)
-		{
-			weapon1_maxClipAmmo = weapon1_clipAmmo;
-			//self iprintln("Primary changed " + weapon1_maxClipAmmo);
-
-			last_weapon1_clipAmmo = weapon1_clipAmmo;
-		}
-		if (weapon2 != last_weapon2)
-		{
-			weapon2_maxClipAmmo = weapon2_clipAmmo;
-			//self iprintln("Secondary changed " + weapon2_maxClipAmmo);
-
-			last_weapon2_clipAmmo = weapon2_clipAmmo;
-		}
-
-		last_weapon1 = weapon1;
-		last_weapon2 = weapon2;
-
-		// Weapon fired - for 1 seconds give -1 less ammo to allow reload
-		if (weapon1_clipAmmo < last_weapon1_clipAmmo)
-			weapon1_pauseGivingMaxAmmo = int(level.sv_fps / 1); // how many frames to wait
-		if (weapon2_clipAmmo < last_weapon2_clipAmmo)
-			weapon2_pauseGivingMaxAmmo = int(level.sv_fps / 1); // how many frames to wait
-
-		last_weapon1_clipAmmo = weapon1_clipAmmo;
-		last_weapon2_clipAmmo = weapon2_clipAmmo;
-
-
-		current = self getcurrentweapon();
-
-		// For example player is on ladder
-		if(current == "none")
-			continue;
-
-		// Imidietly after firing give player -1 less ammo to allow reloading animation
-		new_weapon1_clipAmmo = weapon1_maxClipAmmo;
-		if (weapon1_pauseGivingMaxAmmo != 0 && new_weapon1_clipAmmo > 0)
-			new_weapon1_clipAmmo--;
-		new_weapon2_clipAmmo = weapon2_maxClipAmmo;
-		if (weapon2_pauseGivingMaxAmmo != 0 && new_weapon2_clipAmmo > 0)
-			new_weapon2_clipAmmo--;
-
-		// Give ammo
-		// Primary
-		if(current == weapon1)
-			self setweaponclipammo(current, new_weapon1_clipAmmo);
-		// Secondary
-		else if (current == weapon2)
-			self setweaponclipammo(current, new_weapon2_clipAmmo);
-	}
-}
-
-keepMaxAmmoStop()
-{
-	self notify("keepMaxAmmo_end");
-}

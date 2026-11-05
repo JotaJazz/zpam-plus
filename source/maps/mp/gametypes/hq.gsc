@@ -728,7 +728,6 @@ spawnPlayer()
 			level.allies_give_smoke = false;
 		if (smokes > 0 && self.pers["team"] == "axis")
 			level.axis_give_smoke = false;
-		//if (smokes > 0) iprintln("^1 smoke given to spawned player in team " + self.pers["team"] + " " + self.name);
 	}
 
 
@@ -954,7 +953,6 @@ startGame()
 			timepassed = (getTime() - level.starttime) / 1000;	// elapsed time in seconds
 			timepassed = timepassed - level.timeout_elapsedTime;	// exclude time of timeout
 
-			//iprintln(timepassed);
 
 			// Freeze time if in timeout
 			if (level.in_timeout)
@@ -1568,7 +1566,6 @@ hq_radio_think(radio)
 				{
 					radio.collector_allies = (multiplier + radio.collector_allies + (radio.allies * multiplier));
 					radio.holdtime_allies = 1 + int(radio.collector_allies);
-					//radio.holdtime_allies = int( .667 + (radio.holdtime_allies + (radio.allies * level.MultipleCaptureBias)));
 
 					if(radio.holdtime_allies >= (level.progressBarWidth - 4))
 					{
@@ -1582,7 +1579,6 @@ hq_radio_think(radio)
 				{
 					radio.collector_axis = (multiplier + radio.collector_axis + (radio.axis * multiplier));
 					radio.holdtime_axis = 1 + int(radio.collector_axis);
-					//radio.holdtime_axis = int( .667 + (radio.holdtime_axis + (radio.axis * level.MultipleCaptureBias)));
 
 					if(radio.holdtime_axis >= (level.progressBarWidth - 4))
 					{
@@ -1658,7 +1654,6 @@ hq_radio_think(radio)
 				{
 					radio.collector_allies = (multiplier + radio.collector_allies + (radio.allies * multiplier));
 					radio.holdtime_allies = 1 + int(radio.collector_allies);
-					//radio.holdtime_allies = int(.667 + (radio.holdtime_allies + (radio.allies * level.MultipleCaptureBias)));
 					if(radio.holdtime_allies >= (level.progressBarWidth - 4))
 						level hq_radio_capture(radio, "none");
 				}
@@ -1666,7 +1661,6 @@ hq_radio_think(radio)
 				{
 					radio.collector_axis = (multiplier + radio.collector_axis + (radio.axis * multiplier));
 					radio.holdtime_axis = 1 + int(radio.collector_axis);
-					//radio.holdtime_axis = int(.667 + (radio.holdtime_axis + (radio.axis * level.MultipleCaptureBias)));
 					if(radio.holdtime_axis >= (level.progressBarWidth - 4))
 						level hq_radio_capture(radio, "none");
 				}
@@ -1746,7 +1740,6 @@ hq_radio_progressbar_enemy_establishing_failure()
 
 	level waittill("progressbar_enemy_establishing_destroy");
 
-	//iprintlnBold("^1destroying ...");
 
 	for(i = 0; i < players.size; i++)
 	{
@@ -1963,7 +1956,6 @@ hq_radio_capture(radio, team)
 		// Restricted smokes
 		level.allies_give_smoke = true;
 		level.axis_give_smoke = true;
-		//iprintln("^1GIVE SMOKE");
 
 		//give all the alive players that are now defending the radio full health
 		players = getentarray("player", "classname");
@@ -1984,7 +1976,6 @@ hq_radio_capture(radio, team)
 					level.allies_give_smoke = false;
 				if (smokes > 0 && players[i].pers["team"] == "axis")
 					level.axis_give_smoke = false;
-				//if (smokes > 0) iprintln("^1 smoke given to alive team " + players[i].pers["team"] + " " + players[i].name);
 			}
 		}
 
@@ -2049,7 +2040,6 @@ hq_maxholdtime_think()
 			if ( ((current_time - start_time)) >= max_time )
 				break;
 		}
-		//wait (level.fps_multiplier * (level.RadioMaxHoldSeconds - level.frame));
 	}
 
     level notify("RadioMaxHoldTime");
@@ -2219,25 +2209,6 @@ hq_removhudelem_allplayers(radio)
 			players[i].progressbar_capture2 destroy();
 		if(isdefined(players[i].progressbar_capture3))
 			players[i].progressbar_capture3 destroy();
-	}
-}
-
-hq_check_teams_exist()
-{
-	players = getentarray("player", "classname");
-	level.alliesexist = false;
-	level.axisexist = false;
-	for(i = 0; i < players.size; i++)
-	{
-		if(!isdefined(players[i].pers["team"]) || players[i].pers["team"] == "spectator")
-			continue;
-		if(players[i].pers["team"] == "allies")
-			level.alliesexist = true;
-		else if(players[i].pers["team"] == "axis")
-			level.axisexist = true;
-
-		if(level.alliesexist && level.axisexist)
-			return;
 	}
 }
 
@@ -2736,24 +2707,6 @@ HQ_Team_Scoring(team, score)
 	checkScoreLimit();
 
 }
-
-hq_check_radio_defenders_alive()
-{
-	allplayers = getentarray("player", "classname");
-	alive = [];
-	for(i = 0; i < allplayers.size; i++)
-	{
-		if(allplayers[i].sessionstate == "playing" && allplayers[i].sessionteam == level.DefendingRadioTeam)
-			alive[alive.size] = allplayers[i];
-	}
-	return alive.size;
-}
-
-
-
-
-
-
 
 serverInfo()
 {

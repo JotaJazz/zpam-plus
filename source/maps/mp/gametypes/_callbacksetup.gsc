@@ -143,9 +143,6 @@ CodeCallback_PlayerConnect()
 	self endon("disconnect");
 
 	/#
-	//if (isDefined(self.alreadyConnected))
-	//	assertMsg("Duplicated connection for " + self.name);
-	//self.alreadyConnected = true;
 	println("##### " + gettime() + " " + level.frame_num + " ##### Connecting: " + self.name);
 	#/
 
@@ -359,8 +356,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 
 
 
-	// 1 = print debug messages to player with name eyza
-	eyza_debug = 0;
 
 	// Hitbox left and right hand fix
 	if (level.scr_hitbox_hand_fix &&
@@ -419,7 +414,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 						self.hit[i] thread maps\mp\gametypes\global\developer::showWaypoint();
 					}
 				}
-				//angles = eAttacker getPlayerAngles();
 				angles = vectortoangles(self.headTag getOrigin() - attacker_eye);
 
 				right = anglestoright(angles);
@@ -446,7 +440,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 				self.hit[8].origin = vPoint;
 			}
 
-			//angles = eAttacker getPlayerAngles();
 			angles = vectortoangles(self.headTag getOrigin() - attacker_eye);
 			rotationMatrix[0] = anglestoforward(angles); // normalized FORWARD vector of the box
 			rotationMatrix[1] = anglestoright(angles);  // normalized RIGHT vector of the box
@@ -476,7 +469,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 				}
 				if (applyFix)
 				{
-					if (eyza_debug) printToEyza("^1Hand hitbox fix - making damage to "+sHitLoc+" as kill for " + eAttacker.name); // EYZA_DEBUG
 					eAttacker.hitData[self_num].adjustedBy = "hand_hitbox_fix";
 					iDamage = 100;
 				}
@@ -486,14 +478,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 				if (level.debug_handhitbox) eAttacker iprintln("^9Hand hitbox fix - hit is outside the box");
 			}
 
-			/*
-			self.hit[7].origin = (self.headTag getOrigin()) + (0, 150, 0) + (0, 0, 0);
-			self.hit[8].origin = (self.headTag getOrigin()) + (0, 150, 0) + (boxBack, 0, 0);
-			self.hit[9].origin = (self.headTag getOrigin()) + (0, 150, 0) + (0, boxLeft, 0);
-			self.hit[10].origin = (self.headTag getOrigin()) + (0, 150, 0) + (0, boxRight * -1, 0);
-			self.hit[11].origin = (self.headTag getOrigin()) + (0, 150, 0) + (boxFront * -1, 0, 0);
-			self.hit[12].origin = (self.headTag getOrigin()) + (0, 150, 0) + Transform;
-			*/
 		}
 	}
 
@@ -541,7 +525,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 			{
 				eAttacker iprintln("^1Torso hitbox fix - adjusted damage from " + iDamage + " to 100 (distance " + int(dist*10)/10 + " <= " + distanceLimit + ")");
 			}
-			if (eyza_debug) printToEyza("### Torso hitbox fix - adjusted damage from " + iDamage + " to 100 for " + eAttacker.name); // EYZA_DEBUG
 			eAttacker.hitData[self_num].adjustedBy = "torso_hitbox_fix";
 			iDamage = 100;
 		}
@@ -602,7 +585,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 				if (!bodyOrHeadVisible)
 					isKill = false;
 
-				if (eyza_debug) printToEyza("### Consistent shotgun: upcoming hit is to leg or hand | bodyOrHeadVisible:" + bodyOrHeadVisible + " for " + eAttacker.name); // EYZA_DEBUG
 			}
 
 
@@ -611,7 +593,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 				iDamage = 100;
 				damageFeedback = 2; // Do big damage feedback, because this bullet kills the player and the others are canceled due to this
 				if (level.debug_shotgun) eAttacker iprintln("^1Distance " + int(dist) + " | close range 0-250 | KILL");
-				if (eyza_debug) printToEyza("### Consistent shotgun: attacker:"+eAttacker.name+" | victim:"+self.name+" | distance:" + int(dist) + " | hitLoc:" + sHitLoc + " | close range 0-250 | KILL"); // EYZA_DEBUG
 				eAttacker.hitData[self_num].adjustedBy = "consistent_shotgun_1_kill"; // Range 1, kill
 			}
 			else
@@ -619,7 +600,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 				// Scale the damage based on distance
 				iDamage = damageScale(dist, 0, 250, 100, 50); //distance, distStart, distEnd, hpStart, hpEnd
 				if (level.debug_shotgun) eAttacker iprintln("^1Distance " + int(dist) + " | close range 0-250 | ^3hit to hand or leg");
-				if (eyza_debug) printToEyza("### Consistent shotgun: attacker:"+eAttacker.name+" | victim:"+self.name+" | distance:" + int(dist) + " | hitLoc:" + sHitLoc + " | close range 0-250 | hit to hand or leg"); // EYZA_DEBUG
 				eAttacker.hitData[self_num].adjustedBy = "consistent_shotgun_1_hit"; // Range 1, hit only, because head and body is not visible
 			}
 		}
@@ -631,7 +611,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 			iDamage = damageScale(dist, 250, 384, 100, 50); //distance, distStart, distEnd, hpStart, hpEnd
 
 			if (level.debug_shotgun) eAttacker iprintln("^3Distance " + int(dist) + " | mid range 250-384 | " + iDamage + "hp damage (pellet id: " + eAttacker.hitData[self_num].id + ")");
-			if (eyza_debug) printToEyza("### Consistent shotgun: attacker:"+eAttacker.name+" | victim:"+self.name+" | distance:" + int(dist) + " | hitLoc:" + sHitLoc + " | mid range 250-384 | damage:" + iDamage + " | pelletId:" + eAttacker.hitData[self_num].id); // EYZA_DEBUG
 			eAttacker.hitData[self_num].adjustedBy = "consistent_shotgun_2"; // Range 2
 		}
 
@@ -642,7 +621,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 			iDamage = damageScale(dist, 384, 500, 50, 34); //distance, distStart, distEnd, hpStart, hpEnd
 
 			if (level.debug_shotgun) eAttacker iprintln("^4Distance " + int(dist) + " | mid range 384-500 | " + iDamage + "hp damage (pellet id: " + eAttacker.hitData[self_num].id + ")");
-			if (eyza_debug) printToEyza("### Consistent shotgun: attacker:"+eAttacker.name+" | victim:"+self.name+" | distance:" + int(dist) + " | hitLoc:" + sHitLoc + " | mid range 384-500 | damage:" + iDamage + " | pelletId:" + eAttacker.hitData[self_num].id); // EYZA_DEBUG
 			eAttacker.hitData[self_num].adjustedBy = "consistent_shotgun_3"; // Range 3
 		}
 
@@ -655,7 +633,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 			if (iDamage < 1.0) iDamage = 1; // always atleast 1hp damage
 
 			if (level.debug_shotgun) eAttacker iprintln("^9Distance " + int(dist) + " | far range 500-800 | linear " + iDamage + "hp damage");
-			if (eyza_debug) printToEyza("### Consistent shotgun: attacker:"+eAttacker.name+" | victim:"+self.name+" | distance:" + int(dist) + " | hitLoc:" + sHitLoc + " | far range 500-800 | linear damage:" + iDamage); // EYZA_DEBUG
 			eAttacker.hitData[self_num].adjustedBy = "consistent_shotgun_4"; // Range 4
 		}
 		else
@@ -682,7 +659,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 		eAttacker.hitData[self_num].damage = iDamage;
 
 
-	//println("##################### " + "notifyDamaging");
 	// Call onDamage event and return if damage was prevented
 	ret = maps\mp\gametypes\global\events::notifyDamaging(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset);
 	if (ret) return;
@@ -693,7 +669,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 		eAttacker.hitData[self_num].damage_comulated += iDamage;
 
 
-	//println("##################### " + "notifyDamage");
 	// Call onPlayerDamaged event
 	maps\mp\gametypes\global\events::notifyDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset);
 
@@ -703,7 +678,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 	// Damage feedback
 	if (damageFeedback >= 1)
 	{
-		//eAttacker iprintln("^6DMG feedback" + i);
 		if(isPlayer(eAttacker) && eAttacker != self && !(iDFlags & level.iDFLAGS_NO_PROTECTION))
 			eAttacker thread maps\mp\gametypes\_damagefeedback::updateDamageFeedback(self, damageFeedback);
 	}
@@ -711,7 +685,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 
 hitDataAutoRestart(eAttacker, self_num)
 {
-	//self endon("disconnect");
 	eAttacker endon("disconnect");
 
 	self notify("hitDataAutoRestart_end" + eAttacker getEntityNumber());
@@ -751,23 +724,6 @@ damageScale(dist, distStart, distEnd, hpStart, hpEnd)
 {
 	return int(hpStart - ((dist - distStart) / (distEnd - distStart)) * (hpStart - hpEnd));
 }
-
-
-printToEyza(text)
-{
-	println(text);
-
-	players = getentarray("player", "classname");
-	for(i = 0; i < players.size; i++)
-	{
-		if (players[i].name == "eyza")
-		{
-			players[i] iprintln(text);
-		}
-	}
-}
-
-
 
 
 /*================
@@ -848,13 +804,6 @@ CodeCallback_PlayerKilled(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon
 	// Call gametype specific event that is called as last
 	[[level.onAfterPlayerKilled]](eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, timeOffset, deathAnimDuration);
 
-	/*
-	// Warning about high ping
-	if (isPlayer(eAttacker) && eAttacker != self && timeOffset > 100)
-	{
-		self iprintln("^3You were killed by player with high ping " + timeOffset + "ms!");
-	}
-	*/
 }
 
 
@@ -906,11 +855,9 @@ AbortLevel()
 
 	setcvar("g_gametype", "dm");
 
-	//wait level.fps_multiplier * 1;
 
 	println("Restarting to DM gametype...");
 
-	//exitLevel(false);
 	map(level.mapname);
 }
 

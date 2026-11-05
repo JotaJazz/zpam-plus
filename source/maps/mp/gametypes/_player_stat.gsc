@@ -15,7 +15,6 @@ init()
     addEventListener("onConnectedAll",    ::onConnectedAll);
     addEventListener("onJoinedTeam",    ::onJoinedTeam);
 
-    //thread printThread();
 }
 
 resetConnectedStatus()
@@ -44,7 +43,6 @@ removeOld()
   {
     data = game["playerstats"][i];
 
-    //iprintln("Looping " + i + ": "+ data["name"] + "   " + data["isConnected"] + "  " + (time - data["lastTime"]));
 
 
     if (data["deleted"] || data["isConnected"]) continue;
@@ -60,8 +58,6 @@ removeOld()
     {
       game["playerstats"][i]["deleted"] = true;
 
-      //wait level.fps_multiplier * 1;
-      //iprintln("Deleting old player stats for " + game["playerstats"][i]["name"] + "   " + data["isConnected"] + "  " + (time - data["lastTime"]));
     }
   }
 }
@@ -93,7 +89,6 @@ handleRename()
   {
     if (self.pers["lastName"] != self.name)
     {
-      //println("PLayer renamed");
 
       dataId = findData(self.pers["lastName"], self getEntityNumber());
       if (dataId >= 0)
@@ -104,7 +99,6 @@ handleRename()
           return;
 
         game["playerstats"][dataId]["name"] = self.name;
-        //setCvar("sv_playerstats_" + dataId + "_name", self.name);
       }
 
       self.pers["lastName"] = self.name;
@@ -121,65 +115,6 @@ getStatId()
 
   return findData(self.pers["lastName"], self getEntityNumber());
 }
-
-getStats()
-{
-  id = self getStatId();
-
-  if (id >= 0)
-  {
-    return game["playerstats"][id];
-  }
-
-  return undefined;
-}
-
-
-print()
-{
-  for (i = 0; i < game["playerstats"].size; i++)
-  {
-    data = game["playerstats"][i];
-    if (data["deleted"] == false)
-    {
-      println("game[playerstats]["+i+"][entityId]    = " + data["entityId"]);
-      println("game[playerstats]["+i+"][name]        = " + data["name"]);
-      println("game[playerstats]["+i+"][isConnected] = " + data["isConnected"]);
-      println("game[playerstats]["+i+"][lastTime]    = " + data["lastTime"]);
-      println("game[playerstats]["+i+"][kills]       = " + data["kills"]);
-      println("game[playerstats]["+i+"][damage]      = " + data["damage"]);
-      println("game[playerstats]["+i+"][assists]     = " + data["assists"]);
-      println("game[playerstats]["+i+"][deaths]      = " + data["deaths"]);
-      println("game[playerstats]["+i+"][kills]       = " + data["score"]);
-      println("game[playerstats]["+i+"][grenades]    = " + data["grenades"]);
-      println("game[playerstats]["+i+"][plants]      = " + data["plants"]);
-      println("game[playerstats]["+i+"][defuses]     = " + data["defuses"]);
-    }
-    else
-    {
-      println("game[playerstats]["+i+"] - deleted");
-    }
-    println("");
-  }
-}
-
-printThread()
-{
-  setcvar("p", "0");
-
-  for(;;)
-  {
-    wait level.fps_multiplier * 0.5;
-
-    if (getcvar("p") == "1")
-    {
-      setcvar("p", "0");
-      print();
-    }
-  }
-}
-
-
 
 onConnected()
 {
@@ -213,7 +148,6 @@ onConnected()
 			game["playerstats"][dataId]["lastTime"] = getTime();
 
 			self thread restoreScore(game["playerstats"][dataId]["kills"], game["playerstats"][dataId]["deaths"]);
-			//setCvar("sv_playerstats_" + dataId + "_entityId", id);
 		}
 		else
 		{

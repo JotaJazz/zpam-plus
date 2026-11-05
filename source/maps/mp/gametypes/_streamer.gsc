@@ -25,7 +25,6 @@ init()
 	addEventListener("onConnectedAll",    	::onConnectedAll);
 	addEventListener("onMenuResponse",  	::onMenuResponse);
 
-	//setCvar("debug_spectator", 1);
 }
 
 // Called even is streamer system is disabled
@@ -148,7 +147,6 @@ join_streamer_enable(loaded_from_settings, color_mode)
 	if (level.streamerSystem && (!isDefined(self.pers["firstTeamSelected"]) || self.pers["team"] == "streamer") && self.pers["streamerSystem_autoJoinSpectatorTeam"] == false)
 	{
 		self.pers["streamerSystem_autoJoinSpectatorTeam"] = true;
-		//self iprintln("Automatically join spectator team ^2Enabled");
 
 		// Enabled when manually joined streamers, save this setting into server16
 		if (loaded_from_settings == false)
@@ -170,8 +168,6 @@ join_streamer_disable(loaded_from_settings)
 {
 	if (!isDefined(loaded_from_settings)) loaded_from_settings = false;
 
-	//if (self.pers["streamerSystem_autoJoinSpectatorTeam"])
-		//self iprintln("Automatically join spectator team ^1Disabled");
 
 	self.pers["streamerSystem_autoJoinSpectatorTeam"] = false;
 
@@ -356,7 +352,6 @@ onMenuResponse(menu, response)
 		// not received in free spectating, because menu mouse is not working
 		else if (response == "mouse1" || response == "mouse2")
 		{
-			//self iprintln("mouse1");
 
 			// We were in cinematic move, just cancel it
 			if (self.streamerSystem_inCinematic)
@@ -619,8 +614,6 @@ openStreamerMenu()
 		self.sessionteam = "spectator";
 		self.sessionstate = "spectator";
 
-		//if (self.spectatorclient == -1 && spectatorclient != -1)
-		//	self.spectatorclient = spectatorclient;
 		//else
 
 		self spawn(origin, angles);
@@ -777,31 +770,6 @@ player_loop()
 			playerChanged = true;
 		}
 
-
-/*
-		// Show scoreboard beween halfs and map changes
-	    	in_timeout = level.in_timeout;
-		in_halftime = !in_timeout && (game["is_halftime"] || game["overtime_active"]);
-		in_mapswitch = !in_halftime && (game["scr_matchinfo"] == 2 && game["match_exists"]);
-		scoreboardShouldBeVisible = level.in_readyup && (in_timeout || in_halftime || in_mapswitch);
-		scoreboard_toggleOn = scoreboardShouldBeVisible && scoreboardShouldBeVisible_last != scoreboardShouldBeVisible;
-		scoreboardShouldBeVisible_last = scoreboardShouldBeVisible;
-
-		if (scoreboard_toggleOn)
-		{
-			if (level.gametype == "sd" && self.pers["scoreboard_keepRefreshing"] == 0)
-				self thread maps\mp\gametypes\_menu_scoreboard::generatePlayerList(true); // toggle
-			self.pers["streamerSystem_scoreboardOpenedAutomatically"] = true;
-		}
-
-		// Hide scoreboard if we are not in readyup and it was opened automatically
-		if (scoreboardShouldBeVisible == false && self.pers["streamerSystem_scoreboardOpenedAutomatically"])
-		{
-			if (self.pers["scoreboard_keepRefreshing"] != 0)
-				self.pers["scoreboard_keepRefreshing"] = 0;
-			self.pers["streamerSystem_scoreboardOpenedAutomatically"] = false;
-		}
-*/
 
 
 		// Handle menu cursor bypass
@@ -1024,8 +992,6 @@ cinematicMove()
 	dist = -55; // how far
 	originEnd = origin + (forward[0] * dist, forward[1] * dist, forward[2] * dist); // new pos
 
-	//self iprintln(originStart);
-	//self iprintln(originEnd);
 
 
 	self spawn(originStart, angles);
@@ -1041,8 +1007,6 @@ cinematicMove()
 	}
 
 
-	//self setOrigin(originStart);
-	//self setPlayerAngles(angles);
 
 	self.spectatorLock = spawn("script_model", originStart);
 	self.spectatorLock.angles = angles;
@@ -1269,7 +1233,6 @@ getPlayerFrom(actualSpectatedPlayer, team, reverse)
 	{
 		player = playersFinal[i];
 
-		//iprintln("--" + player.name);
 
 		// Skip dead players
 		if (player.sessionstate != "playing")
@@ -1324,7 +1287,6 @@ followPlayer(selectedPlayer)
 	level.streamerSystem_player = selectedPlayer;
 	level.streamerSystem_lastChange = getTime();
 
-	//if (level.debug_spectator) printToStreamers("Spect: set followed player: " + selectedPlayer.name);
 }
 
 
@@ -1334,7 +1296,6 @@ stopFollowing()
 	level.streamerSystem_player = undefined;
 	level.streamerSystem_lastChange = getTime();
 
-	//if (level.debug_spectator) printToStreamers("Spect: set followed player: " + selectedPlayer.name);
 }
 
 
@@ -1423,21 +1384,6 @@ printToStreamers(text)
 		if (player.pers["team"] == "streamer" /*&& player.streamerSystem_turnedOn*/)
 		{
 			player iprintln(text);
-			break;
-		}
-	}
-}
-
-
-printBoldToStreamers(text)
-{
-	players = getentarray("player", "classname");
-	for(i = 0; i < players.size; i++)
-	{
-		player = players[i];
-		if (player.pers["team"] == "streamer" /*&& player.streamerSystem_turnedOn*/)
-		{
-			player iprintlnbold(text);
 			break;
 		}
 	}

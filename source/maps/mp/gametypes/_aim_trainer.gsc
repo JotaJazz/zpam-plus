@@ -20,14 +20,6 @@ onStartGameType()
 	activators_damage = 	getentarray("trainer_activator_damage", "targetname");
 	activators_hint = 	getentarray("trainer_activator_hint", "targetname");
 
-/*
-	println("## trainer_target = " + targets.size);
-	println("## trainer_trigger = " + targets_damage.size);
-	println("## trainer_activator = " + activators.size);
-	println("## trainer_activator_damage = " + activators_damage.size);
-	println("## trainer_activator_hint = " + activators_hint.size);
-*/
-
 	if (targets.size == 0 || activators.size == 0)
 		return;
 	if (targets.size != targets_damage.size)
@@ -70,8 +62,6 @@ onStartGameType()
 		targets[i] notsolid();
 		targets[i].trigger_damage = targets_damage[i];
 		targets[i].origin_original = targets[i].origin;
-		//targets[i].trigger_damage thread debugDamage("["+i+"]");
-		//targets[i] thread maps\mp\gametypes\global\developer::showWaypoint();
 
 		targets_damage[i] enablelinkto();
 		targets_damage[i] linkTo(targets[i]);
@@ -82,27 +72,16 @@ onStartGameType()
 	for (i = 0; i < activators_damage.size; i++)
 	{
 		activators_damage[i] thread handleActivation();
-		//activators_damage[i] enablelinkto();
-		//activators_damage[i] linkTo(activators[i]);
 
-		//activators_hint[i] enablelinkto();
-		//activators_hint[i] linkTo(activators[i]);
 		activators_hint[i] setcursorhint("HINT_NONE");
-		//activators_hint[i] setHintString();
 
-		//activators[i] show();
 
-		//activators[i] thread maps\mp\gametypes\global\developer::showWaypoint();
 
-		//println("## activators["+i+"].origin = " + activators[i].origin);
-		//println("## activators_damage["+i+"].origin = " + activators_damage[i].origin);
-		//println("## activators_hint["+i+"].origin = " + activators_hint[i].origin);
 	}
 
 
 	level.aimTargets = targets;
 
-	//println("## level.aimTargets = " + level.aimTargets.size);
 }
 
 onConnected()
@@ -135,7 +114,6 @@ reserveTargetBy(player)
 		{
 			target.reservedBy = player;
 
-			//player iprintln("reserving index " + i);
 
 			return target;
 		}
@@ -175,16 +153,6 @@ rotateTowards(player)
 }
 
 
-
-debugDamage(name)
-{
-	for(;;)
-	{
-		self waittill("damage", dmg, player);
-
-		iprintln("Damage " + dmg + " to " + name + " by " + player.name);
-	}
-}
 
 handleDamageForPlayer(player)
 {
@@ -304,13 +272,11 @@ getTargetPos(randomize)
 			if (left_right_diff > -10 && left_right_diff <= 0)
 			{
 				left_right += 10;
-				//iprintln("adjusted target more to the left");
 
 			}
 			else if (left_right_diff < 10 && left_right_diff > 0)
 			{
 				left_right -= 10;
-				//iprintln("adjusted target more to the right");
 			}
 		}
 
@@ -402,27 +368,6 @@ moving(speed)
 		index_2 = 0;
 	}
 
-/*
-	if (!isDefined(target.waypoint1))
-	{
-		target.waypoint1 = spawnstruct();
-		target.waypoint1.origin = origin[index_1];
-		target.waypoint1 thread maps\mp\gametypes\global\developer::showWaypoint(undefined, 1);
-	}
-	if (!isDefined(target.waypoint2))
-	{
-		target.waypoint2 = spawnstruct();
-		target.waypoint2.origin = origin[index_2];
-		target.waypoint2 thread maps\mp\gametypes\global\developer::showWaypoint(undefined, 1);
-	}
-	target.waypoint1.origin = origin[index_1];
-	target.waypoint2.origin = origin[index_2];
-*/
-/*
-	iprintln("speed: ("+speed+")");
-	iprintln("right: ("+time[0]+")");
-	iprintln("left: ("+time[1]+")");
-*/
 	firstMove = true;
 	for(;;)
 	{
@@ -549,7 +494,6 @@ player_loop()
 
 	self.aimTarget1 thread rotateTowards(self);
 	self.aimTarget1 thread handleDamageForPlayer(self);
-	//self.aimTarget1 thread maps\mp\gametypes\global\developer::showWaypoint(self, 2);
 
 
 	self.aimTrainer_startAngles = self.angles;
@@ -594,12 +538,10 @@ player_loop()
 		if (weapon1 != last_weapon1)
 		{
 			weapon1_maxClipAmmo = weapon1_clipAmmo;
-			//self iprintln("Primary changed " + weapon1_maxClipAmmo);
 		}
 		if (weapon2 != last_weapon2)
 		{
 			weapon2_maxClipAmmo = weapon2_clipAmmo;
-			//self iprintln("Secondary changed " + weapon2_maxClipAmmo);
 		}
 		last_weapon1 = weapon1;
 		last_weapon2 = weapon2;
@@ -614,7 +556,6 @@ player_loop()
 		current_clipAmmo = -1;
 		if(current == weapon1) current_clipAmmo = weapon1_clipAmmo;
 		if(current == weapon2) current_clipAmmo = weapon2_clipAmmo;
-		//self iprintln("ammo: " + current_clipAmmo);
 
 
 		// Bullet fired
@@ -623,7 +564,6 @@ player_loop()
 			// This bullet was not into target
 			if (self.aimTarget1.kills == last_kills && self.aimTrainerMode == last_mode)
 			{
-				//self iprintln("missed shot");
 
 				self thread generateMeNewTargetPosition("missed");
 
@@ -636,7 +576,6 @@ player_loop()
 			}
 			else
 			{
-				//self iprintln("fired");
 
 				self.aimTarget1.misses = 0;
 			}
@@ -750,7 +689,6 @@ generateMeNewTargetPosition(reason)
 
 	playSpawnSound = false;
 
-	//reason = "test";
 	if (reason == "test")
 	{
 		if (!isDefined(self.aimTarget1.generateTime))
@@ -822,7 +760,6 @@ generateMeNewTargetPosition(reason)
 			self thread turnOff();
 		}
 
-		//self iprintlnbold("TIME!");
 
 		wait level.fps_multiplier * 1;
 
@@ -901,7 +838,6 @@ generateMeNewTargetPosition(reason)
 
 	}
 
-	//self iprintln("self.aimTrainerMode: " + self.aimTrainerMode);
 
 	randomPosition = true;
 	if (self.aimTrainerMode == 4) // Mode 4: Reaction time"
@@ -961,9 +897,6 @@ generateMeNewTargetPosition(reason)
 		timeout = 5;
 	}
 
-	//self.aimTarget1.trigger_damage unlink();
-	//self.aimTarget1.trigger_damage.origin = self.aimTarget1.origin;
-	//self.aimTarget1.trigger_damage linkto(self.aimTarget1);
 
 	self.aimTarget1 show();
 	self.aimTarget1.generateTime = gettime();

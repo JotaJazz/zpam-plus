@@ -50,7 +50,6 @@ Init()
 		assert(level.pam_mode != "");
 
 		_2v2 = PAMModeContains("2v2");
-		reserve = false;
 		lan = PAMModeContains("lan");
 		custom = PAMModeContains("custom");
 		ot = isDefined(game["overtime_active"]) && game["overtime_active"];
@@ -58,80 +57,48 @@ Init()
 
 		// This is because of fucking cod2 precache system
 		game["leagueOptionsString"] = &"";
-		if (!rifle && !ot && !custom && _2v2 && reserve && lan)		game["leagueOptionsString"] = &"2v2 | RESERVE | LAN";
-		if (!rifle && !ot && !custom && _2v2 && !reserve && lan)	game["leagueOptionsString"] = &"2v2 | LAN";
-		if (!rifle && !ot && !custom && _2v2 && reserve && !lan)	game["leagueOptionsString"] = &"2v2 | RESERVE";
-		if (!rifle && !ot && !custom && !_2v2 && reserve && lan)	game["leagueOptionsString"] = &"RESERVE | LAN";
-		if (!rifle && !ot && !custom && _2v2 && !reserve && !lan)	game["leagueOptionsString"] = &"2v2";
-		if (!rifle && !ot && !custom && !_2v2 && reserve && !lan)	game["leagueOptionsString"] = &"RESERVE";
-		if (!rifle && !ot && !custom && !_2v2 && !reserve && lan)	game["leagueOptionsString"] = &"LAN";
+		if (!rifle && !ot && !custom && _2v2 && lan)	game["leagueOptionsString"] = &"2v2 | LAN";
+		if (!rifle && !ot && !custom && _2v2 && !lan)	game["leagueOptionsString"] = &"2v2";
+		if (!rifle && !ot && !custom && !_2v2 && lan)	game["leagueOptionsString"] = &"LAN";
 		// -
-		if (!rifle && !ot && custom && _2v2 && reserve && lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | RESERVE | LAN";
-		if (!rifle && !ot && custom && _2v2 && !reserve && lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | LAN";
-		if (!rifle && !ot && custom && _2v2 && reserve && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | RESERVE";
-		if (!rifle && !ot && custom && !_2v2 && reserve && lan)		game["leagueOptionsString"] = &"^3Custom^7 | RESERVE | LAN";
-		if (!rifle && !ot && custom && _2v2 && !reserve && !lan)	game["leagueOptionsString"] = &"^3Custom^7 | 2v2";
-		if (!rifle && !ot && custom && !_2v2 && reserve && !lan)	game["leagueOptionsString"] = &"^3Custom^7 | RESERVE";
-		if (!rifle && !ot && custom && !_2v2 && !reserve && lan)	game["leagueOptionsString"] = &"^3Custom^7 | LAN";
-		if (!rifle && !ot && custom && !_2v2 && !reserve && !lan)	game["leagueOptionsString"] = &"^3Custom";
+		if (!rifle && !ot && custom && _2v2 && lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | LAN";
+		if (!rifle && !ot && custom && _2v2 && !lan)	game["leagueOptionsString"] = &"^3Custom^7 | 2v2";
+		if (!rifle && !ot && custom && !_2v2 && lan)	game["leagueOptionsString"] = &"^3Custom^7 | LAN";
+		if (!rifle && !ot && custom && !_2v2 && !lan)	game["leagueOptionsString"] = &"^3Custom";
 		//
 		//
-		if (!rifle && ot && !custom && _2v2 && reserve && lan)		game["leagueOptionsString"] = &"2v2 | RESERVE | LAN | ^3Overtime";
-		if (!rifle && ot && !custom && _2v2 && !reserve && lan)		game["leagueOptionsString"] = &"2v2 | LAN | ^3Overtime";
-		if (!rifle && ot && !custom && _2v2 && reserve && !lan)		game["leagueOptionsString"] = &"2v2 | RESERVE | ^3Overtime";
-		if (!rifle && ot && !custom && !_2v2 && reserve && lan)		game["leagueOptionsString"] = &"RESERVE | LAN | ^3Overtime";
-		if (!rifle && ot && !custom && _2v2 && !reserve && !lan)	game["leagueOptionsString"] = &"2v2 | ^3Overtime";
-		if (!rifle && ot && !custom && !_2v2 && reserve && !lan)	game["leagueOptionsString"] = &"RESERVE | ^3Overtime";
-		if (!rifle && ot && !custom && !_2v2 && !reserve && lan)	game["leagueOptionsString"] = &"LAN | ^3Overtime";
+		if (!rifle && ot && !custom && _2v2 && lan)		game["leagueOptionsString"] = &"2v2 | LAN | ^3Overtime";
+		if (!rifle && ot && !custom && _2v2 && !lan)	game["leagueOptionsString"] = &"2v2 | ^3Overtime";
+		if (!rifle && ot && !custom && !_2v2 && lan)	game["leagueOptionsString"] = &"LAN | ^3Overtime";
 		// -
-		if (!rifle && ot && custom && _2v2 && reserve && lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | RESERVE | LAN | ^3Overtime";
-		if (!rifle && ot && custom && _2v2 && !reserve && lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | LAN | ^3Overtime";
-		if (!rifle && ot && custom && _2v2 && reserve && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | RESERVE | ^3Overtime";
-		if (!rifle && ot && custom && !_2v2 && reserve && lan)		game["leagueOptionsString"] = &"^3Custom^7 | RESERVE | LAN | ^3Overtime";
-		if (!rifle && ot && custom && _2v2 && !reserve && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | ^3Overtime";
-		if (!rifle && ot && custom && !_2v2 && reserve && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | RESERVE | ^3Overtime";
-		if (!rifle && ot && custom && !_2v2 && !reserve && lan)		game["leagueOptionsString"] = &"^3Custom^7 | LAN | ^3Overtime";
-		if (!rifle && ot && custom && !_2v2 && !reserve && !lan)	game["leagueOptionsString"] = &"^3Custom^7 | ^3Overtime";
-		if (!rifle && ot && !custom && !_2v2 && !reserve && !lan)	game["leagueOptionsString"] = &"^3Overtime";
+		if (!rifle && ot && custom && _2v2 && lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | LAN | ^3Overtime";
+		if (!rifle && ot && custom && _2v2 && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | ^3Overtime";
+		if (!rifle && ot && custom && !_2v2 && lan)		game["leagueOptionsString"] = &"^3Custom^7 | LAN | ^3Overtime";
+		if (!rifle && ot && custom && !_2v2 && !lan)	game["leagueOptionsString"] = &"^3Custom^7 | ^3Overtime";
+		if (!rifle && ot && !custom && !_2v2 && !lan)	game["leagueOptionsString"] = &"^3Overtime";
 		//
 		//
 		//
-		if (rifle && !ot && !custom && _2v2 && reserve && lan)		game["leagueOptionsString"] = &"2v2 | Rifle | RESERVE | LAN";
-		if (rifle && !ot && !custom && _2v2 && !reserve && lan)		game["leagueOptionsString"] = &"2v2 | Rifle | LAN";
-		if (rifle && !ot && !custom && _2v2 && reserve && !lan)		game["leagueOptionsString"] = &"2v2 | Rifle | RESERVE";
-		if (rifle && !ot && !custom && !_2v2 && reserve && lan)		game["leagueOptionsString"] = &"RESERVE | Rifle | LAN";
-		if (rifle && !ot && !custom && _2v2 && !reserve && !lan)	game["leagueOptionsString"] = &"2v2 | Rifle";
-		if (rifle && !ot && !custom && !_2v2 && reserve && !lan)	game["leagueOptionsString"] = &"RESERVE | Rifle";
-		if (rifle && !ot && !custom && !_2v2 && !reserve && lan)	game["leagueOptionsString"] = &"LAN | Rifle";
+		if (rifle && !ot && !custom && _2v2 && lan)		game["leagueOptionsString"] = &"2v2 | Rifle | LAN";
+		if (rifle && !ot && !custom && _2v2 && !lan)	game["leagueOptionsString"] = &"2v2 | Rifle";
+		if (rifle && !ot && !custom && !_2v2 && lan)	game["leagueOptionsString"] = &"LAN | Rifle";
 		// -
-		if (rifle && !ot && custom && _2v2 && reserve && lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | Rifle | RESERVE | LAN";
-		if (rifle && !ot && custom && _2v2 && !reserve && lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | Rifle | LAN";
-		if (rifle && !ot && custom && _2v2 && reserve && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | Rifle | RESERVE";
-		if (rifle && !ot && custom && !_2v2 && reserve && lan)		game["leagueOptionsString"] = &"^3Custom^7 | RESERVE | Rifle | LAN";
-		if (rifle && !ot && custom && _2v2 && !reserve && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | Rifle";
-		if (rifle && !ot && custom && !_2v2 && reserve && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | RESERVE | Rifle";
-		if (rifle && !ot && custom && !_2v2 && !reserve && lan)		game["leagueOptionsString"] = &"^3Custom^7 | LAN | Rifle";
-		if (rifle && !ot && custom && !_2v2 && !reserve && !lan)	game["leagueOptionsString"] = &"^3Custom^7 | Rifle";
+		if (rifle && !ot && custom && _2v2 && lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | Rifle | LAN";
+		if (rifle && !ot && custom && _2v2 && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | Rifle";
+		if (rifle && !ot && custom && !_2v2 && lan)		game["leagueOptionsString"] = &"^3Custom^7 | LAN | Rifle";
+		if (rifle && !ot && custom && !_2v2 && !lan)	game["leagueOptionsString"] = &"^3Custom^7 | Rifle";
 		//
 		//
-		if (rifle && ot && !custom && _2v2 && reserve && lan)		game["leagueOptionsString"] = &"2v2 | Rifle | RESERVE | LAN | ^3Overtime";
-		if (rifle && ot && !custom && _2v2 && !reserve && lan)		game["leagueOptionsString"] = &"2v2 | Rifle | LAN | ^3Overtime";
-		if (rifle && ot && !custom && _2v2 && reserve && !lan)		game["leagueOptionsString"] = &"2v2 | Rifle | RESERVE | ^3Overtime";
-		if (rifle && ot && !custom && !_2v2 && reserve && lan)		game["leagueOptionsString"] = &"RESERVE | Rifle | LAN | ^3Overtime";
-		if (rifle && ot && !custom && _2v2 && !reserve && !lan)		game["leagueOptionsString"] = &"2v2 | Rifle | ^3Overtime";
-		if (rifle && ot && !custom && !_2v2 && reserve && !lan)		game["leagueOptionsString"] = &"RESERVE | Rifle | ^3Overtime";
-		if (rifle && ot && !custom && !_2v2 && !reserve && lan)		game["leagueOptionsString"] = &"Rifle | LAN | ^3Overtime";
+		if (rifle && ot && !custom && _2v2 && lan)		game["leagueOptionsString"] = &"2v2 | Rifle | LAN | ^3Overtime";
+		if (rifle && ot && !custom && _2v2 && !lan)		game["leagueOptionsString"] = &"2v2 | Rifle | ^3Overtime";
+		if (rifle && ot && !custom && !_2v2 && lan)		game["leagueOptionsString"] = &"Rifle | LAN | ^3Overtime";
 		// -
-		if (rifle && ot && custom && _2v2 && reserve && lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | Rifle | RESERVE | LAN | ^3Overtime";
-		if (rifle && ot && custom && _2v2 && !reserve && lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | Rifle | LAN | ^3Overtime";
-		if (rifle && ot && custom && _2v2 && reserve && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | Rifle | RESERVE | ^3Overtime";
-		if (rifle && ot && custom && !_2v2 && reserve && lan)		game["leagueOptionsString"] = &"^3Custom^7 | RESERVE | Rifle | LAN | ^3Overtime";
-		if (rifle && ot && custom && _2v2 && !reserve && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | Rifle | ^3Overtime";
-		if (rifle && ot && custom && !_2v2 && reserve && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | RESERVE | Rifle | ^3Overtime";
-		if (rifle && ot && custom && !_2v2 && !reserve && lan)		game["leagueOptionsString"] = &"^3Custom^7 | Rifle | LAN | ^3Overtime";
-		if (rifle && ot && custom && !_2v2 && !reserve && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | Rifle | ^3Overtime";
-		if (rifle && ot && !custom && !_2v2 && !reserve && !lan)	game["leagueOptionsString"] = &"Rifle | ^3Overtime";
-		if (rifle && !ot && !custom && !_2v2 && !reserve && !lan)	game["leagueOptionsString"] = &"Rifle";
+		if (rifle && ot && custom && _2v2 && lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | Rifle | LAN | ^3Overtime";
+		if (rifle && ot && custom && _2v2 && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | Rifle | ^3Overtime";
+		if (rifle && ot && custom && !_2v2 && lan)		game["leagueOptionsString"] = &"^3Custom^7 | Rifle | LAN | ^3Overtime";
+		if (rifle && ot && custom && !_2v2 && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | Rifle | ^3Overtime";
+		if (rifle && ot && !custom && !_2v2 && !lan)	game["leagueOptionsString"] = &"Rifle | ^3Overtime";
+		if (rifle && !ot && !custom && !_2v2 && !lan)	game["leagueOptionsString"] = &"Rifle";
 
 
 

@@ -59,7 +59,6 @@ registerCvarEx(method, cvar, type, defaultValue, minValue, maxValue)
 {
 	cvar = toLower(cvar);
 
-	//println("Registering cvar " + cvar + "  " + method);
 
 
 	// Check if this cvar is registered for multiple times
@@ -227,7 +226,6 @@ setCvarQuiet(cvarName, value)
 	setCvar(cvarName, value);
 
 	setCvar("scr_cvar_quietMode_" + cvarName, game["cvars"][cvarName]["valueBeforeQuiet"]);
-	//println("Quiet mode for cvar " + cvarName + " was SET");
 }
 
 restoreCvarQuiet(cvarName)
@@ -249,7 +247,6 @@ restoreCvarQuiet(cvarName)
 
 		setCvar("scr_cvar_quietMode_" + cvarName, "");
 
-		//println("Quiet mode for cvar " + cvarName + " was canceled");
 	}
 }
 
@@ -262,7 +259,6 @@ cancelCvarQuiet(cvarName)
 
 	setCvar("scr_cvar_quietMode_" + cvarName, "");
 
-	//println("Quiet mode for cvar " + cvarName + " was canceled");
 }
 
 
@@ -302,33 +298,6 @@ setCvarIfChanged(cvar, value)
 
 setClientCvar2(cvar, value, aaa, bbb, ccc)
 {
-	/*
-	/#
-	if (!self.pers["isBot"] && !maps\mp\gametypes\global\_global::startsWith(cvar, "debug"))
-	{
-		if (cvar == "cg_objectiveText")
-	      		println("### " + getTime() + " ### " + level.frame_num + " ### " + self.name + " ### " + cvar + " = " + "...localized string...");
-	        else
-	      		println("### " + getTime() + " ### " + level.frame_num + " ### " + self.name + " ### " + cvar + " = \"" + value + "\"");
-
-		self thread countCvarsInSingleFrame();
-
-
-	        if (!isDefined(self.pers["aaa"]))
-	        {
-		      	self.pers["aaa"] = [];
-		      	self.pers["sended_cvars"] = 0;
-	        }
-	        if (!isDefined(self.pers["aaa"][cvar]))
-	        {
-		      	self.pers["aaa"][cvar] = 1;
-		      	self.pers["sended_cvars"]++;
-
-		      	//println("### new cvars:" + self.pers["sended_cvars"] + "  " + cvar);
-	        }
-	}
-	#/
-*/
 
         self setClientCvar(cvar, value, aaa, bbb, ccc);
 }
@@ -459,7 +428,6 @@ limitCvar(cvar, registerTime)
 	}
 	else if (cvar["type"] == "STRING" && isDefined(cvar["minValue"]) /*&& !isString(cvar["minValue"]) && cvar["minValue"].size != 0*/)
 	{
-		//assert(cvar["name"] == "pam_mode");
 
 		value_now = getValueByType(cvar["name"], cvar["type"], cvar["defaultValue"]);
 
@@ -471,15 +439,6 @@ limitCvar(cvar, registerTime)
 
 		if (!isValid)
 		{
-			/*
-			// Check also is value before is valid
-			previousIsValid = [[validateFunction]](cvar, cvar["value"], registerTime);
-
-			if (!previousIsValid)
-			    setCvar(cvar["name"], cvar["defaultValue"]); // set default value
-			else
-			    setCvar(cvar["name"], cvar["value"]); // set value before
-*/
 
     			if (registerTime)
     			    setCvar(cvar["name"], cvar["defaultValue"]); // set default value
@@ -618,7 +577,6 @@ getNumberOfChangedCvars()
 		if (cvar["method"] != "I" &&  (cvar["value"] != cvar["defaultValue"] && !isDefined(cvar["inQuiet"]))  ||  (isDefined(cvar["inQuiet"]) && cvar["valueBeforeQuiet"] != cvar["defaultValue"]) )
 		{
 			/#
-			//println("Not equal to rules: " + cvar["name"] + ", value="+cvar["value"] +", defValue="+ cvar["defaultValue"]);
 			#/
 
 			changes++;

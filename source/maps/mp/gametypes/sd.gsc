@@ -594,15 +594,12 @@ onAfterPlayerDamaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWe
 	// If bomb explodes, set the planting player as the attacker of bomb explosion
 	if (level.bombKill && isDefined(level.planting_player) && isPlayer(level.planting_player) && eAttacker.classname == "worldspawn")
 	{
-		//iprintln("Killed by bomb!!");
 		// Prevent killing teammates by player - it can be abused to decrease player kill score
-		//if (self.pers["team"] != level.planting_player.pers["team"])
 		eAttacker = level.planting_player;
 	}
 
 	isFriendlyFire = false; // used for log
 
-	//println("^2"+self.name+" took damage " + iDamage + " idflags " + iDFlags);
 
 	// check for completely getting out of the damage
 	if(!(iDFlags & level.iDFLAGS_NO_PROTECTION))
@@ -723,7 +720,6 @@ watchPlayerDamageForStats(enemy, damage, sMeansOfDeath, sWeapon)
 	else
 		return;
 
-	//self iprintln("^2Hits: " + damage);
 
 	// Make sure only 1 thread is running for player
 	self notify("watchPlayerDamageForStats_kill_" + enemy getEntityNumber());
@@ -744,7 +740,6 @@ watchPlayerDamageForStats(enemy, damage, sMeansOfDeath, sWeapon)
 	// Enemy was not killed in 5sec, count damage
 	self maps\mp\gametypes\_player_stat::AddDamage(damage);
 
-	//self iprintln("Hits: " + damage);
 }
 
 /*
@@ -934,7 +929,6 @@ onAfterPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir,
 
 		if (distance < 70.0)
 		{
-			//iprintln(distance);
 			body delete();
 		}
 	}
@@ -1404,57 +1398,6 @@ HUD_Clock(countDownTime)
 	level.clock.color = (1, 0.25, 0.25);
 }
 
-HUD_Clock_Bomb(countDownTime)
-{
-	level.clock = newHudElem2();
-	level.clock.font = "default";
-	level.clock.fontscale = 2;
-	level.clock.horzAlign = "center_safearea";
-	level.clock.vertAlign = "top";
-	level.clock.alignX = "left";
-	level.clock.alignY = "top";
-	level.clock.color = (1, 1, 1);
-	level.clock.x = 0;
-	level.clock.y = 445;
-	level.clock setTimer(countDownTime);
-
-	// If strattime is enabled, show fade-in animation
-	if (level.strat_time > 0)
-	{
-		level.clock.alpha = 0;
-
-		level.clock FadeOverTime(0.5);
-		level.clock.alpha = 1;
-
-		level.clock.x = 40;
-		level.clock moveovertime(0.5);
-		level.clock.x = 0;
-	}
-
-
-	waitTime = countDownTime - 30 - 0.3;
-	if (waitTime <= 0)
-		return;
-
-	wait waitTime * level.fps_multiplier;
-	if (!isDefined(level.clock) || level.roundended)
-		return;
-
-	// Orange
-	level.clock.color = (1, 0.6, 0.15);
-
-	waitTime = countDownTime - waitTime - 15;
-	if (waitTime <= 0)
-		return;
-
-	wait waitTime * level.fps_multiplier;
-	if (!isDefined(level.clock) || level.roundended)
-		return;
-
-	// Red
-	level.clock.color = (1, 0.25, 0.25);
-}
-
 HUD_StratTime(time)
 {
 	if (time <= 0)
@@ -1552,7 +1495,6 @@ HUD_ShowBombTimers()
 
 	level.bombtimerhud = addHUD(6, 76, undefined, undefined, "left", "top", "left", "top");
 	level.bombtimerhud showHUDSmooth(0.1);
-	//level.bombtimerhud.foreground = true;  // visible if menu opened
 	level.bombtimerhud setClock(countDownTime, 60, "hudStopwatch", 48, 48);
 
 
@@ -1566,7 +1508,6 @@ HUD_ShowBombTimers()
 	level.clock.color = (1, 1, 1);
 	level.clock.x = 0;
 	level.clock.y = 445;
-	//level.clock setTimer(countDownTime - 1.1);
 
 
 	time_start = gettime();
@@ -2810,7 +2751,6 @@ menuAllies()
 	// If team is already allies or we cannot join allies (to keep team balance), open team menu again
 	if(self.pers["team"] == "allies" || !maps\mp\gametypes\_teams::getJoinTeamPermissions("allies"))
 	{
-		//self openMenu(game["menu_team"]);
 		return;
 	}
 
@@ -2843,7 +2783,6 @@ menuAxis()
 	// If team is already axis or we cannot join axis (to keep team balance), open team menu again
 	if(self.pers["team"] == "axis" || !maps\mp\gametypes\_teams::getJoinTeamPermissions("axis"))
 	{
-		//self openMenu(game["menu_team"]);
 		return;
 	}
 
@@ -3080,13 +3019,6 @@ menuWeapon(response)
 
 					maps\mp\gametypes\_weapons::givePistol();
 				}
-				/*
-				// If I select the same weapon that is already in slot, it means I want to remove secondary weapon to pistol
-				if (weapon == primary && maps\mp\gametypes\_weapons::isMainWeapon(primaryb))
-				{
-					self takeWeapon(primaryb); // Remove weapon
-					maps\mp\gametypes\_weapons::givePistol();
-				}*/
 
 				self.spawnedWeapon = weapon;
 
@@ -3163,33 +3095,6 @@ soundPlanted(player)
 	level playSoundOnPlayers(axissound, "axis");
 	level playSoundOnPlayers(alliedsound, "spectator");
 	level playSoundOnPlayers(alliedsound, "streamer");
-/*
-	wait level.fps_multiplier * 1.5;
-
-	if(level.planting_team == "allies")
-	{
-		if(game["allies"] == "british")
-			alliedsound = "UK_mp_defendbomb";
-		else if(game["allies"] == "russian")
-			alliedsound = "RU_mp_defendbomb";
-		else
-			alliedsound = "US_mp_defendbomb";
-
-		level playSoundOnPlayers(alliedsound, "allies");
-		level playSoundOnPlayers("GE_mp_defusebomb", "axis");
-	}
-	else if(level.planting_team == "axis")
-	{
-		if(game["allies"] == "british")
-			alliedsound = "UK_mp_defusebomb";
-		else if(game["allies"] == "russian")
-			alliedsound = "RU_mp_defusebomb";
-		else
-			alliedsound = "US_mp_defusebomb";
-
-		level playSoundOnPlayers(alliedsound, "allies");
-		level playSoundOnPlayers("GE_mp_defendbomb", "axis");
-	}*/
 
 }
 

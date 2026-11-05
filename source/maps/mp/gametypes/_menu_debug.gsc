@@ -101,11 +101,9 @@ onMenuResponse(menu, response)
 menuOpened()
 {
     self notify("kill_debug");
-    //wait level.frame;
     if (self.pers["rcon_logged_in"] || getCvar("debug") == "1")
     {
 	    self thread debugBasics();
-        //level thread debugCvars();
     }
 }
 
@@ -121,7 +119,6 @@ debugBasics()
 	self endon("disconnect");
     self endon("kill_debug");
 
-    //self waittill("spawned_player");
 
 
     for (i = 1; i <= 30; i++)
@@ -175,15 +172,6 @@ debugBasics()
 		self setClientCvar2("debug_line_26", "allies name   = " + 		 level.teamname_allies);
 		self setClientCvar2("debug_line_27", "axis name     = " + 		 level.teamname_axis);
 
-		/*
-		self setClientCvar2("debug_line_17", "allies_called_timeouts = " + game["allies_called_timeouts"]);
-		self setClientCvar2("debug_line_18", "allies_called_timeouts_half = " + game["allies_called_timeouts_half"]);
-		self setClientCvar2("debug_line_19", "axis_called_timeouts = " + game["axis_called_timeouts"]);
-		self setClientCvar2("debug_line_20", "axis_called_timeouts_half = " + game["axis_called_timeouts_half"]);
-
-		self setClientCvar2("debug_line_21", "timeout_called_team = " + game["timeout_called_team"]);
-*/
-
 		self setClientCvar2("debug_row_2_line_1", "getWeaponSlotWeapon(primary)   = " + 	 self getWeaponSlotWeapon("primary"));
 		self setClientCvar2("debug_row_2_line_2", "getWeaponSlotWeapon(primaryb)  = " + 	 self getWeaponSlotWeapon("primaryb"));
 		self setClientCvar2("debug_row_2_line_3", "getCurrentWeapon()             = " + 	 self getCurrentWeapon());
@@ -209,8 +197,6 @@ debugBasics()
         self setClientCvar2("debug_row_2_line_8", "allies_limited    = " + 	 axis_limited);
 
 
-		//spawnweapon = "?";
-		//if (isDefined(self.pers["spawnweapon"])) spawnweapon = self.pers["spawnweapon"];
 		weapon = "?";
 		if (isDefined(self.pers["weapon"])) weapon = self.pers["weapon"];
 		weapon1 = "?";
@@ -219,7 +205,6 @@ debugBasics()
 		if (isDefined(self.pers["weapon2"])) weapon2 = self.pers["weapon2"];
 
 
-		//self setClientCvar2("debug_row_2_line_10", "self.pers[spawnweapon]  = " + spawnweapon);
 		self setClientCvar2("debug_row_2_line_11", "self.pers[weapon]       = " + weapon);
 		self setClientCvar2("debug_row_2_line_12", "self.pers[weapon1]      = " + weapon1);
 		self setClientCvar2("debug_row_2_line_13", "self.pers[weapon2]      = " + weapon2);
@@ -236,7 +221,6 @@ debugBasics()
 	self setClientCvar2("debug_row_2_line_25", "self isOnGround()                = " + 	self isOnGround());
 	self setClientCvar2("debug_row_2_line_26", "self playerAds()                 = " + 	self playerAds());
 
-        //self setClientCvar2("debug_row_2_line_14", "self.dropped_weapons   = " + 		 self.dropped_weapons);
 
 
 
@@ -246,29 +230,3 @@ debugBasics()
 
 }
 
-
-debugCvars()
-{
-
-	for(i = 0; i < game["cvarnames"].size; i++)
-	{
-		cvar = game["cvars"][game["cvarnames"][i]]; // array
-
-		color = "";
-		if (cvar["value"] != cvar["defaultValue"])
-			color = "*CHANGED* ";
-
-        min = "?";
-        if (isDefined(cvar["minValue"]) && isString(cvar["minValue"]))
-            min = cvar["minValue"];
-
-        max = "?";
-        if (isDefined(cvar["maxValue"]) && isString(cvar["maxValue"]))
-            max = cvar["maxValue"];
-
-		println(color + cvar["name"] + " = " + cvar["value"] + "   (d:" + cvar["defaultValue"] + ", <" + min + "; " + max + ">)");
-
-
-    }
-
-}
