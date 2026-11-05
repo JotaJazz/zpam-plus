@@ -379,6 +379,9 @@ onMenuResponse(menu, response)
 printTeamChanged(text, name) {
 	self endon("disconnect");
 
+	if (!self maps\mp\gametypes\global\player::actionAllowed("team_print", 2000))
+		return;
+
 	wait level.frame;
 	iprintln(text, name);
 }

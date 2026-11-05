@@ -100,12 +100,18 @@ onMenuResponse(menu, response)
 
 	if (response == "scoreboard_refresh")
 	{
+		if (!self maps\mp\gametypes\global\player::actionAllowed("scoreboard", 500))
+			return true;
+
 		self thread generatePlayerList();
 		return true;
 	}
 
 	if (startsWith(response, "scoreboard_setPlayer"))
 	{
+		if (!self maps\mp\gametypes\global\player::actionAllowed("scoreboard", 500))
+			return true;
+
 		substr = getSubstr(response, 20);
 
 		if (!isDigitalNumber(substr))

@@ -7,6 +7,17 @@ BeforeOnConnected()
 	self thread AddTags();
 }
 
+// True (and stamps the time) if at least ms passed since the last true for this key
+actionAllowed(key, ms)
+{
+	now = getTime();
+	last = self.pers["action_" + key];
+	if (isDefined(last) && now - last < ms)
+		return false;
+	self.pers["action_" + key] = now;
+	return true;
+}
+
 // Called when player disconnect, after all disconnect evets were called
 AfterOnDisconnect()
 {

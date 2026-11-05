@@ -25,6 +25,8 @@ init()
 	}
 
 	level.in_timeout = false;
+	if (!isDefined(level.timeout_going_to_id))
+		level.timeout_going_to_id = 0;
 	level.timeout_elapsedTime = 0; // in seconds
 
 	// If this flag is set to true, we know timeout will be runned
@@ -115,6 +117,11 @@ getTeamName(team)
 
 callTimeout()
 {
+	if (!self maps\mp\gametypes\global\player::actionAllowed("timeout", 2000))
+	{
+		self iprintln("Wait before calling or canceling a time-out again");
+		return;
+	}
 
 	// Return "notallowed", "cancel", "run_now", "run_next_round", "run_in_time"
 	action = self Validate_Timeout(true);
@@ -460,6 +467,9 @@ HUD_Timeout()
 
 TO_Time_Based_GoingToTimeOutIN()
 {
+	level.timeout_going_to_id++;
+	myId = level.timeout_going_to_id;
+
 	waittime = 12;
 
 	goingtoo = newHudElem2();
@@ -481,7 +491,7 @@ TO_Time_Based_GoingToTimeOutIN()
 	ttb SetTimer(waittime);
 
 	time = 0;
-	while (game["do_timeout"]) {
+	while (game["do_timeout"] && myId == level.timeout_going_to_id) {
 
 		if (time >= waittime)
 		{
