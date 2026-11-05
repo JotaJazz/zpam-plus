@@ -12,7 +12,7 @@ actionAllowed(key, ms)
 {
 	now = getTime();
 	last = self.pers["action_" + key];
-	if (isDefined(last) && now - last < ms)
+	if (isDefined(last) && now >= last && now - last < ms) // now < last: clock restarted
 		return false;
 	self.pers["action_" + key] = now;
 	return true;
