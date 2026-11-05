@@ -3,6 +3,12 @@
 Append-only. Newest first. Template in
 [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
 
+## 2026-11-05 — rules at 40 Hz
+
+- Comp, strat and dm warmup rules set `sv_fps 40`, `g_forceSnaps 40`, `g_forceRate 40000` and `sv_maxRate 0`, the 40 Hz setting of the Plus protocol; the two Plus dvars are registered in `global/cvars.gsc`.
+- `_cvar_forces.gsc` forced `sv_maxRate 25000` on every map, after the rules, which would have capped the 40 Hz rate; the rules now own it.
+- Checked on a local Plus build by rcon (values set, kept across `map_restart`); pub keeps the server config's values, as before.
+
 ## 2026-11-05 — audit fixes
 
 - Waits are real seconds at any tick rate (`level.fps_multiplier` is 1); kill replays only for streamers; one time-out per call and per-player rate limits; `pub` refuses suffixes; restored stats need the same name and IP; names go through `logSafe` in `games_mp.log` and team names are computed once per match start.

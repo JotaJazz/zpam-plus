@@ -52,6 +52,8 @@ Register_Shared_Cvars()
 
 
 	[[sVar]]("sv_fps", "INT", 20, 10, 1000);
+	[[sVar]]("g_forceSnaps", "INT", 0, 0, 1000);		// Plus server: snapshots a second sent to every client, 0 = the client's snaps
+	[[sVar]]("g_forceRate", "INT", 0, 0, 1000000);	// Plus server: rate of every client in bytes a second, 0 = the client's rate
 	[[sVar]]("rate", "INT", 25000, 25000, 25000);
 	[[sVar]]("g_allowVote", "BOOL", 1);
 	[[sVar]]("g_clonePlayerMaxVelocity", "FLOAT", 80, 0, undefined);
@@ -138,6 +140,8 @@ onCvarChanged(cvar, value, isRegisterTime)
 			return true;
 
 		case "rate": 				return true;
+		case "g_forcesnaps":			return true;
+		case "g_forcerate":			return true;
 		case "developer":			return true;
 		case "developer_script":		return true;
 		case "g_allowvote":			level.allowvote = value; return true;

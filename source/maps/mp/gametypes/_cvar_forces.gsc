@@ -5,7 +5,7 @@ init()
     addEventListener("onConnected",         ::onConnected);
 
     setCvar("rate", "25000");
-    setCvar("sv_maxRate", "25000");
+    // sv_maxRate comes from the rules: at 40 Hz it must be 0, or it caps g_forceRate at 25000
     setCvar("sv_pure", "1");
 }
 

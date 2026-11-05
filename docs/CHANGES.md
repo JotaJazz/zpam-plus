@@ -14,6 +14,8 @@ Changes since zPAM 3.38. Earlier history:
 - A `;` in a player name is written as `:` in `games_mp.log`, so a name cannot add
   fields to a log line.
 - Timers last real seconds at any `sv_fps`; at 40 Hz they lasted twice as long.
+- Comp, strat and dm warmup rules run at 40 Hz: `sv_fps 40`, `g_forceSnaps 40`,
+  `g_forceRate 40000` and `sv_maxRate 0` (was `sv_fps 30` and `sv_maxRate 25000`).
 - Kill replays only open for players in the streamer team; before, anyone could
   open them from the console.
 - Calling a time-out twice in time-based modes no longer stacks two countdowns.
