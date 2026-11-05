@@ -10,3 +10,7 @@
 | Machine paths in `tools/run-server.sh` defaults | personal defaults, overridable by variables | move them to a local, uncommitted file |
 | No automated GSC test | manual, with `tools/rcon.py` on a `tools/run-server.sh` server | a scripted run that reads the console log |
 | Player identity is IP plus name | restored stats match the IP and the name, not an account; players behind one IP (and all bots, 0.0.0.0) are told apart only by name | the ladder needs real accounts |
+| Plus server segfaults loading `re` on `mp_toujane_fix` and `mp_burgundy` | found on the test server, present before `fix/plus-audit`; server side | a fix in OpenCoD2-Plus Server |
+| `hq` script runtime error `level.radio[-1]` at match start | found on the test server, present before `fix/plus-audit` | find why no radio is chosen |
+| Not tested in game (no real client) | killcam refusal, time-out and rate limits, different-IP refusal, `a;b` names, recording, plant and defuse, match limits | a session with real clients |
+| Comp, strat and warmup rules force `sv_fps` 30 | `level.fps_multiplier` is 1 now, so waits no longer depend on it; 30 versus 40 is the maintainer's decision | decide, then change the rules |

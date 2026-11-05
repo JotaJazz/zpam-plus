@@ -1,6 +1,6 @@
 # System summary
 
-Updated 2026-11-05. Version: zPAM Plus 1, unreleased, on `feat/plus-foundation`.
+Updated 2026-11-05. Version: zPAM Plus 1, unreleased, on `fix/plus-audit`.
 
 ## Tree
 
@@ -20,7 +20,7 @@ images/                     pictures used by the upstream manual
 
 | Area | State |
 |---|---|
-| Rules and match flow | zPAM 3.38 with the audit fixes up to `dad08c5` |
+| Rules and match flow | zPAM 3.38 with the audit fixes up to `dad08c5` and the `fix/plus-audit` branch (see debt for what is untested) |
 | Plus check | built, `sv_plus` 122 or later; tested on stock 1.0 (refused) and a local Plus build (passes) |
 | Name and version | "zPAM Plus 1", `zpamplus1.iwd`, `_zpam` = `Plus 1` |
 | Real match on Plus | not yet |
