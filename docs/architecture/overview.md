@@ -22,6 +22,21 @@ that loads from `main`. Paths below are under `source/maps/mp/gametypes/`.
 there say which module depends on which (readyup before timeout, matchinfo
 before record, and so on).
 
+## Shared gametype code
+
+Function bodies that were copied between gametype files live once in
+`global/gametype_*_common.gsc`, pulled in with `#include`. A gametype must not
+define a function its includes define (the compiler refuses it), so each file
+holds only what every gametype including it shares.
+
+| File | Included by |
+|---|---|
+| `global/gametype_common.gsc` | ctf, dm, htf, hq, tdm |
+| `global/gametype_respawn_common.gsc` | ctf, dm, htf, hq, tdm |
+
+Inside them, calls to a gametype's own spawn functions go through
+`level.spawnPlayer`, `level.spawnSpectator` and `level.spawnIntermission`.
+
 ## Rules
 
 `pam_mode` is `pub`, or `comp` (also `warmup` in dm) followed by `_<score>` and

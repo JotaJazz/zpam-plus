@@ -10,6 +10,7 @@
 | Rule values live in `rules/`, read through `global/cvar_system.gsc` | one place per pam_mode, defaults restored on mode change |
 | The iwd name equals `level.pam_folder`; every line that carries the name or version is marked `// ZPAM_RENAME` | the installation check refuses any other name |
 | The mod runs from `main`, never from `fs_game` | mods do not exec player configs |
+| A fix in shared gametype code goes in the common file (`global/gametype_*_common.gsc`), not in a gametype copy | the gametypes that include it get the fix at once ([overview](overview.md#shared-gametype-code)) |
 
 ## Forbidden
 

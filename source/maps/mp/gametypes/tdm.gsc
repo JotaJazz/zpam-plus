@@ -1,4 +1,6 @@
 #include maps\mp\gametypes\global\_global;
+#include maps\mp\gametypes\global\gametype_common;
+#include maps\mp\gametypes\global\gametype_respawn_common;
 
 main()
 {
@@ -352,56 +354,6 @@ onPlayerDamaging(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon
 			}
 		}
 	}
-}
-
-/*
-Called when player has taken damage.
-self is the player that took damage.
-*/
-onPlayerDamaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, psOffsetTime)
-{
-}
-
-// Called as last funtction after all onPlayerDamaged events are processed
-onAfterPlayerDamaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, psOffsetTime)
-{
-	if(!(iDFlags & level.iDFLAGS_NO_PROTECTION))
-	{
-		// Make sure at least one point of damage is done
-		if(iDamage < 1)
-			iDamage = 1;
-
-		self finishPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, psOffsetTime);
-		self notify("damaged_player", iDamage);
-
-		// Shellshock/Rumble
-		self thread maps\mp\gametypes\_shellshock::shellshockOnDamage(sMeansOfDeath, iDamage);
-	}
-
-	// LOG stuff
-	if(self.sessionstate != "dead")
-		level notify("log_damage", self, eAttacker, sWeapon, iDamage, sMeansOfDeath, sHitLoc, false);
-}
-
-
-/*
-Called when player is about to be killed.
-self is the player that was killed.
-Return true to prevent the kill.
-*/
-onPlayerKilling(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration)
-{
-	if (level.mapended)
-		return true;
-}
-
-
-/*
-Called when player is killed
-self is the player that was killed.
-*/
-onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration)
-{
 }
 
 // Called as last funtction after all onPlayerKilled events are processed
@@ -784,71 +736,6 @@ startGame()
 	}
 }
 
-stratTime_g_speed()
-{
-	// Disable players movement
-	maps\mp\gametypes\global\cvar_system::setCvarQuiet("g_speed", 0);
-
-	level waittill("strat_time_end");
-
-	if (!level.in_timeout)
-		maps\mp\gametypes\global\cvar_system::restoreCvarQuiet("g_speed");
-}
-
-
-strattime_end_timer(time)
-{
-	level endon("strat_time_end");
-
-	wait level.fps_multiplier * time;
-
-	level notify("strat_time_end");
-}
-
-strattime_end_ontimeout()
-{
-	level endon("strat_time_end");
-
-	level waittill("running_timeout");
-
-	level notify("strat_time_end");
-}
-
-HUD_StratTime(time)
-{
-	if (time <= 0)
-		return;
-
-	// Strat Time
-	strattime = addHUD(0, 450, 2, (.98, .827, .58), "center", "bottom", "center_safearea", "top");
-	strattime setText(game["STRING_STRAT_TIME"]);
-
-	// 0:05
-	strat_clock = addHUD(0, 445, 2, (.98, .827, .58), "center", "top", "center_safearea", "top");
-	strat_clock setTimer(time);
-
-
-	// Wait untill time expired or timeout was called
-	level waittill("strat_time_end");
-
-
-	strattime FadeOverTime(0.5);
-	strattime.alpha = 0;
-
-	strat_clock FadeOverTime(0.5);
-	strat_clock.alpha = 0;
-
-	strat_clock moveovertime(0.5);
-	strat_clock.x = -40;
-
-	wait level.fps_multiplier * 0.5;
-
-	strattime destroy2();
-	strat_clock destroy2();
-}
-
-
-
 TDM_Team_Scoring(score)
 {
 	if (self.pers["team"] == "allies")
@@ -1117,34 +1004,6 @@ menuSpectator()
 	self notify("joined_spectators");
 
 	level notify("joined", "spectator", self); // used in first round to check if someone joined team
-}
-
-menuStreamer()
-{
-	if(self.pers["team"] == "streamer")
-		return;
-
-	self.joining_team = "streamer";
-	self.leaving_team = self.pers["team"];
-
-	if(isAlive(self))
-	{
-		self.switching_teams = true;
-		self suicide();
-	}
-
-	self.sessionteam = "spectator";
-	self.statusicon = "";
-	self.pers["team"] = "streamer";
-	self.pers["weapon"] = undefined;
-	self.pers["savedmodel"] = undefined;
-
-	spawnSpectator();
-
-	self notify("joined", "streamer");
-	self notify("joined_streamers");
-
-	level notify("joined", "streamer", self); // used in first round to check if someone joined team
 }
 
 menuWeapon(response)
