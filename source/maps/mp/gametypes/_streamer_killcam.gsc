@@ -46,6 +46,9 @@ Return true to indicate that menu response was handled in this function
 */
 onMenuResponse(menu, response)
 {
+	if (self.pers["team"] != "streamer")
+		return;
+
 	if (menu == game["menu_streamersystem"])
 	{
 		if (response == "killcam_open")

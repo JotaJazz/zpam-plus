@@ -12,3 +12,5 @@ Changes since zPAM 3.38. Earlier history:
 - `zpam338.iwd` in `main` is refused, as older zPAM iwds already were.
 - Help links point to JotaJazz/zpam-plus.
 - Timers last real seconds at any `sv_fps`; at 40 Hz they lasted twice as long.
+- Kill replays only open for players in the streamer team; before, anyone could
+  open them from the console.
