@@ -16,12 +16,12 @@ init()
 
 onConnected()
 {
-    logPrint("Connected;"+self getGuid()+";"+self getEntityNumber()+";"+self.name+"\n");
+    logPrint("Connected;"+self getGuid()+";"+self getEntityNumber()+";"+logSafe(self.name)+"\n");
 }
 
 onDisconnect()
 {
-    logPrint("Disconnected;"+self getGuid()+";"+self getEntityNumber()+";"+self.name+"\n");
+    logPrint("Disconnected;"+self getGuid()+";"+self getEntityNumber()+";"+logSafe(self.name)+"\n");
 }
 
 onReadyUpOver()
@@ -46,7 +46,7 @@ onDamage()
 
         self_num = player getEntityNumber();
 		self_guid = player getGuid();
-		self_name = player.name;
+		self_name = logSafe(player.name);
 		self_team = player.pers["team"];
 
         attack_num = -1;
@@ -58,7 +58,7 @@ onDamage()
 		{
 			attack_num = eAttacker getEntityNumber();
 			attack_guid = eAttacker getGuid();
-			attack_name = eAttacker.name;
+			attack_name = logSafe(eAttacker.name);
 			attack_team = eAttacker.pers["team"];
 		}
 
@@ -84,7 +84,7 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
 
         self_num = player getEntityNumber();
     	self_guid = player getGuid();
-    	self_name = player.name;
+    	self_name = logSafe(player.name);
     	self_team = player.pers["team"];
 
         attack_num = -1;
@@ -96,7 +96,7 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
     	{
     		attack_num = attacker getEntityNumber();
     		attack_guid = attacker getGuid();
-    		attack_name = attacker.name;
+    		attack_name = logSafe(attacker.name);
     		attack_team = attacker.pers["team"];
     	}
 

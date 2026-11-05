@@ -129,7 +129,7 @@ callbash()
 
 		iprintlnbold("^3" + self.name + " ^7called a pistol bash");
 
-		logPrint("BASH_CALL;" + self.pers["team"] + ";" + self.name + "\n");
+		logPrint("BASH_CALL;" + self.pers["team"] + ";" + logSafe(self.name) + "\n");
 
 		HUD_Bash();
 	}

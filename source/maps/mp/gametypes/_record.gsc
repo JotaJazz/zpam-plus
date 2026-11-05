@@ -113,7 +113,7 @@ onSpawned()
 		if (!level.in_readyup && !level.in_timeout && (self.pers["team"] == "allies" || self.pers["team"] == "axis"))
 		{
 			waittillframeend; // wait until team names are generated
-			self execRecording();
+			self execRecording(false);
 		}
 	}
 }
@@ -184,7 +184,7 @@ hide()
 
 
 
-generateDemoName()
+generateDemoName(namesReady)
 {
 	// Wait untill team names are generated in case recording is executed right at start of new round
 	waittillframeend;
@@ -207,8 +207,11 @@ generateDemoName()
 		// Protection if team names from match info are empty
 		if (myTeamName == "" || enemyTeamName == "")
 		{
-			maps\mp\gametypes\_teamname::refreshTeamName("allies"); // will update level.teamname_allies
-			maps\mp\gametypes\_teamname::refreshTeamName("axis"); // will update level.teamname_axis
+			if (!namesReady)
+			{
+				maps\mp\gametypes\_teamname::refreshTeamName("allies"); // will update level.teamname_allies
+				maps\mp\gametypes\_teamname::refreshTeamName("axis"); // will update level.teamname_axis
+			}
 
 			if (self.pers["team"] == "allies")
 			{
@@ -356,18 +359,21 @@ getSecureString(string)
 
 startRecordingForAll()
 {
+    // Once per match start, not once per player
+    maps\mp\gametypes\_teamname::refreshTeamName("allies");
+    maps\mp\gametypes\_teamname::refreshTeamName("axis");
     players = getentarray("player", "classname");
     for(i = 0; i < players.size; i++)
     {
         player = players[i];
 
 		if (!player.pers["recording_executed"] && (player.pers["team"] == "allies" || player.pers["team"] == "axis"))
-			player thread execRecording();
+			player thread execRecording(true);
     }
 }
 
 
-execRecording()
+execRecording(namesReady)
 {
 	self endon("disconnect");
 
@@ -392,7 +398,7 @@ execRecording()
 		return;
 	}
 
-	demoName = generateDemoName();
+	demoName = self generateDemoName(namesReady);
 
 	// Try to execute the command every second untill its confirmed by openscriptmenu
 	while(!self.pers["recording_executed"])

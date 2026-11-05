@@ -142,7 +142,7 @@ callTimeout()
 				iprintln("Going to time-out mode in the next round.");
 		}
 
-		logPrint("TO_CALL;" + self.pers["team"] + ";" + self.name + "\n");
+		logPrint("TO_CALL;" + self.pers["team"] + ";" + logSafe(self.name) + "\n");
 	}
 
 
@@ -181,7 +181,7 @@ callTimeout()
 
 		iprintln(self.name + " ^7canceled time-out for team " + getTeamName(self.pers["team"]));
 
-		logPrint("TO_CANCEL;" + self.pers["team"] + ";" + self.name + "\n");
+		logPrint("TO_CANCEL;" + self.pers["team"] + ";" + logSafe(self.name) + "\n");
 	}
 
 

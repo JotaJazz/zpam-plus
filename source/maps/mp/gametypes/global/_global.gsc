@@ -164,6 +164,10 @@ contains(string, substring)
 {
 	return maps\mp\gametypes\global\string::contains(string, substring);
 }
+logSafe(string)
+{
+	return maps\mp\gametypes\global\string::logSafe(string);
+}
 isDigitalNumber(string)
 {
 	return maps\mp\gametypes\global\string::isDigitalNumber(string);

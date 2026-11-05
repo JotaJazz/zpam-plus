@@ -2412,7 +2412,7 @@ bombzone_think(bombzone_other)
 
 					lpselfnum = player getEntityNumber();
 					lpselfguid = player getGuid();
-					logPrint("Bomb;" + lpselfguid + ";" + lpselfnum + ";" + player.pers["team"] + ";" + player.name + ";" + "bomb_plant" + "\n");
+					logPrint("Bomb;" + lpselfguid + ";" + lpselfnum + ";" + player.pers["team"] + ";" + logSafe(player.name) + ";" + "bomb_plant" + "\n");
 
 
 					if (level.bomb_plant_points)
@@ -2609,7 +2609,7 @@ bomb_think()
 
 					lpselfnum = player getEntityNumber();
 					lpselfguid = player getGuid();
-					logPrint("Bomb;" + lpselfguid + ";" + lpselfnum + ";" + player.pers["team"] + ";" + player.name + ";" + "bomb_defuse" + "\n");
+					logPrint("Bomb;" + lpselfguid + ";" + lpselfnum + ";" + player.pers["team"] + ";" + logSafe(player.name) + ";" + "bomb_defuse" + "\n");
 
 					if (level.bomb_defuse_points)
 					{

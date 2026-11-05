@@ -1,3 +1,17 @@
+// Replaces ';' with ':' so a player name cannot add fields to a log line
+logSafe(string)
+{
+	result = "";
+	for (i = 0; i < string.size; i++)
+	{
+		if (string[i] == ";")
+			result += ":";
+		else
+			result += string[i];
+	}
+	return result;
+}
+
 // String starts with substring
 startsWith(string, substring)
 {
@@ -244,4 +258,10 @@ selfTest()
 		assertMsg("string selfTest: empty");
 	if (isDigitalNumber("-"))
 		assertMsg("string selfTest: dash");
+	if (logSafe("a;b;;c") != "a:b::c")
+		assertMsg("string selfTest: logSafe a;b;;c");
+	if (logSafe("") != "")
+		assertMsg("string selfTest: logSafe empty");
+	if (logSafe("abc") != "abc")
+		assertMsg("string selfTest: logSafe abc");
 }
