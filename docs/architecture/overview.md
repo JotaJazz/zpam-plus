@@ -34,6 +34,7 @@ holds only what every gametype including it shares.
 | `global/gametype_common.gsc` | ctf, dm, htf, hq, re, sd, tdm |
 | `global/gametype_respawn_common.gsc` | ctf, dm, htf, hq, tdm |
 | `global/gametype_team_common.gsc` | ctf, htf, hq, tdm |
+| `global/gametype_round_common.gsc` | re, sd |
 
 Inside them, calls to a gametype's own spawn functions go through
 `level.spawnPlayer`, `level.spawnSpectator` and `level.spawnIntermission`.
