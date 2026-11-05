@@ -31,7 +31,7 @@ holds only what every gametype including it shares.
 
 | File | Included by |
 |---|---|
-| `global/gametype_common.gsc` | ctf, dm, htf, hq, tdm |
+| `global/gametype_common.gsc` | ctf, dm, htf, hq, re, sd, tdm |
 | `global/gametype_respawn_common.gsc` | ctf, dm, htf, hq, tdm |
 
 Inside them, calls to a gametype's own spawn functions go through

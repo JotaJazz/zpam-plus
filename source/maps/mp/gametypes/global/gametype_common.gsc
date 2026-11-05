@@ -1,6 +1,6 @@
 #include maps\mp\gametypes\global\_global;
 
-// Gametype functions with the same body in ctf, dm, htf, hq and tdm.
+// Gametype functions with the same body in ctf, dm, htf, hq, re, sd and tdm.
 // Included by those files: fix them here, not in a copy.
 
 HUD_StratTime(time)
