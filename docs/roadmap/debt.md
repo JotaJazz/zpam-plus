@@ -7,6 +7,5 @@
 | Admin can fake `sv_plus` on a non-Plus build | accepted in [ADR 0001](../architecture/adr/0001-plus-server-only.md) | none |
 | Automatic ladder | not started | define what results leave the server and how |
 | Help text points to the zPAM Discord channel | `ingame_aboutpam.menu` | replace when the family has its own channel |
-| `pam_mode` like `pub_mr12` passes validation but no rules load (`assert(loaded)` in `global/rules.gsc`) | upstream bug, kept | refuse suffixes after `pub` in `IsValidPAMModeForGametype` |
 | Machine paths in `tools/run-server.sh` defaults | personal defaults, overridable by variables | move them to a local, uncommitted file |
 | No automated GSC test | manual, with `tools/rcon.py` on a `tools/run-server.sh` server | a scripted run that reads the console log |

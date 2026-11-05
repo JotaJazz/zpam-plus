@@ -243,6 +243,10 @@ IsValidPAMModeForGametype(gametype, pammode)
 	if (array.size <= 0)
 		isValid = false;
 
+	// pub has no submodes
+	if (array.size > 1 && array[0] == "pub")
+		isValid = false;
+
 	// Submodes
 	for (i = 0; i < array.size; i++)
 	{

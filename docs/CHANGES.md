@@ -14,3 +14,4 @@ Changes since zPAM 3.38. Earlier history:
 - Timers last real seconds at any `sv_fps`; at 40 Hz they lasted twice as long.
 - Kill replays only open for players in the streamer team; before, anyone could
   open them from the console.
+- `pam_mode` with a suffix after `pub` (such as `pub_mr12`) is refused as an invalid value; before, it crashed the map with a script error.
