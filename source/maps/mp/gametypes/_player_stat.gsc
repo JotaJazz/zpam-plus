@@ -187,8 +187,8 @@ onConnected()
 
 	id = self getEntityNumber();
 
-	dataId = findData(self.name, id);
-	if (dataId >= 0 && game["playerstats"][dataId]["isConnected"] == false) // note: isConnected is reseted every map_restart
+	dataId = findData(self.pers["lastName"], id);
+	if (dataId >= 0 && game["playerstats"][dataId]["isConnected"] == false && game["playerstats"][dataId]["ip"] == self getip()) // note: isConnected is reseted every map_restart
 	{
 		game["playerstats"][dataId]["player"] = self;
 		game["playerstats"][dataId]["isConnected"] = true;
@@ -202,7 +202,7 @@ onConnected()
 		// Player was not found via name and id, give other players connecting in same time time to identified them via name and id before this player will be found only by name.. (to avoid stat steal by duplicating name)
 		waittillframeend;
 
-		dataId = findData(self.name);
+		dataId = findData(self.pers["lastName"]);
 		// same name from another IP is another player
 		if (dataId >= 0 && game["playerstats"][dataId]["isConnected"] == false && game["playerstats"][dataId]["ip"] == self getip())
 		{
@@ -224,7 +224,7 @@ onConnected()
 			game["playerstats"][newIndex]["deleted"] = false;
 			game["playerstats"][newIndex]["entityId"] = id;
 			game["playerstats"][newIndex]["ip"] = self getip();
-			game["playerstats"][newIndex]["name"] = self.name;
+			game["playerstats"][newIndex]["name"] = self.pers["lastName"];
 			game["playerstats"][newIndex]["team"] = self.sessionteam;
 			game["playerstats"][newIndex]["isConnected"] = true;
 			game["playerstats"][newIndex]["lastTime"] = getTime();

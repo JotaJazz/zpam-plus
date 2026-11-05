@@ -9,4 +9,4 @@
 | Help text points to the zPAM Discord channel | `ingame_aboutpam.menu` | replace when the family has its own channel |
 | Machine paths in `tools/run-server.sh` defaults | personal defaults, overridable by variables | move them to a local, uncommitted file |
 | No automated GSC test | manual, with `tools/rcon.py` on a `tools/run-server.sh` server | a scripted run that reads the console log |
-| Player identity is IP plus name | restored stats match the IP and the name, not an account | the ladder needs real accounts |
+| Player identity is IP plus name | restored stats match the IP and the name, not an account; players behind one IP (and all bots, 0.0.0.0) are told apart only by name | the ladder needs real accounts |
