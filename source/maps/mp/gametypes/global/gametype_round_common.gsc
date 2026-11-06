@@ -1,6 +1,6 @@
 #include maps\mp\gametypes\global\_global;
 
-// Round functions with the same body in sd and re. Included by those two
+// Functions with the same body in sd and re. Included by those two
 // files: fix them here, not in a copy.
 
 HUD_RoundInfo(time)
@@ -252,4 +252,195 @@ onAfterConnected()
 
 	else
 		assertMsg("Unknown team");
+}
+
+menuAutoAssign()
+{
+	// Team is already selected, do nothing and open menu again
+	if(self.pers["team"] == "allies" || self.pers["team"] == "axis")
+	{
+		return;
+	}
+
+	numonteam["allies"] = 0;
+	numonteam["axis"] = 0;
+
+	players = getentarray("player", "classname");
+	for(i = 0; i < players.size; i++)
+	{
+		player = players[i];
+
+		if(player.pers["team"] != "allies" && player.pers["team"] != "axis")
+			continue;
+
+		numonteam[player.pers["team"]]++;
+	}
+
+	// if teams are equal return the team with the lowest score
+	if(numonteam["allies"] == numonteam["axis"])
+	{
+		if(getTeamScore("allies") == getTeamScore("axis"))
+		{
+			teams[0] = "allies";
+			teams[1] = "axis";
+			assignment = teams[randomInt(2)];
+		}
+		else if(getTeamScore("allies") < getTeamScore("axis"))
+			assignment = "allies";
+		else
+			assignment = "axis";
+	}
+	else if(numonteam["allies"] < numonteam["axis"])
+		assignment = "allies";
+	else
+		assignment = "axis";
+
+
+	self.joining_team = assignment; // can be allies or axis
+	self.leaving_team = self.pers["team"]; // can be "spectator" or "none"
+
+	if(assignment != self.pers["team"] && (self.sessionstate == "playing" || self.sessionstate == "dead"))
+	{
+		self.switching_teams = true;
+		self suicide();
+	}
+
+	self.sessionteam = assignment;
+	self.statusicon = "hud_status_dead";
+	self.pers["team"] = assignment;
+	self.pers["weapon"] = undefined;
+	self.pers["weapon1"] = undefined;
+	self.pers["weapon2"] = undefined;
+	self.pers["savedmodel"] = undefined;
+
+	self notify("joined", assignment);
+	self notify("joined_allies_axis");
+
+	level notify("joined", assignment, self); // used in first round to check if someone joined team
+}
+
+menuAllies()
+{
+	// If team is already allies or we cannot join allies (to keep team balance), open team menu again
+	if(self.pers["team"] == "allies" || !maps\mp\gametypes\_teams::getJoinTeamPermissions("allies"))
+	{
+		return;
+	}
+
+	self.joining_team = "allies";
+	self.leaving_team = self.pers["team"];
+
+	if(self.sessionstate == "playing")
+	{
+		self.switching_teams = true;
+		self suicide();
+	}
+
+	self.sessionteam = "allies";
+	self.statusicon = "hud_status_dead";
+	self.pers["team"] = "allies";
+	self.pers["weapon"] = undefined;
+	self.pers["weapon1"] = undefined;
+	self.pers["weapon2"] = undefined;
+	self.pers["savedmodel"] = undefined;
+
+
+	self notify("joined", "allies");
+	self notify("joined_allies_axis");
+
+	level notify("joined", "allies", self); // used in first round to check if someone joined team
+}
+
+menuAxis()
+{
+	// If team is already axis or we cannot join axis (to keep team balance), open team menu again
+	if(self.pers["team"] == "axis" || !maps\mp\gametypes\_teams::getJoinTeamPermissions("axis"))
+	{
+		return;
+	}
+
+	self.joining_team = "axis";
+	self.leaving_team = self.pers["team"];
+
+	if(self.sessionstate == "playing")
+	{
+		self.switching_teams = true;
+		self suicide();
+	}
+
+	self.sessionteam = "axis";
+	self.statusicon = "hud_status_dead";
+	self.pers["team"] = "axis";
+	self.pers["weapon"] = undefined;
+	self.pers["weapon1"] = undefined;
+	self.pers["weapon2"] = undefined;
+	self.pers["savedmodel"] = undefined;
+
+
+	self notify("joined", "axis");
+	self notify("joined_allies_axis");
+
+	level notify("joined", "axis", self); // used in first round to check if someone joined team
+}
+
+menuSpectator()
+{
+	if(self.pers["team"] == "spectator")
+		return;
+
+	self.joining_team = "spectator";
+	self.leaving_team = self.pers["team"];
+
+	if(isAlive(self))
+	{
+		self.switching_teams = true;
+		self suicide();
+	}
+
+	self.sessionteam = "spectator";
+	self.statusicon = "";
+	self.pers["team"] = "spectator";
+	self.pers["weapon"] = undefined;
+	self.pers["weapon1"] = undefined;
+	self.pers["weapon2"] = undefined;
+	self.pers["savedmodel"] = undefined;
+
+
+	self [[level.spawnSpectator]]();
+
+	self notify("joined", "spectator");
+	self notify("joined_spectators");
+
+	level notify("joined", "spectator", self); // used in first round to check if someone joined team
+}
+
+menuStreamer()
+{
+	if(self.pers["team"] == "streamer")
+		return;
+
+	self.joining_team = "streamer";
+	self.leaving_team = self.pers["team"];
+
+	if(isAlive(self))
+	{
+		self.switching_teams = true;
+		self suicide();
+	}
+
+	self.sessionteam = "spectator";
+	self.statusicon = "";
+	self.pers["team"] = "streamer";
+	self.pers["weapon"] = undefined;
+	self.pers["weapon1"] = undefined;
+	self.pers["weapon2"] = undefined;
+	self.pers["savedmodel"] = undefined;
+
+
+	self [[level.spawnSpectator]]();
+
+	self notify("joined", "streamer");
+	self notify("joined_streamers");
+
+	level notify("joined", "streamer", self); // used in first round to check if someone joined team
 }
