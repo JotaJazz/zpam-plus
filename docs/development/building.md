@@ -30,8 +30,9 @@ check (it needs the www download set):
 
 A healthy start has no `zPAM Errors` in the console log. In another shell,
 `COD2_PORT=28981 python3 tools/rcon.py <command...>` sends one rcon command
-(password from `.server/rcon_password.txt`) and prints the reply; it exits 1
-without reply after 2 s. Stop the server by its PID. The mod's rules reset some
+(password from `.server/rcon_password.txt`) and prints the reply; it collects extra
+reply packets for 0.3 s, exits 1 without reply after 2 s, and prints "start
+tools/run-server.sh first" if the password file is missing. Stop the server by its PID. The mod's rules reset some
 cvars at map load (`sv_fps` reads back 30, not 40), so read a cvar back before
 trusting a `+set`.
 

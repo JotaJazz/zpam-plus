@@ -25,7 +25,6 @@ def main():
     s.settimeout(2)
     s.sendto(PREFIX + b"rcon " + pw + b" " + cmd, ("127.0.0.1", int(os.environ.get("COD2_PORT", 28960))))
     head = PREFIX + b"print\n"
-    out = b""
     try:
         out = s.recvfrom(65535)[0].removeprefix(head)
     except socket.timeout:
