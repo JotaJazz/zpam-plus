@@ -251,7 +251,6 @@ CheckInstallation()
 	maps[maps.size] = "mp_leningrad_mjr";
 	maps[maps.size] = "wawa_3daim";
 
-
 	for(i = 0; i < maps.size; i++)
 	{
 		if (!MapExists(maps[i]))

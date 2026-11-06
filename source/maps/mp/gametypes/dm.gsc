@@ -1,7 +1,7 @@
 #include maps\mp\gametypes\global\_global;
 #include maps\mp\gametypes\global\gametype_common;
 #include maps\mp\gametypes\global\gametype_respawn_common;
-#include maps\mp\gametypes\global\gametype_ffa_common;
+#include maps\mp\gametypes\global\gametype_dm_tdm_common;
 
 main()
 {
