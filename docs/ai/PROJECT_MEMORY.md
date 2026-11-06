@@ -3,6 +3,12 @@
 Append-only. Newest first. Template in
 [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
 
+## 2026-11-06 — first match with a Plus client
+
+- sd `comp` on `mp_toujane_fix` at 40 Hz on a local `make PLUS=1` build, one Plus client (32 and 64-bit) and bots: www download of both iwds, readyup, rounds and the halftime side swap played with no script error; clients got `rate 40000`.
+- `sv_wwwBaseURL` cannot be set with `+set` or rcon: `//` starts a comment and the URL stops at `http:`; set it from an exec'd cfg. Bots stand still with the weapon down because `scr_bots_freeze` defaults to 1.
+- Open: movement desync between client and server, seen in that match; it belongs to the server and client repos.
+
 ## 2026-11-06 — hq radio index
 
 - `hq_obj_think` read `level.radio[-1]` on its first pass and the script error shut the server down; the index is now guarded (reproduced and checked with 6 bots on `mp_toujane_fix`, pub, on a local `make PLUS=1` build).

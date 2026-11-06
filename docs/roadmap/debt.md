@@ -2,7 +2,7 @@
 
 | Item | State | Next step |
 |---|---|---|
-| No real match on the Plus server | the mod was tested only to the www check on a local Plus build | a match with Plus clients at 40 Hz |
+| One real match on the Plus server | 2026-11-06: one Plus client and bots, sd comp at 40 Hz on `mp_toujane_fix`, www download, readyup, rounds and halftime side swap, no script error | a match with several Plus clients |
 | The upstream manual describes zPAM 3.38 | `docs/upstream/zpam-3.38.md` keeps its install steps, links and iwd names | write Plus versions of the parts that change |
 | Admin can fake `sv_plus` on a non-Plus build | accepted in [ADR 0001](../architecture/adr/0001-plus-server-only.md) | none |
 | Automatic ladder | not started | define what results leave the server and how |
