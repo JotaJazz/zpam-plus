@@ -27,3 +27,4 @@ Changes since zPAM 3.38. Earlier history:
   the same name got them. Renaming to the name of a disconnected player no
   longer deletes that player's stats: the renamed player keeps his own under the
   old name.
+- `hq` no longer stops the server with a script error when the match starts.

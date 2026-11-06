@@ -11,7 +11,6 @@
 | No automated GSC test | manual, with `tools/rcon.py` on a `tools/run-server.sh` server | a scripted run that reads the console log |
 | Player identity is IP plus name | restored stats match the IP and the name, not an account; players behind one IP (and all bots, 0.0.0.0) are told apart only by name | the ladder needs real accounts |
 | Plus server segfaults loading `re` on `mp_toujane_fix` and `mp_burgundy` | found on the test server, present before `fix/plus-audit`; server side | a fix in OpenCoD2-Plus Server |
-| `hq` script runtime error at strat end | stock negative index at `hq.gsc` `isdefined(level.radio[(level.nextradio - 1)])` while `nextradio` is 0; the radio code is identical to the base | guard the index |
 | Not tested in game (no real client) | killcam refusal, time-out and rate limits, different-IP refusal, `a;b` names, recording, plant and defuse, match limits | a session with real clients |
 | Gametype copies left | `spawnIntermission` is identical in ctf, dm, htf and tdm; `onConnecting` is identical in 7 gametypes (only dm differs); tdm `playSoundOnPlayers` is identical to round_common's; no common file has the right includers for them | a new common file per set, or accept the copies |
 | `level.fps_multiplier` kept for the map pack | `mp_leningrad_mjr` and `mp_leningrad_tls` in `zpam_maps_v6.iwd` still wait `level.fps_multiplier * n` | remove the variable from `global/cvars.gsc` when the map pack is rebuilt |

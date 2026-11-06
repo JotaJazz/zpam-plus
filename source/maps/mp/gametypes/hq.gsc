@@ -1059,7 +1059,7 @@ hq_obj_think(radio)
 		if(level.radio.size >= 4)
 		{
 			fakeposition = level.radio[randomint(level.radio.size)];
-			if(isdefined(level.radio[(level.nextradio - 1)]))
+			if(level.nextradio > 0 && isdefined(level.radio[(level.nextradio - 1)]))
 			{
 				while((fakeposition == level.radio[level.nextradio]) || (fakeposition == level.radio[level.nextradio - 1]))
 					fakeposition = level.radio[randomint(level.radio.size)];
