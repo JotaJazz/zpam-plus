@@ -13,3 +13,4 @@
 | Plus server segfaults loading `re` on `mp_toujane_fix` and `mp_burgundy` | found on the test server, present before `fix/plus-audit`; server side | a fix in OpenCoD2-Plus Server |
 | `hq` script runtime error at strat end | stock negative index at `hq.gsc` `isdefined(level.radio[(level.nextradio - 1)])` while `nextradio` is 0; the radio code is identical to the base | guard the index |
 | Not tested in game (no real client) | killcam refusal, time-out and rate limits, different-IP refusal, `a;b` names, recording, plant and defuse, match limits | a session with real clients |
+| Gametype copies left | `spawnIntermission` is identical in ctf, dm, htf and tdm, but no common file has exactly those includers; `onConnecting` and tdm `playSoundOnPlayers` differ per gametype | a new common file for the four, or accept the copies |
