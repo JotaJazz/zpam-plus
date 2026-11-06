@@ -103,6 +103,7 @@ getBestNameFromArray(names)
 	{
 		separes_marged[i] = [];
 		separes_marged_count[i] = [];
+		marged_index = []; // "_" + ToLower(word) -> its index in separes_marged[i]
 
 		for (j = 0; j < separes.size; j++)
 		{
@@ -115,20 +116,16 @@ getBestNameFromArray(names)
 
 			for (k = 0; k < separes_clean.size; k++)
 			{
-				exists_in_array = false;
-				for (l = 0; l < separes_marged[i].size; l++)
+				key = "_" + ToLower(separes_clean[k]);
+				if (isDefined(marged_index[key]))
 				{
-					if (ToLower(separes_marged[i][l]) == ToLower(separes_clean[k]))
-					{
-						// We found word already in "separes_marged[i]" array - so count up
-						separes_marged_count[i][l]++;
-						exists_in_array = true;
-						break;
-					}
+					// We found word already in "separes_marged[i]" array - so count up
+					separes_marged_count[i][marged_index[key]]++;
 				}
-				if (!exists_in_array)
+				else
 				{
 					// If this word does not exist in array, add it
+					marged_index[key] = separes_marged[i].size;
 					separes_marged[i][separes_marged[i].size] = separes_clean[k];
 					separes_marged_count[i][separes_marged_count[i].size] = 1;
 				}
@@ -257,27 +254,46 @@ removeEndSymbols(string)
 removeSameItems(array)
 {
     array_to_return = [];
-    index = 0;
+    seen = []; // "_" + item, so numeric items never collide with integer indices
 
     for (i = 0; i < array.size; i++)
     {
-        // Loop array to check if word already exists
-        item_already_exists = false;
-        for (j = 0; j < array_to_return.size; j++)
-        {
-            if (array_to_return[j] == array[i])
-            {
-                item_already_exists = true;
-                break;
-            }
-        }
-
-        if (item_already_exists)
+        key = "_" + array[i];
+        if (isDefined(seen[key]))
             continue;
 
-        array_to_return[index] = array[i];
-        index++;
+        seen[key] = true;
+        array_to_return[array_to_return.size] = array[i];
     }
 
     return array_to_return;
+}
+
+// Runs only with developer_script 1. Expected values were recorded from the
+// quadratic version this replaced.
+teamnameSelfTest()
+{
+	c = []; c[0] = "TLS|abc"; c[1] = "TLS|def"; c[2] = "TLS|ghi";
+	if (getBestNameFromArray(c) != "TLS") assertMsg("teamname selfTest: TLS|abc,TLS|def,TLS|ghi");
+	c = []; c[0] = "ABC|x"; c[1] = "abc|y"; c[2] = "Abc|z";
+	if (getBestNameFromArray(c) != "ABC") assertMsg("teamname selfTest: ABC|x,abc|y,Abc|z");
+	c = []; c[0] = "a"; c[1] = "b";
+	if (getBestNameFromArray(c) != "a") assertMsg("teamname selfTest: a,b");
+	c = []; c[0] = "123x"; c[1] = "123y";
+	if (getBestNameFromArray(c) != "123") assertMsg("teamname selfTest: 123x,123y");
+	c = []; c[0] = "solo";
+	if (getBestNameFromArray(c) != "solo") assertMsg("teamname selfTest: solo");
+	c = []; c[0] = "abAB"; c[1] = "cd";
+	if (getBestNameFromArray(c) != "ab") assertMsg("teamname selfTest: abAB,cd");
+	c = []; c[0] = "xAbab"; c[1] = "yabAb"; c[2] = "Q";
+	if (getBestNameFromArray(c) != "Abab") assertMsg("teamname selfTest: xAbab,yabAb,Q");
+	c = [];
+	if (getBestNameFromArray(c) != "") assertMsg("teamname selfTest: empty");
+
+	// 10 distinct 32-character names: the worst case of a full team in one frame
+	alphabet = "abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789";
+	c = [];
+	for (i = 0; i < 10; i++)
+		c[i] = "TLS|" + getsubstr(alphabet, i, i + 28);
+	if (getBestNameFromArray(c) != "ijklmnopqrstuvwxyz01") assertMsg("teamname selfTest: 10 names of 32 chars");
 }

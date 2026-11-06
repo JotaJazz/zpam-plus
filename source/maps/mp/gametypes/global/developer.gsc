@@ -15,6 +15,7 @@ init()
 	// This is called only if developer_script is set to 1
 	/#
 	maps\mp\gametypes\global\string::selfTest();
+	maps\mp\gametypes\_teamname::teamnameSelfTest();
 	thread timingSelfTest();
 	#/
 }
