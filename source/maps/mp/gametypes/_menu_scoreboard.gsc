@@ -41,7 +41,7 @@ UpdateStandartScoreboard()
 {
 	self endon("disconnect");
 
-	wait level.fps_multiplier * 0.5;
+	wait 0.5;
 	wait level.frame * (self getentitynumber());
 
 	// This command update info inside standart scoreboard without showing it
@@ -50,7 +50,7 @@ UpdateStandartScoreboard()
 	{
 		self ShowScoreBoard();
 		//self iprintln("updated");
-		wait level.fps_multiplier * 1;
+		wait 1;
 	}
 }
 
@@ -73,7 +73,7 @@ hide_scoreboard(distributed)
 	self setClientCvarIfChanged("ui_scoreboard_visible", "0");
 
 	if (isDefined(distributed) && distributed)
-		wait level.fps_multiplier * 0.25;
+		wait 0.25;
 
 	// Fill empty lines
 	for(j = 1; j <= level.scoreboard_lines; j++)
@@ -84,7 +84,7 @@ hide_scoreboard(distributed)
 		self setClientCvarIfChanged("ui_scoreboard_line_" + j, "0");
 
 		if (j == 14 && isDefined(distributed) && distributed)
-			wait level.fps_multiplier * 0.25;
+			wait 0.25;
 	}
 }
 
@@ -685,7 +685,7 @@ generatePlayerList(toggle)
 			// In intermission keep updating forever
 			if (game["state"] == "intermission")
 			{
-				wait level.fps_multiplier * 1;
+				wait 1;
 				break;
 			}
 

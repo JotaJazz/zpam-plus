@@ -157,7 +157,7 @@ onStartGameType()
 			players = getentarray("player", "classname");
 			if (players.size > 0)
 				break;
-			wait level.fps_multiplier * 1;
+			wait 1;
 		}
 
 		// For public mode, wait untill most of player connect
@@ -181,7 +181,7 @@ onStartGameType()
 				{
 					iprintln("Match is starting");
 
-					wait level.fps_multiplier * 8;
+					wait 8;
 
 					if (!level.pam_mode_change)
 						map_restart(true);
@@ -189,7 +189,7 @@ onStartGameType()
 					break;
 				}
 
-				wait level.fps_multiplier * 3;
+				wait 3;
 			}
 		}
 	}
@@ -396,7 +396,7 @@ onAfterPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir,
 		body = self cloneplayer(deathAnimDuration);
 	self.switching_teams = undefined;
 
-	delay = level.fps_multiplier * 1.5;
+	delay = 1.5;
 	wait delay;
 
 	if(isDefined(body))
@@ -617,7 +617,7 @@ startGame()
 			}
 
 
-			wait level.fps_multiplier * .5;
+			wait .5;
 		}
 	}
 }

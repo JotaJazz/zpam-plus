@@ -81,7 +81,7 @@ manageWeaponCycleDelay()
     cycleDelayActivated = true;
     cycleDelayTime = 0;
 
-    wait level.fps_multiplier * 0.2;
+    wait 0.2;
 
     for (;;)
     {

@@ -251,7 +251,7 @@ quickcommands(response)
 	self saveHeadIcon();
 	self doQuickMessage(soundalias, saytext);
 
-	wait level.fps_multiplier * 2;
+	wait 2;
 	self.spamdelay = undefined;
 	self restoreHeadIcon();
 }
@@ -496,7 +496,7 @@ quickstatements(response)
 	self saveHeadIcon();
 	self doQuickMessage(soundalias, saytext);
 
-	wait level.fps_multiplier * 2;
+	wait 2;
 	self.spamdelay = undefined;
 	self restoreHeadIcon();
 }
@@ -717,7 +717,7 @@ quickresponses(response)
 	self saveHeadIcon();
 	self doQuickMessage(soundalias, saytext);
 
-	wait level.fps_multiplier * 2;
+	wait 2;
 	self.spamdelay = undefined;
 	self restoreHeadIcon();
 }

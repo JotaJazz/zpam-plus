@@ -144,7 +144,7 @@ addBots(number)
 		ent[i] thread bot_think();
 
 		// Spawnout zasebou, ne naráz
-		wait level.fps_multiplier * 0.25;
+		wait 0.25;
 	}
 }
 
@@ -177,7 +177,7 @@ removeBots(number)
 			if (kickedBots >= number)
 				break;
 
-			wait level.fps_multiplier * 0.1;
+			wait 0.1;
 		}
 	}
 }
@@ -203,13 +203,13 @@ spam_bot(value)
 				game["bots_spammer"] thread bot_think();
 			}
 
-			wait level.fps_multiplier * value;
+			wait value;
 			if (isDefined(game["bots_spammer"]))
 			{
 				game["bots_spammer"] removeBot();
 				game["bots_spammer"] = undefined;
 			}
-			wait level.fps_multiplier * value;
+			wait value;
 		}
 	}
 	else
@@ -229,7 +229,7 @@ bots_fill_balance()
 	level endon("bots_fill_balance");
 
 	// Wait untill all players/bots are connected
-	wait level.fps_multiplier * 1;
+	wait 1;
 
 	for (;;)
 	{
@@ -300,7 +300,7 @@ bots_fill_balance()
 			}
 		}
 
-		wait level.fps_multiplier * 2;
+		wait 2;
 	}
 }
 
@@ -311,13 +311,13 @@ bot_think()
 {
 	self endon("disconnect");
 
-	wait level.fps_multiplier * 0.1;
+	wait 0.1;
 
 	self thread bot_think_freeze();
 
 	// Wait while client is connected
 	while(!isdefined(self.pers["team"]))
-		wait level.fps_multiplier * .1;
+		wait .1;
 
 	for (;;)
 	{
@@ -325,7 +325,7 @@ bot_think()
 		{
 			// Select team
 			self notify("menuresponse", game["menu_team"], "autoassign");
-			wait level.fps_multiplier * 0.2;
+			wait 0.2;
 		}
 
 		if (!isDefined(self.pers["weapon"]))
@@ -336,12 +336,12 @@ bot_think()
 			else if(self.pers["team"] == "axis")
 				self notify("menuresponse", game["menu_weapon_axis"], "random");
 
-			wait level.fps_multiplier * 0.2;
+			wait 0.2;
 		}
 
 
 
-		wait level.fps_multiplier * 0.2;
+		wait 0.2;
 	}
 
 }
@@ -357,18 +357,18 @@ bot_think_freeze()
 			self.botLockPosition = spawn("script_model", (0,0,0));
 		}
 
-		wait level.fps_multiplier * .25;
+		wait .25;
 
 		for (;;)
 		{
 			self enableWeapon();
 			self unlink();
-			while(!isAlive(self) || !level.bots_freeze)	wait level.fps_multiplier * 1;
+			while(!isAlive(self) || !level.bots_freeze)	wait 1;
 
 			self linkto(self.botLockPosition);
 			self disableWeapon();
 
-			while(isAlive(self) && level.bots_freeze)	wait level.fps_multiplier * 1;
+			while(isAlive(self) && level.bots_freeze)	wait 1;
 		}
 	}
 

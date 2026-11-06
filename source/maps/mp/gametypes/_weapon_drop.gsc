@@ -89,7 +89,7 @@ playersWeaponDrop()
 
 	for(;;)
 	{
-		wait level.fps_multiplier * .25;
+		wait .25;
 
 		if (!isAlive(self))
 			return;
@@ -157,7 +157,7 @@ playersWeaponDrop()
 				self.dropped_weapons++;
 
 
-				wait level.fps_multiplier * .25;
+				wait .25;
 
 				// Play sound in strattime indicating where the weapon is dropped
 				if (isDefined(level.in_strattime) && level.in_strattime)
@@ -165,12 +165,12 @@ playersWeaponDrop()
 					self playSound("zpam_weap_drop");
 				}
 
-				wait level.fps_multiplier * .75;
+				wait .75;
 
 				break;
 			}
 
-			wait level.fps_multiplier * .1;
+			wait .1;
 		}
 	}
 }

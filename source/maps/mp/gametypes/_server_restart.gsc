@@ -29,7 +29,7 @@ restartIfEmpty()
 		level notify("server_restart");
 		level endon("server_restart");
 
-		wait level.fps_multiplier * 30;
+		wait 30;
 
 		players = getentarray("player", "classname");
 		if (players.size == 0)

@@ -31,14 +31,11 @@ minefield_kill(trigger)
 	if(isDefined(self.minefield))
 		return;
 
-	if (!isDefined(level.fps_multiplier))
-		level.fps_multiplier = 1;
-
 	self.minefield = true;
 	self playsound ("minefield_click");
 
-	wait(level.fps_multiplier * .5);
-	wait(level.fps_multiplier * randomFloat(.5));
+	wait(.5);
+	wait(randomFloat(.5));
 
 	if(isdefined(self) && self istouching(trigger))
 	{

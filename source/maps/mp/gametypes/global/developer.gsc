@@ -23,9 +23,9 @@ init()
 timingSelfTest()
 {
 	// The first wait spans the end of the map load, so measure the second
-	wait level.fps_multiplier * 1;
+	wait 1;
 	t = getTime();
-	wait level.fps_multiplier * 1;
+	wait 1;
 	d = getTime() - t;
 	if (d < 950 || d > 1050)
 		assertMsg("timing selfTest: wait 1 lasted " + d + " ms");

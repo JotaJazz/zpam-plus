@@ -460,7 +460,7 @@ limitCvar(cvar, registerTime)
 
 monitorCvarChanges()
 {
-	wait level.fps_multiplier * 0.31337;
+	wait 0.31337;
 
 	for (;;)
 	{

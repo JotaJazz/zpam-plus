@@ -76,7 +76,7 @@ pronePeekFix()
 
 		// If player is not alive, or model is not set, or player is planting, wait more
 		while (!isAlive(self) || !isDefined(self.pers["savedmodel"]) || (level.gametype == "sd" && self.bombinteraction))
-			wait level.fps_multiplier * 1;
+			wait 1;
 
 		// If prone peek fix was disabled via cvar
 		if (!level.scr_prone_peek_fix)

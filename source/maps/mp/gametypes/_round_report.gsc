@@ -42,7 +42,7 @@ onConnected()
 	// Set default value
 	if (!isDefined(self.pers["round_report_debug_init"]))
 	{
-		wait level.fps_multiplier * 5;
+		wait 5;
 		self setClientCvarIfChanged("pam_damage_debug", "");
 		self setClientCvarIfChanged("pam_damage_debug2", "");
 		self setClientCvarIfChanged("pam_damage_debug3", "");
@@ -275,7 +275,7 @@ print()
 
 
 
-	wait level.fps_multiplier * 1;
+	wait 1;
 
 	self thread sendDebugInfo();
 

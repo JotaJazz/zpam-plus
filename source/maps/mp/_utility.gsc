@@ -16,7 +16,7 @@ triggerOn()
 error(msg)
 {
 	println("^c*ERROR* ", msg);
-	wait level.fps_multiplier * .05;	// waitframe
+	wait .05;	// waitframe
 /#
 	if (getcvar("debug") != "1")
 		assertmsg("This is a forced error - attach the log file");
@@ -81,7 +81,7 @@ exploder(num)
 exploder_sound()
 {
 	if(isdefined(self.script_delay))
-		wait level.fps_multiplier * self.script_delay;
+		wait self.script_delay;
 
 	self playSound(level.scr_sound[self.script_sound]);
 }
@@ -104,7 +104,7 @@ cannon_effect(source)
 brush_delete()
 {
 	if(isdefined(self.script_delay))
-		wait(level.fps_multiplier * self.script_delay);
+		wait(self.script_delay);
 
 	self delete();
 }
@@ -112,7 +112,7 @@ brush_delete()
 brush_show()
 {
 	if(isdefined(self.script_delay))
-		wait(level.fps_multiplier * self.script_delay);
+		wait(self.script_delay);
 
 	self show();
 	self solid();
@@ -121,7 +121,7 @@ brush_show()
 brush_throw()
 {
 	if(isdefined(self.script_delay))
-		wait(level.fps_multiplier * self.script_delay);
+		wait(self.script_delay);
 
 	ent = undefined;
 	if(isdefined(self.target))
@@ -148,7 +148,7 @@ brush_throw()
 	self rotateVelocity((x,y,z), 12);
 	self moveGravity((x, y, z), 12);
 
-	wait(level.fps_multiplier * 6);
+	wait(6);
 	self delete();
 }
 

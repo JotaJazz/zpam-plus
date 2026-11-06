@@ -20,7 +20,7 @@ main()
 		shutter = leftShutters[i];
 		shutter rotateto((shutter.angles[0], shutter.angles[1] + 180, shutter.angles[2]), 0.1);
 	}
-	wait (level.fps_multiplier * 0.2);
+	wait (0.2);
 
 	for (i=0;i<leftShutters.size;i++)
 		leftShutters[i].startYaw = leftShutters[i].angles[1];
@@ -55,7 +55,7 @@ windController()
 		if (randomint(100) > 50)
 			windDirection = "right";
 		level notify ("wind blows", windDirection);
-		wait (level.fps_multiplier * 2 + randomfloat(10));
+		wait (2 + randomfloat(10));
 	}
 }
 
@@ -75,7 +75,7 @@ shutterWanderLeft(shutter, windDirection)
 
 	newTime = 0.2;
 	shutter rotateto((shutter.angles[0], newYaw, shutter.angles[2]), newTime);
-	wait (level.fps_multiplier * (newTime + 0.1));
+	wait ((newTime + 0.1));
 
 	for (;;)
 	{
@@ -101,7 +101,7 @@ shutterWanderLeft(shutter, windDirection)
 //		assert (newYaw < shutter.startYaw + 179);
 
 		shutter rotateto((shutter.angles[0], newYaw, shutter.angles[2]), newTime, newTime * 0.5, newTime * 0.5);
-		wait (level.fps_multiplier * newTime);
+		wait (newTime);
 	}
 }
 
@@ -121,7 +121,7 @@ shutterWanderRight(shutter, windDirection)
 
 	newTime = 0.2;
 	shutter rotateto((shutter.angles[0], newYaw, shutter.angles[2]), newTime);
-	wait (level.fps_multiplier * (newTime + 0.1));
+	wait ((newTime + 0.1));
 
 	for (;;)
 	{
@@ -147,7 +147,7 @@ shutterWanderRight(shutter, windDirection)
 //		assert (newYaw < shutter.startYaw + 179);
 
 		shutter rotateto((shutter.angles[0], newYaw, shutter.angles[2]), newTime, newTime * 0.5, newTime * 0.5);
-		wait (level.fps_multiplier * newTime);
+		wait (newTime);
 	}
 }
 
@@ -167,13 +167,13 @@ wireWander (wire)
 	rotrange = 0.9;
 	dist = 4 + randomfloat(2);
 	ent rotateroll(dist*0.5,0.2);
-	wait (level.fps_multiplier * 0.2);
+	wait (0.2);
 	for (;;)
 	{
 		rottime = rottimer + randomfloat (rotRange) - (rotRange * 0.5);
 		ent rotateroll(dist,rottime, rottime*0.5, rottime*0.5);
-		wait (level.fps_multiplier * rottime);
+		wait (rottime);
 		ent rotateroll(dist * -1,rottime, rottime*0.5, rottime*0.5);
-		wait (level.fps_multiplier * rottime);
+		wait (rottime);
 	}
 }

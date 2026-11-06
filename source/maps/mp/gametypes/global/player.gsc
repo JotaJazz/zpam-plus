@@ -42,7 +42,7 @@ IsMoving()
 
 	for (;;)
 	{
-		wait level.fps_multiplier * .1;
+		wait .1;
 
 		if (firstFrame)
 		{

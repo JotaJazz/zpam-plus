@@ -51,7 +51,7 @@ onConnected()
 	// Switched to readyup (halft, timeout..) -> imidietly hide bars
 	if (level.streamerSystem && level.in_readyup)
 	{
-		wait level.fps_multiplier * 0.41337;
+		wait 0.41337;
 		self thread maps\mp\gametypes\_streamer_hud::hide_player_boxes();
 		self thread maps\mp\gametypes\_streamer_hud::hide_player_progress();
 	}
@@ -213,7 +213,7 @@ move_to_streamers()
 	// Simulate joining streamer team
 	// It needs to be distributed like this because a lot of cvars for scoreboard and spectator bars are beeing sent to players (command overflow fix)
 
-	wait level.fps_multiplier * 0.5;
+	wait 0.5;
 
 	// Serverinfo menu close
 	self closeMenu();
@@ -228,7 +228,7 @@ move_to_streamers()
 	self iprintlnbold(" ");
 	self iprintlnbold(" ");
 
-	wait level.fps_multiplier * 1.5;
+	wait 1.5;
 
 	self iprintlnbold(" ");
 	self iprintlnbold(" ");
@@ -603,7 +603,7 @@ openStreamerMenu()
 
 		// Wait a second before next menu opening
 		for (i = 0; i < 9 && !self.pers["streamerSystem_menu_open_confirmed"]; i++)
-			wait level.fps_multiplier * .1;
+			wait .1;
 
 		retry++;
 	}
@@ -627,7 +627,7 @@ openStreamerMenu()
 		self.spectator_blackbg FadeOverTime(0.25);
 		self.spectator_blackbg.alpha = 0;
 
-		wait level.fps_multiplier * .25;
+		wait .25;
 
 		if (isDefined(self.spectator_blackbg))
 			self.spectator_blackbg destroy2();
@@ -750,7 +750,7 @@ player_loop()
 			{
 				if (level.debug_spectator) self iprintln("^1 UNABLE ^8to set self.spectatorclient="+level.streamerSystem_playerID);
 
-				wait level.fps_multiplier * 1;
+				wait 1;
 
 				continue;
 			}
@@ -962,7 +962,7 @@ cinematicMove()
 			return;
 		}
 
-		wait level.fps_multiplier * 0.1;
+		wait 0.1;
 	}
 
 
@@ -1337,7 +1337,7 @@ spectating_loop()
 	no_one = false;
 	for(;;)
 	{
-		wait level.fps_multiplier * 0.1;
+		wait 0.1;
 
 
 		id = level.streamerSystem_playerID;
@@ -1362,7 +1362,7 @@ spectating_loop()
 		// If followed player is dead, follow next no matter what
 		if (spectated_player.sessionstate != "playing")
 		{
-			wait level.fps_multiplier * 1;
+			wait 1;
 
 			level followNextPlayer();
 			if (level.debug_spectator) printToStreamers("(followed player died)");
@@ -1440,7 +1440,7 @@ waitForSpectatorsInKillcam()
 		count = 2;
 		for(;;)
 		{
-			wait level.fps_multiplier * 1;
+			wait 1;
 			in_killcam = level isSpectatorInKillcam();
 
 			if (!in_killcam)
@@ -1454,7 +1454,7 @@ waitForSpectatorsInKillcam()
 
 		hud hideHUDSmooth(.5);
 
-		wait level.fps_multiplier * 0.5;
+		wait 0.5;
 	}
 
 	return true;
@@ -1463,11 +1463,11 @@ waitForSpectatorsInKillcam()
 
 player_names()
 {
-	wait level.fps_multiplier * 0.123456;
+	wait 0.123456;
 
 	for (;;)
 	{
-		wait level.fps_multiplier * 1;
+		wait 1;
 
 		maxTime = 0;
 		players = getentarray("player", "classname");
@@ -1490,7 +1490,7 @@ player_names()
 		// There is player in streamer menu for atleast x seconds
 		if (maxTime > 15 && ((level.in_readyup && level.playersready) || (!level.in_readyup && level.in_strattime)))
 		{
-			wait level.fps_multiplier * 1;
+			wait 1;
 			players = getentarray("player", "classname");
 			for(i = 0; i < players.size; i++)
 			{
@@ -1511,7 +1511,7 @@ player_names()
 						player iprintlnbold(" ");
 						player setClientCvar("name", name);
 
-						wait level.fps_multiplier * 0.1;
+						wait 0.1;
 					}
 				}
 			}

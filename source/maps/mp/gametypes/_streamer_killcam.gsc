@@ -171,7 +171,7 @@ potencialAutoKillcam(killId)
 	// Replay last kill if it was not fully spectated, or if it was interesting action (even if it was already replayed)
 	if (record.lastKill && replayLastKill && (!record.fullyFollowedBySpectator || isInterestingAction))
 	{
-		wait level.fps_multiplier * 1.5;
+		wait 1.5;
 
 		// Replay action for all spectators
 		replayActionForAll(killId);
@@ -219,7 +219,7 @@ potencialAutoKillcamForPlayer(killId)
 		// If round ended change it to auto-replay
 		if (level.gametype == "sd" && level.roundended)
 		{
-			wait level.fps_multiplier * 1.5; // wait untill killcam for last kill is played as first (if there is no killcam, it will start this one)
+			wait 1.5; // wait untill killcam for last kill is played as first (if there is no killcam, it will start this one)
 			wait level.frame;
 
 			self thread replayAction(killId, false);
@@ -264,7 +264,7 @@ potencialAutoKillcamForPlayer(killId)
 				{
 					self thread hideKillcamProposingForPlayer();
 
-					wait level.fps_multiplier * 1.5; // wait untill killcam for last kill is played as first (if there is no killcam, it will start this one)
+					wait 1.5; // wait untill killcam for last kill is played as first (if there is no killcam, it will start this one)
 					wait level.frame;
 
 					self thread replayAction(killId, false);
@@ -356,7 +356,7 @@ showKillcamProposingForPlayer(killId)
 	self.autoSpectating_KillcamProposingPlayer.alpha = .75;
 
 	// Wait a while before we allow key Press to be registered
-	wait level.fps_multiplier * disableTime;
+	wait disableTime;
 	time -= disableTime;
 
 	if (!self.streamerSystem_killcam_proposingVisible)
@@ -364,7 +364,7 @@ showKillcamProposingForPlayer(killId)
 
 	self thread killcamProposingKey(killId);
 
-	wait level.fps_multiplier * time;
+	wait time;
 
 	if (!self.streamerSystem_killcam_proposingVisible)
 		return;
@@ -379,7 +379,7 @@ showKillcamProposingForPlayer(killId)
 	self.autoSpectating_KillcamProposingText.alpha = 0;
 	self.autoSpectating_KillcamProposingPlayer.alpha = 0;
 
-	wait level.fps_multiplier * prematureEnd;
+	wait prematureEnd;
 
 	if (!self.streamerSystem_killcam_proposingVisible)
 		return;
@@ -450,7 +450,7 @@ watchIntenseSituation()
 
 	for (;;)
 	{
-		wait level.fps_multiplier * 1;
+		wait 1;
 
 		// Count numbers of players in teams
 		alliesAlive = 0;

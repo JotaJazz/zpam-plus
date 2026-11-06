@@ -499,7 +499,7 @@ TO_Time_Based_GoingToTimeOutIN()
 			break;
 		}
 
-		wait level.fps_multiplier * 0.5;
+		wait 0.5;
 		time += 0.5;
 	}
 

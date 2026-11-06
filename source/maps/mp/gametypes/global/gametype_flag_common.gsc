@@ -114,10 +114,10 @@ respawn_wait_remaining()
 
 	remaining = int((self.respawnAt - getTime()) / 1000) + 1;
 	self iprintln("You will respawn in " + remaining + " seconds.");
-	wait level.fps_multiplier * (self.respawnAt - getTime()) / 1000;
+	wait ((self.respawnAt - getTime()) / 1000);
 
 	while(level.in_timeout)
-		wait level.fps_multiplier * 1;
+		wait 1;
 
 	if(isDefined(self.pers["weapon"]) && self.sessionstate != "playing")
 		self thread [[level.spawnPlayer]]();

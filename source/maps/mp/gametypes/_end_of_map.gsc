@@ -22,7 +22,7 @@ Do_Map_End()
 	// Cancel timeout if called
 	level maps\mp\gametypes\_timeout::Cancel();
 
-	wait level.fps_multiplier * 2;
+	wait 2;
 
 	// Wait for spectators in killcam
 	level maps\mp\gametypes\_streamer::waitForSpectatorsInKillcam();
@@ -45,7 +45,7 @@ Do_Map_End()
 		player [[level.spawnIntermission]]();
 	}
 
-	wait level.fps_multiplier * 12;
+	wait 12;
 
 
 	if (game["is_public_mode"])

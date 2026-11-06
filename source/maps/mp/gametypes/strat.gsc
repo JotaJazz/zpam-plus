@@ -350,7 +350,7 @@ onAfterPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir,
 		body = self cloneplayer(deathAnimDuration);
 	self.switching_teams = undefined;
 
-	wait level.fps_multiplier * 1.5;
+	wait 1.5;
 
 	if(isDefined(body))
 		body delete();
@@ -410,7 +410,7 @@ onMenuResponse(menu, response)
 
 sv_cheats()
 {
-	wait level.fps_multiplier * 0.2;
+	wait 0.2;
 
 	setCvar("sv_cheats", 1);
 }
@@ -843,7 +843,7 @@ Key_Toggle_FlyMode()
 			}
 			wait level.frame;
 		}
-		wait level.fps_multiplier * 0.2;
+		wait 0.2;
 	}
 }
 
@@ -863,13 +863,13 @@ Key_SavePosition()
 				if(catch_next && self meleeButtonPressed())
 				{
 					self thread savePos();
-					wait level.fps_multiplier * 1;
+					wait 1;
 					break;
 				}
 				else if(!(self meleeButtonPressed()))
 					catch_next = true;
 
-				wait level.fps_multiplier * 0.01;
+				wait 0.01;
 			}
 		}
 		wait level.frame;
@@ -892,13 +892,13 @@ Key_LoadPosition()
 				if(catch_next && self useButtonPressed())
 				{
 					self thread loadPos();
-					wait level.fps_multiplier * 1;
+					wait 1;
 					break;
 				}
 				else if(!(self useButtonPressed()))
 					catch_next = true;
 
-				wait level.fps_multiplier * 0.01;
+				wait 0.01;
 			}
 		}
 
@@ -927,13 +927,13 @@ Key_AddBot()
 
 				// Wait untill keys are released
 				while (self meleebuttonpressed() && self useButtonPressed())
-					wait level.fps_multiplier * 0.2;
+					wait 0.2;
 
 				break;
 			}
 			wait level.frame;
 		}
-		wait level.fps_multiplier * 0.2;
+		wait 0.2;
 	}
 }
 
@@ -961,13 +961,13 @@ Key_RecordBot()
 
 				// Wait untill keys are released
 				while (self attackbuttonpressed() && self useButtonPressed() && !self meleebuttonpressed())
-					wait level.fps_multiplier * 0.2;
+					wait 0.2;
 
 				break;
 			}
 			wait level.frame;
 		}
-		wait level.fps_multiplier * 0.2;
+		wait 0.2;
 	}
 }
 
@@ -989,7 +989,7 @@ Key_PlayRecord()
 			}
 			wait level.frame;
 		}
-		wait level.fps_multiplier * 0.2;
+		wait 0.2;
 	}
 }
 
@@ -1058,7 +1058,7 @@ Watch_Grenade_Throw(is_strat)
 		grenade_count_old	 = grenade_count;
 		smokegrenade_count_old = smokegrenade_count;
 
-		wait level.fps_multiplier * 0.1;
+		wait 0.1;
 	}
 }
 
@@ -1078,7 +1078,7 @@ Fly(player)
 	player.hilfsObjekt linkto(self);
 
 	// Wait untill greande is fully throwed to avoid interrupted jump
-	wait level.fps_multiplier * 0.13;
+	wait 0.13;
 
 	// Link player to that script_model
 	player setOrigin(player.hilfsObjekt.origin);
@@ -1123,25 +1123,25 @@ Fly(player)
 		{
 			for(i=0;i<3.5;i+=0.1) {
 
-				wait level.fps_multiplier * 0.1;
+				wait 0.1;
 				if(player useButtonPressed()) break;
 			}
 		}
 		else
 		{
 			player.hilfsObjekt moveto(player.origin+(0,0,20),0.1);
-			wait level.fps_multiplier * 0.2;
+			wait 0.2;
 
 			for(i=0;i<2;i+=0.1)
 			{
-				wait level.fps_multiplier * 0.1;
+				wait 0.1;
 				if(player useButtonPressed()) break;
 			}
 		}
 	}
 
 	player.hilfsObjekt moveto(old_player_origin,0.1);
-	wait level.fps_multiplier * 0.2;
+	wait 0.2;
 
 	player unlink();
 	if(isDefined(player.hilfsObjekt)) player.hilfsObjekt delete();
@@ -1278,7 +1278,7 @@ HUD_Grenade_Releases_In()
 	self.c = addHUDClient(self, -35, 310, 1.2, (.8,1,1), "right", "top", "right");
 	self.c settenthsTimer(3.5);
 
-	wait level.fps_multiplier * 3.5;
+	wait 3.5;
 
 	self.c destroy2();
 	self.exin destroy2();
@@ -1318,7 +1318,7 @@ handle_bot(player)
 	angle = player.angles;
 	player iprintlnbold("Move away to spawn a bot.");
 	while (distance(pos, player.origin) < 50)
-		wait level.fps_multiplier * .1;
+		wait .1;
 
 
 	// This make sure only one thread is running on bot
@@ -1345,12 +1345,12 @@ handle_bot(player)
 		self.botLockPosition.angles = angle;
 	}
 
-	wait level.fps_multiplier * .25;
+	wait .25;
 
 	for (;;)
 	{
 		self unlink();
-		while(!isAlive(self))	wait level.fps_multiplier * 1;
+		while(!isAlive(self))	wait 1;
 
 		self setOrigin(self.botLockPosition.origin); // make sure player is always centered with script_model (for proper playing)
 		self linkto(self.botLockPosition);
@@ -1360,7 +1360,7 @@ handle_bot(player)
 		self.headicon = "";
 		self.headiconteam = "none";
 
-		while(isAlive(self))	wait level.fps_multiplier * 1;
+		while(isAlive(self))	wait 1;
 	}
 }
 
@@ -1493,7 +1493,7 @@ record(slot)
 			self iprintlnbold("^2Recording to slot " + (slot+1) + "...");
 			break;
 		}
-		wait level.fps_multiplier * 0.1;
+		wait 0.1;
 	}
 
 
@@ -1514,7 +1514,7 @@ record(slot)
 		self.recordSlots[slot].angles[self.recordSlots[slot].angles.size] = self.angles;
 		origin_old = self.origin;
 
-		wait level.fps_multiplier * 0.25;
+		wait 0.25;
 
 		if (origin_old == self.origin && self.origin != origin_start)
 			time_not_moving++;
@@ -1573,7 +1573,7 @@ playRecords()
 
 		// Wait untill bot is spawned
 		while(!isAlive(bot))
-			wait level.fps_multiplier * 0.1;
+			wait 0.1;
 	}
 
 
@@ -1611,7 +1611,7 @@ playRecords()
 
 	// Wait untill all records are played
 	while (self.replayedRecords != records)
-		wait level.fps_multiplier * .1;
+		wait .1;
 
 	self.clock destroy2();
 
@@ -1640,7 +1640,7 @@ playRecord(slotIndex, botIndex)
 		bot.botLockPosition moveto(self.recordSlots[slotIndex].positions[i], 0.25);
 		bot SetPlayerAngles(self.recordSlots[slotIndex].angles[i]);
 
-		wait level.fps_multiplier * 0.25;
+		wait 0.25;
 	}
 
 	self.replayedRecords++;

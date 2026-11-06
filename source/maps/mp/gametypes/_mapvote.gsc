@@ -46,7 +46,7 @@ Initialize()
 	level.mapvotehudoffset = 30;
 
 	// Small wait
-	wait level.fps_multiplier * .5;
+	wait .5;
 
 	// Create HUD
 	CreateHud();
@@ -278,7 +278,7 @@ DisplayMapChoices()
 		iprintlnbold(level.mapcandidate[2]["mapname"] + " (" + level.mapcandidate[2]["gametype"] +")");
 		iprintlnbold(level.mapcandidate[3]["mapname"] + " (" + level.mapcandidate[3]["gametype"] +")");
 		iprintlnbold(level.mapcandidate[4]["mapname"] + " (" + level.mapcandidate[4]["gametype"] +")");
-		wait level.fps_multiplier * 7.8;
+		wait 7.8;
 	}
 }
 
@@ -373,7 +373,7 @@ VoteLogic()
 			level.vote_map3 setValue( level.mapcandidate[2]["votes"] );
 			level.vote_map4 setValue( level.mapcandidate[3]["votes"] );
 			level.vote_map5 setValue( level.mapcandidate[4]["votes"] );
-			wait level.fps_multiplier * .1;
+			wait .1;
 		}
 		level.vote_hud_timeleft setValue( level.mapvotetime );
 	}
@@ -459,7 +459,7 @@ SetMapWinner(winner)
 	}
 
 	// Show winning map for a few seconds
-	wait level.fps_multiplier * 4;
+	wait 4;
 	level notify( "VotingComplete" );
 }
 

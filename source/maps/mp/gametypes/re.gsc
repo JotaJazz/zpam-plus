@@ -741,7 +741,7 @@ onStartGameType()
 			players = getentarray("player", "classname");
 			if (players.size > 0)
 				break;
-			wait level.fps_multiplier * 1;
+			wait 1;
 		}
 
 		// For public mode, wait untill most of player connect
@@ -765,7 +765,7 @@ onStartGameType()
 				{
 					iprintln("Match starting");
 
-					wait level.fps_multiplier * 8;
+					wait 8;
 
 					if (!level.pam_mode_change)
 						map_restart(true);
@@ -773,7 +773,7 @@ onStartGameType()
 					break;
 				}
 
-				wait level.fps_multiplier * 3;
+				wait 3;
 			}
 		}
 	}
@@ -1019,7 +1019,7 @@ watchPlayerDamageForStats(enemy, damage)
 	lastValue = enemy.health;
 	for(;;)
 	{
-		wait level.fps_multiplier * 1;
+		wait 1;
 		if (enemy.health > lastValue)
 			break;
 		if (enemy.health <= 0)	// if enemy is killed, dont count damage
@@ -1233,7 +1233,7 @@ onAfterPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir,
 
 
 	delay = 2;	// Delay the player becoming a spectator till after he's done dying
-	wait level.fps_multiplier * delay;	// ?? Also required for Callback_PlayerKilled to complete before killcam can execute
+	wait delay;	// ?? Also required for Callback_PlayerKilled to complete before killcam can execute
 
 
 
@@ -1527,7 +1527,7 @@ startRound()
 		//maps\mp\gametypes\_weapons::deletePlacedEntity("misc_turret");
 		maps\mp\gametypes\_weapons::deletePlacedEntity("misc_mg42");
 
-		wait level.fps_multiplier * 1;
+		wait 1;
 
 		// Hide score if it may be hidden
 		level maps\mp\gametypes\_hud_teamscore::hideScore(0.5);
@@ -1632,7 +1632,7 @@ startRound()
 
 
 	// Wait until round time expires (2 min default)
-	wait level.fps_multiplier * level.roundlength * 60;
+	wait level.roundlength * 60;
 
 
 	// Time expired
@@ -1682,7 +1682,7 @@ HUD_Clock(countDownTime)
 	if (waitTime <= 0)
 		return;
 
-	wait waitTime * level.fps_multiplier;
+	wait waitTime;
 	if (!isDefined(level.clock) || level.roundended)
 		return;
 
@@ -1693,7 +1693,7 @@ HUD_Clock(countDownTime)
 	if (waitTime <= 0)
 		return;
 
-	wait waitTime * level.fps_multiplier;
+	wait waitTime;
 	if (!isDefined(level.clock) || level.roundended)
 		return;
 
@@ -1742,7 +1742,7 @@ HUD_NextRound()
 
 	// Remove HUD in case timeout is called (new hud about timeout is whowed)
 	while (!game["do_timeout"])
-		wait level.fps_multiplier * 0.2;
+		wait 0.2;
 
 	round thread destroyHUDSmooth(.5);
 	roundnum thread destroyHUDSmooth(.5);
@@ -1822,7 +1822,7 @@ endRound(roundwinner)
 
 	if (level.in_bash)
 	{
-		wait level.fps_multiplier * 4;
+		wait 4;
 		players = getentarray("player", "classname");
 
 		game["Do_Ready_up"] = undefined; // will restart readyup
@@ -1892,7 +1892,7 @@ endRound(roundwinner)
 
 
 	// Wait a sec after last player is killed
-	wait level.fps_multiplier * 2;
+	wait 2;
 
 
 	thread maps\mp\gametypes\_pam::PAM_Header(true); // true = fadein
@@ -1931,12 +1931,12 @@ endRound(roundwinner)
 			thread HUD_NextRound();
 
 
-		wait level.fps_multiplier * level.round_endtime;
+		wait level.round_endtime;
 	}
 	else
 	{
 		// Wait a sec if no warup time defined
-		wait level.fps_multiplier * 3;
+		wait 3;
 	}
 
 
@@ -2240,7 +2240,7 @@ retrieval_think() //each objective model runs this to find it's trigger and goal
             return;
 
 
-        wait level.fps_multiplier * .08;
+        wait .08;
 
         players = getentarray("player", "classname");
         for(i = 0; i < players.size; i++)
@@ -2423,7 +2423,7 @@ objective_carrier_atgoal_wait(player)
 		}
 		else
 		{
-			wait level.fps_multiplier * 0.05;
+			wait 0.05;
 		}
 	}
 }
@@ -2659,7 +2659,7 @@ objective_timeout()
 {
 	self endon("picked up");
 	obj_timeout = 115;
-	wait level.fps_multiplier * obj_timeout;
+	wait obj_timeout;
 	iprintln(&"RE_TIMEOUTRETURNINGGENERIC", self.script_objective_name);
 	self.trigger.origin = self.trigger.startorigin;
 	self.origin = self.startorigin;
@@ -2681,7 +2681,7 @@ hold_to_drop_objective(player)
 	barsize = 288;
 	level.barincrement = int(barsize / (20.0 * droptime));
 
-	wait level.fps_multiplier * (1);
+	wait (1);
 
 
 	while(isPlayer(player))
@@ -2741,7 +2741,7 @@ hold_to_drop_objective(player)
 					}
 					player.progressbar setShader("white", progresslength, 8);
 
-					wait level.fps_multiplier * 0.05;
+					wait 0.05;
 				}
 
 				if(progresstime >= droptime)
@@ -2774,7 +2774,7 @@ hold_to_drop_objective(player)
 		}
 		player unlink();
 		player.isusing = false;
-		wait level.fps_multiplier * (.05);
+		wait (.05);
 	}
 }
 
@@ -2800,7 +2800,7 @@ delay_drop_objective(ent_obj)
 
 			break;
 		}
-		wait level.fps_multiplier * .05;
+		wait .05;
 	}
 }
 
@@ -2831,7 +2831,7 @@ hold_use_button(player)
 		if(player useButtonPressed())
 			player notify("Pressed Use");
 
-		wait level.fps_multiplier * (.05);
+		wait (.05);
 	}
 }
 
@@ -2915,7 +2915,7 @@ client_print(obj, text, s)
 	else
 		self.hudelem[num] setText(text);
 
-	wait level.fps_multiplier * 3;
+	wait 3;
 
     self.hud_client_print = undefined;
 
@@ -3494,7 +3494,7 @@ show_use_hud_hintstring(ent_obj, ent_dist)
 
 	while (ent_dist < 65 && self.is_touching_obj == ent_obj.number)
     {
-		wait level.fps_multiplier * .08;
+		wait .08;
 
 
 
@@ -3544,7 +3544,7 @@ sayObjective()
 {
 	level endon("running_timeout");
 
-	wait level.fps_multiplier * 1;
+	wait 1;
 
 	attacksounds["american"] = "MP_announcer_offense";
 	attacksounds["british"] = "MP_announcer_offense";

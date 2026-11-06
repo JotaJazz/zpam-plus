@@ -235,7 +235,7 @@ waitTime(time)
 
 	if (time < 0) time = 0;
 
-	wait level.fps_multiplier * time;
+	wait time;
 	self notify("end_killcam");
 }
 
@@ -247,7 +247,7 @@ waitKillcamTime()
 	time = (self.archivetime - level.frame);
 	if (time < 0) time = 0;
 
-	wait level.fps_multiplier * time;
+	wait time;
 	self notify("end_killcam");
 }
 

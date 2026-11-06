@@ -191,7 +191,7 @@ emptyName()
 
 	for(;;)
 	{
-		wait level.fps_multiplier * 1;
+		wait 1;
 
 		// Wait untill the name is changed
 		if (self.name == self.name_old)
@@ -214,7 +214,7 @@ emptyName()
 				self iprintlnbold("^1Using empty name would lead to kick!");
 			}
 			self setClientCvar("name", "Unnamed player");
-			wait level.fps_multiplier * 3; // wait untill the name is trully renamed
+			wait 3; // wait untill the name is trully renamed
 		}
 
 		self.name_old = self.name;
@@ -707,7 +707,7 @@ hitDataAutoRestart(eAttacker, self_num)
 		if (!isDefined(self) || !isAlive(self))
 			break;
 
-		wait level.fps_multiplier * 1;
+		wait 1;
 	}
 
 	// Remove the rest of the data

@@ -128,7 +128,7 @@ checkingRconCvarThread()
 
     for(;;)
     {
-        wait level.fps_multiplier * 0.5;
+        wait 0.5;
 
         // Check if cvar is changed
         cvarValue = getCvar("rcon_map_uuid");
@@ -150,7 +150,7 @@ checkingRconCvarThread()
 				setCvar(cvar["name"], cvar["value"]);
 
 				if (player.pers["rcon_map_apply_action"] == "")
-					wait level.fps_multiplier * 0.5;
+					wait 0.5;
 			}
 
 			// Apply action

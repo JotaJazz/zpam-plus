@@ -298,7 +298,7 @@ FollowCloseByPlayer()
 			{
 				self.streamerSystem_HUD_followPlayerName fadeOverTime(time);
 				self.streamerSystem_HUD_followPlayerName.alpha = 0;
-				wait level.fps_multiplier * time;
+				wait time;
 				if (!isDefined(self)) break; // in case player disconnects
 			}
 			if (!isDefined(saved_player_last) || saved_player_last != saved_player)
@@ -306,7 +306,7 @@ FollowCloseByPlayer()
 				self.streamerSystem_HUD_followPlayerName SetPlayerNameString(saved_player);
 				self.streamerSystem_HUD_followPlayerName fadeOverTime(time);
 				self.streamerSystem_HUD_followPlayerName.alpha = 1;
-				wait level.fps_multiplier * time;
+				wait time;
 				if (!isDefined(self)) break; // in case player disconnects
 			}
 		}
@@ -314,7 +314,7 @@ FollowCloseByPlayer()
 		{
 			self.streamerSystem_HUD_followPlayerName fadeOverTime(time);
 			self.streamerSystem_HUD_followPlayerName.alpha = 0;
-			wait level.fps_multiplier * time;
+			wait time;
 			if (!isDefined(self)) break; // in case player disconnects
 		}
 

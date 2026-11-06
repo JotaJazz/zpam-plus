@@ -168,11 +168,11 @@ playerBreathingSound(healthcap)
 	self endon("disconnect");
 	self endon("end_healthregen");
 
-	wait level.fps_multiplier * 2;
+	wait 2;
 	player = self;
 	for (;;)
 	{
-		wait level.fps_multiplier * 0.2;
+		wait 0.2;
 		if (player.health <= 0)
 			return;
 
@@ -181,7 +181,7 @@ playerBreathingSound(healthcap)
 			continue;
 
 		player playLocalSound("breathing_hurt");
-		wait level.fps_multiplier * .784;
-		wait level.fps_multiplier * (0.1 + randomfloat (0.8));
+		wait .784;
+		wait (0.1 + randomfloat (0.8));
 	}
 }

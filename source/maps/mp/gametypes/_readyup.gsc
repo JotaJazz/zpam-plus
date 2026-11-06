@@ -143,13 +143,13 @@ Start_Readyup_Mode(runned_in_middle_of_game)
 	// Wait here untill there is atleast one player connected
 	if (game["readyup_first_run"])
 	{
-		wait level.fps_multiplier * 0.1;
+		wait 0.1;
 		for(;;)
 		{
 			players = getentarray("player", "classname");
 			if (players.size > 0)
 				break;
-			wait level.fps_multiplier * 1;
+			wait 1;
 		}
 	}
 
@@ -359,7 +359,7 @@ respawnOnKilled(sWeapon, deathAnimDuration)
 	if(!isdefined(self.switching_teams))
 		body = self cloneplayer(deathAnimDuration);
 
-	wait level.fps_multiplier * 2;
+	wait 2;
 
 	// Delete dead body in readyup
 	if(isDefined(body))
@@ -384,7 +384,7 @@ giveGrenadesInReadyup()
 	grenadesLast = 0;
 	for(;;)
 	{
-		wait level.fps_multiplier * 0.5;
+		wait 0.5;
 
 		if (!isAlive(self) || !isDefined(self.pers["weapon"]))
 			continue;
@@ -439,11 +439,11 @@ playerReadyUpThread()
 
 	// Dont show readyup for just connected players
 	while(!isDefined(self.pers["firstTeamSelected"]))
-		wait level.fps_multiplier * 0.1;
+		wait 0.1;
 
 	// Dont show readyup if player is in team but weapon is not selected yet (player is in spectator session state)
 	while((self.pers["team"] == "allies" || self.pers["team"] == "axis") && !isDefined(self.pers["weapon"]))
-		wait level.fps_multiplier * 0.1;
+		wait 0.1;
 
 	// Set ready for spectators
 	if (self.pers["team"] == "spectator" || self.pers["team"] == "streamer")
@@ -543,7 +543,7 @@ playerReadyUpThread()
 			level thread Check_All_Ready();
 
 
-			wait level.fps_multiplier * 0.25;
+			wait 0.25;
 			while (self useButtonPressed())
 				wait level.frame;
 		}
@@ -573,7 +573,7 @@ playerReadyUpThread()
 					// Disable killing
 					self disableKilling();
 
-					wait level.fps_multiplier * 1;
+					wait 1;
 					break;
 				}
 
@@ -728,7 +728,7 @@ Check_All_Ready()
 	if (areAllPlayersReady())
 	{
 		// Give players a few time to change their status if he was tle last one even if all players are ready
-		wait level.fps_multiplier * 1;
+		wait 1;
 
 		if (areAllPlayersReady())
 			level.playersready = true;
@@ -841,7 +841,7 @@ End_Readyup_Mode()
     	thread playStartSound();
 
 
-	wait level.fps_multiplier * level.scr_readyup_start_timer; // (10sec)
+	wait level.scr_readyup_start_timer; // (10sec)
 
 	// reset flag as readyup was runned
 	game["readyup_first_run"] = false;
@@ -867,7 +867,7 @@ ReadyUp_AutoResume(minutes)
 	level thread HUD_ReadyUp_ResumingIn(minutes);
 
 	// Resume after
-	wait level.fps_multiplier * minutes * 60;
+	wait minutes * 60;
 
 
 	level thread HUD_ReadyUp_ResumingIn_ExtraTime();
@@ -888,7 +888,7 @@ ReadyUp_AutoResume(minutes)
 
 	}
 
-	wait level.fps_multiplier * 3;
+	wait 3;
 
 	// If atleast one of the teams are ready, end readyup
 	for(;;)
@@ -922,7 +922,7 @@ ReadyUp_AutoResume(minutes)
 			break;
 		}
 
-		wait level.fps_multiplier * 1;
+		wait 1;
 	}
 }
 
@@ -960,7 +960,7 @@ Update_Players_Count()
 
 		level.notreadyhud setValue(notready);
 
-		wait level.fps_multiplier * .1;
+		wait .1;
 	}
 }
 
@@ -1160,7 +1160,7 @@ HUD_Clock()
 	level.stim FadeOverTime(1);
 	level.stim.alpha = 0;
 
-	wait level.fps_multiplier * 1;
+	wait 1;
 
 	level.timertext destroy2();
 	level.stim destroy2();
@@ -1192,7 +1192,7 @@ HUD_ReadyUpMode()
     level.readyup_mode FadeOverTime(1);
     level.readyup_mode.alpha = 0;
 
-    wait level.fps_multiplier * 1;
+    wait 1;
 
 	level.readyup_mode destroy2();
 }
@@ -1243,7 +1243,7 @@ HUD_WaitingOn_X_Players()
     level.playerstext FadeOverTime(1);
     level.playerstext.alpha = 0;
 
-    wait level.fps_multiplier * 1;
+    wait 1;
 
 	level.waitingon destroy2();
     level.notreadyhud destroy2();
@@ -1284,7 +1284,7 @@ HUD_ReadyUp_ResumingIn(minutes)
 	level.ht_resume_clock FadeOverTime(1);
 	level.ht_resume_clock.alpha = 0;
 
-	wait level.fps_multiplier * 1;
+	wait 1;
 
 	level.ht_resume destroy2();
 	level.ht_resume_clock destroy2();
@@ -1333,7 +1333,7 @@ HUD_ReadyUp_ResumingIn_ExtraTime()
 	level.setYourTeamAsReady FadeOverTime(1);
 	level.setYourTeamAsReady.alpha = 0;
 
-	wait level.fps_multiplier * 1;
+	wait 1;
 
 	level.ht_resume_clock_extra destroy2();
 	level.setYourTeamAsReadyBG destroy2();
@@ -1437,7 +1437,7 @@ HUD_Half_Start(time)
 	blackbgtimer.foreground = true;
 	blackbgtimer settimer(time-0.5);
 
-	wait level.fps_multiplier * time;
+	wait time;
 
 	blackbg FadeOverTime(1);
 	blackbg.alpha = 0;
@@ -1446,7 +1446,7 @@ HUD_Half_Start(time)
 	blackbgtimer FadeOverTime(1);
 	blackbgtimer.alpha = 0;
 
-	wait level.fps_multiplier * 1;
+	wait 1;
 
 	blackbg destroy2();
 	blackbgtimertext destroy2();
@@ -1480,7 +1480,7 @@ playLastManSound()
 {
 	self endon("disconnect");
 
-	wait level.fps_multiplier * 3;
+	wait 3;
 
 	if (self.isReady == false)
 	{
@@ -1488,7 +1488,7 @@ playLastManSound()
 	}
 
 	// Next sound after 30 sec
-	wait level.fps_multiplier * 30;
+	wait 30;
 
 	self.lastMan = false;
 }

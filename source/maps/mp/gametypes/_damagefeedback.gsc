@@ -89,7 +89,7 @@ updateDamageFeedback(enemy, count)
 
 
 
-			wait delay * level.fps_multiplier;
+			wait delay;
 
 			self.hud_damagefeedback fadeOverTime(time);
 			self.hud_damagefeedback.alpha = 0;

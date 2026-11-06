@@ -122,18 +122,15 @@ onCvarChanged(cvar, value, isRegisterTime)
 			// OpenCoD2-Plus Server's wait follows sv_fps, so waits need no scaling
 			if (value == 30)
 			{
-				level.fps_multiplier = 1;
 				level.frame = .033;
 			}
 			else if (value == 25)
 			{
-				level.fps_multiplier = 1;
 				level.frame = .039;
 			}
 			else
 			{
 				level.frame = 1 / value;
-				level.fps_multiplier = 1;
 			}
 			level.sv_fps = value;
 			//println("Server FPS is: " + value);
@@ -212,7 +209,7 @@ onCvarChanged(cvar, value, isRegisterTime)
 restartMap()
 {
 	iprintln("Restarting map...");
-	wait level.fps_multiplier * 2;
+	wait 2;
 	map(level.mapname, false);
 }
 

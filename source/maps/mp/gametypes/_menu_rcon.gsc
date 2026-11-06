@@ -91,7 +91,7 @@ checkingRconCvarThread()
 
     for(;;)
     {
-        wait level.fps_multiplier * 0.1;
+        wait 0.1;
 
         // Check if cvar is changed
         cvarValue = getCvar(level.rconCvar);

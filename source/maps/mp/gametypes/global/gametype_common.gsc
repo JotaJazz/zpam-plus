@@ -30,7 +30,7 @@ HUD_StratTime(time)
 	strat_clock moveovertime(0.5);
 	strat_clock.x = -40;
 
-	wait level.fps_multiplier * 0.5;
+	wait 0.5;
 
 	strattime destroy2();
 	strat_clock destroy2();
@@ -40,7 +40,7 @@ strattime_end_timer(time)
 {
 	level endon("strat_time_end");
 
-	wait level.fps_multiplier * time;
+	wait time;
 
 	level notify("strat_time_end");
 }

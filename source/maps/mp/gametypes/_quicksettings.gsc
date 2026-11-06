@@ -17,7 +17,7 @@ onConnected()
 	while (!self.pers["modDownloaded"])
 		wait level.frame;
 
-	wait level.fps_multiplier * 1;
+	wait 1;
 
 	// Nothing get loaded, write defaults
 	if (!self.pers["quicksettings_saved"])

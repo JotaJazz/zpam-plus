@@ -418,7 +418,7 @@ Update_WeaponClass_HUDs(team, weaponclass)
 
 		//iprintln(debugtext+")");
 
-		//wait level.fps_multiplier * 0.05;
+		//wait 0.05;
 	}
 }
 

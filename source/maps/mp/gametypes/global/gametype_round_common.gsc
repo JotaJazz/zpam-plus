@@ -163,13 +163,13 @@ deadchat()
 			maps\mp\gametypes\global\cvar_system::setCvarQuiet("g_deadChat", 0); //setcvar("g_deadchat", 0);
 		}
 
-		wait level.fps_multiplier * 1;
+		wait 1;
 	}
 }
 
 announceWinner(winner, delay)
 {
-	wait level.fps_multiplier * delay;
+	wait delay;
 
 	// Announce winner
 	if(winner == "allies")

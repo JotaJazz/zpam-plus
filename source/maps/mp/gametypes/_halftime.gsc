@@ -25,7 +25,7 @@ Do_Half_Time()
 	level maps\mp\gametypes\_streamer_hud::ScoreProgress_AddHalftime();
 
 
-	wait level.fps_multiplier * 4;
+	wait 4;
 
 
 	// Wait for spectators in killcam

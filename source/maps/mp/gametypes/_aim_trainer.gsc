@@ -213,7 +213,7 @@ setKillTimeout(seconds, target)
 	target notify("aim_trainer_kill_timeout");
 	target endon("aim_trainer_kill_timeout");
 
-	wait level.fps_multiplier * seconds;
+	wait seconds;
 
 	self thread generateMeNewTargetPosition("timeout");
 }
@@ -609,7 +609,7 @@ player_loop()
 
 handleKillScore()
 {
-	wait level.fps_multiplier * 0.3;
+	wait 0.3;
 
 	if (self.aimTrainerMode != 4 && self.aimTarget1.kills_score >= 1)
 	{
@@ -709,7 +709,7 @@ generateMeNewTargetPosition(reason)
 
 		self thread handleKillScore();
 
-		wait level.fps_multiplier * 1.5;
+		wait 1.5;
 
 		self.aimTrainer_startAngles = self.angles;
 
@@ -729,11 +729,11 @@ generateMeNewTargetPosition(reason)
 
 		self thread handleKillScore();
 
-		wait level.fps_multiplier * 0.1;
+		wait 0.1;
 
 		self playlocalsound("aim_trainer_missed_shot");
 
-		wait level.fps_multiplier * 0.9;
+		wait 0.9;
 
 		self.aimTrainer_startAngles = self.angles;
 
@@ -761,7 +761,7 @@ generateMeNewTargetPosition(reason)
 		}
 
 
-		wait level.fps_multiplier * 1;
+		wait 1;
 
 		self.aimTrainer_startAngles = self.angles;
 
@@ -825,7 +825,7 @@ generateMeNewTargetPosition(reason)
 	// Single shot
 	if (mode == 1)
 	{
-		wait level.fps_multiplier * 1.6;
+		wait 1.6;
 
 		playSpawnSound = true;
 
@@ -842,8 +842,8 @@ generateMeNewTargetPosition(reason)
 	randomPosition = true;
 	if (self.aimTrainerMode == 4) // Mode 4: Reaction time"
 	{
-		wait level.fps_multiplier * 1;
-		wait level.fps_multiplier * (randomint(30) / 10);  // 0.0 - 2.9
+		wait 1;
+		wait (randomint(30) / 10);  // 0.0 - 2.9
 		self.aimTrainer_startAngles = self.angles;
 		randomPosition = false;
 	}
@@ -866,7 +866,7 @@ generateMeNewTargetPosition(reason)
 			warningPrinted = true;
 		}
 
-		wait level.fps_multiplier * 0.5;
+		wait 0.5;
 	}
 
 

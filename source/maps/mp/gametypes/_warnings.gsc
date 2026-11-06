@@ -30,7 +30,7 @@ sv_cheats_update()
 	// If this is after fresh map restart, update the warning if showed becuase sv_cheats is set too late
 	if (game["firstInit"])
 	{
-		wait level.fps_multiplier * 0.2;
+		wait 0.2;
 
 		if (level.warnings_visible)
 			update();

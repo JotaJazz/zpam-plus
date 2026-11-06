@@ -297,7 +297,7 @@ onStartGameType()
 			players = getentarray("player", "classname");
 			if (players.size > 0)
 				break;
-			wait level.fps_multiplier * 1;
+			wait 1;
 		}
 
 		// For public mode, wait untill most of player connect
@@ -321,7 +321,7 @@ onStartGameType()
 				{
 					iprintln("Match is starting");
 
-					wait level.fps_multiplier * 8;
+					wait 8;
 
 					if (!level.pam_mode_change)
 						map_restart(true);
@@ -329,7 +329,7 @@ onStartGameType()
 					break;
 				}
 
-				wait level.fps_multiplier * 3;
+				wait 3;
 			}
 		}
 	}
@@ -561,7 +561,7 @@ onAfterPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir,
 		}
 	}
 
-	delay = level.fps_multiplier * 1.5;
+	delay = 1.5;
 
 	if((level.matchstarted) && (!allowInstantRespawn))
 	{
@@ -906,7 +906,7 @@ startGame()
 			}
 
 
-			wait level.fps_multiplier * .5;
+			wait .5;
 		}
 	}
 }
@@ -991,7 +991,7 @@ endMap()
 	}
 
 
-	wait (level.fps_multiplier * level.frame);
+	wait (level.frame);
 
 
 	level thread maps\mp\gametypes\_end_of_map::Do_Map_End();
@@ -1080,10 +1080,10 @@ hq_obj_think(radio)
 			otherAorB = 1;
 
 
-		wait level.fps_multiplier * 1;
+		wait 1;
 
 		while (level.in_strattime || level.in_timeout)
-			wait level.fps_multiplier * 1;
+			wait 1;
 
 
 		iprintln(&"MP_RADIOS_SPAWN_IN_SECONDS", level.RadioSpawnDelay);
@@ -1097,7 +1097,7 @@ hq_obj_think(radio)
 			if (time >= level.RadioSpawnDelay)
 				break;
 
-			wait level.fps_multiplier * 1;
+			wait 1;
 		}
 
 		level.radio[level.nextradio] show();
@@ -1605,7 +1605,7 @@ hq_radio_disconnected_capture(radio)
 {
 	level endon("intermission");
 
-	wait level.fps_multiplier * 1.5;
+	wait 1.5;
 
 	if(radio.team != "none" && level.DefendingRadioTeam != "none" && !level.in_timeout)
 	{
@@ -1867,7 +1867,7 @@ hq_maxholdtime_think()
 
 		while (1)
 		{
-			wait level.fps_multiplier * level.frame;
+			wait level.frame;
 
 			if (level.in_timeout)
 				continue;
@@ -2181,8 +2181,8 @@ menuWeapon(response)
 			// Dont spawn if choosen team is defending radio and in that team are alive players
 			else if(level.DefendingRadioTeam != "none" && self.pers["team"] == level.DefendingRadioTeam && hq_radio_defenders_alive() >= 1)
 			{
-				self thread respawn_timer(level.fps_multiplier * .1);
-				self thread respawn_staydead(level.fps_multiplier * .1);
+				self thread respawn_timer(.1);
+				self thread respawn_staydead(.1);
 				self thread respawn();
 			}
 			else
@@ -2227,7 +2227,7 @@ respawn_timer(delay)
 		wait delay;
 		self thread updateTimer();
 
-		wait level.fps_multiplier * level.respawndelay;
+		wait level.respawndelay;
 
 		if(isdefined(self.respawntimer))
 			self.respawntimer destroy();

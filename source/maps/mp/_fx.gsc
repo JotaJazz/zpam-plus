@@ -77,7 +77,7 @@ OneShotfxthread ( fxId, fxPos, waittime, fxPos2 )
 {
 	wait level.frame; // waitframe
 
-    wait level.fps_multiplier * waittime;
+    wait waittime;
     if (isdefined (fxPos2))
 		fxPos2 = vectornormalize (fxPos2 - fxPos);
 
@@ -185,7 +185,7 @@ loopfxthread ( fxId, fxPos, waittime, fxPos2, fxStart, fxStop, timeout )
 loopfxStop (timeout)
 {
 	self endon("death");
-	wait(level.fps_multiplier * timeout);
+	wait(timeout);
 	self delete();
 }
 
@@ -212,7 +212,7 @@ gunfireloopfx(fxId, fxPos, shotsMin, shotsMax, shotdelayMin, shotdelayMax, betwe
 gunfireloopfxthread (fxId, fxPos, shotsMin, shotsMax, shotdelayMin, shotdelayMax, betweenSetsMin, betweenSetsMax)
 {
 	level endon ("stop all gunfireloopfx");
-	wait level.fps_multiplier * .05; // waitframe
+	wait .05; // waitframe
 
 	if (betweenSetsMax < betweenSetsMin)
 	{
@@ -251,9 +251,9 @@ gunfireloopfxthread (fxId, fxPos, shotsMin, shotsMax, shotdelayMin, shotdelayMax
 		{
 			playfx ( level._effect[fxId], fxPos );
 
-			wait level.fps_multiplier * (shotdelayBase + randomfloat (shotdelayRange));
+			wait (shotdelayBase + randomfloat (shotdelayRange));
 		}
-        wait level.fps_multiplier * (betweenSetsBase + randomfloat(betweenSetsRange));
+        wait (betweenSetsBase + randomfloat(betweenSetsRange));
     }
 }
 
@@ -265,7 +265,7 @@ gunfireloopfxVec(fxId, fxPos, fxPos2, shotsMin, shotsMax, shotdelayMin, shotdela
 gunfireloopfxVecthread (fxId, fxPos, fxPos2, shotsMin, shotsMax, shotdelayMin, shotdelayMax, betweenSetsMin, betweenSetsMax)
 {
 	level endon ("stop all gunfireloopfx");
-	wait level.fps_multiplier * .05; // waitframe
+	wait .05; // waitframe
 
 	if (betweenSetsMax < betweenSetsMin)
 	{
@@ -305,10 +305,10 @@ gunfireloopfxVecthread (fxId, fxPos, fxPos2, shotsMin, shotsMax, shotdelayMin, s
 		for (i=0;i<shotnum;i++)
 		{
 			playfx ( level._effect[fxId], fxPos, fxPos2);
-			wait level.fps_multiplier * (shotdelayBase + randomfloat (shotdelayRange));
+			wait (shotdelayBase + randomfloat (shotdelayRange));
 		}
-		wait level.fps_multiplier * (shotdelayBase + randomfloat (shotdelayRange));
-		wait level.fps_multiplier * (betweenSetsBase + randomfloat(betweenSetsRange));
+		wait (shotdelayBase + randomfloat (shotdelayRange));
+		wait (betweenSetsBase + randomfloat(betweenSetsRange));
 	}
 }
 

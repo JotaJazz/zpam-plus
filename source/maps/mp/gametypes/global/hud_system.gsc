@@ -375,7 +375,7 @@ destroyHUDSmooth(time)
     if (time > 0) self FadeOverTime(time);
     self.alpha = 0;
 
-    wait level.fps_multiplier * time;
+    wait time;
 
     if (isDefined(self) && isDefined(self.alpha))
 	self destroy2();

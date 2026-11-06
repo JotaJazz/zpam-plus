@@ -100,7 +100,7 @@ switchMapToFixVersion()
 	waittillframeend;
 
 	// Wait untill sv_cheats is set
-	wait level.fps_multiplier * 0.2;
+	wait 0.2;
 
 	// Dont switch the map if devmap were used
 	if (getcvarint("sv_cheats") == 1)
@@ -127,7 +127,7 @@ CheckInstallation()
 
 	// Wait untill sv_referencedIwds is set
 	// Dont know why, but sv_referencedIwds cvars is defined after 4 frames
-	wait level.fps_multiplier * 0.3; // just to be sure - on some servers cvars are set twice with different value every time
+	wait 0.3; // just to be sure - on some servers cvars are set twice with different value every time
 
 	sv_referencedIwds = getCvar("sv_referencedIwds");
 	sv_referencedIwdNames = getCvar("sv_referencedIwdNames");
@@ -366,7 +366,7 @@ printTextInLoop(line1, line2, line3, line4)
 		if (isDefined(line3)) 	iprintlnbold(line3);
 		if (isDefined(line4)) 	iprintlnbold(line4);
 
-		wait level.fps_multiplier * 5;
+		wait 5;
 	}
 }
 
@@ -392,7 +392,7 @@ ChangeTo(mode)
 	iprintlnbold("^3zPAM mode changing to ^2" + mode);
 	iprintlnbold("^3Please wait...");
 
-	wait level.fps_multiplier * 3;
+	wait 3;
 
 	// Reset custom cvars
 	setCvar("pam_mode_custom", 0);

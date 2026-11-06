@@ -120,7 +120,7 @@ onConnected()
 	}
 	else
 	{
-		wait level.fps_multiplier * 0.2;
+		wait 0.2;
 		self setClientCvar2("ui_matchinfo_show", "0");
 	}
 
@@ -271,9 +271,9 @@ refreshTeamNames()
 {
 	// Generate allies and axis team names
 	// Generate team names according to player names
-	wait level.fps_multiplier * 0.1;
+	wait 0.1;
 	maps\mp\gametypes\_teamname::refreshTeamName("allies"); // will update level.teamname_allies
-	wait level.fps_multiplier * 0.1;
+	wait 0.1;
 	maps\mp\gametypes\_teamname::refreshTeamName("axis"); // will update level.teamname_axis
 	wait level.frame;
 }
@@ -378,7 +378,7 @@ resetAll()
 
 waitForPlayerOrClear(playersLast)
 {
-	wait level.fps_multiplier * 15;
+	wait 15;
 
 	resetCount = 0;
 
@@ -403,7 +403,7 @@ waitForPlayerOrClear(playersLast)
 			return;
 		}
 
-		wait level.fps_multiplier * 5;
+		wait 5;
 	}
 }
 
@@ -853,7 +853,7 @@ refresh()
 
 
 
-		wait level.fps_multiplier * 1;
+		wait 1;
 	}
 
 

@@ -112,6 +112,6 @@ updateSniperShotgunHUD()
 		if (exit)
 			return;
 
-		wait level.fps_multiplier * 0.5;
+		wait 0.5;
 	}
 }

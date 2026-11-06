@@ -32,7 +32,7 @@ Do_Overtime()
 {
 	HUD_GoingToOvertime();
 
-	wait level.fps_multiplier * 5;
+	wait 5;
 
 	// Wait for spectators in killcam
 	level maps\mp\gametypes\_streamer::waitForSpectatorsInKillcam();

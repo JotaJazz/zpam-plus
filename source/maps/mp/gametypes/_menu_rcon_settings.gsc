@@ -156,7 +156,7 @@ checkingRconCvarThread()
 
     for(;;)
     {
-        wait level.fps_multiplier * 0.5;
+        wait 0.5;
 
         // Check if cvar is changed
         cvarValue = getCvar("rcon_settings_uuid");
@@ -353,7 +353,7 @@ cursor(cvar_name)
 
 		self setClientCvarIfChanged("ui_rcon_settings_"+cvar_name, self.pers["rcon_settings_" + cvar_name] + char + " ");
 
-		wait level.fps_multiplier * .4;
+		wait .4;
 	}
 
 	self setClientCvarIfChanged("ui_rcon_settings_enter_help", 0);

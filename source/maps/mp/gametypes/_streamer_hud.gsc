@@ -135,19 +135,19 @@ HUD_CloseMenuWarning_show()
 	{
 		self.streamerSystem_HUD_closeMenuWarningBG.alpha = 0.75;
 
-		wait level.fps_multiplier * 0.1;
+		wait 0.1;
 		if (!isDefined(self.streamerSystem_HUD_closeMenuWarningBG) || !isDefined(self.streamerSystem_HUD_closeMenuWarning)) return;
 
 		self.streamerSystem_HUD_closeMenuWarningBG.alpha = 0.5;
 
-		wait level.fps_multiplier * 0.1;
+		wait 0.1;
 		if (!isDefined(self.streamerSystem_HUD_closeMenuWarningBG) || !isDefined(self.streamerSystem_HUD_closeMenuWarning)) return;
 	}
 
 	self.streamerSystem_HUD_closeMenuWarningBG.alpha = 0.75;
 	self.streamerSystem_HUD_closeMenuWarning.alpha = 1;
 
-	wait level.fps_multiplier * 0.5;
+	wait 0.5;
 	if (!isDefined(self.streamerSystem_HUD_closeMenuWarningBG) || !isDefined(self.streamerSystem_HUD_closeMenuWarning)) return;
 
 	self.streamerSystem_HUD_closeMenuWarningBG FadeOverTime(.5);
@@ -155,7 +155,7 @@ HUD_CloseMenuWarning_show()
 	self.streamerSystem_HUD_closeMenuWarningBG.alpha = 0;
 	self.streamerSystem_HUD_closeMenuWarning.alpha = 0;
 
-	wait level.fps_multiplier * .5;
+	wait .5;
 
 	self HUD_CloseMenuWarning_destroy();
 }
@@ -346,7 +346,7 @@ settingsChangedForPlayer(what) // "", auto, xray, damage
 
 	if (self.pers["streamerSystem_keysVisible"] == false && (what == "auto" || what == "xray" || what == "damage"))
 	{
-		wait level.fps_multiplier * 1;
+		wait 1;
 
 		self setClientCvarIfChanged("ui_streamersystem_settings", "");
 	}
@@ -365,7 +365,7 @@ HUD_PlayerBoxes_Loop()
 	round_kills_printed = false;
 	for(;;)
 	{
-		wait level.fps_multiplier * 0.1;
+		wait 0.1;
 
 		if (self.pers["team"] != "streamer")
 		{

@@ -73,6 +73,6 @@ fixed maps load; then no `zzz_zpam_custom` iwd and no blacklisted iwd.
 |---|---|---|
 | `sv_plus` | OpenCoD2-Plus Server, Plus build only, read-only | the Plus check |
 | `sv_referencedIwdNames`, `sv_iwdNames` | engine | iwd name and blacklist checks |
-| `sv_fps` | engine | GSC `wait` follows it (OpenCoD2-Plus Server), so waits are real seconds and `level.fps_multiplier` is always 1 |
+| `sv_fps` | engine | GSC `wait` follows it (OpenCoD2-Plus Server), so waits are written in seconds |
 | `g_forceSnaps`, `g_forceRate` | OpenCoD2-Plus Server, Plus build | the 40 Hz rules send a snapshot every frame at 40000 bytes a second; `sv_maxRate` must stay 0 or it caps the rate at 25000 |
 | `shortversion`, `g_cod2x` | engine, CoD2x | 1.3 checks (a Plus server reports 1.3) |

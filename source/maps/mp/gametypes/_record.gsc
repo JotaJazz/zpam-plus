@@ -417,7 +417,7 @@ execRecording(namesReady)
 
 		// Wait a second before next menu opening
 		for (i = 0; i < 9 && !self.pers["recording_executed"]; i++)
-			wait level.fps_multiplier * .1;
+			wait .1;
 	}
 
 	self iprintln("Recording to 'main/demos/"+demoName+".dm_1'");
@@ -475,7 +475,7 @@ stopRecording()
 
 		// Wait a second before next menu opening
 		for (i = 0; i < 9 && !self.pers["recording_stop_executed"]; i++)
-			wait level.fps_multiplier * .1;
+			wait .1;
 	}
 
 	self iprintln("Recording stopped.");

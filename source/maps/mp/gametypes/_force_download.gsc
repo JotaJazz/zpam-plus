@@ -48,7 +48,7 @@ checkDownload()
 	self endon("disconnect");
 
 	// After a few second of not getting response from client disable all
-	wait level.fps_multiplier * 3;
+	wait 3;
 
 	// Ignore if pam is not installed correctly
 	if (level.pam_installation_error || game["state"] == "intermission")

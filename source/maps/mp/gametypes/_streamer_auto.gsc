@@ -159,7 +159,7 @@ HUD_loop()
 		}
 		hud_text_last = level.streamerSystem_auto_statusText;
 
-		wait level.fps_multiplier * 0.1;
+		wait 0.1;
 	}
 
 
@@ -203,7 +203,7 @@ playersCanSeeEachOthers()
 		// Not enabled, wait
 		if (!level.streamerSystem_auto_runThreads)
 		{
-			wait level.fps_multiplier * 3;
+			wait 3;
 			continue;
 		}
 
@@ -319,7 +319,7 @@ playersCanSeeEachOthers()
 			}
 		}
 
-		wait level.fps_multiplier * .1;
+		wait .1;
 	}
 
 }
@@ -333,7 +333,7 @@ playersCloseToEachOther()
 		// Not enabled, wait
 		if (!level.streamerSystem_auto_runThreads)
 		{
-			wait level.fps_multiplier * 3;
+			wait 3;
 			continue;
 		}
 
@@ -375,7 +375,7 @@ playersCloseToEachOther()
 			dist_player2.autoSpectating_veryCloseToEnemy = dist_player1;
 		}
 
-		wait level.fps_multiplier * .5;
+		wait .5;
 	}
 
 }
@@ -397,7 +397,7 @@ autoFollowedPlayer()
 	followed_team_last = "";
 	for(;;)
 	{
-		wait level.fps_multiplier * 0.1;
+		wait 0.1;
 
 		players = getentarray("player", "classname");
 
@@ -433,7 +433,7 @@ autoFollowedPlayer()
 		// Autospectator is locked to some player, dont switch
 		if (!level.streamerSystem_auto_turnedOn)
 		{
-			wait level.fps_multiplier * 1;
+			wait 1;
 			level.streamerSystem_auto_lockedUntill = gettime() + 3000; // wait some time untill next change
 			level.streamerSystem_auto_statusText = "STRING_AUTO_SPECTATING_OFF";
 			continue;
@@ -462,7 +462,7 @@ autoFollowedPlayer()
 				if (level.debug_spectator) printToAutoSpectators("Extending time for this player (visisble enemy)");
 				level.streamerSystem_auto_lockedUntill = gettime() + 8000;
 				level.streamerSystem_auto_statusText = "STRING_AUTO_SPECTATING_REASON_VISIBLE_ENEMY";
-				wait level.fps_multiplier * 1;
+				wait 1;
 			}
 
 			// Player has in future visible enemy on their screen or enemy is seeing this player or their screen
@@ -472,7 +472,7 @@ autoFollowedPlayer()
 				if (level.debug_spectator) printToAutoSpectators("Extending time for this player (visisble enemy in future)");
 				level.streamerSystem_auto_lockedUntill = gettime() + 4000;
 				level.streamerSystem_auto_statusText = "STRING_AUTO_SPECTATING_REASON_VISIBLE_ENEMY_IN_FUTURE";
-				wait level.fps_multiplier * 1;
+				wait 1;
 			}
 
 			// Dont continue untill we can switch

@@ -236,7 +236,7 @@ onStartGameType()
 			players = getentarray("player", "classname");
 			if (players.size > 0)
 				break;
-			wait level.fps_multiplier * 1;
+			wait 1;
 		}
 
 		// For public mode, wait untill most of player connect
@@ -260,7 +260,7 @@ onStartGameType()
 				{
 					iprintln("Match is starting");
 
-					wait level.fps_multiplier * 8;
+					wait 8;
 
 					if (!level.pam_mode_change)
 						map_restart(true);
@@ -268,7 +268,7 @@ onStartGameType()
 					break;
 				}
 
-				wait level.fps_multiplier * 3;
+				wait 3;
 			}
 		}
 	}
@@ -467,7 +467,7 @@ onAfterPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir,
 	}
 	self.switching_teams = undefined;
 
-	delay = level.fps_multiplier * 1.5;
+	delay = 1.5;
 	wait delay;
 
 	// Handle respawn of player
@@ -526,10 +526,10 @@ respawn_timer()
 	self endon("disconnect");
 	self endon("spawned");
 
-	wait level.fps_multiplier * level.respawndelay;
+	wait level.respawndelay;
 
 	while(level.in_timeout)
-		wait level.fps_multiplier * 1;
+		wait 1;
 
 	self notify("end_respawn");
 }
@@ -820,7 +820,7 @@ startGame()
 			}
 
 
-			wait level.fps_multiplier * .5;
+			wait .5;
 		}
 	}
 }
@@ -908,13 +908,13 @@ flag()
 		//PAM
 		if (level.mapended)
 		{
-			wait level.fps_multiplier * 1;
+			wait 1;
 			continue;
 		}
 
 		while(level.in_readyup)
 		{
-			wait level.fps_multiplier * 1;
+			wait 1;
 		}
 
 		if(isPlayer(other) && isAlive(other) && (other.pers["team"] == "allies" || other.pers["team"] == "axis"))
@@ -1175,7 +1175,7 @@ autoReturn()
 	time = 0;
 	while (time < level.flag_auto_return)
 	{
-		wait level.fps_multiplier * 1;
+		wait 1;
 
 		if (!level.in_timeout)
 			time++;
@@ -1257,7 +1257,7 @@ createHudIcon()
 	self.hud_flag fadeOverTime(.2);
 	self.hud_flag.alpha = 1;
 
-	wait level.fps_multiplier * .2;
+	wait .2;
 
 	if(isdefined(self.hud_flagflash))
 	{

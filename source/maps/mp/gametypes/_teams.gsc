@@ -119,7 +119,7 @@ watchBalance()
 	{
 		level.teamlimit = level.maxclients / 2;
 
-		wait level.fps_multiplier * .15;
+		wait .15;
 
 		if(level.gametype == "sd")
 		{
@@ -148,16 +148,16 @@ watchBalance()
 					if(!getTeamBalance())
 					{
 						iprintlnbold(&"MP_AUTOBALANCE_SECONDS", 15);
-					    	wait level.fps_multiplier * 15;
+					    	wait 15;
 
 						if(!getTeamBalance())
 							level balanceTeams();
 					}
 
-					wait level.fps_multiplier * 59;
+					wait 59;
 				}
 
-				wait level.fps_multiplier * 1;
+				wait 1;
 			}
 		}
 	}

@@ -346,7 +346,7 @@ onStartGameType()
 			players = getentarray("player", "classname");
 			if (players.size > 0)
 				break;
-			wait level.fps_multiplier * 1;
+			wait 1;
 		}
 
 		// For public mode, wait untill most of player connect
@@ -370,7 +370,7 @@ onStartGameType()
 				{
 					iprintln("Match is starting");
 
-					wait level.fps_multiplier * 8;
+					wait 8;
 
 					if (!level.pam_mode_change)
 						map_restart(true);
@@ -378,7 +378,7 @@ onStartGameType()
 					break;
 				}
 
-				wait level.fps_multiplier * 3;
+				wait 3;
 			}
 		}
 	}
@@ -662,7 +662,7 @@ watchPlayerDamageForStats(enemy, damage, sMeansOfDeath, sWeapon)
 	lastValue = enemy.health;
 	for(;;)
 	{
-		wait level.fps_multiplier * 1;
+		wait 1;
 		if (enemy.health > lastValue)
 			break;
 		if (enemy.health <= 0)	// if enemy is killed, dont count damage
@@ -852,7 +852,7 @@ onAfterPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir,
 
 
 	delay = 2;	// Delay the player becoming a spectator till after he's done dying
-	wait level.fps_multiplier * delay;	// ?? Also required for Callback_PlayerKilled to complete before killcam can execute
+	wait delay;	// ?? Also required for Callback_PlayerKilled to complete before killcam can execute
 
 
 	// Delete dead body if its close to bomb
@@ -1135,7 +1135,7 @@ startRound()
 
 		level streamer_reset_round_kills();
 
-		wait level.fps_multiplier * 1;
+		wait 1;
 
 		// Hide score if it may be hidden
 		level maps\mp\gametypes\_hud_teamscore::hideScore(0.5);
@@ -1231,7 +1231,7 @@ startRound()
 
 
 	// Wait until round time expires (2 min default)
-	wait level.fps_multiplier * level.roundlength * 60;
+	wait level.roundlength * 60;
 
 
 	// Time expired
@@ -1294,7 +1294,7 @@ HUD_Clock(countDownTime)
 	if (waitTime <= 0)
 		return;
 
-	wait waitTime * level.fps_multiplier;
+	wait waitTime;
 	if (!isDefined(level.clock) || level.roundended || level.bombplanted)
 		return;
 
@@ -1305,7 +1305,7 @@ HUD_Clock(countDownTime)
 	if (waitTime <= 0)
 		return;
 
-	wait waitTime * level.fps_multiplier;
+	wait waitTime;
 	if (!isDefined(level.clock) || level.roundended || level.bombplanted)
 		return;
 
@@ -1370,7 +1370,7 @@ HUD_ShowBombTimers()
 			value_old = value;
 		}
 
-		wait level.fps_multiplier * 0.1;
+		wait 0.1;
 	}
 }
 
@@ -1520,7 +1520,7 @@ endRound(roundwinner)
 
 	if (level.in_bash)
 	{
-		wait level.fps_multiplier * 4;
+		wait 4;
 		players = getentarray("player", "classname");
 
 		game["Do_Ready_up"] = undefined; // will restart readyup
@@ -1594,7 +1594,7 @@ endRound(roundwinner)
 
 
 	// Wait a sec after last player is killed
-	wait level.fps_multiplier * 2;
+	wait 2;
 
 
 	thread maps\mp\gametypes\_pam::PAM_Header(true); // true = fadein
@@ -1633,12 +1633,12 @@ endRound(roundwinner)
 			thread HUD_NextRound();
 
 
-		wait level.fps_multiplier * level.round_endtime;
+		wait level.round_endtime;
 	}
 	else
 	{
 		// Wait a sec if no warup time defined
-		wait level.fps_multiplier * 3;
+		wait 3;
 	}
 
 
@@ -1822,7 +1822,7 @@ bombzones()
 	level.barsize = 192;
 
 
-	wait level.fps_multiplier * .2;
+	wait .2;
 
 	// Find bombzones (may be 1 bombzone or 2 bomzones A and B)
 	bombzones = getentarray("bombzone", "targetname");
@@ -2167,7 +2167,7 @@ bomb_countdown()
 		self thread HUD_ShowBombTimers();
 	level.bombmodel playLoopSound("bomb_tick");
 
-	wait level.fps_multiplier * level.bombtimer;
+	wait level.bombtimer;
 
 	// bomb timer is up
 	objective_delete(0);
@@ -2361,7 +2361,7 @@ sayObjective()
 
 	if (game["is_public_mode"])
 	{
-		wait level.fps_multiplier * 2;
+		wait 2;
 
 		level playSoundOnPlayers(soundAttackers, game["attackers"]);
 		level playSoundOnPlayers(soundDefenders, game["defenders"]);
@@ -2388,7 +2388,7 @@ sayObjectiveIfPlayerIsNotMoving(sound)
 	{
 		origin = self.origin;
 
-		wait level.fps_multiplier * 0.5;
+		wait 0.5;
 
 		// Player moved
 		if (distance(self.origin, origin) > 10)

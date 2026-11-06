@@ -228,7 +228,7 @@ onStartGameType()
 			players = getentarray("player", "classname");
 			if (players.size > 0)
 				break;
-			wait level.fps_multiplier * 1;
+			wait 1;
 		}
 
 		// For public mode, wait untill most of player connect
@@ -252,7 +252,7 @@ onStartGameType()
 				{
 					iprintln("Match is starting");
 
-					wait level.fps_multiplier * 8;
+					wait 8;
 
 					if (!level.pam_mode_change)
 						map_restart(true);
@@ -260,7 +260,7 @@ onStartGameType()
 					break;
 				}
 
-				wait level.fps_multiplier * 3;
+				wait 3;
 			}
 		}
 	}
@@ -467,7 +467,7 @@ onAfterPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir,
 	}
 	self.switching_teams = undefined;
 
-	delay = level.fps_multiplier * 1.5;
+	delay = 1.5;
 	wait delay;
 
 	// Handle respawn of player
@@ -531,10 +531,10 @@ respawn_timer()
 	self endon("disconnect");
 	self endon("spawned");
 
-	wait level.fps_multiplier * level.respawndelay;
+	wait level.respawndelay;
 
 	while(level.in_timeout)
-		wait level.fps_multiplier * 1;
+		wait 1;
 
 	self notify("end_respawn");
 }
@@ -856,7 +856,7 @@ startGame()
 			}
 
 
-			wait level.fps_multiplier * .5;
+			wait .5;
 		}
 	}
 }
@@ -866,7 +866,7 @@ checkScoreProgress()
 {
 	while (!level.mapended)
 	{
-		wait level.fps_multiplier * 1.00;
+		wait 1.00;
 
 		if (level.in_timeout)
 			continue;
@@ -933,7 +933,7 @@ checkFlag()
 		while (!isAlive(self) || self.sessionstate != "playing")
 		{
 			wasDead = true;
-			wait level.fps_multiplier * .1;
+			wait .1;
 		}
 
 		while (!level.matchstarted)
@@ -941,7 +941,7 @@ checkFlag()
 
 
 		while (level.in_timeout)
-			wait level.fps_multiplier * 1;
+			wait 1;
 
 
 		if (wasDead)
@@ -999,7 +999,7 @@ checkFlag()
 		// Update objective on compass
 		if(isdefined(self.flag))
 		{
-			wait level.fps_multiplier * 0.05;
+			wait 0.05;
 
 			// Make sure flag still exist
 			if(isdefined(self.flag))
@@ -1032,7 +1032,7 @@ checkFlag()
 			}
 		}
 		else
-			wait level.fps_multiplier * 0.2;
+			wait 0.2;
 	}
 }
 
@@ -1167,15 +1167,15 @@ returnFlag()
 	 	self.basemodel.angles = spawnpoint.angles;
 	}
 
-	wait level.fps_multiplier * 1;
+	wait 1;
 
 	// Do not spawn flag unless there are alive players in both teams
 	while( !(alivePlayers("allies") && alivePlayers("axis")) )
-		wait level.fps_multiplier * 0.05;
+		wait 0.05;
 
 	// Do not spawn flag unless there are strattime / timeout
 	while (level.in_timeout || level.in_strattime)
-		wait level.fps_multiplier * 1;
+		wait 1;
 
 
 	if(!level.first_flag_spawn)
@@ -1193,7 +1193,7 @@ returnFlag()
 		if (time >= level.flagspawndelay)
 			break;
 
-		wait level.fps_multiplier * 1;
+		wait 1;
 	}
 
 
@@ -1225,7 +1225,7 @@ autoReturn()
 	time = 0;
 	for(;;)
 	{
-		wait level.fps_multiplier * 1;
+		wait 1;
 
 		if (level.in_timeout)
 			continue;
@@ -1237,7 +1237,7 @@ autoReturn()
 
 	iprintln(&"HTF_FLAGAUTORETURN");
 
-	wait level.fps_multiplier * 3;
+	wait 3;
 
 	self thread returnFlag();
 }
