@@ -5,7 +5,7 @@ Append-only. Newest first. Template in
 
 ## 2026-11-05 — optimizations
 
-- `level.fps_multiplier` is gone from `source/` (waits are plain seconds); the dm/tdm common file is `global/gametype_dm_tdm_common.gsc`; the sd and re menu handlers moved to `global/gametype_round_common.gsc`; `tools/rcon.py` reads multi-packet replies and says so when the password file is missing.
+- `level.fps_multiplier` is gone from the mod's own waits (plain seconds) but stays 1 in `global/cvars.gsc` for `mp_leningrad_mjr` and `mp_leningrad_tls` in `zpam_maps_v6.iwd`; the dm/tdm common file is `global/gametype_dm_tdm_common.gsc`; the sd and re menu handlers moved to `global/gametype_round_common.gsc`; `tools/rcon.py` reads multi-packet replies and says so when the password file is missing.
 - Team-name generation uses keyed lookups with identical output: 10 names of 32 characters went from 36-47 ms to 5-6 ms, pinned by `teamnameSelfTest` in `developer_script 1`.
 - Left on purpose: `spawnIntermission` is identical in ctf, dm, htf and tdm but no common file has exactly those includers; `onConnecting` and the tdm `playSoundOnPlayers` stay per gametype (see [debt](../roadmap/debt.md)).
 

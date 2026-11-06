@@ -120,6 +120,7 @@ onCvarChanged(cvar, value, isRegisterTime)
 		case "sv_fps":
 
 			// OpenCoD2-Plus Server's wait follows sv_fps, so waits need no scaling
+			level.fps_multiplier = 1; // read by mp_leningrad_mjr/_tls in zpam_maps_v6.iwd
 			if (value == 30)
 			{
 				level.frame = .033;
