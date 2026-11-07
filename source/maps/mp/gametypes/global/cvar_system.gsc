@@ -302,34 +302,6 @@ setClientCvar2(cvar, value, aaa, bbb, ccc)
         self setClientCvar(cvar, value, aaa, bbb, ccc);
 }
 
-countCvarsInSingleFrame()
-{
-	self endon("disconnect");
-
-	if (!isDefined(self.cvars2_count))
-		self.cvars2_count = 0;
-	else
-		self.cvars2_count++;
-
-	self notify("cvar2_count_end");
-	self endon("cvar2_count_end");
-
-	for (i = 0; i < 200; i++)
-	{
-		resettimeout();
-		waittillframeend;
-	}
-
-	if (self.cvars2_count > 1)
-	{
-		println("-----------------------------------------------------------------------------------");
-		println("### " + getTime() + " ### " + (level.frame_num-1) + " ### " + self.name + " ### sended cvars: " + self.cvars2_count + " (defined cvars: "+self.pers["sended_cvars"]+")");
-		println("-----------------------------------------------------------------------------------");
-	}
-
-	self.cvars2_count = 0;
-}
-
 // This function will remember the last value sended to client, so if the same value is used, nothing will be send to client
 setClientCvarIfChanged(cvar, value)
 {
