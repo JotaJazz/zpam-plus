@@ -375,6 +375,20 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 
 
 
+	// MG damage: the server takes the hit-location multiplier and sWeapon from the weapon the attacker
+	// held before mounting (a pistol gives pistol damage), so set fixed values (upstream 27d0dfc, d30f47d)
+	if (sMeansOfDeath == "MOD_RIFLE_BULLET" && isDefined(eAttacker) && isPlayer(eAttacker) && eAttacker isUsingTurret())
+	{
+		if (sHitLoc == "head" || sHitLoc == "neck")
+			iDamage = 100;
+		else if (sHitLoc == "torso_upper" || sHitLoc == "torso_lower" || sHitLoc == "right_leg_upper" || sHitLoc == "left_leg_upper")
+			iDamage = 75;
+		else
+			iDamage = 35;
+
+		sWeapon = "mg42_bipod_stand_mp"; // also keeps the rifle and shotgun fixes below off MG hits
+	}
+
 	// Hitbox left and right hand fix
 	if (level.scr_hitbox_hand_fix &&
 		isDefined(sWeapon) && isDefined(sHitLoc) && isDefined(eAttacker) && isPlayer(eAttacker) && eAttacker != self)

@@ -48,3 +48,6 @@ Changes since zPAM 3.38. Earlier history:
 - Leaving a mounted MG moves the player behind it once, when he leaves; before,
   his position was set every frame while he used it, which made his view tear
   for spectators.
+- MG hits do 100 to the head and neck, 75 to the torso and upper legs and 35
+  elsewhere; before, the server used the multipliers of the weapon the player
+  held before mounting it (a pistol gave pistol damage).
