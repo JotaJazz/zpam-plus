@@ -3,6 +3,12 @@
 Append-only. Newest first. Template in
 [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
 
+## 2026-11-07 — ladder phase B
+
+- The roster in `scr_ladder_team1/2` is enforced in `_menus.gsc`'s team menu: a listed player joins his team only, anyone else watches; `scr_ladder_team1_name/_team2_name` (an addition to ADR 0003's point 4) replace the generated names. Checked with three bots and match info.
+- `games_mp.log` is buffered unless `g_logSync 1`: a test or a ladder service reading it sees lines late; `tools/test_server.py` now sets it, and the log contract says so.
+- Open: phase C (forfeit on no-show, leavers); in rcon a roster with `;` must be quoted.
+
 ## 2026-11-07 — ladder design and phase A
 
 - ADR 0003 accepted: a separate ladder service drives the server by rcon and reads `games_mp.log`; phase A logs `LadderStart;` and `LadderEnd;` (team1 = the team on allies at the start, kept across halftime), checked by a two-bot comp match with a halftime that ends `LadderEnd;m1;0;2;team2`. ADR 0002 now holds the Plus 123 decision that had been written into the accepted ADR 0001.
