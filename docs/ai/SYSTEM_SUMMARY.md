@@ -39,5 +39,5 @@ images/                     pictures used by the upstream manual
 
 | With | Contract |
 |---|---|
-| OpenCoD2-Plus Server | `sv_plus` read-only, Plus build only, value `PLUS_VERSION` (123); the engine applies the fast reload, prone peek and MG clip rules |
+| OpenCoD2-Plus Server | `sv_plus` read-only, Plus build only, value `PLUS_VERSION` (123); the engine applies the fast reload, prone peek and MG clip rules; `g_shotgun_spread_fix` (from `ae124d3`, same `sv_plus`) is used only if the engine registered it |
 | Server admins | iwd name `zpamplus1`, run from `main`, www download on, `zpam_maps_v6.iwd` |

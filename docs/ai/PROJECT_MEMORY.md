@@ -3,6 +3,12 @@
 Append-only. Newest first. Template in
 [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
 
+## 2026-11-07 — Plus 123 required, fixed shotgun spread
+
+- The mod requires `sv_plus` 123 (ADR 0001 update): the fast reload, prone peek and MG clip scripts and their cvars are removed, as the engine applies those rules on both sides. `scr_score_change_mode` lets `_lan` change the score at any time.
+- The comp rules turn on the server's `g_shotgun_spread_fix` (from `ae124d3`, `sv_plus` unchanged), registered by the mod only if the engine has it, and the shotgun uses upstream's ranges for the fixed pattern.
+- Kept: the climbing sound script, because the mod's `weap_raise` is `null.wav` and its script also voices normal weapon raises; dropping it needs a real client to check.
+
 ## 2026-11-07 — upstream 4.x review, block 3, and Plus 123
 
 - In: hit feedback merged per frame (kill and hit crosses, a second cross for multi-hits), dm player stats, faster ready-up respawn, sd compass and clock timing, strat bombsite icons, steady clock and hit details, map vote names from match info, debug damage printed after the fixes. The server already had Plus 123 (fast reload, prone peek, MG clip in the engine), so `engineHasPlusRules()` skips those script fixes; the climbing sound fix stays, as zPAM silences `weap_raise`.
