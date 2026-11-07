@@ -440,6 +440,7 @@ getWeapon(sMeansOfDeath, sWeapon)
 	weaponsTexts["m1garand_mp"] = "M1 Garand";
 	weaponsTexts["thompson_mp"] = "Thompson";
 	weaponsTexts["bar_mp"] = "Bar";
+	weaponsTexts["bar_buffed_mp"] = "Bar";
 	weaponsTexts["springfield_mp"] = "Springfield";
 	weaponsTexts["greasegun_mp"] = "Greasegun";
 	weaponsTexts["shotgun_mp"] = "Shotgun";
@@ -456,6 +457,7 @@ getWeapon(sMeansOfDeath, sWeapon)
 	weaponsTexts["g43_mp"] = "Gewehr";
 	weaponsTexts["mp40_mp"] = "MP40";
 	weaponsTexts["mp44_mp"] = "MP44";
+	weaponsTexts["fg42_mp"] = "FG42";
 	weaponsTexts["kar98k_sniper_mp"] = "Kar98k Scoped";
 	weaponsTexts["colt_mp"] = "Pistol";
 	weaponsTexts["webley_mp"] = "Pistol";

@@ -36,3 +36,5 @@ Changes since zPAM 3.38. Earlier history:
   with a saved scope and the new shotgun: the saved weapons are checked against
   the selection again at spawn. The selected weapon saved in the secondary slot
   spawns first ("kar bug").
+- Hit stats count the scoped Kar98k like the other scoped rifles, and count the
+  buffed BAR and the FG42; the round report names them.
