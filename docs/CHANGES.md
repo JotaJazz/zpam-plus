@@ -83,3 +83,7 @@ Changes since zPAM 3.38. Earlier history:
 - New `scr_score_change_mode` (0 off, 1 only in the first ready-up, 2 always);
   `_lan` sets 2, so an admin at an event can fix the score after a crash at any
   time.
+- Comp, strat and dm warmup turn on the server's fixed shotgun pellet pattern
+  (`g_shotgun_spread_fix 1`, OpenCoD2-Plus Server `ae124d3` or later). With it
+  the consistent shotgun kills up to 280 units and does 75 to 400 and 35 to 500;
+  without it (an older build, or the dvar at 0) the ranges stay as before.

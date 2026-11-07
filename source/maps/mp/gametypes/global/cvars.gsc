@@ -107,6 +107,12 @@ Register_Shared_Cvars()
 	[[sVar]]("scr_friendlyfire", "INT", 0, 0, 3); 	// level.scr_friendlyfire on, off, reflect, shared
 
 	[[sVar]]("scr_posters", "BOOL", 0);              // level.scr_posters
+
+	// The server's fixed shotgun pellet pattern (as in CoD2x). Registered only if the engine has it:
+	// a dvar the mod created would look like engine support on the next map
+	level.g_shotgun_spread_fix = false;
+	if (getCvar("g_shotgun_spread_fix") != "")
+		[[sVar]]("g_shotgun_spread_fix", "BOOL", 0);
 }
 
 
@@ -138,6 +144,7 @@ onCvarChanged(cvar, value, isRegisterTime)
 			return true;
 
 		case "rate": 				return true;
+		case "g_shotgun_spread_fix":		level.g_shotgun_spread_fix = value; return true;
 		case "g_forcesnaps":			return true;
 		case "g_forcerate":			return true;
 		case "developer":			return true;

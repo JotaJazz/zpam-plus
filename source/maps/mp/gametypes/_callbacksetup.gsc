@@ -565,8 +565,30 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 		eAttacker.hitData[self_num].shotgun_distance = dist;
 
 
-		// Range 0-250   (1 pellet needed for kill)
-		if (dist <= 250)
+		// Fixed pellet pattern (g_shotgun_spread_fix, server): upstream's ranges for it (1c7bdb8, d30f47d)
+		// Range 0-280 kill, 280-400 75hp, 400-500 35hp
+		if (level.g_shotgun_spread_fix && dist <= 500)
+		{
+			if (dist <= 280)
+			{
+				iDamage = 100;
+				eAttacker.hitData[self_num].adjustedBy = "consistent_shotgun_1_kill";
+			}
+			else if (dist <= 400)
+			{
+				iDamage = 75;
+				eAttacker.hitData[self_num].adjustedBy = "consistent_shotgun_2";
+			}
+			else
+			{
+				iDamage = 35;
+				eAttacker.hitData[self_num].adjustedBy = "consistent_shotgun_3";
+			}
+			if (level.debug_shotgun) eAttacker iprintln("Distance " + int(dist) + " | fixed pattern | " + iDamage + "hp damage (" + eAttacker.hitData[self_num].adjustedBy + ")");
+		}
+
+		// Random spread: Range 0-250   (1 pellet needed for kill)
+		else if (dist <= 250)
 		{
 			isKill = true;
 

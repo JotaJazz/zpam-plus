@@ -68,6 +68,7 @@ GetCvars(arr)
 
 
 	arr = ruleCvarDefault(arr, "scr_shotgun_consistent", 1);			// Enable consistent shotgun to fix long shot kills and short range hits
+	arr = ruleCvarDefault(arr, "g_shotgun_spread_fix", 1);			// Fixed pellet pattern (server); the shotgun ranges follow it
 	arr = ruleCvarDefault(arr, "scr_hitbox_hand_fix", 1);				// Damage to left hand is adjusted for rifles and scopes.
 	arr = ruleCvarDefault(arr, "scr_hitbox_torso_fix", 1);					// Damage of M1, rifles, scopes and shotgun is adjusted to have less hits in game
 	arr = ruleCvarDefault(arr, "scr_hitbox_neck_kill", 1);					// A neck hit counts as a head hit
