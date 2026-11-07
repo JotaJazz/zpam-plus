@@ -3,6 +3,11 @@
 Append-only. Newest first. Template in
 [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
 
+## 2026-11-06 — the desync was WSL
+
+- The movement desync of the first Plus match came from WSL2, whose clock ran about 8% faster than Windows; not the mod, the server or the client.
+- For timing or movement tests with a Windows client, run the server where its clock matches the client's (not WSL2), or check the WSL clock first.
+
 ## 2026-11-06 — first match with a Plus client
 
 - sd `comp` on `mp_toujane_fix` at 40 Hz on a local `make PLUS=1` build, one Plus client (32 and 64-bit) and bots: www download of both iwds, readyup, rounds and the halftime side swap played with no script error; clients got `rate 40000`.
