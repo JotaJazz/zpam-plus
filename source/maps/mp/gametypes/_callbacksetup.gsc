@@ -425,13 +425,13 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 			boxBack = 8;		//	 _________				//	 _________
 			boxFront = 30;		//	|  -[]-	 |	       Back		//	|  _[]_	 |	       Top
 			boxLeft = 9;		//	|   |	 |	Left  [Head]  Right	//	| || ||	 |	Left  [Head]  Right
-			boxRight = 9;		//	|	 |	      Front		//	|__| |___|	      Down
+			boxRight = 11;		//	|	 |	      Front		//	|__| |___|	      Down
 			boxUp = 8;		//	|________|	        ^		//	   ||
-			boxDown = 14;		//	Top view	      Enemy		//	Front view
+			boxDown = 16;		//	Top view	      Enemy		//	Front view
 			if (self.isMoving) // if player is moving, make the box bigger so it will compensate poor hitboxes
 			{
-				boxLeft = 11;
-				boxRight = 11;
+				boxLeft = 13;
+				boxRight = 15;
 			}
 			stance = self maps\mp\gametypes\global\player::getStance(); // prone crouch stand
 			if (stance == "prone")

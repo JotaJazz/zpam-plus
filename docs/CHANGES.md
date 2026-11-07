@@ -54,3 +54,6 @@ Changes since zPAM 3.38. Earlier history:
 - New `scr_hitbox_neck_kill` (on in comp, strat and dm warmup): a bullet in the
   neck counts as a head hit, with the weapon's head damage. Shown in server info
   and in the rcon settings menu.
+- The hand-hitbox fix uses a slightly bigger box around the head (2 units more
+  to the right and down; when the player moves, 13 to the left and 15 to the
+  right).
