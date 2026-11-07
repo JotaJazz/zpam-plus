@@ -12,7 +12,6 @@ Via this player always spawn behind the MG when he drop it
 
 init()
 {
-	addEventListener("onConnected",     ::onConnected);
 	addEventListener("onCvarChanged", ::onCvarChanged);
 
 	registerCvar("scr_mg_peek_fix", "BOOL", 0);
@@ -22,11 +21,6 @@ init()
 		wait level.frame;	// wait a frame - MGs can be removed by other scripts
 		start();
 	}
-}
-
-onConnected()
-{
-	self.usingMG = false;
 }
 
 // This function is called when cvar changes value.
@@ -92,9 +86,6 @@ handleDrop(turret)
 {
 	self endon("disconnect");
 
-	self.usingMG = true;
-	//iprintln("Player "+self.name+ " is using MG");
-
 	wait level.frame;
 
 	// Compute position of player behid the MG
@@ -112,22 +103,11 @@ handleDrop(turret)
 		pos = pos + (0, 0, -24); // new pos
 	}
 
-	while (true)
-	{
-	        self setOrigin(pos);
+	// Move the player once, when he leaves the MG; setting the origin every frame while he used it
+	// made his view tear for spectators (upstream d9f34e6)
+	while (self isUsingTurret())
+		wait level.frame;
 
-	        wait level.frame;
-
-		// Next frame the position of player is overwrited when using MG
-		// Via that we can detect if player is still using the MG - by checking distance between position
-
-		dist = distance(self.origin, pos);
-
-	        if (dist < 2)
-	          break;
-	}
-
-	//iprintln("Player "+self.name+ " dropped MG");
-
-	self.usingMG = false;
+	if (self.sessionstate == "playing")
+		self setOrigin(pos);
 }

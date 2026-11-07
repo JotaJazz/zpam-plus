@@ -45,3 +45,6 @@ Changes since zPAM 3.38. Earlier history:
   until the map ends (before, 2 minutes). A player who reconnects in the middle
   of a map while his old connection still waits for `sv_timeout` gets his stats
   back instead of a new row.
+- Leaving a mounted MG moves the player behind it once, when he leaves; before,
+  his position was set every frame while he used it, which made his view tear
+  for spectators.
