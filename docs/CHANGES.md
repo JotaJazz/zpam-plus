@@ -94,3 +94,6 @@ Changes since zPAM 3.38. Earlier history:
   far.
 - With `developer_script 1`, `rcon dev_duel <weapon> <distance> <head|torso>`
   makes one bot shoot another once, for testing damage without players.
+- The ready-up and time-out HUD and the quick settings menu follow the game's
+  language, with Spanish as the first translation (the rest of the mod is still
+  English).

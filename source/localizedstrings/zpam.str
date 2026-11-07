@@ -1,0 +1,166 @@
+// zPAM Plus strings. LANG_ENGLISH is the fallback; add a LANG_<language> line per translation.
+// Windows-1252, as the stock .str files.
+VERSION             "1"
+CONFIG              "C:\trees\cod2\bin\StringEd.cfg"
+
+REFERENCE           READYUP_WAITING_ON
+LANG_ENGLISH        "Waiting on"
+LANG_SPANISH        "Esperando a"
+
+REFERENCE           READYUP_PLAYERS
+LANG_ENGLISH        "Players"
+LANG_SPANISH        "Jugadores"
+
+REFERENCE           READYUP_YOUR_STATUS
+LANG_ENGLISH        "Your Status"
+LANG_SPANISH        "Tu estado"
+
+REFERENCE           READYUP_READY
+LANG_ENGLISH        "Ready"
+LANG_SPANISH        "Listo"
+
+REFERENCE           READYUP_NOT_READY
+LANG_ENGLISH        "Not Ready"
+LANG_SPANISH        "No listo"
+
+REFERENCE           READYUP_CLOCK
+LANG_ENGLISH        "Clock"
+LANG_SPANISH        "Reloj"
+
+REFERENCE           READYUP_MODE
+LANG_ENGLISH        "Ready-Up Mode"
+LANG_SPANISH        "Modo Ready-Up"
+
+REFERENCE           READYUP_MODE_HALF
+LANG_ENGLISH        "Half-Time Ready-Up Mode"
+LANG_SPANISH        "Ready-Up del descanso"
+
+REFERENCE           READYUP_MODE_TIMEOUT
+LANG_ENGLISH        "Time-Out Ready-Up Mode"
+LANG_SPANISH        "Ready-Up del tiempo muerto"
+
+REFERENCE           READYUP_MODE_OVERTIME
+LANG_ENGLISH        "Overtime Ready-Up Mode"
+LANG_SPANISH        "Ready-Up del overtime"
+
+REFERENCE           READYUP_SELECT_TEAM
+LANG_ENGLISH        "Select team!"
+LANG_SPANISH        "¡Elige equipo!"
+
+REFERENCE           READYUP_RESUMING_IN
+LANG_ENGLISH        "Resuming In"
+LANG_SPANISH        "Se reanuda en"
+
+REFERENCE           READYUP_KILLING_DISABLED
+LANG_ENGLISH        "Disabled"
+LANG_SPANISH        "Desactivado"
+
+REFERENCE           READYUP_KILLING_ENABLED
+LANG_ENGLISH        "Enabled"
+LANG_SPANISH        "Activado"
+
+REFERENCE           READYUP_KILLING
+LANG_ENGLISH        "Killing"
+LANG_SPANISH        "Matar"
+
+REFERENCE           READYUP_AIM_TRAINER
+LANG_ENGLISH        "Aim Trainer"
+LANG_SPANISH        "Entrenador de puntería"
+
+REFERENCE           READYUP_AIM_TRAINER_NOT_SUPPORTED
+LANG_ENGLISH        "Not supported"
+LANG_SPANISH        "No disponible"
+
+REFERENCE           READYUP_AIM_TRAINER_AVAIBLE
+LANG_ENGLISH        "Available"
+LANG_SPANISH        "Disponible"
+
+REFERENCE           READYUP_AIM_TRAINER_ACTIVE
+LANG_ENGLISH        "Active"
+LANG_SPANISH        "Activo"
+
+REFERENCE           READYUP_MATCH_BEGINS_IN
+LANG_ENGLISH        "Match begins in:"
+LANG_SPANISH        "La partida empieza en:"
+
+REFERENCE           READYUP_MATCH_CONTINUES_IN
+LANG_ENGLISH        "Match continues in:"
+LANG_SPANISH        "La partida sigue en:"
+
+REFERENCE           READYUP_MATCH_RESUMES_IN
+LANG_ENGLISH        "Match resumes in:"
+LANG_SPANISH        "La partida se reanuda en:"
+
+REFERENCE           READYUP_SET_YOUR_TEAM_AS_READY
+LANG_ENGLISH        "Time is over. Setting one team ready will skip the Ready-up."
+LANG_SPANISH        "Se acabó el tiempo. Si un equipo se pone listo, se salta el Ready-Up."
+
+REFERENCE           TIMEOUT
+LANG_ENGLISH        "Time-out"
+LANG_SPANISH        "Tiempo muerto"
+
+REFERENCE           GOING_TO_TIMEOUT
+LANG_ENGLISH        "Going to Time-out"
+LANG_SPANISH        "Vamos a tiempo muerto"
+
+REFERENCE           GOING_TO_TIMEOUT_IN
+LANG_ENGLISH        "Going to Time-out in"
+LANG_SPANISH        "Tiempo muerto en"
+
+REFERENCE           QS_TITLE
+LANG_ENGLISH        "Quick settings"
+LANG_SPANISH        "Ajustes rápidos"
+
+REFERENCE           QS_AUTORECORDING_ON
+LANG_ENGLISH        "1. Auto recording: ^5On"
+LANG_SPANISH        "1. Grabación automática: ^5Sí"
+
+REFERENCE           QS_AUTORECORDING_OFF
+LANG_ENGLISH        "1. Auto recording: ^5Off"
+LANG_SPANISH        "1. Grabación automática: ^5No"
+
+REFERENCE           QS_MATCHINFO_YES
+LANG_ENGLISH        "2. Show match info in game: ^5Yes"
+LANG_SPANISH        "2. Info de la partida en pantalla: ^5Sí"
+
+REFERENCE           QS_MATCHINFO_NO
+LANG_ENGLISH        "2. Show match info in game: ^5No"
+LANG_SPANISH        "2. Info de la partida en pantalla: ^5No"
+
+REFERENCE           QS_SCORE_YES
+LANG_ENGLISH        "3. Show score: ^5Yes"
+LANG_SPANISH        "3. Mostrar marcador: ^5Sí"
+
+REFERENCE           QS_SCORE_NO
+LANG_ENGLISH        "3. Show score: ^5No"
+LANG_SPANISH        "3. Mostrar marcador: ^5No"
+
+REFERENCE           QS_ENEMYLIST_YES
+LANG_ENGLISH        "4. Show enemy list: ^5Yes"
+LANG_SPANISH        "4. Lista de enemigos: ^5Sí"
+
+REFERENCE           QS_ENEMYLIST_NO
+LANG_ENGLISH        "4. Show enemy list: ^5No"
+LANG_SPANISH        "4. Lista de enemigos: ^5No"
+
+REFERENCE           QS_PACKETDUP_0
+LANG_ENGLISH        "5. Packet duplication: ^50x"
+LANG_SPANISH        "5. Duplicar paquetes: ^50x"
+
+REFERENCE           QS_PACKETDUP_1
+LANG_ENGLISH        "5. Packet duplication: ^51x"
+LANG_SPANISH        "5. Duplicar paquetes: ^51x"
+
+REFERENCE           QS_PACKETDUP_2
+LANG_ENGLISH        "5. Packet duplication: ^52x"
+LANG_SPANISH        "5. Duplicar paquetes: ^52x"
+
+REFERENCE           QS_PACKETDUP_3
+LANG_ENGLISH        "5. Packet duplication: ^53x"
+LANG_SPANISH        "5. Duplicar paquetes: ^53x"
+
+REFERENCE           QS_MOUSE
+LANG_ENGLISH        "6. Mouse settings"
+LANG_SPANISH        "6. Ajustes del ratón"
+
+ENDMARKER

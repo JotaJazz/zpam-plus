@@ -81,3 +81,16 @@ GSC has no unit tests; a change is checked on a test server with
    `ZPAM_RENAME - add old pam` line).
 3. Update `source/readme.txt` (release date), `docs/CHANGES.md`, the iwd name in
    `README.md` and `docs/ai/SYSTEM_SUMMARY.md`.
+
+## Translations
+
+Players see the mod in their game's language (`loc_language`), the stock way:
+`source/localizedstrings/zpam.str` holds one `REFERENCE` per string with a
+`LANG_ENGLISH` line, the fallback, and one `LANG_<language>` line per
+translation (`LANG_SPANISH`, `LANG_FRENCH`, `LANG_GERMAN`, `LANG_RUSSIAN`...).
+GSC uses it as `&"ZPAM_<REFERENCE>"` and menus as `"@ZPAM_<REFERENCE>"`; the
+file name gives the `ZPAM_` prefix. Keep the file in Windows-1252 with LF, as
+the stock `.str` files. So far the ready-up and time-out HUD and the quick
+settings menu use it; text the server builds and sends by cvar
+(`cg_objectiveText`, server info, match info) and `iprintln` messages are still
+English.

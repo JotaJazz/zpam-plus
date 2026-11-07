@@ -15,17 +15,17 @@ init()
 	if(game["firstInit"])
 	{
 		// Ready-up
-		precacheString2("STRING_READYUP_WAITING_ON", &"Waiting on");
-		precacheString2("STRING_READYUP_PLAYERS", &"Players");
-		precacheString2("STRING_READYUP_YOUR_STATUS", &"Your Status");
-		precacheString2("STRING_READYUP_READY", &"Ready");
-		precacheString2("STRING_READYUP_NOT_READY", &"Not Ready");
-		precacheString2("STRING_READYUP_CLOCK", &"Clock");
+		precacheString2("STRING_READYUP_WAITING_ON", &"ZPAM_READYUP_WAITING_ON");
+		precacheString2("STRING_READYUP_PLAYERS", &"ZPAM_READYUP_PLAYERS");
+		precacheString2("STRING_READYUP_YOUR_STATUS", &"ZPAM_READYUP_YOUR_STATUS");
+		precacheString2("STRING_READYUP_READY", &"ZPAM_READYUP_READY");
+		precacheString2("STRING_READYUP_NOT_READY", &"ZPAM_READYUP_NOT_READY");
+		precacheString2("STRING_READYUP_CLOCK", &"ZPAM_READYUP_CLOCK");
 
-		precacheString2("STRING_READYUP_MODE", &"Ready-Up Mode");
-		precacheString2("STRING_READYUP_MODE_HALF", &"Half-Time Ready-Up Mode");
-		precacheString2("STRING_READYUP_MODE_TIMEOUT", &"Time-Out Ready-Up Mode");
-		precacheString2("STRING_READYUP_MODE_OVERTIME", &"Overtime Ready-Up Mode");
+		precacheString2("STRING_READYUP_MODE", &"ZPAM_READYUP_MODE");
+		precacheString2("STRING_READYUP_MODE_HALF", &"ZPAM_READYUP_MODE_HALF");
+		precacheString2("STRING_READYUP_MODE_TIMEOUT", &"ZPAM_READYUP_MODE_TIMEOUT");
+		precacheString2("STRING_READYUP_MODE_OVERTIME", &"ZPAM_READYUP_MODE_OVERTIME");
 
 		// Strings (problem with precache...)
 		game["STRING_READYUP_KEY_ACTIVATE_PRESS"] = 		"Press the ^3[{+activate}] ^7button to Ready-Up.";
@@ -37,25 +37,25 @@ init()
 		game["STRING_READYUP_TIME_EXPIRED_SKIP"] = 		"Set your team as ready to skip the Ready-Up.";
 
 
-		precacheString2("STRING_READYUP_SELECT_TEAM", &"Select team!");
+		precacheString2("STRING_READYUP_SELECT_TEAM", &"ZPAM_READYUP_SELECT_TEAM");
 
-		precacheString2("STRING_READYUP_RESUMING_IN", &"Resuming In");
-		precacheString2("STRING_READYUP_KILLING_DISABLED", &"Disabled");
-		precacheString2("STRING_READYUP_KILLING_ENABLED", &"Enabled");
-		precacheString2("STRING_READYUP_KILLING", &"Killing");
-		precacheString2("STRING_READYUP_AIM_TRAINER", &"Aim Trainer");
-		precacheString2("STRING_READYUP_AIM_TRAINER_NOT_SUPPORTED", &"Not supported");
-		precacheString2("STRING_READYUP_AIM_TRAINER_AVAIBLE", &"Available");
-		precacheString2("STRING_READYUP_AIM_TRAINER_ACTIVE", &"Active");
+		precacheString2("STRING_READYUP_RESUMING_IN", &"ZPAM_READYUP_RESUMING_IN");
+		precacheString2("STRING_READYUP_KILLING_DISABLED", &"ZPAM_READYUP_KILLING_DISABLED");
+		precacheString2("STRING_READYUP_KILLING_ENABLED", &"ZPAM_READYUP_KILLING_ENABLED");
+		precacheString2("STRING_READYUP_KILLING", &"ZPAM_READYUP_KILLING");
+		precacheString2("STRING_READYUP_AIM_TRAINER", &"ZPAM_READYUP_AIM_TRAINER");
+		precacheString2("STRING_READYUP_AIM_TRAINER_NOT_SUPPORTED", &"ZPAM_READYUP_AIM_TRAINER_NOT_SUPPORTED");
+		precacheString2("STRING_READYUP_AIM_TRAINER_AVAIBLE", &"ZPAM_READYUP_AIM_TRAINER_AVAIBLE");
+		precacheString2("STRING_READYUP_AIM_TRAINER_ACTIVE", &"ZPAM_READYUP_AIM_TRAINER_ACTIVE");
 		precacheString2("STRING_READYUP_DASH", &"-");
 
 		// HUD: Half_Start
-		precacheString2("STRING_READYUP_MATCH_BEGINS_IN", &"Match begins in:");
-		precacheString2("STRING_READYUP_MATCH_CONTINUES_IN", &"Match continues in:");
-		precacheString2("STRING_READYUP_MATCH_RESUMES_IN", &"Match resumes in:");
+		precacheString2("STRING_READYUP_MATCH_BEGINS_IN", &"ZPAM_READYUP_MATCH_BEGINS_IN");
+		precacheString2("STRING_READYUP_MATCH_CONTINUES_IN", &"ZPAM_READYUP_MATCH_CONTINUES_IN");
+		precacheString2("STRING_READYUP_MATCH_RESUMES_IN", &"ZPAM_READYUP_MATCH_RESUMES_IN");
 
 		// Time to readyup expired
-		precacheString2("STRING_READYUP_SET_YOUR_TEAM_AS_READY", &"Time is over. Setting one team ready will skip the Ready-up.");
+		precacheString2("STRING_READYUP_SET_YOUR_TEAM_AS_READY", &"ZPAM_READYUP_SET_YOUR_TEAM_AS_READY");
 
 		precacheStatusIcon("party_ready");
 		precacheStatusIcon("party_notready");

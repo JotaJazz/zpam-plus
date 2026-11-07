@@ -11,9 +11,9 @@ init()
 
 	if(game["firstInit"])
 	{
-		precacheString2("STRING_TIMEOUT", &"Time-out");
-		precacheString2("STRING_GOING_TO_TIMEOUT", &"Going to Time-out");
-		precacheString2("STRING_GOING_TO_TIMEOUT_IN", &"Going to Time-out in");
+		precacheString2("STRING_TIMEOUT", &"ZPAM_TIMEOUT");
+		precacheString2("STRING_GOING_TO_TIMEOUT", &"ZPAM_GOING_TO_TIMEOUT");
+		precacheString2("STRING_GOING_TO_TIMEOUT_IN", &"ZPAM_GOING_TO_TIMEOUT_IN");
 
 
 		game["timeout_called_team"] = "";
