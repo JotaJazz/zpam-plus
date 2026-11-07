@@ -78,6 +78,18 @@ self is the player that was killed.
 */
 onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration)
 {
+	// Player stats (_player_stat.gsc) for dm, where score is kills (upstream e399efd); sd and re keep their own
+	if (level.gametype != "dm" || level.in_readyup || !level.matchstarted || level.mapended)
+		return;
+
+	if (!isDefined(self.switching_teams))
+		self maps\mp\gametypes\_player_stat::AddDeath();
+
+	if (isPlayer(attacker) && attacker != self)
+	{
+		attacker maps\mp\gametypes\_player_stat::AddKill();
+		attacker maps\mp\gametypes\_player_stat::AddScore(1);
+	}
 }
 
 /*

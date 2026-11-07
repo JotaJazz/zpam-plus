@@ -69,3 +69,5 @@ Changes since zPAM 3.38. Earlier history:
 - Map vote names maps like the match info does: the `_fix` maps get their names
   (they showed as `mp_toujane_fix`); stock maps show their file name (Farmhouse,
   not Beltot).
+- dm counts kills, deaths and score in the player stats (scoreboard and match
+  info), as sd and re already did.
