@@ -938,15 +938,34 @@ spawnPlayer()
 	// If there is saved weapons from last round
 	if(isdefined(self.pers["weapon1"]) && isdefined(self.pers["weapon2"]))
 	{
-	 	self setWeaponSlotWeapon("primary", self.pers["weapon1"]);
-		self giveMaxAmmo(self.pers["weapon1"]);
+		weapon1 = self.pers["weapon1"];
+		weapon2 = self.pers["weapon2"];
 
-	 	self setWeaponSlotWeapon("primaryb", self.pers["weapon2"]);
-		self giveMaxAmmo(self.pers["weapon2"]);
+		// The selection can change after the round ended (time-out ready-up), which let a player
+		// keep a saved scope and select a shotgun: apply the new selection and check the slots again
+		if (self.pers["weapon"] != self.pers["weapon_saved_for"])
+		{
+			weapon1 = self.pers["weapon"];
+			if (!self maps\mp\gametypes\_weapon_limiter::isWeaponSaveable(weapon2) || weapon2 == weapon1)
+				weapon2 = "none";
+		}
+		// Selected weapon saved in the secondary slot goes first ("kar bug": the other weapon would
+		// count as the spawn weapon, so it could be changed and the kar picked up again)
+		else if (weapon2 == self.pers["weapon"] && weapon1 != weapon2)
+		{
+			weapon2 = weapon1;
+			weapon1 = self.pers["weapon"];
+		}
 
-		self setSpawnWeapon(self.pers["weapon1"]);
+	 	self setWeaponSlotWeapon("primary", weapon1);
+		self giveMaxAmmo(weapon1);
 
-		self.spawnedWeapon = self.pers["weapon1"];
+	 	self setWeaponSlotWeapon("primaryb", weapon2);
+		self giveMaxAmmo(weapon2);
+
+		self setSpawnWeapon(weapon1);
+
+		self.spawnedWeapon = weapon1;
 	}
 	else
 	{
@@ -1700,9 +1719,10 @@ endRound(roundwinner)
 				weapon2 = temp;
 			}
 
-			// Save spawned weapon
+			// Save spawned weapon, and the selection it was computed for (checked again in spawnPlayer)
 			player.pers["weapon1"] = weapon1;
 			player.pers["weapon2"] = weapon2;
+			player.pers["weapon_saved_for"] = player.pers["weapon"];
 		}
 		else
 		{

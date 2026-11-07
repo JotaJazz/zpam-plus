@@ -32,3 +32,7 @@ Changes since zPAM 3.38. Earlier history:
   stance again; on the Plus server it was always the standing height.
 - A name with `[{...}]`, which the game draws as a key binding ("Unbound"), is
   renamed with `_` in place of the brackets.
+- Changing the selected weapon during a time-out no longer lets a player spawn
+  with a saved scope and the new shotgun: the saved weapons are checked against
+  the selection again at spawn. The selected weapon saved in the secondary slot
+  spawns first ("kar bug").
