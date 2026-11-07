@@ -64,3 +64,5 @@ Changes since zPAM 3.38. Earlier history:
 - In ready-up a killed player respawns after 0.5 s instead of 2 s.
 - sd: the bombsite icons show on the compass one frame after the round starts
   (was 0.2 s), and the round clock turns orange at 0:30 (was 0.3 s earlier).
+- `g_debugDamage` prints the damage after the hitbox, shotgun and MG fixes, so
+  it shows what is applied.
