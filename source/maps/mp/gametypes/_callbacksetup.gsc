@@ -191,7 +191,7 @@ emptyName()
 
 	for(;;)
 	{
-		wait 1;
+		wait 0.5;
 
 		// Wait untill the name is changed
 		if (self.name == self.name_old)
@@ -215,6 +215,24 @@ emptyName()
 			}
 			self setClientCvar("name", "Unnamed player");
 			wait 3; // wait untill the name is trully renamed
+		}
+
+		// "[{x}]" in a name is drawn as a key binding ("Unbound"), which hides who the player is
+		if (maps\mp\gametypes\global\string::hasBindPattern(self.name))
+		{
+			self iprintlnbold("^1Using [{}] in name is not allowed!");
+
+			safeName = "";
+			for (i = 0; i < self.name.size; i++)
+			{
+				char = self.name[i];
+				if (char == "[" || char == "]" || char == "{" || char == "}")
+					safeName += "_";
+				else
+					safeName += char;
+			}
+			self setClientCvar("name", safeName);
+			wait 1; // wait untill the name is trully renamed
 		}
 
 		self.name_old = self.name;

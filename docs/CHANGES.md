@@ -30,3 +30,5 @@ Changes since zPAM 3.38. Earlier history:
 - `hq` no longer stops the server with a script error when the match starts.
 - The hand-hitbox and shotgun fixes take the attacker's eye height from his
   stance again; on the Plus server it was always the standing height.
+- A name with `[{...}]`, which the game draws as a key binding ("Unbound"), is
+  renamed with `_` in place of the brackets.

@@ -264,4 +264,29 @@ selfTest()
 		assertMsg("string selfTest: logSafe empty");
 	if (logSafe("abc") != "abc")
 		assertMsg("string selfTest: logSafe abc");
+	if (!hasBindPattern("a[{+attack}]b"))
+		assertMsg("string selfTest: bind +attack");
+	if (!hasBindPattern("[{x}]"))
+		assertMsg("string selfTest: bind x");
+	if (hasBindPattern("[{}]"))
+		assertMsg("string selfTest: bind empty");
+	if (hasBindPattern("}][{x"))
+		assertMsg("string selfTest: bind reversed");
+	if (hasBindPattern("[x]{y}"))
+		assertMsg("string selfTest: bind plain brackets");
+}
+
+// True if string has "[{" followed later by "}]" with at least one character between them,
+// which the client draws as a key binding
+hasBindPattern(string)
+{
+	for (o = 0; o + 1 < string.size; o++)
+	{
+		if (string[o] != "[" || string[o + 1] != "{")
+			continue;
+		for (c = o + 3; c + 1 < string.size; c++)
+			if (string[c] == "}" && string[c + 1] == "]")
+				return true;
+	}
+	return false;
 }
