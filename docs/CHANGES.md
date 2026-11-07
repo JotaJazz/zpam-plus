@@ -71,3 +71,6 @@ Changes since zPAM 3.38. Earlier history:
   not Beltot).
 - dm counts kills, deaths and score in the player stats (scoreboard and match
   info), as sd and re already did.
+- strat: the bombsite icons show on the compass, the replay clock is always on
+  screen (0:00 when idle), and damage messages give the distance in metres and
+  the fix that changed the hit.

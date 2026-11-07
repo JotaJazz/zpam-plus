@@ -47,6 +47,8 @@ main()
 precache()
 {
 	precacheStatusIcon("compassping_enemyfiring"); // for streamers
+	precacheShader("objectiveA");
+	precacheShader("objectiveB");
 
 	precacheString2("STRING_FLY_ENABLED", &"Enabled");
 	precacheString2("STRING_FLY_DISABLED", &"Disabled");
@@ -115,6 +117,19 @@ onStartGameType()
 	maps\mp\gametypes\_gameobjects::main(allowed);
 
 
+
+	// Bombsite icons on the compass, as in sd (upstream fcaed36)
+	bombzones = getentarray("bombzone", "targetname");
+	for(i = 0; i < bombzones.size; i++)
+	{
+		if (!isdefined(bombzones[i].script_bombmode_original) || !isdefined(bombzones[i].script_label))
+			continue;
+		label = toLower(bombzones[i].script_label);
+		if (label == "a")
+			objective_add(0, "current", bombzones[i].origin, "objectiveA");
+		else if (label == "b")
+			objective_add(1, "current", bombzones[i].origin, "objectiveB");
+	}
 
 	thread maps\mp\gametypes\_pam::PAM_Header();
 	level Show_HUD_Global();
@@ -246,12 +261,21 @@ onPlayerDamaging(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon
 		}
 		else
 		{
+			// Distance in metres (1 unit = 1 inch), one decimal, and the fix that changed the hit if any (upstream 56670df)
+			point = self.origin;
+			if (isDefined(vPoint))
+				point = vPoint;
+			info = (int(distance(eAttacker getViewOrigin(), point) * 0.254) / 10) + "m, " + sHitLoc;
+			self_num = self getEntityNumber();
+			if (isDefined(eAttacker.hitData) && isDefined(eAttacker.hitData[self_num]) && eAttacker.hitData[self_num].adjustedBy != "")
+				info += ", " + eAttacker.hitData[self_num].adjustedBy;
+
 			// You inflicted 28 damage to BOT1
-			eAttacker iprintln("^7You inflicted ^2" + iDamage + "^7 damage to " + self.name + " (hitLoc: " + sHitLoc + ")");
+			eAttacker iprintln("^7You inflicted ^2" + iDamage + "^7 damage to " + self.name + " (" + info + ")");
 			//eAttacker iprintln("^2Hit ^7" + self.name + "^2 for ^1" + iDamage + " ^2 damage^7"); // Attacker damage notice
 
 			// Bot1 inflicted 12 damage to you
-			self iprintln(eAttacker.name + "^7 inflicted ^1" + iDamage + "^7 damage to you (hitLoc: " + sHitLoc + ")");
+			self iprintln(eAttacker.name + "^7 inflicted ^1" + iDamage + "^7 damage to you (" + info + ")");
 			//self iprintln("^1Hit by ^7" + eAttacker.name + "^1 for ^3" + iDamage + " ^1 damage^7"); // Hit Player damage notice
 		}
 	}
@@ -803,6 +827,17 @@ Run_Strat()
 	// Ignore bots
 	if (self.pers["isBot"])
 		return;
+
+	// Always shown (0:00), so the replay timer does not pop up from nothing (upstream 34af519)
+	self.clock = newClientHudElem2(self);
+	self.clock.font = "default";
+	self.clock.fontscale = 2;
+	self.clock.horzAlign = "center_safearea";
+	self.clock.vertAlign = "top";
+	self.clock.color = (1, 1, 1);
+	self.clock.x = -25;
+	self.clock.y = 445;
+	self.clock setTimer(0.001);
 
 	self thread Show_HUD_Player();
 
@@ -1583,17 +1618,6 @@ playRecords()
 	self iprintlnbold(" ");
 	self iprintlnbold(" ");
 
-	if (isDefined(self.clock))
-		self.clock destroy2();
-
-	self.clock = newClientHudElem2(self);
-	self.clock.font = "default";
-	self.clock.fontscale = 2;
-	self.clock.horzAlign = "center_safearea";
-	self.clock.vertAlign = "top";
-	self.clock.color = (1, 1, 1);
-	self.clock.x = -25;
-	self.clock.y = 445;
 	self.clock setTimer(2 * 60);
 
 
@@ -1613,7 +1637,7 @@ playRecords()
 	while (self.replayedRecords != records)
 		wait .1;
 
-	self.clock destroy2();
+	self.clock setTimer(0.001);
 
 	self iprintln("Playing finished");
 }
