@@ -4,7 +4,7 @@
 |---|---|---|
 | One real match on the Plus server | 2026-11-06: one Plus client and bots, sd comp at 40 Hz on `mp_toujane_fix`, www download, readyup, rounds and halftime side swap, no script error | a match with several Plus clients |
 | Admin can fake `sv_plus` on a non-Plus build | accepted in [ADR 0001](../architecture/adr/0001-plus-server-only.md) | none |
-| Automatic ladder | not started | define what results leave the server and how |
+| Automatic ladder | designed, not built: [ADR 0003](../architecture/adr/0003-ladder-server-side.md) (proposed) | the maintainer accepts or changes ADR 0003, then phase A |
 | Help text points to the zPAM Discord channel | `ingame_aboutpam.menu` | replace when the family has its own channel |
 | No automated GSC test | `tools/test_server.py` checks a server run, and `--duel` checks damage, kills and the stats hooks with two bots; rounds with more players, the MG, neck hits, menus and HUD are still checked by hand | duels for the MG (needs a turret) and neck hits (needs an aim at the neck tag) |
 | Player identity is IP plus name | restored stats match the IP and the name, not an account; players behind one IP (and all bots, 0.0.0.0) are told apart only by name | the ladder needs real accounts |
