@@ -3,6 +3,11 @@
 Append-only. Newest first. Template in
 [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
 
+## 2026-11-07 — strat waits were a non-Plus build
+
+- The "strat waits last half" entry was wrong: both failing runs used a 1.0 build without `COD2_PLUS` (the server was being rebuilt), where `wait` counts 20 frames a second; the mod refused it with the Plus error just before the assert. On the Plus build strat waits measure 1000 ms each (six in a row).
+- When a self-test fails on the test server, check the console for the zPAM installation error and the build line first.
+
 ## 2026-11-07 — Plus 123 required, fixed shotgun spread
 
 - The mod requires `sv_plus` 123 (ADR 0001 update): the fast reload, prone peek and MG clip scripts and their cvars are removed, as the engine applies those rules on both sides. `scr_score_change_mode` lets `_lan` change the score at any time.
