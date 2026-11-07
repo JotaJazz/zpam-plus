@@ -1311,7 +1311,7 @@ HUD_Clock(countDownTime)
 	timeForRed = 15;
 
 
-	waitTime = countDownTime - timeForOrange - 0.3;
+	waitTime = countDownTime - timeForOrange;
 	if (waitTime <= 0)
 		return;
 
@@ -1844,7 +1844,7 @@ bombzones()
 	level.barsize = 192;
 
 
-	wait .2;
+	wait level.frame;
 
 	// Find bombzones (may be 1 bombzone or 2 bomzones A and B)
 	bombzones = getentarray("bombzone", "targetname");
