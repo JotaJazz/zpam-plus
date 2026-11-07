@@ -138,5 +138,9 @@ onRoundEnd()
         }
 
     	logPrint("Score;allies;" + getTeamScore("allies") + ";axis;" + getTeamScore("axis") + "\n");
+
+        // Match totals per player (_player_stat.gsc), for a ladder to read
+        if (level.gametype == "sd" || level.gametype == "re")
+            maps\mp\gametypes\_player_stat::logStats();
     }
 }

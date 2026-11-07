@@ -87,3 +87,8 @@ Changes since zPAM 3.38. Earlier history:
   (`g_shotgun_spread_fix 1`, OpenCoD2-Plus Server `ae124d3` or later). With it
   the consistent shotgun kills up to 280 units and does 75 to 400 and 35 to 500;
   without it (an older build, or the dvar at 0) the ranges stay as before.
+- sd and re keep extended player stats: real damage dealt, headshots, entry
+  kills and deaths, aces, 1vX clutches won and played, multi-kills, trades and
+  kills by weapon class. After each round, `games_mp.log` gets one
+  `Stats;<name>;<team>;key=value;...` line per player with the match totals so
+  far.
