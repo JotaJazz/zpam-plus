@@ -38,3 +38,6 @@ Changes since zPAM 3.38. Earlier history:
   spawns first ("kar bug").
 - Hit stats count the scoped Kar98k like the other scoped rifles, and count the
   buffed BAR and the FG42; the round report names them.
+- Comp, strat and dm warmup rules set `sv_kickBanTime 0`: a player kicked by the
+  mod (or by an admin) can reconnect at once instead of being banned by IP for
+  5 minutes.

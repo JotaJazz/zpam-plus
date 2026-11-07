@@ -115,6 +115,7 @@ GetCvars(arr)
 	arr = ruleCvarDefault(arr, "g_forceRate", 40000);			// what a client needs at 40 Hz; sv_maxRate 0 so it is not capped at 25000
 	arr = ruleCvarDefault(arr, "sv_maxRate", 0);
 	arr = ruleCvarDefault(arr, "sv_timeout", 60);					// Time after 999 player is kicked
+	arr = ruleCvarDefault(arr, "sv_kickBanTime", 0);				// a kick (bad name, reconnect) must not ban the player's IP
 	arr = ruleCvarDefault(arr, "g_antilag", 0);					// Antilag 1 means that players ping is considered when calculating hit location - what you see on your monitor is also what the server will see
 	arr = ruleCvarDefault(arr, "g_knockback", 0);					// Speed energy if player is hitted by grenade, other player, etc; turned off to avoid "sliding" effect
 
