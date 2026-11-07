@@ -289,6 +289,15 @@ onMenuResponse(menu, response)
 
 	else if(menu == game["menu_team"] && game["state"] != "intermission")
 	{
+		// Ladder roster (_ladder.gsc): a roster player joins only his team, anyone else only watches
+		rosterTeam = self maps\mp\gametypes\_ladder::rosterTeam();
+		if (isDefined(rosterTeam) && (response == "allies" || response == "axis" || response == "autoassign"))
+		{
+			if (rosterTeam == "spectator")
+				self iprintln("^3This ladder match is for its roster only: you can watch.");
+			response = rosterTeam;
+		}
+
 		teamBefore = self.pers["team"];
 		switch(response)
 		{

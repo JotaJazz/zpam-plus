@@ -100,3 +100,6 @@ Changes since zPAM 3.38. Earlier history:
 - With `scr_ladder_match` set by rcon, `games_mp.log` gets `LadderStart;` when
   the first ready-up ends and `LadderEnd;` with each team's score and the winner
   at the end of the map, for an automatic ladder to read.
+- In a ladder match, `scr_ladder_team1` and `scr_ladder_team2` list who plays:
+  a listed player can join only his team, anyone else only watch; and
+  `scr_ladder_team1_name` / `_team2_name` give the team names.

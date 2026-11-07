@@ -146,7 +146,9 @@ def main():
         sys.exit(f"port {a.port} is in use: stop the other server or pass --port")
 
     env = dict(os.environ, COD2_PORT=str(a.port))
-    cmd = [os.path.join(ROOT, "tools", "run-server.sh"), a.gametype, a.map, "+set", "pam_mode", a.pam_mode] + a.extra
+    # g_logSync 1: games_mp.log is written at once, not buffered, so --log sees new lines
+    cmd = [os.path.join(ROOT, "tools", "run-server.sh"), a.gametype, a.map, "+set", "pam_mode", a.pam_mode,
+           "+set", "g_logSync", "1"] + a.extra
     os.makedirs(os.path.dirname(LOG), exist_ok=True)
     games_log = os.path.join(ROOT, ".server", "main", "games_mp.log")
     games_start = os.path.getsize(games_log) if os.path.exists(games_log) else 0

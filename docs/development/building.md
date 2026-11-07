@@ -67,7 +67,8 @@ The `Stats;` lines in `.server/main/games_mp.log` then hold the kills, headshots
 and damage of those shots.
 
 `--rcon "<command>"` runs commands once the map loads, and `--log <regex>`
-waits up to 30 s for a matching line in this run's `games_mp.log`.
+waits up to 30 s for a matching line in this run's `games_mp.log` (the run sets
+`g_logSync 1`, so lines are not held in a buffer).
 `dev_bots_autoready 1` makes bots ready up, so a whole ladder match plays with
 two bots, a halftime after round one and two rounds:
 

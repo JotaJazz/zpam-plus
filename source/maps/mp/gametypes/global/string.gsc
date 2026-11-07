@@ -274,6 +274,8 @@ selfTest()
 		assertMsg("string selfTest: bind reversed");
 	if (hasBindPattern("[x]{y}"))
 		assertMsg("string selfTest: bind plain brackets");
+	if (trim("  a b ") != "a b" || trim("") != "" || trim("   ") != "" || trim("x") != "x")
+		assertMsg("string selfTest: trim");
 }
 
 // True if string has "[{" followed later by "}]" with at least one character between them,
@@ -289,4 +291,16 @@ hasBindPattern(string)
 				return true;
 	}
 	return false;
+}
+
+// Without the spaces at both ends
+trim(string)
+{
+	start = 0;
+	while (start < string.size && string[start] == " ")
+		start++;
+	end = string.size;
+	while (end > start && string[end - 1] == " ")
+		end--;
+	return getsubstr(string, start, end);
 }

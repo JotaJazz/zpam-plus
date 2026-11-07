@@ -36,6 +36,11 @@ refreshTeamName(team)
 
 getTeamName(team)
 {
+	// A ladder match brings its own team names
+	ladderName = maps\mp\gametypes\_ladder::teamName(team);
+	if (ladderName != "")
+		return ladderName;
+
 	names = [];
 
 	players = getentarray("player", "classname");
