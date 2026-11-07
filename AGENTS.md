@@ -17,8 +17,9 @@ OpenCoD2-Plus Server, which serves only the OpenCoD2-Plus client
 
 - GSC lives in `source/`; the `.iwd` name must equal `level.pam_folder` in
   `source/maps/mp/gametypes/global/pam.gsc` (the mod refuses any other name).
-- Build with `tools/build-iwd.sh`; test with `tools/run-server.sh` against a CoD2
-  folder with only stock iwds, never a player install.
+- Build with `tools/build-iwd.sh`; test with `tools/test_server.py` (or
+  `tools/run-server.sh`) against a CoD2 folder with only stock iwds, never a
+  player install.
 - Plus-only behaviour needs a signal from the server; never trust a value a
   client can set.
 - Keep each file's line endings.

@@ -33,6 +33,7 @@ images/                     pictures used by the upstream manual
 |---|---|
 | Build | `tools/build-iwd.sh` |
 | Test server | `tools/run-server.sh [gametype] [map] [+set ...]`; `python3 tools/rcon.py <command>` |
+| Server check | `python3 tools/test_server.py [--gametype] [--pam-mode] [--expect cvar=value]` |
 | Docs | `python3 scripts/check_docs.py` |
 | Checker tests | `python3 -m unittest discover -s scripts` |
 

@@ -33,8 +33,17 @@ A healthy start has no `zPAM Errors` in the console log. In another shell,
 (password from `.server/rcon_password.txt`) and prints the reply; it collects extra
 reply packets for 0.3 s, exits 1 without reply after 2 s, and prints "start
 tools/run-server.sh first" if the password file is missing. Stop the server by its PID. The mod's rules reset some
-cvars at map load (`sv_fps` reads back 30, not 40), so read a cvar back before
-trusting a `+set`.
+cvars at map load (comp sets `sv_fps` 40 whatever `+set` said), so read a cvar
+back before trusting a `+set`.
+
+`python3 tools/test_server.py` does a whole check in one run: it starts the
+server on a free port (28990 by default), waits for the map, checks that the
+build is 1.3 Plus with `sv_plus` 123 or later, adds bots, waits, reads back each
+`--expect cvar=value`, stops the server and fails on any zPAM installation
+error, script error, failed self-test or busy port in the console (kept in
+`.server/test_server.log`). `--gametype`, `--map`, `--pam-mode`, `--bots`,
+`--seconds` and `-- +set ...` choose the run; `python3 tools/test_server.py --help`
+lists them.
 
 ## Checks
 
@@ -42,9 +51,11 @@ trusting a `+set`.
 |---|---|
 | Docs | `python3 scripts/check_docs.py` |
 | Docs checker tests | `python3 -m unittest discover -s scripts` |
+| Server run | `python3 tools/test_server.py [--expect cvar=value ...]` |
+| Its parser tests | `python3 -m unittest discover -s tools` |
 
-GSC has no unit tests; a change is checked on a test server, reading the
-console in `.server/main/console_mp_server.log`.
+GSC has no unit tests; a change is checked on a test server with
+`tools/test_server.py`, and by reading the console when it needs more than that.
 
 ## Release a version
 

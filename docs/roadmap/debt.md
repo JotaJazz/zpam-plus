@@ -8,7 +8,7 @@
 | Automatic ladder | not started | define what results leave the server and how |
 | Help text points to the zPAM Discord channel | `ingame_aboutpam.menu` | replace when the family has its own channel |
 | Machine paths in `tools/run-server.sh` defaults | personal defaults, overridable by variables | move them to a local, uncommitted file |
-| No automated GSC test | manual, with `tools/rcon.py` on a `tools/run-server.sh` server | a scripted run that reads the console log |
+| No automated GSC test | `tools/test_server.py` checks a server run (Plus build, no script errors, cvars); behaviour in a match (damage, rounds, menus) is still checked by hand | scripted scenarios with bots for rounds and kills |
 | Player identity is IP plus name | restored stats match the IP and the name, not an account; players behind one IP (and all bots, 0.0.0.0) are told apart only by name | the ladder needs real accounts |
 | Plus server segfaults loading `re` on `mp_toujane_fix` and `mp_burgundy` | found on the test server, present before `fix/plus-audit`; server side | a fix in OpenCoD2-Plus Server |
 | Not tested in game (no real client) | killcam refusal, time-out and rate limits, different-IP refusal, `a;b` and `[{x}]` names, a weapon change in a time-out, a reconnect over a 999 slot, prone eye height, MG damage, neck hits, the fixed-pattern shotgun, hit indicators, Plus 123 rules with the mod, silent climbing with the weapon down, recording, plant and defuse, match limits | a session with real clients |
