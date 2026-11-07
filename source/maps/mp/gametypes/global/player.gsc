@@ -180,7 +180,7 @@ getEyeOrigin()
 	//iprintln(x + ", " + y);
 
 	lean = 0;
-	stance = self getStance();
+	stance = self maps\mp\gametypes\global\player::getStance(); // with path: the bare name calls libcod's getstance, which returns duck/lie/stand
 
 	// Prone
 	if (stance == "prone")

@@ -10,6 +10,8 @@ Normative summary; detail in [boundaries.md](../architecture/boundaries.md) and
 - Precache before the first `wait`; new `SetText` strings through `precacheString2` in `game["firstInit"]`.
 - Add features as `_<name>.gsc` modules in `InitModules`, in dependency order.
 - Mark every name or version line `// ZPAM_RENAME`.
+- Call a mod method that shares its name with a libcod builtin (such as
+  `getStance`) with its path: the server looks up builtins first.
 
 ## Must not
 
