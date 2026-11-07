@@ -166,52 +166,58 @@ onConnected()
 		else
 		{
 			// Create new entry
-			newIndex = game["playerstats"].size;
-			game["playerstats"][newIndex]["id"] = newIndex;
-			game["playerstats"][newIndex]["player"] = self;
-			game["playerstats"][newIndex]["deleted"] = false;
-			game["playerstats"][newIndex]["entityId"] = id;
-			game["playerstats"][newIndex]["ip"] = self getip();
-			game["playerstats"][newIndex]["name"] = self.pers["lastName"];
-			game["playerstats"][newIndex]["team"] = self.sessionteam;
-			game["playerstats"][newIndex]["isConnected"] = true;
-			game["playerstats"][newIndex]["lastTime"] = getTime();
-			game["playerstats"][newIndex]["kills"] = 0;
-			game["playerstats"][newIndex]["assists"] = 0;
-			game["playerstats"][newIndex]["damage"] = 0;
-			game["playerstats"][newIndex]["deaths"] = 0;
-			game["playerstats"][newIndex]["score"] = 0.0;
-			game["playerstats"][newIndex]["grenades"] = 0;
-			game["playerstats"][newIndex]["plants"] = 0;
-			game["playerstats"][newIndex]["defuses"] = 0;
-			game["playerstats"][newIndex]["damage_dealt"] = 0;
-			game["playerstats"][newIndex]["headshots"] = 0;
-			game["playerstats"][newIndex]["entry_kills"] = 0;
-			game["playerstats"][newIndex]["entry_deaths"] = 0;
-			game["playerstats"][newIndex]["aces"] = 0;
-			game["playerstats"][newIndex]["round_kills"] = 0;
-			game["playerstats"][newIndex]["round_kills_team"] = "";
-			game["playerstats"][newIndex]["clutches_max"] = 5;
-			for (c = 1; c <= 5; c++)
-			{
-				game["playerstats"][newIndex]["clutches_won_1v" + c] = 0;
-				game["playerstats"][newIndex]["clutches_attempts_1v" + c] = 0;
-			}
-			for (c = 2; c <= 5; c++)
-				game["playerstats"][newIndex]["multi_kills_" + c] = 0;
-			game["playerstats"][newIndex]["trade_kills"] = 0;
-			game["playerstats"][newIndex]["traded_deaths"] = 0;
-			game["playerstats"][newIndex]["round_trade_kills"] = 0;
-			game["playerstats"][newIndex]["round_traded_deaths"] = 0;
-			classes = level.stat_weapon_classes;
-			for (c = 0; c < classes.size; c++)
-			{
-				game["playerstats"][newIndex]["kills_" + classes[c]] = 0;
-				game["playerstats"][newIndex]["round_kills_" + classes[c]] = 0;
-			}
+			createStatRow(game["playerstats"].size, self, id, self getip(), self.pers["lastName"], self.sessionteam);
 		}
 	}
 
+}
+
+
+// New stats row at index i (also used by statsSelfTest with fake rows)
+createStatRow(i, player, entityId, ip, name, team)
+{
+	game["playerstats"][i]["id"] = i;
+	game["playerstats"][i]["player"] = player;
+	game["playerstats"][i]["deleted"] = false;
+	game["playerstats"][i]["entityId"] = entityId;
+	game["playerstats"][i]["ip"] = ip;
+	game["playerstats"][i]["name"] = name;
+	game["playerstats"][i]["team"] = team;
+	game["playerstats"][i]["isConnected"] = true;
+	game["playerstats"][i]["lastTime"] = getTime();
+	game["playerstats"][i]["kills"] = 0;
+	game["playerstats"][i]["assists"] = 0;
+	game["playerstats"][i]["damage"] = 0;
+	game["playerstats"][i]["deaths"] = 0;
+	game["playerstats"][i]["score"] = 0.0;
+	game["playerstats"][i]["grenades"] = 0;
+	game["playerstats"][i]["plants"] = 0;
+	game["playerstats"][i]["defuses"] = 0;
+	game["playerstats"][i]["damage_dealt"] = 0;
+	game["playerstats"][i]["headshots"] = 0;
+	game["playerstats"][i]["entry_kills"] = 0;
+	game["playerstats"][i]["entry_deaths"] = 0;
+	game["playerstats"][i]["aces"] = 0;
+	game["playerstats"][i]["round_kills"] = 0;
+	game["playerstats"][i]["round_kills_team"] = "";
+	game["playerstats"][i]["clutches_max"] = 5;
+	for (c = 1; c <= 5; c++)
+	{
+		game["playerstats"][i]["clutches_won_1v" + c] = 0;
+		game["playerstats"][i]["clutches_attempts_1v" + c] = 0;
+	}
+	for (c = 2; c <= 5; c++)
+		game["playerstats"][i]["multi_kills_" + c] = 0;
+	game["playerstats"][i]["trade_kills"] = 0;
+	game["playerstats"][i]["traded_deaths"] = 0;
+	game["playerstats"][i]["round_trade_kills"] = 0;
+	game["playerstats"][i]["round_traded_deaths"] = 0;
+	classes = level.stat_weapon_classes;
+	for (c = 0; c < classes.size; c++)
+	{
+		game["playerstats"][i]["kills_" + classes[c]] = 0;
+		game["playerstats"][i]["round_kills_" + classes[c]] = 0;
+	}
 }
 
 onJoinedTeam(team)
@@ -708,4 +714,46 @@ logStats()
           line += ";clutches_1v" + c + "=" + data["clutches_won_1v" + c] + "/" + data["clutches_attempts_1v" + c];
       logPrint(line + "\n");
     }
+}
+
+// Runs only with developer_script 1: round stats on fake rows, then the real rows come back
+statsSelfTest()
+{
+    waittillframeend; // after init() set level.stat_*
+
+    saved = game["playerstats"];
+    game["playerstats"] = [];
+    createStatRow(0, undefined, 0, "0", "A", "allies");
+    createStatRow(1, undefined, 1, "0", "B", "axis");
+    createStatRow(2, undefined, 2, "0", "C", "axis");
+
+    // Round 1: A kills B, C kills A (trades B's death), C plays a 1v1 and axis wins; A killed both axis players
+    RoundStarted();
+    level.stat_round_team_size["allies"] = 2;
+    level.stat_round_team_size["axis"] = 2;
+    addTrade(0, 1);
+    addTrade(2, 0);
+    game["playerstats"][0]["round_kills"] = 2;
+    game["playerstats"][0]["round_kills_team"] = "axis";
+    level.stat_round_clutch["axis"] = 2;
+    level.stat_round_clutch_enemies["axis"] = 1;
+    RoundEnded("axis");
+
+    // Round 2: A kills B, then B's grenade kills A: avenging your own death is not a trade
+    RoundStarted();
+    addTrade(0, 1);
+    addTrade(1, 0);
+    RoundEnded("allies");
+
+    a = game["playerstats"][0]; b = game["playerstats"][1]; c = game["playerstats"][2];
+    game["playerstats"] = saved;
+    level.stat_round_active = false;
+
+    if (c["trade_kills"] != 1)		assertMsg("stats selfTest: C trade_kills " + c["trade_kills"]);
+    if (b["traded_deaths"] != 1)		assertMsg("stats selfTest: B traded_deaths " + b["traded_deaths"]);
+    if (a["trade_kills"] != 0 || b["trade_kills"] != 0)	assertMsg("stats selfTest: own death counted as trade");
+    if (a["traded_deaths"] != 0)		assertMsg("stats selfTest: A traded_deaths " + a["traded_deaths"]);
+    if (c["clutches_won_1v1"] != 1 || c["clutches_attempts_1v1"] != 1)	assertMsg("stats selfTest: C clutch 1v1");
+    if (a["aces"] != 1)			assertMsg("stats selfTest: A aces " + a["aces"]);
+    if (a["multi_kills_2"] != 1)		assertMsg("stats selfTest: A multi_kills_2 " + a["multi_kills_2"]);
 }

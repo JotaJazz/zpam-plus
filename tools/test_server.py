@@ -125,11 +125,15 @@ def main():
             if rcon.send("status", a.port) is None:
                 errors.append("the server stopped answering")
     finally:
-        os.killpg(proc.pid, signal.SIGTERM)
-        try:
-            proc.wait(10)
-        except subprocess.TimeoutExpired:
-            os.killpg(proc.pid, signal.SIGKILL)
+        if proc.poll() is None:
+            os.killpg(proc.pid, signal.SIGTERM)
+            try:
+                proc.wait(10)
+            except subprocess.TimeoutExpired:
+                os.killpg(proc.pid, signal.SIGKILL)
+        else:
+            # A script error with developer 1 shuts the server down
+            errors.append("the server exited before the check ended")
 
     for what, line in scan(read_log()):
         errors.append(f"{what}: {line}")
