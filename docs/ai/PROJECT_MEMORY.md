@@ -3,6 +3,12 @@
 Append-only. Newest first. Template in
 [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
 
+## 2026-11-07 — bots that shoot, play test guide
+
+- `dev_duel` and `tools/test_server.py --duel` make one bot shoot another: kar98k head and torso kill, thompson torso does 35, the fixed-pattern shotgun kills at 200 and does 16 at 650, and `Stats;` then shows the kills, the headshot and the damage dealt; `docs/development/playtest.md` lists 22 checks for a session with real players.
+- Bots fire their `ps->weapon`, so a duel switches with `setSpawnWeapon` (not `switchToWeapon`) and fills the clip; sd restarts the map when both teams first have players, so a duel waits for a live round.
+- Open: duels for the MG and neck hits, and the play test itself.
+
 ## 2026-11-07 — server check, CPU, shared intermission, round stats
 
 - `tools/test_server.py` checks a server run in one command (Plus build, `sv_plus`, cvars, no zPAM or script errors); `spawnIntermission` is shared by ctf, dm, htf and tdm; sd and re keep upstream's extended round stats and log a `Stats;` line per player after each round.
