@@ -47,6 +47,10 @@ removeOld()
 
     if (data["deleted"] || data["isConnected"]) continue;
 
+    // Once the match started, keep them until the map ends: a player restarting his router or PC
+    // needs more than 2 minutes to come back (upstream 71c7c8d)
+    if (!game["is_public_mode"] && isDefined(game["readyup_first_run"]) && !game["readyup_first_run"]) continue;
+
     timeout = 2; // wait 5min by default
     if (game["is_public_mode"])
     	timeout = 0.1; // 6sec in public mode
@@ -139,8 +143,9 @@ onConnected()
 		waittillframeend;
 
 		dataId = findData(self.pers["lastName"], undefined, self getip());
-		// same name from another IP is another player
-		if (dataId >= 0 && game["playerstats"][dataId]["isConnected"] == false)
+		// same name from another IP is another player; in the middle of a map, a row still connected
+		// with the same name and IP is this player's old connection waiting for sv_timeout (999 ping)
+		if (dataId >= 0 && (game["playerstats"][dataId]["isConnected"] == false || isDefined(level.allPlayersConnected)))
 		{
 			game["playerstats"][dataId]["player"] = self;
 			game["playerstats"][dataId]["entityId"] = id;

@@ -41,3 +41,7 @@ Changes since zPAM 3.38. Earlier history:
 - Comp, strat and dm warmup rules set `sv_kickBanTime 0`: a player kicked by the
   mod (or by an admin) can reconnect at once instead of being banned by IP for
   5 minutes.
+- Once a non-pub match has started, a disconnected player's stats are kept
+  until the map ends (before, 2 minutes). A player who reconnects in the middle
+  of a map while his old connection still waits for `sv_timeout` gets his stats
+  back instead of a new row.
