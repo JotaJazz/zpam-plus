@@ -82,3 +82,6 @@ Changes since zPAM 3.38. Earlier history:
   a kill shows a bigger white cross that shrinks back; one shot or grenade that
   hits two or more players adds a second cross and plays one sound per player;
   team hits are red in every team gametype (before, only in sd).
+- New `scr_score_change_mode` (0 off, 1 only in the first ready-up, 2 always);
+  `_lan` sets 2, so an admin at an event can fix the score after a crash at any
+  time.
