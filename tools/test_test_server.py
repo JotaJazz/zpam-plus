@@ -24,6 +24,18 @@ class ParseTest(unittest.TestCase):
                          ["zPAM installation error", "script runtime error", "failed self-test", "port in use"])
         self.assertEqual(test_server.scan("InitGame\nHitch warning: 2596 msec frame time"), [])
 
+    def test_duel(self):
+        r = test_server.duel_result("DUEL done weapon=kar98k_mp dist=598 aim=head health=0 alive=0")
+        self.assertEqual(r["weapon"], "kar98k_mp")
+        self.assertTrue(test_server.duel_ok(r, "kill"))
+        self.assertFalse(test_server.duel_ok(r, "40"))
+        hit = test_server.duel_result("DUEL done weapon=thompson_mp dist=500 aim=torso health=60 alive=1")
+        self.assertTrue(test_server.duel_ok(hit, "40"))
+        self.assertFalse(test_server.duel_ok(hit, "kill"))
+        self.assertTrue(test_server.duel_ok(hit, "35-45"))
+        self.assertFalse(test_server.duel_ok(hit, "41-45"))
+        self.assertIsNone(test_server.duel_result("DUEL error: needs two live bots"))
+
     def test_build_line(self):
         self.assertEqual(test_server.build_line("CoD2 MP 1.3 build linux-x64 Nov  7 2026"), "1.3")
         self.assertEqual(test_server.build_line("CoD2 MP 1.0 build linux-x64"), "1.0")

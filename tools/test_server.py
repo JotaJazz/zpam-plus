@@ -4,12 +4,16 @@
 Usage:
   python3 tools/test_server.py [--gametype sd] [--map mp_toujane_fix]
       [--pam-mode comp] [--bots 4] [--seconds 20] [--port 28990]
-      [--expect cvar=value ...] [-- +set name value ...]
+      [--expect cvar=value ...] [--duel weapon,distance,head|torso[,kill|damage|lo-hi] ...]
+      [-- +set name value ...]
 
 It runs tools/run-server.sh on a free port, waits for the map, checks that the
 binary is a Plus build with sv_plus 123 or later, adds bots, waits, reads back
-every --expect cvar, stops the server and scans its console for zPAM errors,
+every --expect cvar, runs every --duel (one bot shoots another once; expect
+"kill" or the damage), stops the server and scans its console for zPAM errors,
 script errors, failed self-tests and a busy port. Exit 0 when all pass.
+Duels need a live round: --pam-mode pub -- +set scr_sd_strat_time 0
++set scr_bots_freeze 0.
 The console is kept in .server/test_server.log.
 """
 import argparse
@@ -54,6 +58,45 @@ def scan(log_text):
     return found
 
 
+def duel_result(line):
+    """Fields of a 'DUEL done k=v ...' console line, or None."""
+    if "DUEL done" not in line:
+        return None
+    return dict(kv.split("=", 1) for kv in line.split("DUEL done", 1)[1].split() if "=" in kv)
+
+
+def duel_ok(result, expect):
+    """expect is "kill", the damage the target took, or a damage range "lo-hi"."""
+    if expect == "kill":
+        return result.get("alive") == "0"
+    lo, _, hi = expect.partition("-")
+    damage = 100 - int(result.get("health", -1))
+    return result.get("alive") == "1" and int(lo) <= damage <= int(hi or lo)
+
+
+def run_duel(spec, port):
+    """Run one duel, retrying while no two live bots exist. Returns (result dict or None, message)."""
+    weapon, dist, aim = spec.split(",")[:3]
+    for _ in range(20):
+        before = read_log().count("DUEL ")
+        rcon.send(f'set dev_duel "{weapon} {dist} {aim}"', port)
+        deadline = time.time() + 10
+        while time.time() < deadline:
+            new = [l for l in read_log().splitlines() if "DUEL " in l][before:]
+            if new:
+                break
+            time.sleep(0.3)
+        else:
+            return None, "no DUEL reply"
+        result = duel_result(new[0])
+        if result is not None:
+            return result, new[0].strip()
+        if "two live bots" not in new[0] and "round not live" not in new[0]:
+            return None, new[0].strip()
+        time.sleep(2)  # between rounds: wait for the round and the bots
+    return None, "no two live bots"
+
+
 def build_line(log_text):
     m = re.search(r"CoD2 MP (\S+) build", log_text)
     return m.group(1) if m else None
@@ -84,6 +127,7 @@ def main():
     ap.add_argument("--seconds", type=float, default=20)
     ap.add_argument("--port", type=int, default=28990)
     ap.add_argument("--expect", action="append", default=[], metavar="CVAR=VALUE")
+    ap.add_argument("--duel", action="append", default=[], metavar="WEAPON,DIST,head|torso[,EXPECT]")
     ap.add_argument("extra", nargs="*", help="more +set arguments, after --")
     a = ap.parse_args()
 
@@ -122,6 +166,15 @@ def main():
                     print(f"ok    {name} = {got!r}")
                 else:
                     errors.append(f"{name} is {got!r}, want {want!r}")
+            for spec in a.duel:
+                result, msg = run_duel(spec, a.port)
+                parts = spec.split(",")
+                if result is None:
+                    errors.append(f"duel {spec}: {msg}")
+                elif len(parts) > 3 and not duel_ok(result, parts[3]):
+                    errors.append(f"duel {spec}: {msg}")
+                else:
+                    print(f"ok    duel {spec}: {msg.split('DUEL done', 1)[-1].strip()}")
             if rcon.send("status", a.port) is None:
                 errors.append("the server stopped answering")
     finally:

@@ -45,6 +45,20 @@ error, script error, failed self-test or busy port in the console (kept in
 `--seconds` and `-- +set ...` choose the run; `python3 tools/test_server.py --help`
 lists them.
 
+`--duel weapon,distance,head|torso[,expect]` makes one bot shoot another once
+(`dev_duel` in `global/developer.gsc`, `developer_script 1` only): it finds a
+clear line, places the target, aims, fires, and checks `kill`, a damage or a
+range `lo-hi`. Duels need a live round, and the damage fixes need their cvars:
+
+    python3 tools/test_server.py --pam-mode pub --bots 2 --seconds 5 \
+        --duel kar98k_mp,600,head,kill --duel kar98k_mp,600,torso,kill \
+        --duel thompson_mp,500,torso,35 --duel shotgun_mp,200,torso,kill \
+        --duel shotgun_mp,650,torso,15-17 -- +set scr_sd_strat_time 0 \
+        +set scr_bots_freeze 0 +set scr_shotgun_consistent 1 +set g_shotgun_spread_fix 1
+
+The `Stats;` lines in `.server/main/games_mp.log` then hold the kills, headshots
+and damage of those shots.
+
 ## Checks
 
 | What | Command |
