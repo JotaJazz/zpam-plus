@@ -3,6 +3,12 @@
 Append-only. Newest first. Template in
 [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
 
+## 2026-11-07 — upstream 4.x review, block 3, and Plus 123
+
+- In: hit feedback merged per frame (kill and hit crosses, a second cross for multi-hits), dm player stats, faster ready-up respawn, sd compass and clock timing, strat bombsite icons, steady clock and hit details, map vote names from match info, debug damage printed after the fixes. The server already had Plus 123 (fast reload, prone peek, MG clip in the engine), so `engineHasPlusRules()` skips those script fixes; the climbing sound fix stays, as zPAM silences `weap_raise`.
+- Not taken: the per-player bomb timer, the bash text, `sv_cracked`/`scr_posters` (upstream undid them), the streamer ready-up check (undone upstream), the hit-indicator toggle.
+- Open: the LAN options, the shotgun spread (engine handoff), and strat waits lasting half (debt).
+
 ## 2026-11-07 — upstream 4.x review, block 2
 
 - Rule changes from upstream: MG use from `isUsingTurret` (player moved once when he leaves), fixed MG damage (100/75/35; the server took the multipliers of the weapon held before mounting), `scr_hitbox_neck_kill` on in comp, a bigger hand-fix head box, the `draw` sub-mode and the engine's `getViewOrigin` for the eye (60 standing, 40 crouched on a bot).
