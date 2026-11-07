@@ -3,6 +3,12 @@
 Append-only. Newest first. Template in
 [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
 
+## 2026-11-07 — server check, CPU, shared intermission, round stats
+
+- `tools/test_server.py` checks a server run in one command (Plus build, `sv_plus`, cvars, no zPAM or script errors); `spawnIntermission` is shared by ctf, dm, htf and tdm; sd and re keep upstream's extended round stats and log a `Stats;` line per player after each round.
+- Measured instead of optimizing: with 12 moving bots the whole server uses 4.0% of a core in comp at 40 Hz and 1.9% in pub at 20 Hz (0.7% empty), so the per-frame script loops were left as they are.
+- Open: the round stats are checked with bots that do not shoot, so kills, trades, clutches and aces are untested.
+
 ## 2026-11-07 — strat waits were a non-Plus build
 
 - The "strat waits last half" entry was wrong: both failing runs used a 1.0 build without `COD2_PLUS` (the server was being rebuilt), where `wait` counts 20 frames a second; the mod refused it with the Plus error just before the assert. On the Plus build strat waits measure 1000 ms each (six in a row).
