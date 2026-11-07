@@ -68,7 +68,10 @@ and damage of those shots.
 
 `--rcon "<command>"` runs commands once the map loads, and `--log <regex>`
 waits up to 30 s for a matching line in this run's `games_mp.log` (the run sets
-`g_logSync 1`, so lines are not held in a buffer).
+`g_logSync 1`, so lines are not held in a buffer). An `--rcon "sleep N"` is not
+sent: it waits, for example after a `map_restart` and before `scr_bots_add`
+(bots added during a restart lose their team). A `map_restart` applies the
+rules again, so set rule cvars such as `scr_sd_end_round` after it.
 `dev_bots_autoready 1` makes bots ready up, so a whole ladder match plays with
 two bots, a halftime after round one and two rounds:
 

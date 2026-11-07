@@ -103,3 +103,7 @@ Changes since zPAM 3.38. Earlier history:
 - In a ladder match, `scr_ladder_team1` and `scr_ladder_team2` list who plays:
   a listed player can join only his team, anyone else only watch; and
   `scr_ladder_team1_name` / `_team2_name` give the team names.
+- In a ladder match the first ready-up waits for both rosters; if
+  `scr_ladder_ready_timeout` runs out first, `LadderForfeit;` names the team that
+  did not show, and a roster player who leaves for longer than the halftime
+  auto-resume is logged with `LadderLeaver;`.

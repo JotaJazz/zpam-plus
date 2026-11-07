@@ -750,6 +750,10 @@ areAllPlayersReady()
 		}
 	}
 
+	// A ladder match starts only with both rosters in and ready (_ladder.gsc)
+	if (!maps\mp\gametypes\_ladder::rosterReady())
+		return false;
+
 	//iprintln("## areAllPlayersReady() = true");
 
 	return true;

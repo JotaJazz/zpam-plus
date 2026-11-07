@@ -137,7 +137,7 @@ def main():
     ap.add_argument("--port", type=int, default=28990)
     ap.add_argument("--expect", action="append", default=[], metavar="CVAR=VALUE")
     ap.add_argument("--duel", action="append", default=[], metavar="WEAPON,DIST,head|torso[,EXPECT]")
-    ap.add_argument("--rcon", action="append", default=[], metavar="COMMAND", help="sent in order once the map loads")
+    ap.add_argument("--rcon", action="append", default=[], metavar="COMMAND", help="sent in order once the map loads; \"sleep N\" waits N seconds")
     ap.add_argument("--log", action="append", default=[], metavar="REGEX", help="games_mp.log of this run must match, within 30 s")
     ap.add_argument("extra", nargs="*", help="more +set arguments, after --")
     a = ap.parse_args()
@@ -172,7 +172,10 @@ def main():
             if not plus or not plus.isdigit() or int(plus) < MIN_PLUS:
                 errors.append(f"sv_plus is {plus!r}, needs {MIN_PLUS} or later")
             for command in a.rcon:
-                rcon.send(command, a.port)
+                if command.startswith("sleep "):  # not sent: lets a map_restart finish
+                    time.sleep(float(command.split()[1]))
+                else:
+                    rcon.send(command, a.port)
             if a.bots:
                 rcon.send(f"scr_bots_add {a.bots}", a.port)
             time.sleep(a.seconds)

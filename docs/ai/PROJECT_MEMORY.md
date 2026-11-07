@@ -3,6 +3,12 @@
 Append-only. Newest first. Template in
 [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
 
+## 2026-11-07 — ladder phase C
+
+- The first ready-up of a ladder match waits for both rosters (`_ladder::rosterReady` in `areAllPlayersReady`); a missing team after `scr_ladder_ready_timeout` gives `LadderForfeit;`; a roster player away longer than the halftime auto-resume gives `LadderLeaver;` (system time, so map restarts do not reset it). Checked: forfeit, a full roster that starts, and a leaver at map end.
+- A player joining a team from "none" keeps the default ready and triggers no ready-up check, so with a roster the ready-up hung; `_ladder` re-runs `Check_All_Ready` on every team join in the first ready-up. Whether that default ready lets a fresh human skip the ready press in normal matches is not checked.
+- Test runs: `--rcon "sleep N"`; a `map_restart` reapplies the rules, and bots added during it lose their team.
+
 ## 2026-11-07 — ladder phase B
 
 - The roster in `scr_ladder_team1/2` is enforced in `_menus.gsc`'s team menu: a listed player joins his team only, anyone else watches; `scr_ladder_team1_name/_team2_name` (an addition to ADR 0003's point 4) replace the generated names. Checked with three bots and match info.

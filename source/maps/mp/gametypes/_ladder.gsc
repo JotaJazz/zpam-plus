@@ -12,6 +12,12 @@ Roster (phase B): scr_ladder_team1 and scr_ladder_team2 list the players by name
 by ";" (colours, case and spaces at the ends do not count). With a match id and a roster, a
 player in it can only join his team; anyone else can only watch. scr_ladder_team1_name and
 scr_ladder_team2_name, if set, are the team names.
+
+No-shows and leavers (phase C): the first ready-up does not end until both rosters are in
+their teams and ready. If scr_ladder_ready_timeout seconds pass first, the match is not
+played: LadderForfeit;<match id>;<team1|team2|both>. A roster player away from the started
+match longer than the halftime auto-resume (2 minutes without one) is logged when he comes
+back or at the end of the map: LadderLeaver;<match id>;<player>;<seconds away>.
 */
 
 init()
@@ -21,14 +27,23 @@ init()
 	registerCvarEx("I", "scr_ladder_team2", "STRING", "");
 	registerCvarEx("I", "scr_ladder_team1_name", "STRING", "");
 	registerCvarEx("I", "scr_ladder_team2_name", "STRING", "");
-	registerCvarEx("I", "scr_ladder_ready_timeout", "INT", 0, 0, 3600);	// forfeit, phase C
+	registerCvarEx("I", "scr_ladder_ready_timeout", "INT", 0, 0, 3600);
 
 	if (!isDefined(game["ladder_started"]))
 		game["ladder_started"] = false;
 	if (!isDefined(game["ladder_team1_side"]))
 		game["ladder_team1_side"] = "allies"; // flips at every halftime
+	if (!isDefined(game["ladder_forfeit"]))
+		game["ladder_forfeit"] = false;
+	if (!isDefined(game["ladder_away"]))
+		game["ladder_away"] = []; // name key -> system time of the disconnect
+
+	addEventListener("onConnected", ::onConnected);
+	addEventListener("onDisconnect", ::onDisconnect);
+	addEventListener("onJoinedTeam", ::onJoinedTeam);
 
 	level thread onReadyUpOver();
+	level thread forfeitWatch();
 }
 
 onReadyUpOver()
@@ -36,7 +51,7 @@ onReadyUpOver()
 	level waittill("rupover");
 
 	// Only the first ready-up of the map starts the match; halftime and time-out ready-ups do not
-	if (!game["readyup_first_run"] || game["ladder_started"] || getCvar("scr_ladder_match") == "")
+	if (!game["readyup_first_run"] || game["ladder_started"] || game["ladder_forfeit"] || getCvar("scr_ladder_match") == "")
 		return;
 
 	game["ladder_started"] = true;
@@ -72,14 +87,108 @@ onMapEnd()
 		winner = "team2";
 
 	logPrint("LadderEnd;" + logSafe(game["ladder_match"]) + ";" + score1 + ";" + score2 + ";" + winner + "\n");
+
+	// Roster players still away at the end
+	keys = getArrayKeys(game["ladder_away"]);
+	for (i = 0; i < keys.size; i++)
+		logLeaver(keys[i]);
+
 	game["ladder_started"] = false;
+}
+
+// The first ready-up waits for both rosters; true when there is no roster or when both are in and ready
+rosterReady()
+{
+	if (!isDefined(game["readyup_first_run"]) || !game["readyup_first_run"] || !hasRoster())
+		return true;
+	return teamReady(getCvar("scr_ladder_team1"), game["ladder_team1_side"]) &&
+	       teamReady(getCvar("scr_ladder_team2"), otherSide(game["ladder_team1_side"]));
+}
+
+// Every listed name has a player in that team who is ready
+teamReady(list, side)
+{
+	names = maps\mp\gametypes\global\string::splitString(list, ";");
+	players = getentarray("player", "classname");
+	for (n = 0; n < names.size; n++)
+	{
+		key = nameKey(names[n]);
+		if (key == "")
+			continue;
+		found = false;
+		for (i = 0; i < players.size; i++)
+			if (nameKey(players[i].name) == key && players[i].pers["team"] == side && isDefined(players[i].isReady) && players[i].isReady)
+				found = true;
+		if (!found)
+			return false;
+	}
+	return true;
+}
+
+forfeitWatch()
+{
+	level endon("rupover");
+
+	timeout = getCvarInt("scr_ladder_ready_timeout");
+	if (timeout <= 0 || !hasRoster() || !game["readyup_first_run"] || game["ladder_forfeit"])
+		return;
+
+	wait timeout;
+
+	ready1 = teamReady(getCvar("scr_ladder_team1"), game["ladder_team1_side"]);
+	ready2 = teamReady(getCvar("scr_ladder_team2"), otherSide(game["ladder_team1_side"]));
+	if (ready1 && ready2)
+		return;
+
+	team = "both";
+	if (ready1)
+		team = "team2";
+	else if (ready2)
+		team = "team1";
+	game["ladder_forfeit"] = true;
+	logPrint("LadderForfeit;" + logSafe(getCvar("scr_ladder_match")) + ";" + team + "\n");
+	iprintlnbold("^3Ladder match not played: " + team + " did not join and ready up in time.");
+}
+
+// With a roster, who is in which team decides the first ready-up, and a team change from
+// "none" (a fresh connect) keeps the ready of the watchers and triggers no ready-up check
+onJoinedTeam(team)
+{
+	if (hasRoster() && game["readyup_first_run"] && isDefined(level.in_readyup) && level.in_readyup)
+		level thread maps\mp\gametypes\_readyup::Check_All_Ready();
+}
+
+onDisconnect()
+{
+	if (game["ladder_started"] && hasRoster() && self rosterTeam() != "spectator")
+		game["ladder_away"][nameKey(self.name)] = getSystemTime();
+}
+
+onConnected()
+{
+	key = nameKey(self.name);
+	if (isDefined(game["ladder_away"][key]))
+		logLeaver(key);
+}
+
+// Logs a roster player who was away longer than the halftime auto-resume, and forgets him
+logLeaver(key)
+{
+	away = getSystemTime() - game["ladder_away"][key];
+	game["ladder_away"][key] = undefined;
+
+	limit = 120;
+	if (level.scr_readyup_autoresume_half > 0)
+		limit = int(level.scr_readyup_autoresume_half * 60);
+	if (away > limit)
+		logPrint("LadderLeaver;" + logSafe(game["ladder_match"]) + ";" + logSafe(key) + ";" + away + "\n");
 }
 
 // The team self must be in: his roster team, or "spectator" if he is not in the roster;
 // undefined when there is no ladder match or no roster
 rosterTeam()
 {
-	if (getCvar("scr_ladder_match") == "" || (getCvar("scr_ladder_team1") == "" && getCvar("scr_ladder_team2") == ""))
+	if (!hasRoster())
 		return undefined;
 
 	if (inRoster(getCvar("scr_ladder_team1"), self.name))
@@ -87,6 +196,12 @@ rosterTeam()
 	if (inRoster(getCvar("scr_ladder_team2"), self.name))
 		return otherSide(game["ladder_team1_side"]);
 	return "spectator";
+}
+
+// A ladder match with a roster is set
+hasRoster()
+{
+	return getCvar("scr_ladder_match") != "" && (getCvar("scr_ladder_team1") != "" || getCvar("scr_ladder_team2") != "");
 }
 
 inRoster(list, name)
