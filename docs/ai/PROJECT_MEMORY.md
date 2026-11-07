@@ -3,6 +3,12 @@
 Append-only. Newest first. Template in
 [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
 
+## 2026-11-07 — upstream 4.x review, block 1
+
+- The 105 upstream commits after our 3.36 base (zPAM 4.00 to 4.11, mostly for CoD2x) were triaged; six fixes went in: `getStance` called by path (the bare call reached libcod's and every eye was at standing height), `[{x}]` names renamed, saved weapons checked against the selection at spawn, `sv_kickBanTime 0` in comp, scoped Kar98k/buffed BAR/FG42 in hit stats, stats kept through a match and taken over from a stale 999 slot.
+- Rejected: the `va()` length cap in `setClientCvar2` (the Plus server truncates instead of failing), and upstream d6add7f's removal of the weapon-change rule (a weapon chosen mid-round was ignored).
+- Open: rule changes (MG with `isUsingTurret`, MG damage, neck kill, hand box, shotgun ranges, `draw` mode, `getvieworigin`), the quality-of-life set and the ladder stats (#20, #25); see [debt](../roadmap/debt.md).
+
 ## 2026-11-06 — the desync was WSL
 
 - The movement desync of the first Plus match came from WSL2, whose clock ran about 8% faster than Windows; not the mod, the server or the client.
