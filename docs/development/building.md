@@ -66,7 +66,7 @@ and damage of those shots.
 | Docs | `python3 scripts/check_docs.py` |
 | Docs checker tests | `python3 -m unittest discover -s scripts` |
 | Server run | `python3 tools/test_server.py [--expect cvar=value ...]` |
-| Its parser tests | `python3 -m unittest discover -s tools` |
+| Its parser tests and the `.str` check's | `python3 -m unittest discover -s tools` |
 
 GSC has no unit tests; a change is checked on a test server with
 `tools/test_server.py`, and by reading the console when it needs more than that.
@@ -90,7 +90,11 @@ Players see the mod in their game's language (`loc_language`), the stock way:
 translation (`LANG_SPANISH`, `LANG_FRENCH`, `LANG_GERMAN`, `LANG_RUSSIAN`...).
 GSC uses it as `&"ZPAM_<REFERENCE>"` and menus as `"@ZPAM_<REFERENCE>"`; the
 file name gives the `ZPAM_` prefix. Keep the file in Windows-1252 with LF, as
-the stock `.str` files. So far the ready-up and time-out HUD and the quick
+the stock `.str` files, and give each `REFERENCE` its `LANG_ENGLISH` line first:
+an English line after a translation hides it. A malformed `.str` stops the
+client from loading every `.str` after it, the stock ones too, so
+`tools/build-iwd.sh` refuses to build when `tools/check_str.py` finds one
+(encoding, order, `&&N` arguments, sizes, `ENDMARKER`). So far the ready-up and time-out HUD and the quick
 settings menu use it; text the server builds and sends by cvar
 (`cg_objectiveText`, server info, match info) and `iprintln` messages are still
 English.

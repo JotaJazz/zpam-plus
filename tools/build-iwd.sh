@@ -27,6 +27,8 @@ while [ $# -gt 0 ]; do
 done
 
 command -v zip >/dev/null || die "zip is not installed"
+# A malformed .str stops the client from loading every .str after it, the stock ones too
+python3 "$ROOT/tools/check_str.py" || die "fix the .str files above"
 mkdir -p "$(dirname "$OUT")"
 rm -f "$OUT"
 

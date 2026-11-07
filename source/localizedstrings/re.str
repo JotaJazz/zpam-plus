@@ -49,7 +49,7 @@ REFERENCE           DROPPEDGENERIC
 LANG_ENGLISH        "Allies have dropped the objective"
 
 REFERENCE           TIMEOUTRETURNINGGENERIC
-LANG_ENGLISH        "Limit on the ground has been reached (&&1).
+LANG_ENGLISH        "Limit on the ground has been reached (&&1)."
 
 REFERENCE           INMINESGENERIC
 LANG_ENGLISH        "Objective has been dropped in the minefield (&&1)."
