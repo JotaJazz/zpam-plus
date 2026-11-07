@@ -160,87 +160,11 @@ DeleteTags()
 
 getEyeOrigin()
 {
-	origin = self getOrigin();
-
 	if (self.sessionstate == "spectator")
-	{
-		return origin + (0, 0, 8);
-	}
+		return self getOrigin() + (0, 0, 8);
 
-	angles = self getPlayerAngles();
-	head = self.headTag getOrigin();
-
-	// Vector of head
-	diff = head - origin;
-
-	// Rotate vector back to angle 0
-	angle = -1 * angles[1];
-	x = diff[0] * cos(angle) - diff[1] * sin(angle);
-	y = diff[1] * cos(angle) + diff[0] * sin(angle);
-	//iprintln(x + ", " + y);
-
-	lean = 0;
-	stance = self maps\mp\gametypes\global\player::getStance(); // with path: the bare name calls libcod's getstance, which returns duck/lie/stand
-
-	// Prone
-	if (stance == "prone")
-	{
-		offset = 11;
-
-		/*
-		Prone 			= (1, 3)		| +x
-		Prone lean left 	= (0.7, 10.5)		|
-		Prone lean right	= (0, -3)	+y______|
-		*/
-		if (y > 7)
-			lean = -1; // lean left
-		else if (y < 0)
-			lean = 1; // lean right
-	}
-	// Crouch
-	else if (stance == "crouch")
-	{
-		offset = 40;
-
-		/*
-		Crouch 			= (0, -4.5)		| +x
-		Crouch lean left 	= (0, 14)		|
-		Crouch lean right	= (-5, -14)	+y______|
-		*/
-		if (y > 10)
-			lean = -1; // lean left
-		else if (y < -10)
-			lean = 1; // lean right
-	}
-	// Stand
-	else
-	{
-		offset = 60;
-
-		/*
-		Stand 			= (-5, 0)		| +x
-		Stand lean left 	= (-5, 14.5)		|
-		Stand lean right	= (-5, -12)	+y______|
-		*/
-		if (y > 10)
-			lean = -1; // lean left
-		else if (y < -8)
-			lean = 1; // lean right
-	}
-
-	//iprintln("stance: " + offset + " | lean: " + lean);
-
-
-	eye = origin + (0, 0, offset);
-
-	// Add offset if we are lean left / right
-	if (lean != 0)
-	{
-		aright = anglestoright(angles);
-		eye = eye + (14 * aright[0] * lean, 14 * aright[1] * lean, -3);
-	}
-
-	return eye;
+	// The engine's view origin (G_GetPlayerViewOrigin, libcod), with stance and lean (upstream 6d5b7a4)
+	return self getViewOrigin();
 }
 
 
