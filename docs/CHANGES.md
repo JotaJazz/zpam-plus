@@ -61,3 +61,4 @@ Changes since zPAM 3.38. Earlier history:
 - New `draw` sub-mode (`pam_mode comp_mr12_draw`): a tie ends the map as a draw,
   with no overtime. It is in the rcon map menu and the pam modes help, and the
   league label shows "Draw".
+- In ready-up a killed player respawns after 0.5 s instead of 2 s.
