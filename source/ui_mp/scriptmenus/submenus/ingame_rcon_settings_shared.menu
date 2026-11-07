@@ -30,25 +30,30 @@ ITEM_RCON_SETTINGS_TEXT(145 60, "Show info when spectated player is automaticall
 
 
 
-ITEM_RCON_SETTINGS_HEADING(0 84, "scr_fast_reload_fix", "", "-")
-ITEM_RCON_SETTINGS_ONDVAR(95 84, 20 11, "1",   "ui_rcon_settings_scr_fast_reload_fix", "1",  exec "openscriptmenu ingame rcon_settings_scr_fast_reload_fix_1")
-ITEM_RCON_SETTINGS_ONDVAR(116 84, 20 11, "0",  "ui_rcon_settings_scr_fast_reload_fix", "0", exec "openscriptmenu ingame rcon_settings_scr_fast_reload_fix_0")
-ITEM_RCON_SETTINGS_TEXT(145 84, "Prevent players from shoting faster via double-scroll bug", "", "-")
+ITEM_RCON_SETTINGS_HEADING(0 72, "scr_fast_reload_fix", "", "-")
+ITEM_RCON_SETTINGS_ONDVAR(95 72, 20 11, "1",   "ui_rcon_settings_scr_fast_reload_fix", "1",  exec "openscriptmenu ingame rcon_settings_scr_fast_reload_fix_1")
+ITEM_RCON_SETTINGS_ONDVAR(116 72, 20 11, "0",  "ui_rcon_settings_scr_fast_reload_fix", "0", exec "openscriptmenu ingame rcon_settings_scr_fast_reload_fix_0")
+ITEM_RCON_SETTINGS_TEXT(145 72, "Prevent players from shoting faster via double-scroll bug", "", "-")
 
-ITEM_RCON_SETTINGS_HEADING(0 96, "scr_shotgun_consistent", "", "-")
-ITEM_RCON_SETTINGS_ONDVAR(95 96, 20 11, "1",  "ui_rcon_settings_scr_shotgun_consistent", "1", exec "openscriptmenu ingame rcon_settings_scr_shotgun_consistent_1")
-ITEM_RCON_SETTINGS_ONDVAR(116 96, 20 11, "0",   "ui_rcon_settings_scr_shotgun_consistent", "0",  exec "openscriptmenu ingame rcon_settings_scr_shotgun_consistent_0")
-ITEM_RCON_SETTINGS_TEXT(145 96, "Enable consistent shotgun to fix long shot kills and short range hits", "", "-")
+ITEM_RCON_SETTINGS_HEADING(0 84, "scr_shotgun_consistent", "", "-")
+ITEM_RCON_SETTINGS_ONDVAR(95 84, 20 11, "1",  "ui_rcon_settings_scr_shotgun_consistent", "1", exec "openscriptmenu ingame rcon_settings_scr_shotgun_consistent_1")
+ITEM_RCON_SETTINGS_ONDVAR(116 84, 20 11, "0",   "ui_rcon_settings_scr_shotgun_consistent", "0",  exec "openscriptmenu ingame rcon_settings_scr_shotgun_consistent_0")
+ITEM_RCON_SETTINGS_TEXT(145 84, "Enable consistent shotgun to fix long shot kills and short range hits", "", "-")
 
-ITEM_RCON_SETTINGS_HEADING(0 108, "scr_hitbox_hand_fix", "", "-")
-ITEM_RCON_SETTINGS_ONDVAR(95 108, 20 11, "1",  "ui_rcon_settings_scr_hitbox_hand_fix", "1", exec "openscriptmenu ingame rcon_settings_scr_hitbox_hand_fix_1")
-ITEM_RCON_SETTINGS_ONDVAR(116 108, 20 11, "0",   "ui_rcon_settings_scr_hitbox_hand_fix", "0",  exec "openscriptmenu ingame rcon_settings_scr_hitbox_hand_fix_0")
-ITEM_RCON_SETTINGS_TEXT(145 108, "Avoid hand hits if body is behind the hands", "", "-")
+ITEM_RCON_SETTINGS_HEADING(0 96, "scr_hitbox_hand_fix", "", "-")
+ITEM_RCON_SETTINGS_ONDVAR(95 96, 20 11, "1",  "ui_rcon_settings_scr_hitbox_hand_fix", "1", exec "openscriptmenu ingame rcon_settings_scr_hitbox_hand_fix_1")
+ITEM_RCON_SETTINGS_ONDVAR(116 96, 20 11, "0",   "ui_rcon_settings_scr_hitbox_hand_fix", "0",  exec "openscriptmenu ingame rcon_settings_scr_hitbox_hand_fix_0")
+ITEM_RCON_SETTINGS_TEXT(145 96, "Avoid hand hits if body is behind the hands", "", "-")
 
-ITEM_RCON_SETTINGS_HEADING(0 120, "scr_hitbox_torso_fix", "", "-")
-ITEM_RCON_SETTINGS_ONDVAR(95 120, 20 11, "1",   "ui_rcon_settings_scr_hitbox_torso_fix", "1",  exec "openscriptmenu ingame rcon_settings_scr_hitbox_torso_fix_1")
-ITEM_RCON_SETTINGS_ONDVAR(116 120, 20 11, "0",  "ui_rcon_settings_scr_hitbox_torso_fix", "0", exec "openscriptmenu ingame rcon_settings_scr_hitbox_torso_fix_0")
-ITEM_RCON_SETTINGS_TEXT(145 120, "Extend lower torso hitbox", "", "-")
+ITEM_RCON_SETTINGS_HEADING(0 108, "scr_hitbox_torso_fix", "", "-")
+ITEM_RCON_SETTINGS_ONDVAR(95 108, 20 11, "1",   "ui_rcon_settings_scr_hitbox_torso_fix", "1",  exec "openscriptmenu ingame rcon_settings_scr_hitbox_torso_fix_1")
+ITEM_RCON_SETTINGS_ONDVAR(116 108, 20 11, "0",  "ui_rcon_settings_scr_hitbox_torso_fix", "0", exec "openscriptmenu ingame rcon_settings_scr_hitbox_torso_fix_0")
+ITEM_RCON_SETTINGS_TEXT(145 108, "Extend lower torso hitbox", "", "-")
+
+ITEM_RCON_SETTINGS_HEADING(0 120, "scr_hitbox_neck_kill", "", "-")
+ITEM_RCON_SETTINGS_ONDVAR(95 120, 20 11, "1",   "ui_rcon_settings_scr_hitbox_neck_kill", "1",  exec "openscriptmenu ingame rcon_settings_scr_hitbox_neck_kill_1")
+ITEM_RCON_SETTINGS_ONDVAR(116 120, 20 11, "0",  "ui_rcon_settings_scr_hitbox_neck_kill", "0", exec "openscriptmenu ingame rcon_settings_scr_hitbox_neck_kill_0")
+ITEM_RCON_SETTINGS_TEXT(145 120, "Count a neck hit as a head hit", "", "-")
 
 ITEM_RCON_SETTINGS_HEADING(0 132, "scr_prone_peek_fix", "", "-")
 ITEM_RCON_SETTINGS_ONDVAR(95 132, 20 11, "1",   "ui_rcon_settings_scr_prone_peek_fix", "1",  exec "openscriptmenu ingame rcon_settings_scr_prone_peek_fix_1")

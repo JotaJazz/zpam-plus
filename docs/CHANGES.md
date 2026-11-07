@@ -51,3 +51,6 @@ Changes since zPAM 3.38. Earlier history:
 - MG hits do 100 to the head and neck, 75 to the torso and upper legs and 35
   elsewhere; before, the server used the multipliers of the weapon the player
   held before mounting it (a pistol gave pistol damage).
+- New `scr_hitbox_neck_kill` (on in comp, strat and dm warmup): a bullet in the
+  neck counts as a head hit, with the weapon's head damage. Shown in server info
+  and in the rcon settings menu.

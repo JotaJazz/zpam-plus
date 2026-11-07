@@ -125,6 +125,7 @@ GetCvars(arr)
 	arr = ruleCvarDefault(arr, "scr_mg_peek_fix", 1);				// When mg is dropped, player is spawned right behid mg
 	arr = ruleCvarDefault(arr, "scr_hitbox_hand_fix", 1);				// Damage to left hand is adjusted for rifles and scopes.
 	arr = ruleCvarDefault(arr, "scr_hitbox_torso_fix", 1);					// Damage of M1, rifles, scopes and shotgun is adjusted to have less hits in game
+	arr = ruleCvarDefault(arr, "scr_hitbox_neck_kill", 1);					// A neck hit counts as a head hit
 	arr = ruleCvarDefault(arr, "scr_killcam", 0);					// Killcam
 
 

@@ -389,6 +389,13 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 		sWeapon = "mg42_bipod_stand_mp"; // also keeps the rifle and shotgun fixes below off MG hits
 	}
 
+	// A bullet in the neck counts as a head hit, with the head multiplier (upstream 8a13d89, 45b121a)
+	else if (level.scr_hitbox_neck_kill && sHitLoc == "neck" && (sMeansOfDeath == "MOD_PISTOL_BULLET" || sMeansOfDeath == "MOD_RIFLE_BULLET"))
+	{
+		sHitLoc = "head";
+		iDamage = getNeckAsHeadDamage(sWeapon, iDamage);
+	}
+
 	// Hitbox left and right hand fix
 	if (level.scr_hitbox_hand_fix &&
 		isDefined(sWeapon) && isDefined(sHitLoc) && isDefined(eAttacker) && isPlayer(eAttacker) && eAttacker != self)
@@ -897,4 +904,43 @@ AbortLevel()
 ================*/
 callbackVoid()
 {
+}
+
+// Neck damage scaled from the weapon's neck multiplier to its head multiplier
+getNeckAsHeadDamage(sWeapon, iDamage)
+{
+	switch (tolower(sWeapon))
+	{
+		case "bar_mp":
+		case "bar_buffed_mp":
+		case "bren_mp":
+		case "enfield_mp":
+		case "enfield_scope_mp":
+		case "fg42_mp":
+		case "greasegun_mp":
+		case "kar98k_mp":
+		case "kar98k_sniper_mp":
+		case "m1carbine_mp":
+		case "mosin_nagant_mp":
+		case "mosin_nagant_sniper_mp":
+		case "mp40_mp":
+		case "mp44_mp":
+		case "pps42_mp":
+		case "springfield_mp":
+		case "sten_mp":
+		case "svt40_mp":
+		case "thompson_mp":
+		case "tt30_mp":
+			return int((iDamage / 1.5) * 3);
+		case "ppsh_stick30_mp":
+			return int((iDamage / 1.5) * 3.5);
+		case "g43_mp":
+		case "m1garand_mp":
+			return int((iDamage / 2) * 3);
+		case "colt_mp":
+		case "luger_mp":
+		case "webley_mp":
+			return int((iDamage / 1.5) * 2.5);
+	}
+	return iDamage;
 }

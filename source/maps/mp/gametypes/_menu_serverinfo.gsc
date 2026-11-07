@@ -129,6 +129,10 @@ generateGlobalServerInfo()
 	changed = "^7"; if (maps\mp\gametypes\global\cvar_system::isCvarChangedFromRuleValue("scr_hitbox_torso_fix") && !game["is_public_mode"]) changed = "^3";
 	if (level.scr_hitbox_torso_fix) 	value += changed+"Enabled ^9Disabled^7" + "\n";
 	else					value += "^9Enabled "+changed+"Disabled^7" + "\n";
+	title +="Neck hitbox kill:\n";
+	changed = "^7"; if (maps\mp\gametypes\global\cvar_system::isCvarChangedFromRuleValue("scr_hitbox_neck_kill") && !game["is_public_mode"]) changed = "^3";
+	if (level.scr_hitbox_neck_kill) 	value += changed+"Enabled ^9Disabled^7" + "\n";
+	else					value += "^9Enabled "+changed+"Disabled^7" + "\n";
 
 	title +="Prone peek fix:\n";
 	changed = "^7"; if (maps\mp\gametypes\global\cvar_system::isCvarChangedFromRuleValue("scr_prone_peek_fix") && !game["is_public_mode"]) changed = "^3";
@@ -163,6 +167,7 @@ generateGlobalServerInfo()
 					case "scr_shotgun_consistent":
 					case "scr_hitbox_hand_fix":
 					case "scr_hitbox_torso_fix":
+					case "scr_hitbox_neck_kill":
 					case "scr_prone_peek_fix":
 					case "scr_mg_peek_fix":
 					case "g_antilag":
