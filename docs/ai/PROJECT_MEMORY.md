@@ -3,6 +3,12 @@
 Append-only. Newest first. Template in
 [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
 
+## 2026-11-07 — upstream 4.x review, block 2
+
+- Rule changes from upstream: MG use from `isUsingTurret` (player moved once when he leaves), fixed MG damage (100/75/35; the server took the multipliers of the weapon held before mounting), `scr_hitbox_neck_kill` on in comp, a bigger hand-fix head box, the `draw` sub-mode and the engine's `getViewOrigin` for the eye (60 standing, 40 crouched on a bot).
+- Changed from upstream: `draw` loads after all rules (upstream loads it in place, so `comp_draw_mr12` kept overtime), and `isUsingTurret` is only called on players (libcod errors on other entities).
+- Open: the shotgun ranges wait for a fixed pellet spread in the engine, which goes in the engine handoff with fast reload, prone peek and the climbing sound.
+
 ## 2026-11-07 — upstream 4.x review, block 1
 
 - The 105 upstream commits after our 3.36 base (zPAM 4.00 to 4.11, mostly for CoD2x) were triaged; six fixes went in: `getStance` called by path (the bare call reached libcod's and every eye was at standing height), `[{x}]` names renamed, saved weapons checked against the selection at spawn, `sv_kickBanTime 0` in comp, scoped Kar98k/buffed BAR/FG42 in hit stats, stats kept through a match and taken over from a stale 999 slot.
