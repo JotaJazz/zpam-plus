@@ -78,7 +78,7 @@ self is the player that was killed.
 */
 onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration)
 {
-	// Player stats (_player_stat.gsc) for dm, where score is kills (upstream e399efd); sd and re keep their own
+	// Player stats (_player_stat.gsc) for dm, where score is kills; sd and re keep their own
 	if (level.gametype != "dm" || level.in_readyup || !level.matchstarted || level.mapended)
 		return;
 

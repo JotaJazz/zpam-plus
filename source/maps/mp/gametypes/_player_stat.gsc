@@ -48,7 +48,7 @@ removeOld()
     if (data["deleted"] || data["isConnected"]) continue;
 
     // Once the match started, keep them until the map ends: a player restarting his router or PC
-    // needs more than 2 minutes to come back (upstream 71c7c8d)
+    // needs more than 2 minutes to come back
     if (!game["is_public_mode"] && isDefined(game["readyup_first_run"]) && !game["readyup_first_run"]) continue;
 
     timeout = 2; // wait 5min by default

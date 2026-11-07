@@ -118,7 +118,7 @@ onStartGameType()
 
 
 
-	// Bombsite icons on the compass, as in sd (upstream fcaed36)
+	// Bombsite icons on the compass, as in sd
 	bombzones = getentarray("bombzone", "targetname");
 	for(i = 0; i < bombzones.size; i++)
 	{
@@ -261,7 +261,7 @@ onPlayerDamaging(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon
 		}
 		else
 		{
-			// Distance in metres (1 unit = 1 inch), one decimal, and the fix that changed the hit if any (upstream 56670df)
+			// Distance in metres (1 unit = 1 inch), one decimal, and the fix that changed the hit if any
 			point = self.origin;
 			if (isDefined(vPoint))
 				point = vPoint;
@@ -828,7 +828,7 @@ Run_Strat()
 	if (self.pers["isBot"])
 		return;
 
-	// Always shown (0:00), so the replay timer does not pop up from nothing (upstream 34af519)
+	// Always shown (0:00), so the replay timer does not pop up from nothing
 	self.clock = newClientHudElem2(self);
 	self.clock.font = "default";
 	self.clock.fontscale = 2;

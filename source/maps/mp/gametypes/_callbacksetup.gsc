@@ -341,7 +341,7 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 
 
 	// MG damage: the server takes the hit-location multiplier and sWeapon from the weapon the attacker
-	// held before mounting (a pistol gives pistol damage), so set fixed values (upstream 27d0dfc, d30f47d)
+	// held before mounting (a pistol gives pistol damage), so set fixed values
 	if (sMeansOfDeath == "MOD_RIFLE_BULLET" && isDefined(eAttacker) && isPlayer(eAttacker) && eAttacker isUsingTurret())
 	{
 		if (sHitLoc == "head" || sHitLoc == "neck")
@@ -354,7 +354,7 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 		sWeapon = "mg42_bipod_stand_mp"; // also keeps the rifle and shotgun fixes below off MG hits
 	}
 
-	// A bullet in the neck counts as a head hit, with the head multiplier (upstream 8a13d89, 45b121a)
+	// A bullet in the neck counts as a head hit, with the head multiplier
 	else if (level.scr_hitbox_neck_kill && sHitLoc == "neck" && (sMeansOfDeath == "MOD_PISTOL_BULLET" || sMeansOfDeath == "MOD_RIFLE_BULLET"))
 	{
 		sHitLoc = "head";
@@ -565,7 +565,7 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 		eAttacker.hitData[self_num].shotgun_distance = dist;
 
 
-		// Fixed pellet pattern (g_shotgun_spread_fix, server): upstream's ranges for it (1c7bdb8, d30f47d)
+		// Fixed pellet pattern (g_shotgun_spread_fix, server): ranges tuned for it
 		// Range 0-280 kill, 280-400 75hp, 400-500 35hp
 		if (level.g_shotgun_spread_fix && dist <= 500)
 		{
@@ -676,7 +676,7 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 		eAttacker.hitData[self_num].damage = iDamage;
 
 
-	// Printed after the fixes above, so it shows the damage that is applied (upstream d30f47d)
+	// Printed after the fixes above, so it shows the damage that is applied
 	if(level.g_debugDamage)
 	{
 		if (isDefined(eAttacker) && isPlayer(eAttacker))

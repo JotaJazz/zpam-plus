@@ -163,7 +163,7 @@ getEyeOrigin()
 	if (self.sessionstate == "spectator")
 		return self getOrigin() + (0, 0, 8);
 
-	// The engine's view origin (G_GetPlayerViewOrigin, libcod), with stance and lean (upstream 6d5b7a4)
+	// The engine's view origin (G_GetPlayerViewOrigin, libcod), with stance and lean
 	return self getViewOrigin();
 }
 
