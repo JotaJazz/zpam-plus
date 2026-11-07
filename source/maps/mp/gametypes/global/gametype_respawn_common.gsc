@@ -102,3 +102,36 @@ onPlayerKilling(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHi
 	if (level.mapended)
 		return true;
 }
+
+// Shared by ctf, dm, htf and tdm; hq has its own (hq_spawnIntermission)
+spawnIntermission()
+{
+	// Resets the infinite loop check timer, to prevent an incorrect infinite loop error when a lot of script must be run
+	resettimeout();
+
+	// Stop shellshock and rumble
+	self stopShellshock();
+	self stoprumble("damage_heavy");
+
+	self.sessionstate = "intermission";
+	self.spectatorclient = -1;
+	self.archivetime = 0;
+	self.psoffsettime = 0;
+	self.friendlydamage = undefined;
+
+	spawnpointname = "mp_global_intermission";
+	spawnpoints = getentarray(spawnpointname, "classname");
+	spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(spawnpoints);
+
+	if(isDefined(spawnpoint))
+		self spawn(spawnpoint.origin, spawnpoint.angles);
+	else
+	{
+		self spawn((0,0,0), (0,0,0));
+		maps\mp\_utility::error("NO " + spawnpointname + " SPAWNPOINTS IN MAP");
+	}
+
+	// Notify "spawned" notifications
+	self notify("spawned");
+	self notify("spawned_intermission");
+}

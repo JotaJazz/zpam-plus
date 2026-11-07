@@ -35,7 +35,7 @@ main()
 
 	level.spawnPlayer = ::spawnPlayer;
 	level.spawnSpectator = ::spawnSpectator;
-	level.spawnIntermission = ::spawnIntermission;
+	level.spawnIntermission = ::hq_spawnIntermission;
 
 
 	// Define gametype specific cvars here
@@ -728,7 +728,7 @@ spawnSpectator(origin, angles)
 }
 
 
-spawnIntermission()
+hq_spawnIntermission()
 {
 	// Resets the infinite loop check timer, to prevent an incorrect infinite loop error when a lot of script must be run
 	resettimeout();
