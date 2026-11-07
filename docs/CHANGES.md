@@ -107,3 +107,5 @@ Changes since zPAM 3.38. Earlier history:
   `scr_ladder_ready_timeout` runs out first, `LadderForfeit;` names the team that
   did not show, and a roster player who leaves for longer than the halftime
   auto-resume is logged with `LadderLeaver;`.
+- The quick settings menu has a language line (English, Français, Deutsch,
+  Italiano, Español) that switches the game's text language at once.

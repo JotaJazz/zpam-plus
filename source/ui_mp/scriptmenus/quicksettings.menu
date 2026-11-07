@@ -135,6 +135,14 @@
 		QUICKMESSAGE_LINE_TEXT(110, "@ZPAM_QS_MOUSE", 1 1 1 1)
 		execKey "6" { close quicksettings; open mousesettings }
 
+		// Text language; vid_restart applies it (the OpenCoD2-Plus client picks it on any install)
+		QUICKMESSAGE_LINE_TEXT_DVAR(125, "@ZPAM_QS_LANGUAGE_0", 1 1 1 1, "loc_language", showDvar { "0" })
+		QUICKMESSAGE_LINE_TEXT_DVAR(125, "@ZPAM_QS_LANGUAGE_1", 1 1 1 1, "loc_language", showDvar { "1" })
+		QUICKMESSAGE_LINE_TEXT_DVAR(125, "@ZPAM_QS_LANGUAGE_2", 1 1 1 1, "loc_language", showDvar { "2" })
+		QUICKMESSAGE_LINE_TEXT_DVAR(125, "@ZPAM_QS_LANGUAGE_3", 1 1 1 1, "loc_language", showDvar { "3" })
+		QUICKMESSAGE_LINE_TEXT_DVAR(125, "@ZPAM_QS_LANGUAGE_4", 1 1 1 1, "loc_language", showDvar { "4" })
+		execKey "7" { exec "togglep loc_language 0 1 2 3 4; vid_restart" }
+
 
 		QUICKMESSAGE_LINE_TEXT(167, "@QUICKMESSAGE_ESC_EXIT", 1 1 1 1)
 	}

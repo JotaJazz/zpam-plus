@@ -109,10 +109,16 @@ GSC has no unit tests; a change is checked on a test server with
 
 ## Translations
 
-Players see the mod in their game's language (`loc_language`), the stock way:
+Players see the mod in their game's language (`loc_language`: 0 English,
+1 French, 2 German, 3 Italian, 4 Spanish; line 7 of the quick settings menu
+cycles it and runs `vid_restart`), the stock way:
 `source/localizedstrings/zpam.str` holds one `REFERENCE` per string with a
 `LANG_ENGLISH` line, the fallback, and one `LANG_<language>` line per
-translation (`LANG_SPANISH`, `LANG_FRENCH`, `LANG_GERMAN`, `LANG_RUSSIAN`...).
+translation (`LANG_FRENCH`, `LANG_GERMAN`, `LANG_ITALIAN`, `LANG_SPANISH`). The
+OpenCoD2-Plus client lets a player pick those four on an English install;
+Russian and Polish are not possible, the game's fonts lack their letters.
+Never ship a `localized_<language>_*.iwd`: the client would turn the English
+game files off.
 GSC uses it as `&"ZPAM_<REFERENCE>"` and menus as `"@ZPAM_<REFERENCE>"`; the
 file name gives the `ZPAM_` prefix. Keep the file in Windows-1252 with LF, as
 the stock `.str` files, and give each `REFERENCE` its `LANG_ENGLISH` line first:

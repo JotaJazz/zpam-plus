@@ -163,4 +163,39 @@ REFERENCE           QS_MOUSE
 LANG_ENGLISH        "6. Mouse settings"
 LANG_SPANISH        "6. Ajustes del ratón"
 
+REFERENCE           QS_LANGUAGE_0
+LANG_ENGLISH        "7. Language: ^5English"
+LANG_FRENCH         "7. Langue : ^5English"
+LANG_GERMAN         "7. Sprache: ^5English"
+LANG_ITALIAN        "7. Lingua: ^5English"
+LANG_SPANISH        "7. Idioma: ^5English"
+
+REFERENCE           QS_LANGUAGE_1
+LANG_ENGLISH        "7. Language: ^5Français"
+LANG_FRENCH         "7. Langue : ^5Français"
+LANG_GERMAN         "7. Sprache: ^5Français"
+LANG_ITALIAN        "7. Lingua: ^5Français"
+LANG_SPANISH        "7. Idioma: ^5Français"
+
+REFERENCE           QS_LANGUAGE_2
+LANG_ENGLISH        "7. Language: ^5Deutsch"
+LANG_FRENCH         "7. Langue : ^5Deutsch"
+LANG_GERMAN         "7. Sprache: ^5Deutsch"
+LANG_ITALIAN        "7. Lingua: ^5Deutsch"
+LANG_SPANISH        "7. Idioma: ^5Deutsch"
+
+REFERENCE           QS_LANGUAGE_3
+LANG_ENGLISH        "7. Language: ^5Italiano"
+LANG_FRENCH         "7. Langue : ^5Italiano"
+LANG_GERMAN         "7. Sprache: ^5Italiano"
+LANG_ITALIAN        "7. Lingua: ^5Italiano"
+LANG_SPANISH        "7. Idioma: ^5Italiano"
+
+REFERENCE           QS_LANGUAGE_4
+LANG_ENGLISH        "7. Language: ^5Español"
+LANG_FRENCH         "7. Langue : ^5Español"
+LANG_GERMAN         "7. Sprache: ^5Español"
+LANG_ITALIAN        "7. Lingua: ^5Español"
+LANG_SPANISH        "7. Idioma: ^5Español"
+
 ENDMARKER
