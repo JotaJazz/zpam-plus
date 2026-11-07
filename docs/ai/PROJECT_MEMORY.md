@@ -3,6 +3,12 @@
 Append-only. Newest first. Template in
 [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
 
+## 2026-11-07 — ladder design and phase A
+
+- ADR 0003 accepted: a separate ladder service drives the server by rcon and reads `games_mp.log`; phase A logs `LadderStart;` and `LadderEnd;` (team1 = the team on allies at the start, kept across halftime), checked by a two-bot comp match with a halftime that ends `LadderEnd;m1;0;2;team2`. ADR 0002 now holds the Plus 123 decision that had been written into the accepted ADR 0001.
+- `tools/run-server.sh` reads machine paths from `.server/env`; `docs/manual-plus.md` says what of the 3.38 manual differs; test runs get `--rcon`, `--log` and `dev_bots_autoready`.
+- Bots are frozen by default (`scr_bots_freeze 1`): a duel or a match with bots needs it at 0. Open: phase B, the roster.
+
 ## 2026-11-07 — bots that shoot, play test guide
 
 - `dev_duel` and `tools/test_server.py --duel` make one bot shoot another: kar98k head and torso kill, thompson torso does 35, the fixed-pattern shotgun kills at 200 and does 16 at 650, and `Stats;` then shows the kills, the headshot and the damage dealt; `docs/development/playtest.md` lists 22 checks for a session with real players.
