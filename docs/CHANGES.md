@@ -66,3 +66,6 @@ Changes since zPAM 3.38. Earlier history:
   (was 0.2 s), and the round clock turns orange at 0:30 (was 0.3 s earlier).
 - `g_debugDamage` prints the damage after the hitbox, shotgun and MG fixes, so
   it shows what is applied.
+- Map vote names maps like the match info does: the `_fix` maps get their names
+  (they showed as `mp_toujane_fix`); stock maps show their file name (Farmhouse,
+  not Beltot).
