@@ -31,11 +31,3 @@ console.
   the check; accepted, because only the person running the server can do it
   and it fools nobody but them.
 - Raising the Plus version does not break the mod while the check is `>=`.
-
-## Update 2026-11-07: Plus 123
-
-Plus 123 moved the fast reload, prone peek and MG clip rules into the shared
-engine code, applied by the server and predicted by the client. The check is
-now `>= 123`, and the mod's script fixes for them (`_fast_reload.gsc`,
-`_prone_peek_fix.gsc`, `_mg_fix.gsc`) are gone. The climbing sound fix stays:
-the mod silences `weap_raise` and plays its own sound for every weapon raise.

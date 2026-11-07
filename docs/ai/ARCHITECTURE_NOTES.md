@@ -21,5 +21,5 @@ Normative summary; detail in [boundaries.md](../architecture/boundaries.md) and
 
 ## Irreversible
 
-- Plus server only: [ADR 0001](../architecture/adr/0001-plus-server-only.md).
+- Plus server only: [ADR 0001](../architecture/adr/0001-plus-server-only.md); Plus 123 or later: [ADR 0002](../architecture/adr/0002-require-plus-123.md).
 - Versions count from 1 (`zpamplus<N>`); zPAM 3.x numbering is not continued.
