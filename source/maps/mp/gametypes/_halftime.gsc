@@ -41,6 +41,7 @@ Do_Half_Time()
 	game["allies_score"] = axis_score;
 	setTeamScore("axis", game["axis_score"]);
 	setTeamScore("allies", game["allies_score"]);
+	maps\mp\gametypes\_ladder::onSideSwap();
 
 	// Switch total called time-outs
 	axis_called_timeouts = game["axis_called_timeouts"];

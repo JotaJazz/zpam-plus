@@ -97,3 +97,6 @@ Changes since zPAM 3.38. Earlier history:
 - The ready-up and time-out HUD and the quick settings menu follow the game's
   language, with Spanish as the first translation (the rest of the mod is still
   English).
+- With `scr_ladder_match` set by rcon, `games_mp.log` gets `LadderStart;` when
+  the first ready-up ends and `LadderEnd;` with each team's score and the winner
+  at the end of the map, for an automatic ladder to read.

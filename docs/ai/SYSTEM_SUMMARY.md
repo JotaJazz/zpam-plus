@@ -43,4 +43,4 @@ images/                     pictures used by the upstream manual
 |---|---|
 | OpenCoD2-Plus Server | `sv_plus` read-only, Plus build only, value `PLUS_VERSION` (123); the engine applies the fast reload, prone peek and MG clip rules; `g_shotgun_spread_fix` (from `ae124d3`, same `sv_plus`) is used only if the engine registered it |
 | Server admins | iwd name `zpamplus1`, run from `main`, www download on, `zpam_maps_v6.iwd` |
-| Log readers (ladder) | `games_mp.log`: after each sd and re round, `Stats;<name>;<team>;key=value;...` per player with match totals (`_player_stat::logStats`); names through `logSafe` |
+| Log readers (ladder) | `games_mp.log`: after each sd and re round, `Stats;<name>;<team>;key=value;...` per player with match totals (`_player_stat::logStats`); with `scr_ladder_match` set, `LadderStart;<id>;<map>;<pam_mode>` when the first ready-up ends and `LadderEnd;<id>;<score team1>;<score team2>;<team1\|team2\|draw>` at map end, team1 being the team on allies at the start ([ADR 0003](../architecture/adr/0003-ladder-server-side.md)); fields through `logSafe` |

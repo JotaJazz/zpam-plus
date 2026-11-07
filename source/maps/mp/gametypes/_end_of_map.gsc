@@ -17,6 +17,8 @@ init()
 // Called at the end of the last round
 Do_Map_End()
 {
+	maps\mp\gametypes\_ladder::onMapEnd();
+
 	HUD_Matchover();
 
 	// Cancel timeout if called

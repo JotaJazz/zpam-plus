@@ -1,6 +1,6 @@
 # ADR 0003: What the game server does for an automatic ladder
 
-Date: 2026-11-07. Status: proposed.
+Date: 2026-11-07. Status: accepted (phase A built).
 
 ## Context
 
@@ -16,8 +16,8 @@ to the network from script (`httpFetch`, WebSockets, JSON).
 What does not exist: accounts. Today a player is his IP plus his name, which
 two players behind one IP share and which anyone can type.
 
-These are the maintainer's calls to check; the maintainer asked for a design
-without questions first, so every decision below is a proposal.
+The maintainer asked for a design without questions first, and accepted it as
+written.
 
 ## Decision
 

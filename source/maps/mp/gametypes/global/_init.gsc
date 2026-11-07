@@ -103,6 +103,7 @@ InitModules()
 
 	thread maps\mp\gametypes\_mapvote::Init();
 	thread maps\mp\gametypes\_player_stat::init();
+	thread maps\mp\gametypes\_ladder::init(); // depends on readyup, halftime, end_of_map
 	thread maps\mp\gametypes\_climbing_sound_fix::init();
 	thread maps\mp\gametypes\_round_report::init();
 	thread maps\mp\gametypes\_score_set::init(); // depends on readyup, halftime, sd
