@@ -1,8 +1,10 @@
 # zPAM Plus
 
 Competition mod for Call of Duty 2 and the mod of the OpenCoD2-Plus family:
-zPAM 3.38 rules and match flow for our servers, public servers and, later, an
-automatic ladder.
+zPAM 3.38 rules and match flow, with the fixes of zPAM 4.x (to 4.11) that work
+on the Plus server, for our servers, public servers and, later, an automatic
+ladder. Competitive rules run at 40 Hz and use the Plus engine's rules for fast
+reload, prone peek, MG clip and a fixed shotgun pellet pattern.
 
 | Needs | |
 |---|---|

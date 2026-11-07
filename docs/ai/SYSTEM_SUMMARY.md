@@ -20,10 +20,11 @@ images/                     pictures used by the upstream manual
 
 | Area | State |
 |---|---|
-| Rules and match flow | zPAM 3.38 with the audit fixes up to `dad08c5` and the `fix/plus-audit` branch (see debt for what is untested) |
-| Plus check | built, `sv_plus` 123 or later; tested on stock 1.0 (refused) and a local Plus build (passes) |
+| Rules and match flow | zPAM 3.38 with the audit fixes up to `dad08c5`, the `fix/plus-audit` branch and the zPAM 4.x fixes that work on Plus (see debt for what is untested) |
+| Upstream | eyza-cod2/zpam3 reviewed to zPAM 4.11 (`c05f226`); what was left out is in debt and project memory |
+| Plus check | built, `sv_plus` 123 or later; tested on stock 1.0 and a non-Plus 1.0 build of the server (refused) and a local Plus build (passes) |
 | Name and version | "zPAM Plus 1", `zpamplus1.iwd`, `_zpam` = `Plus 1` |
-| Real match on Plus | not yet |
+| Real match on Plus | one, on 2026-11-06: one Plus client and bots, sd comp at 40 Hz; none yet with the 4.x fixes |
 | Automatic ladder | not started |
 
 ## Commands
