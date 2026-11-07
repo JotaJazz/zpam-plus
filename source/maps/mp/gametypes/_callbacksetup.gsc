@@ -308,8 +308,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 	if (sMeansOfDeath == "MOD_GRENADE_SPLASH" && !isAlive(self))
 		return;
 
-	damageFeedback = 1;
-
 
 	// Save info about hits
 	self_num = self getEntityNumber();
@@ -567,14 +565,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 		eAttacker.hitData[self_num].shotgun_distance = dist;
 
 
-		// Make sure pellets do only once a feedback damage
-		// This is the first pellet
-		if (eAttacker.hitData[self_num].id == 1)
-			damageFeedback = 1;
-		else
-			damageFeedback = 0;
-
-
 		// Range 0-250   (1 pellet needed for kill)
 		if (dist <= 250)
 		{
@@ -597,7 +587,6 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 			if (isKill)
 			{
 				iDamage = 100;
-				damageFeedback = 2; // Do big damage feedback, because this bullet kills the player and the others are canceled due to this
 				if (level.debug_shotgun) eAttacker iprintln("^1Distance " + int(dist) + " | close range 0-250 | KILL");
 				eAttacker.hitData[self_num].adjustedBy = "consistent_shotgun_1_kill"; // Range 1, kill
 			}
@@ -703,12 +692,9 @@ CodeCallback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 	// Call gametype specific event that is called as last
 	[[level.onAfterPlayerDamaged]](eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset);
 
-	// Damage feedback
-	if (damageFeedback >= 1)
-	{
-		if(isPlayer(eAttacker) && eAttacker != self && !(iDFlags & level.iDFLAGS_NO_PROTECTION))
-			eAttacker thread maps\mp\gametypes\_damagefeedback::updateDamageFeedback(self, damageFeedback);
-	}
+	// Damage feedback (pellets and multi-hits are merged per frame in _damagefeedback)
+	if(isPlayer(eAttacker) && eAttacker != self && !(iDFlags & level.iDFLAGS_NO_PROTECTION))
+		eAttacker thread maps\mp\gametypes\_damagefeedback::updateDamageFeedback(self);
 }
 
 hitDataAutoRestart(eAttacker, self_num)

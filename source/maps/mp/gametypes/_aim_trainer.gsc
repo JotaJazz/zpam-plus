@@ -168,7 +168,7 @@ handleDamageForPlayer(player)
 		if (attacker != player)
 			continue;
 
-		player thread maps\mp\gametypes\_damagefeedback::updateDamageFeedback(undefined, 1);
+		player thread maps\mp\gametypes\_damagefeedback::updateDamageFeedback(undefined);
 
 		player thread generateMeNewTargetPosition("kill");
 	}
@@ -186,7 +186,7 @@ handleActivation()
 		if (player.aimTrainerMode != 0)
 			continue;
 
-		player thread maps\mp\gametypes\_damagefeedback::updateDamageFeedback(undefined, 1);
+		player thread maps\mp\gametypes\_damagefeedback::updateDamageFeedback(undefined);
 
 		// Printed just a few seconds ago
 		if (player.aimTrainerActivatorDelay > gettime())

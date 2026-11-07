@@ -78,3 +78,7 @@ Changes since zPAM 3.38. Earlier history:
   the engine, which applies them on both sides; the mod's script versions run
   only on older Plus servers. The climbing sound fix stays: the mod silences
   `weap_raise`, which the Plus client plays for climbing.
+- New hit indicator: a hit shows a smaller yellowish cross that fades at once;
+  a kill shows a bigger white cross that shrinks back; one shot or grenade that
+  hits two or more players adds a second cross and plays one sound per player;
+  team hits are red in every team gametype (before, only in sd).
