@@ -7,7 +7,6 @@
 | Admin can fake `sv_plus` on a non-Plus build | accepted in [ADR 0001](../architecture/adr/0001-plus-server-only.md) | none |
 | Automatic ladder | not started | define what results leave the server and how |
 | Help text points to the zPAM Discord channel | `ingame_aboutpam.menu` | replace when the family has its own channel |
-| Machine paths in `tools/run-server.sh` defaults | personal defaults, overridable by variables | move them to a local, uncommitted file |
 | No automated GSC test | `tools/test_server.py` checks a server run, and `--duel` checks damage, kills and the stats hooks with two bots; rounds with more players, the MG, neck hits, menus and HUD are still checked by hand | duels for the MG (needs a turret) and neck hits (needs an aim at the neck tag) |
 | Player identity is IP plus name | restored stats match the IP and the name, not an account; players behind one IP (and all bots, 0.0.0.0) are told apart only by name | the ladder needs real accounts |
 | Plus server segfaults loading `re` on `mp_toujane_fix` and `mp_burgundy` | found on the test server, present before `fix/plus-audit`; server side | a fix in OpenCoD2-Plus Server |

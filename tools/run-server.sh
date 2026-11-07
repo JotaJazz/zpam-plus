@@ -5,10 +5,10 @@
 #   tools/run-server.sh [gametype] [map] [+set ...]   # defaults: sd mp_toujane_fix
 #   Anything after the map goes to the binary unchanged.
 #
-# Environment:
-#   COD2_GAME_DIR    folder with main/iw_*.iwd (stock files only)
-#   COD2_SERVER_BIN  dedicated server binary
-#   COD2_MAPS_IWD    zPAM map pack
+# Environment (or the same names in .server/env, a local file git ignores):
+#   COD2_GAME_DIR    folder with main/iw_*.iwd (stock files only), required
+#   COD2_MAPS_IWD    zPAM map pack, required
+#   COD2_SERVER_BIN  dedicated server binary, default ~/CoD2rev_Server/bin/cod2rev_lnxded
 #   COD2_PORT        UDP port, default 28960
 #
 # The game folder stays read-only: the mod and every file the server writes
@@ -16,9 +16,17 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-GAME_DIR="${COD2_GAME_DIR:-/mnt/e/Servers/COD2}"
+# Machine paths live in .server/env (KEY=value lines); the environment wins over it
+if [ -f "$ROOT/.server/env" ]; then
+	while IFS='=' read -r key value; do
+		case "$key" in
+			COD2_GAME_DIR|COD2_MAPS_IWD|COD2_SERVER_BIN|COD2_PORT) [ -n "${!key:-}" ] || export "$key=$value" ;;
+		esac
+	done < "$ROOT/.server/env"
+fi
+GAME_DIR="${COD2_GAME_DIR:-}"
 SERVER_BIN="${COD2_SERVER_BIN:-$HOME/CoD2rev_Server/bin/cod2rev_lnxded}"
-MAPS_IWD="${COD2_MAPS_IWD:-/mnt/e/Servers/COD2-MAPAS/zpam_maps_v6.iwd}"
+MAPS_IWD="${COD2_MAPS_IWD:-}"
 PORT="${COD2_PORT:-28960}"
 GAMETYPE="${1:-sd}"
 MAP="${2:-mp_toujane_fix}"
@@ -26,6 +34,9 @@ shift $(( $# < 2 ? $# : 2 ))
 HOME_DIR="$ROOT/.server"
 
 die() { echo "ERROR: $*" >&2; exit 1; }
+
+[ -n "$GAME_DIR" ] || die "set COD2_GAME_DIR (or COD2_GAME_DIR=<folder> in .server/env)"
+[ -n "$MAPS_IWD" ] || die "set COD2_MAPS_IWD (or COD2_MAPS_IWD=<file> in .server/env)"
 
 [ -x "$SERVER_BIN" ] || die "server binary not found: $SERVER_BIN"
 [ -f "$GAME_DIR/main/iw_00.iwd" ] || die "no stock game files in: $GAME_DIR/main"

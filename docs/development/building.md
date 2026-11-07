@@ -14,10 +14,17 @@ game folder stays untouched.
 
 | Variable | Default | Meaning |
 |---|---|---|
-| `COD2_GAME_DIR` | `/mnt/<drive>/Servers/COD2` | CoD2 folder with stock iwds only |
+| `COD2_GAME_DIR` | none, required | CoD2 folder with stock iwds only |
 | `COD2_SERVER_BIN` | `~/CoD2rev_Server/bin/cod2rev_lnxded` | server binary; a Plus build is needed to pass the Plus check |
-| `COD2_MAPS_IWD` | `/mnt/<drive>/Servers/COD2-MAPAS/zpam_maps_v6.iwd` | map pack; the script stops if it is missing |
+| `COD2_MAPS_IWD` | none, required | map pack; the script stops if it is missing |
 | `COD2_PORT` | 28960 | UDP port |
+
+Put your machine's paths in `.server/env`, one `NAME=value` per line, once:
+
+    COD2_GAME_DIR=/path/to/CoD2
+    COD2_MAPS_IWD=/path/to/zpam_maps_v6.iwd
+
+git ignores `.server/`; a variable set in the shell wins over the file.
 
 The game folder must hold only stock iwds: a downloaded mod or map in `main`
 changes what loads. Everything after the map goes to the binary unchanged.
