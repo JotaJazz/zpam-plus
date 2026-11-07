@@ -3,7 +3,7 @@
 | Need | Read |
 |---|---|
 | What changed in zPAM Plus | [CHANGES.md](CHANGES.md) |
-| Features, settings, errors (zPAM 3.38 manual) | [upstream/zpam-3.38.md](upstream/zpam-3.38.md) |
+| Features, settings, errors (zPAM 3.38 manual) | [upstream/zpam-3.38.md](upstream/zpam-3.38.md), with what differs on zPAM Plus in [manual-plus.md](manual-plus.md) |
 | How the scripts fit together | [architecture/overview.md](architecture/overview.md) |
 | Rules a change must keep | [architecture/boundaries.md](architecture/boundaries.md) |
 | Decisions | [architecture/adr/](architecture/adr/README.md) |

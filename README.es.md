@@ -24,7 +24,7 @@ Es un fork de [eyza-cod2/zpam3](https://github.com/eyza-cod2/zpam3), el mod con 
 - **Para jugadores y casters:** indicadores de impacto y de kill, jugadores restantes, marcador de equipos, información de la partida, un equipo streamer con su propio HUD, auto-espectador y repeticiones de kills, y estadísticas por jugador que se mantienen al reconectar.
 - **Para admins:** menús rcon para mapas, modos, kicks y ajustes, avisos de ajustes erróneos, nombres que no pueden romper el log ni esconderse tras atajos de teclado, y una comprobación que rechaza cualquier servidor que no sea el build Plus.
 
-Cada cambio respecto a zPAM 3.38 está en [docs/CHANGES.md](docs/CHANGES.md) (en inglés); el manual de zPAM 3.38, con cada ajuste y mensaje, se conserva en [docs/upstream/zpam-3.38.md](docs/upstream/zpam-3.38.md).
+Cada cambio respecto a zPAM 3.38 está en [docs/CHANGES.md](docs/CHANGES.md) (en inglés); el manual de zPAM 3.38, con cada ajuste y mensaje, se conserva en [docs/upstream/zpam-3.38.md](docs/upstream/zpam-3.38.md), y lo que cambia en zPAM Plus está en [docs/manual-plus.md](docs/manual-plus.md) (en inglés).
 
 > [!NOTE]
 > **Todavía en pruebas.** Se jugó una partida en el servidor Plus; la mayoría de las reglas nuevas aún necesitan una sesión con jugadores reales. Si algo se comporta distinto que en zPAM, repórtalo en los [issues](https://github.com/JotaJazz/zpam-plus/issues).
