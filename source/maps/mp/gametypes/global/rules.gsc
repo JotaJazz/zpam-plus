@@ -31,6 +31,10 @@ Init()
 	}
 	assert(loaded);
 
+	// Loaded last: a score sub-mode (mr12...) turns overtime on wherever it is in pam_mode
+	if (loaded && PAMModeContains("draw"))
+		maps\mp\gametypes\rules\draw::Load();
+
 	/#
 	if (game["ruleCvars"].size == 0 && !game["is_public_mode"])
 		assertMsg("Rule cvars was not loaded!");
@@ -50,6 +54,7 @@ Init()
 		assert(level.pam_mode != "");
 
 		_2v2 = PAMModeContains("2v2");
+		draw = PAMModeContains("draw");
 		lan = PAMModeContains("lan");
 		custom = PAMModeContains("custom");
 		ot = isDefined(game["overtime_active"]) && game["overtime_active"];
@@ -99,6 +104,23 @@ Init()
 		if (rifle && ot && custom && !_2v2 && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | Rifle | ^3Overtime";
 		if (rifle && ot && !custom && !_2v2 && !lan)	game["leagueOptionsString"] = &"Rifle | ^3Overtime";
 		if (rifle && !ot && !custom && !_2v2 && !lan)	game["leagueOptionsString"] = &"Rifle";
+		// draw turns overtime off, so its labels never meet the Overtime ones
+		if (!rifle && draw && !custom && _2v2 && lan)		game["leagueOptionsString"] = &"2v2 | LAN | ^3Draw";
+		if (!rifle && draw && !custom && _2v2 && !lan)	game["leagueOptionsString"] = &"2v2 | ^3Draw";
+		if (!rifle && draw && !custom && !_2v2 && lan)	game["leagueOptionsString"] = &"LAN | ^3Draw";
+		if (!rifle && draw && custom && _2v2 && lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | LAN | ^3Draw";
+		if (!rifle && draw && custom && _2v2 && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | ^3Draw";
+		if (!rifle && draw && custom && !_2v2 && lan)		game["leagueOptionsString"] = &"^3Custom^7 | LAN | ^3Draw";
+		if (!rifle && draw && custom && !_2v2 && !lan)	game["leagueOptionsString"] = &"^3Custom^7 | ^3Draw";
+		if (!rifle && draw && !custom && !_2v2 && !lan)	game["leagueOptionsString"] = &"^3Draw";
+		if (rifle && draw && !custom && _2v2 && lan)		game["leagueOptionsString"] = &"2v2 | Rifle | LAN | ^3Draw";
+		if (rifle && draw && !custom && _2v2 && !lan)		game["leagueOptionsString"] = &"2v2 | Rifle | ^3Draw";
+		if (rifle && draw && !custom && !_2v2 && lan)		game["leagueOptionsString"] = &"Rifle | LAN | ^3Draw";
+		if (rifle && draw && custom && _2v2 && lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | Rifle | LAN | ^3Draw";
+		if (rifle && draw && custom && _2v2 && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | 2v2 | Rifle | ^3Draw";
+		if (rifle && draw && custom && !_2v2 && lan)		game["leagueOptionsString"] = &"^3Custom^7 | Rifle | LAN | ^3Draw";
+		if (rifle && draw && custom && !_2v2 && !lan)		game["leagueOptionsString"] = &"^3Custom^7 | Rifle | ^3Draw";
+		if (rifle && draw && !custom && !_2v2 && !lan)	game["leagueOptionsString"] = &"Rifle | ^3Draw";
 
 
 
@@ -275,6 +297,7 @@ IsToggleSubPamMode(name)
 	switch(name)
 	{
 		case "2v2":
+		case "draw":
 		case "lan":
 		case "custom":
 		case "rifle":
@@ -292,6 +315,7 @@ LoadToggleSubPamMode(name)
 	switch(name)
 	{
 		case "2v2": 	maps\mp\gametypes\rules\_2v2::Load(); return true;
+		case "draw": 	return true; // loaded after all rules, in Init
 		case "lan": 	maps\mp\gametypes\rules\lan::Load(); return true;
 		case "custom": 	maps\mp\gametypes\rules\custom::Load(); return true;
 		case "rifle": 	maps\mp\gametypes\rules\rifle::Load(); return true;

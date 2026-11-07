@@ -57,3 +57,6 @@ Changes since zPAM 3.38. Earlier history:
 - The hand-hitbox fix uses a slightly bigger box around the head (2 units more
   to the right and down; when the player moves, 13 to the left and 15 to the
   right).
+- New `draw` sub-mode (`pam_mode comp_mr12_draw`): a tie ends the map as a draw,
+  with no overtime. It is in the rcon map menu and the pam modes help, and the
+  league label shows "Draw".

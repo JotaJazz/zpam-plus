@@ -51,7 +51,7 @@ Inside them, calls to a gametype's own spawn functions go through
 |---|---|---|
 | mode | `pub` (no suffixes), `comp`; `warmup` in dm | `rules/<gametype>/<mode>.gsc`, `rules/strat/strat.gsc` |
 | score | sd and re: `mr3`, `mr10`, `mr12`, `mr15`, `20rounds`; others: `10min`, `15min`, `30min`, `60min`, `unlim` | `rules/<gametype>/score/` |
-| toggle | `2v2`, `rifle`, `lan`, `custom` (`developer` when `developer_script` is 1) | `rules/_2v2.gsc`, `rules/rifle.gsc`, `rules/lan.gsc`, `rules/custom.gsc` |
+| toggle | `2v2`, `rifle`, `draw`, `lan`, `custom` (`developer` when `developer_script` is 1); `draw` loads after all the others, as a score part turns overtime on | `rules/_2v2.gsc`, `rules/rifle.gsc`, `rules/draw.gsc`, `rules/lan.gsc`, `rules/custom.gsc` |
 
 ## Installation check
 
