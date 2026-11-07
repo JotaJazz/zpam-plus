@@ -61,7 +61,7 @@ with the reason and prints it to the console. Players who connect then spawn as
 spectators outside the map, get no menu and no force-download message; the
 gametype itself keeps running.
 
-Order: `fs_game` empty, `sv_plus` 122 or later
+Order: `fs_game` empty, `sv_plus` 123 or later
 ([ADR 0001](adr/0001-plus-server-only.md)), iwd lists readable, the mod's iwd
 loaded under its exact name; then, only when `shortversion` is 1.3 or
 `g_cod2x` is set (always on Plus): www download on, `zpam_maps_v6` present, the

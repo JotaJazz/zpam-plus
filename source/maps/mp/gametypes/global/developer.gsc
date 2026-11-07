@@ -5,9 +5,7 @@ init()
 	addEventListener("onCvarChanged", ::onCvarChanged);
 
 	registerCvar("debug_shotgun", "BOOL", false);
-	registerCvar("debug_pronepeek", "BOOL", false);
 	registerCvar("debug_spectator", "BOOL", false);
-	registerCvar("debug_fastreload", "BOOL", false);
 	registerCvar("debug_handhitbox", "BOOL", false);
 	registerCvar("debug_torsohitbox", "BOOL", false);
 
@@ -40,9 +38,7 @@ onCvarChanged(cvar, value, isRegisterTime)
 	switch(cvar)
 	{
 		case "debug_shotgun": 		level.debug_shotgun = value; return true;
-		case "debug_pronepeek": 	level.debug_pronepeek = value; return true;
 		case "debug_spectator": 	level.debug_spectator = value; return true;
-		case "debug_fastreload": 	level.debug_fastreload = value; return true;
 		case "debug_handhitbox": 	level.debug_handhitbox = value; return true;
 		case "debug_torsohitbox": 	level.debug_torsohitbox = value; return true;
 

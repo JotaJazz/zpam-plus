@@ -21,7 +21,7 @@ images/                     pictures used by the upstream manual
 | Area | State |
 |---|---|
 | Rules and match flow | zPAM 3.38 with the audit fixes up to `dad08c5` and the `fix/plus-audit` branch (see debt for what is untested) |
-| Plus check | built, `sv_plus` 122 or later; tested on stock 1.0 (refused) and a local Plus build (passes) |
+| Plus check | built, `sv_plus` 123 or later; tested on stock 1.0 (refused) and a local Plus build (passes) |
 | Name and version | "zPAM Plus 1", `zpamplus1.iwd`, `_zpam` = `Plus 1` |
 | Real match on Plus | not yet |
 | Automatic ladder | not started |
@@ -39,5 +39,5 @@ images/                     pictures used by the upstream manual
 
 | With | Contract |
 |---|---|
-| OpenCoD2-Plus Server | `sv_plus` read-only, Plus build only, value `PLUS_VERSION` (123); from 123 the engine applies the fast reload, prone peek and MG clip rules, and the mod skips its script fixes for them (`engineHasPlusRules`) |
+| OpenCoD2-Plus Server | `sv_plus` read-only, Plus build only, value `PLUS_VERSION` (123); the engine applies the fast reload, prone peek and MG clip rules |
 | Server admins | iwd name `zpamplus1`, run from `main`, www download on, `zpam_maps_v6.iwd` |

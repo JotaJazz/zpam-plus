@@ -7,8 +7,8 @@ Changes since zPAM 3.38. Earlier history:
 
 - Renamed to zPAM Plus; the iwd is `zpamplus1.iwd` and serverinfo `_zpam` is
   `Plus 1`.
-- Runs only on OpenCoD2-Plus Server built with `make PLUS=1`: anywhere else it
-  shows the installation error with the reason.
+- Runs only on OpenCoD2-Plus Server built with `make PLUS=1` (Plus version 123
+  or later): anywhere else it shows the installation error with the reason.
 - `zpam338.iwd` in `main` is refused, as older zPAM iwds already were.
 - Help links point to JotaJazz/zpam-plus.
 - A `;` in a player name is written as `:` in `games_mp.log`, so a name cannot add
@@ -46,9 +46,6 @@ Changes since zPAM 3.38. Earlier history:
   until the map ends (before, 2 minutes). A player who reconnects in the middle
   of a map while his old connection still waits for `sv_timeout` gets his stats
   back instead of a new row.
-- Leaving a mounted MG moves the player behind it once, when he leaves; before,
-  his position was set every frame while he used it, which made his view tear
-  for spectators.
 - MG hits do 100 to the head and neck, 75 to the torso and upper legs and 35
   elsewhere; before, the server used the multipliers of the weapon the player
   held before mounting it (a pistol gave pistol damage).
@@ -74,10 +71,11 @@ Changes since zPAM 3.38. Earlier history:
 - strat: the bombsite icons show on the compass, the replay clock is always on
   screen (0:00 when idle), and damage messages give the distance in metres and
   the fix that changed the hit.
-- On a Plus 123 server the fast reload, prone peek and MG clip fixes are left to
-  the engine, which applies them on both sides; the mod's script versions run
-  only on older Plus servers. The climbing sound fix stays: the mod silences
-  `weap_raise`, which the Plus client plays for climbing.
+- Needs OpenCoD2-Plus Server with Plus version 123: its engine applies the fast
+  reload, prone peek and MG clip rules on both sides, so the mod's script fixes
+  and their cvars (`scr_fast_reload_fix`, `scr_prone_peek_fix`,
+  `scr_mg_peek_fix`, `debug_fastreload`, `debug_pronepeek`) are gone. The
+  climbing sound fix stays.
 - New hit indicator: a hit shows a smaller yellowish cross that fades at once;
   a kill shows a bigger white cross that shrinks back; one shot or grenade that
   hits two or more players adds a second cross and plays one sound per player;

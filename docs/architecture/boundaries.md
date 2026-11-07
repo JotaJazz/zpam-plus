@@ -3,7 +3,7 @@
 | Rule | Why |
 |---|---|
 | Match behaviour stays zPAM 3.38 unless a change is written in `docs/CHANGES.md` | competitors and admins expect zPAM rules |
-| The mod runs only where `sv_plus` is 122 or later | [ADR 0001](adr/0001-plus-server-only.md) |
+| The mod runs only where `sv_plus` is 123 or later | [ADR 0001](adr/0001-plus-server-only.md) |
 | Never trust a value a client can set to decide Plus, rules or results | a client controls its userinfo and cvars |
 | Precache before the first `wait` of a map; new strings for `SetText` go through `precacheString2` in `game["firstInit"]`, as the existing code does | the engine only precaches at map start; `game[]` keeps the string across round restarts |
 | A feature is a `_<name>.gsc` module started from `InitModules`, in dependency order, and talks to others through `global/events.gsc` | keeps modules independent of the call order of engine callbacks |

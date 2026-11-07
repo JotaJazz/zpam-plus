@@ -48,20 +48,15 @@ init()
 	cvar_names[cvar_names.size] = "scr_re_roundlength";		cvar_names_gt[cvar_names_gt.size] = "re";
 
 
-	cvar_names[cvar_names.size] = "debug_fastreload";		cvar_names_gt[cvar_names_gt.size] = "";
 	cvar_names[cvar_names.size] = "debug_shotgun";			cvar_names_gt[cvar_names_gt.size] = "";
 	cvar_names[cvar_names.size] = "debug_handhitbox";		cvar_names_gt[cvar_names_gt.size] = "";
 	cvar_names[cvar_names.size] = "debug_torsohitbox";		cvar_names_gt[cvar_names_gt.size] = "";
-	cvar_names[cvar_names.size] = "debug_pronepeek";		cvar_names_gt[cvar_names_gt.size] = "";
 	cvar_names[cvar_names.size] = "debug_spectator";		cvar_names_gt[cvar_names_gt.size] = "";
 
-	cvar_names[cvar_names.size] = "scr_fast_reload_fix";		cvar_names_gt[cvar_names_gt.size] = "";
 	cvar_names[cvar_names.size] = "scr_shotgun_consistent";		cvar_names_gt[cvar_names_gt.size] = "";
 	cvar_names[cvar_names.size] = "scr_hitbox_hand_fix";		cvar_names_gt[cvar_names_gt.size] = "";
 	cvar_names[cvar_names.size] = "scr_hitbox_torso_fix";		cvar_names_gt[cvar_names_gt.size] = "";
 	cvar_names[cvar_names.size] = "scr_hitbox_neck_kill";		cvar_names_gt[cvar_names_gt.size] = "";
-	cvar_names[cvar_names.size] = "scr_prone_peek_fix";		cvar_names_gt[cvar_names_gt.size] = "";
-	cvar_names[cvar_names.size] = "scr_mg_peek_fix";		cvar_names_gt[cvar_names_gt.size] = "";
 	cvar_names[cvar_names.size] = "g_antilag";			cvar_names_gt[cvar_names_gt.size] = "";
 	cvar_names[cvar_names.size] = "scr_killcam";			cvar_names_gt[cvar_names_gt.size] = "";
 

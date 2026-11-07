@@ -6,7 +6,7 @@ automatic ladder.
 
 | Needs | |
 |---|---|
-| Server | OpenCoD2-Plus Server built with `make PLUS=1` (Plus version 122 or later) |
+| Server | OpenCoD2-Plus Server built with `make PLUS=1` (Plus version 123 or later) |
 | Players | the OpenCoD2-Plus client ("1.3 Plus") |
 
 On any other server the mod shows "zPAM is not installed correctly" and does

@@ -159,10 +159,11 @@ CheckInstallation()
 		return;
 	}
 
-	// sv_plus is a read-only dvar of the Plus build (docs/architecture/adr/0001-plus-server-only.md)
-	if (getCvarInt("sv_plus") < 122)
+	// sv_plus is a read-only dvar of the Plus build (docs/architecture/adr/0001-plus-server-only.md);
+	// 123 brought the engine rules that replaced the fast reload, prone peek and MG clip scripts
+	if (getCvarInt("sv_plus") < 123)
 	{
-		level thread printTextInLoop("Diagnostics info: sv_plus = '" + getCvar("sv_plus") + "', needs 122 or later");
+		level thread printTextInLoop("Diagnostics info: sv_plus = '" + getCvar("sv_plus") + "', needs 123 or later");
 
 		setError(game["STRING_PAM_PLUS_REQUIRED"]);
 		return;

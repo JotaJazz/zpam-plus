@@ -20,13 +20,6 @@ AbortLevel()
 	return maps\mp\gametypes\_callbacksetup::AbortLevel();
 }
 
-// Plus 123 servers and clients apply the fast reload, prone peek and MG clip rules in the engine
-// (plus-protocol.md in OpenCoD2-Plus Server); the mod keeps its script fixes for older servers
-engineHasPlusRules()
-{
-	return getCvarInt("sv_plus") >= 123;
-}
-
 
 
 /*************************************************************************************************************
