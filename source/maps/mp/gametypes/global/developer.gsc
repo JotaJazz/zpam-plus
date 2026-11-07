@@ -17,6 +17,7 @@ init()
 	thread maps\mp\gametypes\_player_stat::statsSelfTest();
 	thread timingSelfTest();
 	thread devDuelLoop();
+	thread devBotsAutoReady();
 	#/
 }
 
@@ -133,7 +134,8 @@ devDuelLoop()
 devDuel(weapon, dist, aim)
 {
 	// Damage only counts in a live round (sd restarts the map when both teams first have players)
-	if (isDefined(level.roundstarted) && (!level.roundstarted || level.roundended))
+	if ((isDefined(level.roundstarted) && (!level.roundstarted || level.roundended)) ||
+		(isDefined(level.in_readyup) && level.in_readyup) || (isDefined(level.in_strattime) && level.in_strattime))
 	{
 		println("DUEL error: round not live");
 		return;
@@ -213,4 +215,30 @@ devDuel(weapon, dist, aim)
 	wait 0.5;
 
 	println("DUEL done weapon=" + weapon + " dist=" + int(distance(shooter getViewOrigin(), point)) + " aim=" + aim + " health=" + target.health + " alive=" + isAlive(target) + " held=" + shooter getCurrentWeapon() + " shots=" + (clip - shooter getWeaponSlotClipAmmo("primary")));
+}
+
+// developer_script 1: "rcon set dev_bots_autoready 1" makes bots ready up in every ready-up,
+// by pressing use as a player does
+devBotsAutoReady()
+{
+	for (;;)
+	{
+		wait 1;
+		if (!getCvarInt("dev_bots_autoready") || !isDefined(level.in_readyup) || !level.in_readyup)
+			continue;
+		players = getentarray("player", "classname");
+		for (i = 0; i < players.size; i++)
+		{
+			p = players[i];
+			if (p.pers["isBot"] && isDefined(p.isReady) && !p.isReady && p.sessionstate == "playing")
+				p thread devPressUse();
+		}
+	}
+}
+
+devPressUse()
+{
+	self usebutton(1);
+	wait 0.2;
+	self usebutton(0);
 }

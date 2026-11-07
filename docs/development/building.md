@@ -66,6 +66,20 @@ range `lo-hi`. Duels need a live round, and the damage fixes need their cvars:
 The `Stats;` lines in `.server/main/games_mp.log` then hold the kills, headshots
 and damage of those shots.
 
+`--rcon "<command>"` runs commands once the map loads, and `--log <regex>`
+waits up to 30 s for a matching line in this run's `games_mp.log`.
+`dev_bots_autoready 1` makes bots ready up, so a whole ladder match plays with
+two bots, a halftime after round one and two rounds:
+
+    python3 tools/test_server.py --pam-mode comp --bots 2 --seconds 5 \
+        --rcon "set dev_bots_autoready 1" --rcon "set scr_bots_freeze 0" \
+        --rcon "set scr_ladder_match m1" --rcon "set scr_sd_half_round 1" \
+        --rcon "set scr_sd_end_round 2" \
+        --duel kar98k_mp,600,head,kill --duel kar98k_mp,600,head,kill \
+        --log 'LadderStart;m1;mp_toujane_fix;comp$' --log 'LadderEnd;m1;\d+;\d+;(team1|team2|draw)$'
+
+Bots are frozen by default (`scr_bots_freeze 1`): a duel needs them free.
+
 ## Checks
 
 | What | Command |

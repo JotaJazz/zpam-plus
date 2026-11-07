@@ -5,7 +5,7 @@ Usage:
   python3 tools/test_server.py [--gametype sd] [--map mp_toujane_fix]
       [--pam-mode comp] [--bots 4] [--seconds 20] [--port 28990]
       [--expect cvar=value ...] [--duel weapon,distance,head|torso[,kill|damage|lo-hi] ...]
-      [-- +set name value ...]
+      [--rcon command ...] [--log regex ...] [-- +set name value ...]
 
 It runs tools/run-server.sh on a free port, waits for the map, checks that the
 binary is a Plus build with sv_plus 123 or later, adds bots, waits, reads back
@@ -113,6 +113,15 @@ def port_free(port):
         s.close()
 
 
+def read_games(path, start):
+    """games_mp.log written since this run started."""
+    if not os.path.exists(path):
+        return ""
+    with open(path, errors="replace") as f:
+        f.seek(start)
+        return f.read()
+
+
 def read_log():
     with open(LOG, errors="replace") as f:
         return f.read()
@@ -128,6 +137,8 @@ def main():
     ap.add_argument("--port", type=int, default=28990)
     ap.add_argument("--expect", action="append", default=[], metavar="CVAR=VALUE")
     ap.add_argument("--duel", action="append", default=[], metavar="WEAPON,DIST,head|torso[,EXPECT]")
+    ap.add_argument("--rcon", action="append", default=[], metavar="COMMAND", help="sent in order once the map loads")
+    ap.add_argument("--log", action="append", default=[], metavar="REGEX", help="games_mp.log of this run must match, within 30 s")
     ap.add_argument("extra", nargs="*", help="more +set arguments, after --")
     a = ap.parse_args()
 
@@ -137,6 +148,8 @@ def main():
     env = dict(os.environ, COD2_PORT=str(a.port))
     cmd = [os.path.join(ROOT, "tools", "run-server.sh"), a.gametype, a.map, "+set", "pam_mode", a.pam_mode] + a.extra
     os.makedirs(os.path.dirname(LOG), exist_ok=True)
+    games_log = os.path.join(ROOT, ".server", "main", "games_mp.log")
+    games_start = os.path.getsize(games_log) if os.path.exists(games_log) else 0
     errors = []
     with open(LOG, "w") as out:
         proc = subprocess.Popen(cmd, stdout=out, stderr=subprocess.STDOUT, env=env, start_new_session=True)
@@ -156,6 +169,8 @@ def main():
             plus = cvar_value(rcon.send("sv_plus", a.port))
             if not plus or not plus.isdigit() or int(plus) < MIN_PLUS:
                 errors.append(f"sv_plus is {plus!r}, needs {MIN_PLUS} or later")
+            for command in a.rcon:
+                rcon.send(command, a.port)
             if a.bots:
                 rcon.send(f"scr_bots_add {a.bots}", a.port)
             time.sleep(a.seconds)
@@ -175,6 +190,14 @@ def main():
                     errors.append(f"duel {spec}: {msg}")
                 else:
                     print(f"ok    duel {spec}: {msg.split('DUEL done', 1)[-1].strip()}")
+            # Wait up to 30 s for each --log line, with the server still running
+            for pattern in a.log:
+                deadline = time.time() + 30
+                while not re.search(pattern, read_games(games_log, games_start), re.M):
+                    if time.time() > deadline or proc.poll() is not None:
+                        errors.append(f"games_mp.log has no line matching {pattern!r}")
+                        break
+                    time.sleep(0.5)
             if rcon.send("status", a.port) is None:
                 errors.append("the server stopped answering")
     finally:
