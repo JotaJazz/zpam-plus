@@ -74,3 +74,7 @@ Changes since zPAM 3.38. Earlier history:
 - strat: the bombsite icons show on the compass, the replay clock is always on
   screen (0:00 when idle), and damage messages give the distance in metres and
   the fix that changed the hit.
+- On a Plus 123 server the fast reload, prone peek and MG clip fixes are left to
+  the engine, which applies them on both sides; the mod's script versions run
+  only on older Plus servers. The climbing sound fix stays: the mod silences
+  `weap_raise`, which the Plus client plays for climbing.

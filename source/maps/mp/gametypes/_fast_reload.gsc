@@ -41,7 +41,7 @@ onCvarChanged(cvar, value, isRegisterTime)
 
 onConnected()
 {
-    if (!level.scr_fast_reload_fix)
+    if (!level.scr_fast_reload_fix || engineHasPlusRules())
       return;
 
     self thread manageWeaponCycleDelay();

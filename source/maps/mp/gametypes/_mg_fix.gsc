@@ -51,6 +51,9 @@ onCvarChanged(cvar, value, isRegisterTime)
 
 start()
 {
+	if (engineHasPlusRules())
+		return;
+
 	handleTurretEntity("misc_turret");
 	handleTurretEntity("misc_mg42");
 }

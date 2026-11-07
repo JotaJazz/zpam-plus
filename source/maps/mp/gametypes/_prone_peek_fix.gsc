@@ -38,7 +38,7 @@ onCvarChanged(cvar, value, isRegisterTime)
 
 onConnected()
 {
-	if (!level.scr_prone_peek_fix)
+	if (!level.scr_prone_peek_fix || engineHasPlusRules())
 		return;
 
 	self thread pronePeekFix();
