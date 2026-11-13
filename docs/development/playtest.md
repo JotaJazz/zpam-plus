@@ -42,6 +42,7 @@ look. Damage numbers per weapon and range are already checked by
 | 20 | Recording | Ready up in comp | A demo starts for each player (`scr_recording`) | client `demos/` |
 | 21 | Plant and defuse | Plant, then defuse; another round, let it explode | Bomb timer, sounds, `plants`/`defuses` in `Stats;` | screen, `games_mp.log` |
 | 22 | Strat | `g_gametype strat`: look at the compass, play a recorded bot, shoot a bot | A and B icons; clock at 0:00 when idle; damage messages with metres and the fix | screen |
+| 23 | Ladder by Plus ID | `rcon plusIdStatus` for your ID; `set scr_ladder_match m1`, `set scr_ladder_team1 "<your ID>"`, `map_restart`; join with another name | You join team1 only; a second player with your name only watches | screen |
 
 ## After the session
 

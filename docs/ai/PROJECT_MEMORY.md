@@ -3,6 +3,12 @@
 Append-only. Newest first. Template in
 [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
 
+## 2026-11-13 — ladder phase D, by Plus ID
+
+- The server already verifies a signed key per Plus client (Plus ID, server ADR 0019), so ADR 0004 replaces ADR 0003's service token: a roster entry `P-...` matches only `getPlusId()`; checked by `ladderSelfTest` and by bots (no ID: an ID roster for team1 gives `LadderForfeit;m1;team1`). A real client joining by ID is play test 23.
+- `bots_fill_balance` counted watching bots as axis and moved a roster bot to the other team; `onMapEnd` called `getArrayKeys` on an empty away list, a script error at the end of every ladder map since phase C.
+- The forfeit timer counts from the map load: a bot test needs a timeout of about 30 s after the `map_restart`.
+
 ## 2026-11-13 — MG and neck duels
 
 - `dev_duel` takes `mg` (the shooter mounts a map turret, `misc_turret` or `misc_mg42`; `mp_toujane` has only the latter) and `neck`; checked on `mp_toujane_fix`: MG 100 head and neck, 75 torso; a neck hit is `neck` and 90 with an M1 Garand with `scr_hitbox_neck_kill 0`, a head kill with 1.

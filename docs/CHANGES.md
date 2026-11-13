@@ -107,5 +107,11 @@ Changes since zPAM 3.38. Earlier history:
   `scr_ladder_ready_timeout` runs out first, `LadderForfeit;` names the team that
   did not show, and a roster player who leaves for longer than the halftime
   auto-resume is logged with `LadderLeaver;`.
+- A ladder roster entry `P-XXXX-XXXX-XXXX-XXXX` is a Plus ID: only the player
+  the server verified with that ID matches it, whatever his name.
+- Bots that watch no longer count as axis when the bots are balanced, which
+  moved a bot out of its ladder team.
+- A ladder match whose roster players all stayed no longer stops the map end
+  with a script error.
 - The quick settings menu has a language line (English, Français, Deutsch,
   Italiano, Español) that switches the game's text language at once.

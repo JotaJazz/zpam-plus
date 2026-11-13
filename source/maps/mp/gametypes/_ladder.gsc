@@ -9,7 +9,9 @@ with it empty the mod behaves as before. games_mp.log gets:
 Team1 is the team on allies when the match starts; it keeps its number when sides swap.
 
 Roster (phase B): scr_ladder_team1 and scr_ladder_team2 list the players by name, separated
-by ";" (colours, case and spaces at the ends do not count). With a match id and a roster, a
+by ";" (colours, case and spaces at the ends do not count). An entry "P-XXXX-XXXX-XXXX-XXXX"
+(phase D) is a Plus ID: only the player whose connect the server verified with that ID
+matches it, whatever his name. With a match id and a roster, a
 player in it can only join his team; anyone else can only watch. scr_ladder_team1_name and
 scr_ladder_team2_name, if set, are the team names.
 
@@ -17,7 +19,8 @@ No-shows and leavers (phase C): the first ready-up does not end until both roste
 their teams and ready. If scr_ladder_ready_timeout seconds pass first, the match is not
 played: LadderForfeit;<match id>;<team1|team2|both>. A roster player away from the started
 match longer than the halftime auto-resume (2 minutes without one) is logged when he comes
-back or at the end of the map: LadderLeaver;<match id>;<player>;<seconds away>.
+back or at the end of the map: LadderLeaver;<match id>;<player>;<seconds away>, where the
+player is his Plus ID when the roster names him by it, else his name key.
 */
 
 init()
@@ -36,7 +39,7 @@ init()
 	if (!isDefined(game["ladder_forfeit"]))
 		game["ladder_forfeit"] = false;
 	if (!isDefined(game["ladder_away"]))
-		game["ladder_away"] = []; // name key -> system time of the disconnect
+		game["ladder_away"] = []; // roster key -> system time of the disconnect
 
 	addEventListener("onConnected", ::onConnected);
 	addEventListener("onDisconnect", ::onDisconnect);
@@ -88,10 +91,13 @@ onMapEnd()
 
 	logPrint("LadderEnd;" + logSafe(game["ladder_match"]) + ";" + score1 + ";" + score2 + ";" + winner + "\n");
 
-	// Roster players still away at the end
-	keys = getArrayKeys(game["ladder_away"]);
-	for (i = 0; i < keys.size; i++)
-		logLeaver(keys[i]);
+	// Roster players still away at the end (getArrayKeys errors on an empty array)
+	if (game["ladder_away"].size > 0)
+	{
+		keys = getArrayKeys(game["ladder_away"]);
+		for (i = 0; i < keys.size; i++)
+			logLeaver(keys[i]);
+	}
 
 	game["ladder_started"] = false;
 }
@@ -105,19 +111,18 @@ rosterReady()
 	       teamReady(getCvar("scr_ladder_team2"), otherSide(game["ladder_team1_side"]));
 }
 
-// Every listed name has a player in that team who is ready
+// Every listed player is in that team and ready
 teamReady(list, side)
 {
 	names = maps\mp\gametypes\global\string::splitString(list, ";");
 	players = getentarray("player", "classname");
 	for (n = 0; n < names.size; n++)
 	{
-		key = nameKey(names[n]);
-		if (key == "")
+		if (nameKey(names[n]) == "")
 			continue;
 		found = false;
 		for (i = 0; i < players.size; i++)
-			if (nameKey(players[i].name) == key && players[i].pers["team"] == side && isDefined(players[i].isReady) && players[i].isReady)
+			if (players[i] rosterKey(names[n]) != "" && players[i].pers["team"] == side && isDefined(players[i].isReady) && players[i].isReady)
 				found = true;
 		if (!found)
 			return false;
@@ -160,14 +165,15 @@ onJoinedTeam(team)
 
 onDisconnect()
 {
-	if (game["ladder_started"] && hasRoster() && self rosterTeam() != "spectator")
-		game["ladder_away"][nameKey(self.name)] = getSystemTime();
+	key = self rosterKey(getCvar("scr_ladder_team1") + ";" + getCvar("scr_ladder_team2"));
+	if (game["ladder_started"] && hasRoster() && key != "")
+		game["ladder_away"][key] = getSystemTime();
 }
 
 onConnected()
 {
-	key = nameKey(self.name);
-	if (isDefined(game["ladder_away"][key]))
+	key = self rosterKey(getCvar("scr_ladder_team1") + ";" + getCvar("scr_ladder_team2"));
+	if (key != "" && isDefined(game["ladder_away"][key]))
 		logLeaver(key);
 }
 
@@ -191,9 +197,9 @@ rosterTeam()
 	if (!hasRoster())
 		return undefined;
 
-	if (inRoster(getCvar("scr_ladder_team1"), self.name))
+	if (self rosterKey(getCvar("scr_ladder_team1")) != "")
 		return game["ladder_team1_side"];
-	if (inRoster(getCvar("scr_ladder_team2"), self.name))
+	if (self rosterKey(getCvar("scr_ladder_team2")) != "")
 		return otherSide(game["ladder_team1_side"]);
 	return "spectator";
 }
@@ -204,14 +210,42 @@ hasRoster()
 	return getCvar("scr_ladder_match") != "" && (getCvar("scr_ladder_team1") != "" || getCvar("scr_ladder_team2") != "");
 }
 
-inRoster(list, name)
+// The key of the entry of list that self matches, or "" when none does
+rosterKey(list)
 {
-	key = nameKey(name);
+	return entriesKey(list, self.name, self getPlusId()); // getPlusId: "" for bots and unverified players
+}
+
+// A "P-" entry matches only plusId (verified by the server at connect); any other matches the name
+entriesKey(list, name, plusId)
+{
 	names = maps\mp\gametypes\global\string::splitString(list, ";");
 	for (i = 0; i < names.size; i++)
-		if (nameKey(names[i]) == key && key != "")
-			return true;
-	return false;
+	{
+		key = nameKey(names[i]);
+		if (key == "")
+			continue;
+		if (maps\mp\gametypes\global\string::startsWith(key, "p-"))
+		{
+			if (plusId != "" && toLower(plusId) == key)
+				return plusId;
+		}
+		else if (nameKey(name) == key)
+			return key;
+	}
+	return "";
+}
+
+// developer_script 1
+ladderSelfTest()
+{
+	id = "P-ABCD-EFGH-IJKL-MNOP";
+	if (entriesKey("x;" + id, "anyone", id) != id) assertMsg("ladder selfTest: id");
+	if (entriesKey("x;p-abcd-efgh-ijkl-mnop ", "anyone", id) != id) assertMsg("ladder selfTest: id case");
+	if (entriesKey(id, "^1" + id, "") != "") assertMsg("ladder selfTest: name as id");
+	if (entriesKey(id, id, "P-ZZZZ-EFGH-IJKL-MNOP") != "") assertMsg("ladder selfTest: other id");
+	if (entriesKey(" ^2Bob ;x", "bob", id) != "bob") assertMsg("ladder selfTest: name");
+	if (entriesKey("a;;b", "", "") != "") assertMsg("ladder selfTest: empty");
 }
 
 nameKey(name)

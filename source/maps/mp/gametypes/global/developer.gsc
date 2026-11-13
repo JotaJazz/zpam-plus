@@ -14,6 +14,7 @@ init()
 	/#
 	maps\mp\gametypes\global\string::selfTest();
 	maps\mp\gametypes\_teamname::teamnameSelfTest();
+	maps\mp\gametypes\_ladder::ladderSelfTest();
 	thread maps\mp\gametypes\_player_stat::statsSelfTest();
 	thread timingSelfTest();
 	thread devDuelLoop();

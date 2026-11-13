@@ -245,7 +245,7 @@ bots_fill_balance()
 			{
 				if (players[i].pers["team"] == "allies")
 					allies_bots++;
-				else
+				else if (players[i].pers["team"] == "axis") // not a watching bot
 					axis_bots++;
 				continue;
 			}
