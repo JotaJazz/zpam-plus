@@ -192,9 +192,9 @@ handleActivation()
 		if (player.aimTrainerActivatorDelay > gettime())
 			continue;
 
-		player iprintlnbold("Aim Trainer control:");
-		player iprintlnbold("Hold ^3[{+melee_breath}] ^7to enable or switch modes.");
-		player iprintlnbold("Double press ^3[{+melee_breath}] ^7to disable.");
+		player iprintlnbold(&"ZPAM_AIM_CONTROL");
+		player iprintlnbold(&"ZPAM_AIM_HOLD");
+		player iprintlnbold(&"ZPAM_AIM_DOUBLE");
 		player iprintlnbold(" ");
 		player iprintlnbold(" ");
 
@@ -401,7 +401,7 @@ toggle()
 {
 	if (level.aimTargets.size == 0)
 	{
-		self iprintln("^1This map does not support aim trainer targets!");
+		self iprintln(&"ZPAM_AIM_NOT_SUPPORTED");
 		return;
 	}
 
@@ -421,30 +421,30 @@ toggle()
 		if (self.aimTrainerMode == 0)
 			return;
 
-		self iprintln("Aim Trainer ^2Enabled");
-		self iprintlnbold("Aim Trainer ^2Enabled");
+		self iprintln(&"ZPAM_AIM_ENABLED");
+		self iprintlnbold(&"ZPAM_AIM_ENABLED");
 	}
 
 
 	if (wasDisabled || self.aimTrainerMode == 4)
 	{
 		self.aimTrainerMode = 1;
-		self iprintlnbold("Mode 1: Static targets");
+		self iprintlnbold(&"ZPAM_AIM_MODE_1");
 	}
 	else if (self.aimTrainerMode == 1)
 	{
 		self.aimTrainerMode = 2;
-		self iprintlnbold("Mode 2: Moving targets");
+		self iprintlnbold(&"ZPAM_AIM_MODE_2");
 	}
 	else if (self.aimTrainerMode == 2)
 	{
 		self.aimTrainerMode = 3;
-		self iprintlnbold("Mode 3: Fast moving targets");
+		self iprintlnbold(&"ZPAM_AIM_MODE_3");
 	}
 	else if (self.aimTrainerMode == 3)
 	{
 		self.aimTrainerMode = 4;
-		self iprintlnbold("Mode 4: Reaction time");
+		self iprintlnbold(&"ZPAM_AIM_MODE_4");
 	}
 
 	self thread generateMeNewTargetPosition("mode");
@@ -461,8 +461,8 @@ turnOff()
 
 		self.aimTarget1 releaseTarget();
 
-		self iprintln("Aim Trainer ^1Disabled");
-		self iprintlnbold("Aim Trainer ^1Disabled");
+		self iprintln(&"ZPAM_AIM_DISABLED");
+		self iprintlnbold(&"ZPAM_AIM_DISABLED");
 
 		self.aimTrainerMode = 0;
 	}
@@ -479,8 +479,8 @@ player_loop()
 	// No available targets
 	if (!isDefined(self.aimTarget1))
 	{
-		self iprintln("^1No available targets!");
-		self iprintlnbold("^1No available targets!");
+		self iprintln(&"ZPAM_AIM_NO_TARGETS");
+		self iprintlnbold(&"ZPAM_AIM_NO_TARGETS");
 		self.aimTrainerMode = 0;
 		return;
 	}
@@ -570,7 +570,7 @@ player_loop()
 				self.aimTarget1.misses++;
 				if (self.aimTarget1.misses == 32)
 				{
-					self iprintlnbold("^3Too many missed shots!");
+					self iprintlnbold(&"ZPAM_AIM_TOO_MANY_MISSES");
 					self thread turnOff();
 				}
 			}
@@ -627,15 +627,15 @@ handleKillScore()
 		else if (self.aimTarget1.kills_score < 20) 	self playlocalsound("aim_trainer_horn");
 		else 						self playlocalsound("aim_trainer_horse");
 
-		text = "Score: " + self.aimTarget1.kills_score;
+		text = &"ZPAM_AIM_SCORE";
 		if (self.aimTarget1.kills_score > self.aimTarget1.kills_score_record)
 		{
 			if (self.aimTarget1.kills_score_record != 0)
-				text = "^2" + text;
+				text = &"ZPAM_AIM_SCORE_RECORD";
 			self.aimTarget1.kills_score_record = self.aimTarget1.kills_score;
 		}
 
-		self iprintlnbold(text);
+		self iprintlnbold(text, self.aimTarget1.kills_score);
 
 		self.aimTarget1.kills_score = 0;
 	}
@@ -721,7 +721,7 @@ generateMeNewTargetPosition(reason)
 		// Mode 4: Reaction time"
 		if (self.aimTrainerMode == 4 && self.aimTarget1.origin == (-99999, -99999, -99999))
 		{
-			self iprintlnbold("^1Too soon!");
+			self iprintlnbold(&"ZPAM_AIM_TOO_SOON");
 		}
 
 		self.aimTarget1 hide();
@@ -755,7 +755,7 @@ generateMeNewTargetPosition(reason)
 
 		if (self.aimTarget1.timeouts >= limit)
 		{
-			self iprintlnbold("^3Time to shot the target elapsed!");
+			self iprintlnbold(&"ZPAM_AIM_TIME_UP");
 
 			self thread turnOff();
 		}
@@ -787,12 +787,12 @@ generateMeNewTargetPosition(reason)
 			// Mode 4: Reaction time"
 			if (self.aimTrainerMode == 4)
 			{
-				self iprintlnbold("Reaction time: " + react_time + "ms");
+				self iprintlnbold(&"ZPAM_AIM_REACTION", react_time);
 			}
 			else
 			{
 				self.aimTarget1.kills_score++;
-				self iprintln("Reaction time: " + react_time + "ms  Score: " + self.aimTarget1.kills_score);
+				self iprintln(&"ZPAM_AIM_REACTION_SCORE", react_time, self.aimTarget1.kills_score);
 			}
 
 
@@ -862,7 +862,7 @@ generateMeNewTargetPosition(reason)
 
 		if (warningPrinted == false)
 		{
-			self iprintlnbold("^3Please step back from the obstacle.");
+			self iprintlnbold(&"ZPAM_AIM_STEP_BACK");
 			warningPrinted = true;
 		}
 

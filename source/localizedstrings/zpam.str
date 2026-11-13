@@ -526,4 +526,532 @@ REFERENCE           GOING_TO_SCOREBOARD
 LANG_ENGLISH        "Going to Scoreboard"
 LANG_SPANISH        "Vamos al marcador"
 
+REFERENCE           CVAR_INVALID
+LANG_ENGLISH        "^3DVAR change detected: ^2&&1^3 is not a valid value for dvar ^2&&2"
+LANG_SPANISH        "^3Cambio de dvar: ^2&&1^3 no es un valor válido para ^2&&2"
+
+REFERENCE           CVAR_NOT_DEFINED
+LANG_ENGLISH        "^3DVAR change detected: ^2&&1 ^3 was not defined"
+LANG_SPANISH        "^3Cambio de dvar: ^2&&1 ^3no estaba definido"
+
+REFERENCE           CVAR_DOMAIN
+LANG_ENGLISH        "^3DVAR change detected: Domain is a value from ^2&&1^3 to ^2&&2"
+LANG_SPANISH        "^3Cambio de dvar: el valor va de ^2&&1^3 a ^2&&2"
+
+REFERENCE           CVAR_CHANGED
+LANG_ENGLISH        "^3Server cvar ^2&&1^3 changed from ^2&&2^3 to ^2&&3"
+LANG_SPANISH        "^3La cvar del servidor ^2&&1^3 cambió de ^2&&2^3 a ^2&&3"
+
+REFERENCE           PAMMODE_VALID
+LANG_ENGLISH        "^3Following values are valid:"
+LANG_SPANISH        "^3Valores válidos:"
+
+REFERENCE           PAMMODE_SUBMODES
+LANG_ENGLISH        "^3Sub-modes:"
+LANG_SPANISH        "^3Sub-modos:"
+
+REFERENCE           PAMMODE_OTHER_GAMETYPE
+LANG_ENGLISH        "^3Change to other gametype!"
+LANG_SPANISH        "^3¡Cambia a otro modo de juego!"
+
+REFERENCE           PAMMODE_CHANGING
+LANG_ENGLISH        "^3zPAM mode changing to ^2&&1"
+LANG_SPANISH        "^3El modo de zPAM cambia a ^2&&1"
+
+REFERENCE           PLEASE_WAIT
+LANG_ENGLISH        "^3Please wait..."
+LANG_SPANISH        "^3Espera, por favor..."
+
+REFERENCE           MAPVOTE_PRESS_FIRE
+LANG_ENGLISH        "Press ^2FIRE^7 to vote                           Votes"
+LANG_SPANISH        "Pulsa ^2DISPARAR^7 para votar                     Votos"
+
+REFERENCE           MAPVOTE_TIME_LEFT
+LANG_ENGLISH        "Time Left: "
+LANG_SPANISH        "Tiempo: "
+
+REFERENCE           MAPVOTE_HEADER
+LANG_ENGLISH        "Next Map Vote"
+LANG_SPANISH        "Votación del próximo mapa"
+
+REFERENCE           MAPVOTE_VOTED
+LANG_ENGLISH        "You have voted for ^2&&1 (&&2)"
+LANG_SPANISH        "Votaste por ^2&&1 (&&2)"
+
+REFERENCE           MAPVOTE_WINNER
+LANG_ENGLISH        "The winner is"
+LANG_SPANISH        "El ganador es"
+
+REFERENCE           MAPVOTE_ROTATION_ERROR
+LANG_ENGLISH        "Warning: Error detected in map rotation"
+LANG_SPANISH        "Aviso: hay un error en la rotación de mapas"
+
+REFERENCE           ROUND_REPORT
+LANG_ENGLISH        "Round report:"
+LANG_SPANISH        "Resumen de la ronda:"
+
+REFERENCE           BOTS_ADDING
+LANG_ENGLISH        "Adding &&1 bots to the server."
+LANG_SPANISH        "Añadiendo &&1 bots al servidor."
+
+REFERENCE           BOTS_REMOVING
+LANG_ENGLISH        "Removing &&1 bots from the server."
+LANG_SPANISH        "Quitando &&1 bots del servidor."
+
+REFERENCE           BOTS_REMOVING_ALL
+LANG_ENGLISH        "Removing all bots from the server."
+LANG_SPANISH        "Quitando todos los bots del servidor."
+
+REFERENCE           BOTS_ADD_FAILED
+LANG_ENGLISH        "Adding bot failed. (server restart is needed)"
+LANG_SPANISH        "No se pudo añadir el bot (hay que reiniciar el servidor)."
+
+REFERENCE           RESTART_TO_APPLY
+LANG_ENGLISH        "Map needs to be restarted to apply the changes."
+LANG_SPANISH        "Hay que reiniciar el mapa para aplicar los cambios."
+
+REFERENCE           RESTARTING_SERVER
+LANG_ENGLISH        "Restarting server..."
+LANG_SPANISH        "Reiniciando el servidor..."
+
+REFERENCE           RESTARTING_MAP
+LANG_ENGLISH        "Restarting map..."
+LANG_SPANISH        "Reiniciando el mapa..."
+
+REFERENCE           RESPAWN_IN
+LANG_ENGLISH        "You will respawn in &&1 seconds."
+LANG_SPANISH        "Reapareces en &&1 segundos."
+
+REFERENCE           AUTOSPEC
+LANG_ENGLISH        "Auto-spectating"
+LANG_SPANISH        "Espectador automático"
+
+REFERENCE           AUTOSPEC_OFF
+LANG_ENGLISH        "Auto-spectating off"
+LANG_SPANISH        "Espectador automático apagado"
+
+REFERENCE           AUTOSPEC_MANUAL
+LANG_ENGLISH        "Manual change"
+LANG_SPANISH        "Cambio manual"
+
+REFERENCE           AUTOSPEC_ENEMY_IN_SIGHT
+LANG_ENGLISH        "Enemy in sight"
+LANG_SPANISH        "Enemigo a la vista"
+
+REFERENCE           AUTOSPEC_SPOTTED
+LANG_ENGLISH        "Spotted by enemy"
+LANG_SPANISH        "Visto por el enemigo"
+
+REFERENCE           AUTOSPEC_ENEMY_IN_SIGHT_P
+LANG_ENGLISH        "Enemy in sight (P)"
+LANG_SPANISH        "Enemigo a la vista (P)"
+
+REFERENCE           AUTOSPEC_SPOTTED_P
+LANG_ENGLISH        "Spotted by enemy (P)"
+LANG_SPANISH        "Visto por el enemigo (P)"
+
+REFERENCE           AUTOSPEC_BOMB_PLANTED
+LANG_ENGLISH        "Bomb planted"
+LANG_SPANISH        "Bomba plantada"
+
+REFERENCE           AUTOSPEC_LOSING_TEAM
+LANG_ENGLISH        "Follow losing team"
+LANG_SPANISH        "Sigue al equipo que pierde"
+
+REFERENCE           AUTOSPEC_LAST_PLAYER
+LANG_ENGLISH        "Last player in team"
+LANG_SPANISH        "Último jugador del equipo"
+
+REFERENCE           AUTOSPEC_1V1
+LANG_ENGLISH        "1v1 losing team"
+LANG_SPANISH        "1v1, equipo que pierde"
+
+REFERENCE           AUTOSPEC_NEARBY
+LANG_ENGLISH        "Next to each other"
+LANG_SPANISH        "Uno junto al otro"
+
+REFERENCE           AUTOSPEC_MOVING
+LANG_ENGLISH        "Follow moving player"
+LANG_SPANISH        "Sigue al jugador que se mueve"
+
+REFERENCE           AUTOSPEC_RADIO
+LANG_ENGLISH        "Radio defending team"
+LANG_SPANISH        "Equipo que defiende la radio"
+
+REFERENCE           HIT_HP
+LANG_ENGLISH        "&&1 hp"
+LANG_SPANISH        "&&1 hp"
+
+REFERENCE           HIT_HEAD
+LANG_ENGLISH        "Head"
+LANG_SPANISH        "Cabeza"
+
+REFERENCE           HIT_NECK
+LANG_ENGLISH        "Neck"
+LANG_SPANISH        "Cuello"
+
+REFERENCE           HIT_BODY
+LANG_ENGLISH        "Torso"
+LANG_SPANISH        "Torso"
+
+REFERENCE           HIT_BODY_UPPER
+LANG_ENGLISH        "Torso-up"
+LANG_SPANISH        "Torso-arriba"
+
+REFERENCE           HIT_BODY_LOWER
+LANG_ENGLISH        "Torso-low"
+LANG_SPANISH        "Torso-abajo"
+
+REFERENCE           HIT_SHOULDER
+LANG_ENGLISH        "Shoulder"
+LANG_SPANISH        "Hombro"
+
+REFERENCE           HIT_ARM
+LANG_ENGLISH        "Arm"
+LANG_SPANISH        "Brazo"
+
+REFERENCE           HIT_HAND
+LANG_ENGLISH        "Hand"
+LANG_SPANISH        "Mano"
+
+REFERENCE           HIT_LEG
+LANG_ENGLISH        "Leg"
+LANG_SPANISH        "Pierna"
+
+REFERENCE           HIT_LEG_UPPER
+LANG_ENGLISH        "Leg-up"
+LANG_SPANISH        "Pierna-arriba"
+
+REFERENCE           HIT_LEG_LOWER
+LANG_ENGLISH        "Leg-low"
+LANG_SPANISH        "Pierna-abajo"
+
+REFERENCE           HIT_FOOT
+LANG_ENGLISH        "Foot"
+LANG_SPANISH        "Pie"
+
+REFERENCE           HIT_GRENADE
+LANG_ENGLISH        "Grenade"
+LANG_SPANISH        "Granada"
+
+REFERENCE           HIT_PELLETS_1
+LANG_ENGLISH        "1 pellet"
+LANG_SPANISH        "1 perdigón"
+
+REFERENCE           HIT_PELLETS_2
+LANG_ENGLISH        "2 pellets"
+LANG_SPANISH        "2 perdigones"
+
+REFERENCE           HIT_PELLETS_3
+LANG_ENGLISH        "3 pellets"
+LANG_SPANISH        "3 perdigones"
+
+REFERENCE           HIT_PELLETS_4
+LANG_ENGLISH        "4 pellets"
+LANG_SPANISH        "4 perdigones"
+
+REFERENCE           HIT_PELLETS_5
+LANG_ENGLISH        "5 pellets"
+LANG_SPANISH        "5 perdigones"
+
+REFERENCE           HIT_PELLETS_6
+LANG_ENGLISH        "6 pellets"
+LANG_SPANISH        "6 perdigones"
+
+REFERENCE           HIT_PELLETS_7
+LANG_ENGLISH        "7 pellets"
+LANG_SPANISH        "7 perdigones"
+
+REFERENCE           HIT_PELLETS_8
+LANG_ENGLISH        "8 pellets"
+LANG_SPANISH        "8 perdigones"
+
+REFERENCE           HIT_SHOTGUN_RANGE_1_KILL
+LANG_ENGLISH        "Range 1   (1 pellet needed for kill)"
+LANG_SPANISH        "Rango 1   (1 perdigón para matar)"
+
+REFERENCE           HIT_SHOTGUN_RANGE_1_HIT
+LANG_ENGLISH        "Range 1   (2 pellets needed for kill (body not visible)"
+LANG_SPANISH        "Rango 1   (2 perdigones para matar: cuerpo no visible)"
+
+REFERENCE           HIT_SHOTGUN_RANGE_2
+LANG_ENGLISH        "Range 2   (2 pellets needed for kill)"
+LANG_SPANISH        "Rango 2   (2 perdigones para matar)"
+
+REFERENCE           HIT_SHOTGUN_RANGE_3
+LANG_ENGLISH        "Range 3   (3 pellets needed for kill)"
+LANG_SPANISH        "Rango 3   (3 perdigones para matar)"
+
+REFERENCE           HIT_SHOTGUN_RANGE_4
+LANG_ENGLISH        "Range 4   (linear damage)"
+LANG_SPANISH        "Rango 4   (daño lineal)"
+
+REFERENCE           HIT_TORSO_FIX
+LANG_ENGLISH        "Torso hitbox fix applied"
+LANG_SPANISH        "Corrección de hitbox de torso aplicada"
+
+REFERENCE           HIT_HAND_FIX
+LANG_ENGLISH        "Hand hitbox fix applied"
+LANG_SPANISH        "Corrección de hitbox de mano aplicada"
+
+REFERENCE           STREAMER_PRESS_ATTACK
+LANG_ENGLISH        "Press ^3[{+attack}]^7 to open streamer menu"
+LANG_SPANISH        "Pulsa ^3[{+attack}]^7 para abrir el menú de streamer"
+
+REFERENCE           STREAMER_PRESS_ESC
+LANG_ENGLISH        "Press ^3[ESC]^7 to close streamer menu\n(binds are not working when streamer menu is opened)"
+LANG_SPANISH        "Pulsa ^3[ESC]^7 para cerrar el menú de streamer\n(las teclas no funcionan con el menú abierto)"
+
+REFERENCE           KILLCAM_MULTIKILL
+LANG_ENGLISH        "Press ^3[F]^7 to replay ^2multi-kill ^7 of:"
+LANG_SPANISH        "Pulsa ^3[F]^7 para repetir la ^2multi-kill ^7 de:"
+
+REFERENCE           KILLCAM_MULTIKILL_2
+LANG_ENGLISH        "Press ^3[F]^7 to replay ^22 kills ^7 of:"
+LANG_SPANISH        "Pulsa ^3[F]^7 para repetir las ^22 kills ^7 de:"
+
+REFERENCE           KILLCAM_MULTIKILL_3
+LANG_ENGLISH        "Press ^3[F]^7 to replay ^23 kills ^7 of:"
+LANG_SPANISH        "Pulsa ^3[F]^7 para repetir las ^23 kills ^7 de:"
+
+REFERENCE           KILLCAM_MULTIKILL_4
+LANG_ENGLISH        "Press ^3[F]^7 to replay ^24 kills ^7 of:"
+LANG_SPANISH        "Pulsa ^3[F]^7 para repetir las ^24 kills ^7 de:"
+
+REFERENCE           KILLCAM_MULTIKILL_5
+LANG_ENGLISH        "Press ^3[F]^7 to replay ^25 kills ^7 of:"
+LANG_SPANISH        "Pulsa ^3[F]^7 para repetir las ^25 kills ^7 de:"
+
+REFERENCE           KILLCAM_NOZOOM
+LANG_ENGLISH        "Press ^3[F]^7 to replay ^2nozoom ^7 of:"
+LANG_SPANISH        "Pulsa ^3[F]^7 para repetir el ^2nozoom ^7 de:"
+
+REFERENCE           KILLCAM_BASH
+LANG_ENGLISH        "Press ^3[F]^7 to replay ^2bash ^7 of:"
+LANG_SPANISH        "Pulsa ^3[F]^7 para repetir el ^2culatazo ^7 de:"
+
+REFERENCE           KILLCAM_REPLAY
+LANG_ENGLISH        "Streamer killcam replay"
+LANG_SPANISH        "Repetición de killcam del streamer"
+
+REFERENCE           STREAMER_AUTOJOIN
+LANG_ENGLISH        "Streamer team auto-join..."
+LANG_SPANISH        "Entrando al equipo de streamer..."
+
+REFERENCE           STREAMER_MENU_ESC
+LANG_ENGLISH        "^1Cannot open streamer system menu. Please press ^3[ESC]^1 key"
+LANG_SPANISH        "^1No se puede abrir el menú de streamer. Pulsa ^3[ESC]"
+
+REFERENCE           STREAMER_NO_ONE
+LANG_ENGLISH        "No player to follow"
+LANG_SPANISH        "No hay jugador a quien seguir"
+
+REFERENCE           STREAMER_DOUBLE_COLORS
+LANG_ENGLISH        "^3Double colors were removed from your nickname for stream purposes."
+LANG_SPANISH        "^3Se quitaron los colores dobles de tu nombre para la transmisión."
+
+REFERENCE           STREAMER_ROUND_KILLS
+LANG_ENGLISH        "&&1^7 with ^2&&2^7 kills in this round!"
+LANG_SPANISH        "¡&&1^7 con ^2&&2^7 kills en esta ronda!"
+
+REFERENCE           STREAMER_PLAYER_DEAD
+LANG_ENGLISH        "^3Player &&1 is not alive"
+LANG_SPANISH        "^3El jugador &&1 no está vivo"
+
+REFERENCE           STREAMER_PLAYER_MISSING
+LANG_ENGLISH        "^3Player &&1 does not exists"
+LANG_SPANISH        "^3El jugador &&1 no existe"
+
+REFERENCE           KILLCAM_NO_RECORD
+LANG_ENGLISH        "^1Not existing record"
+LANG_SPANISH        "^1La grabación no existe"
+
+REFERENCE           KILLCAM_INVALID
+LANG_ENGLISH        "^1Invalid record"
+LANG_SPANISH        "^1Grabación no válida"
+
+REFERENCE           KILLCAM_DISCONNECTED
+LANG_ENGLISH        "^1Selected player disconnects!"
+LANG_SPANISH        "^1¡El jugador elegido se desconectó!"
+
+REFERENCE           KILLCAM_TOO_OLD
+LANG_ENGLISH        "^1Record is too old and can not be replayed"
+LANG_SPANISH        "^1La grabación es muy vieja para repetirla"
+
+REFERENCE           KILLCAM_PLAYING
+LANG_ENGLISH        "Playing killcam for: &&1"
+LANG_SPANISH        "Killcam de: &&1"
+
+REFERENCE           ENABLED
+LANG_ENGLISH        "Enabled"
+LANG_SPANISH        "Activado"
+
+REFERENCE           DISABLED
+LANG_ENGLISH        "Disabled"
+LANG_SPANISH        "Desactivado"
+
+REFERENCE           STRAT_ENABLE_HOLD
+LANG_ENGLISH        "Enable: Hold ^3Bash"
+LANG_SPANISH        "Activar: mantén ^3Golpe"
+
+REFERENCE           STRAT_DISABLE_HOLD
+LANG_ENGLISH        "Disable: Hold ^3Bash"
+LANG_SPANISH        "Desactivar: mantén ^3Golpe"
+
+REFERENCE           STRAT_GRENADE_EXPLODES
+LANG_ENGLISH        "Grenade explodes in"
+LANG_SPANISH        "La granada explota en"
+
+REFERENCE           STRAT_DAMAGE_SELF
+LANG_ENGLISH        "^7You inflicted ^1&&1^7 damage to yourself"
+LANG_SPANISH        "^7Te hiciste ^1&&1^7 de daño"
+
+REFERENCE           STRAT_DAMAGE_DEALT
+LANG_ENGLISH        "^7You inflicted ^2&&1^7 damage to &&2 (&&3)"
+LANG_SPANISH        "^7Le hiciste ^2&&1^7 de daño a &&2 (&&3)"
+
+REFERENCE           STRAT_DAMAGE_TAKEN
+LANG_ENGLISH        "&&1^7 inflicted ^1&&2^7 damage to you (&&3)"
+LANG_SPANISH        "&&1^7 te hizo ^1&&2^7 de daño (&&3)"
+
+REFERENCE           STRAT_FLY_ON
+LANG_ENGLISH        "^3Training nade fly mode turned ^1on"
+LANG_SPANISH        "^3Vuelo de granada de entrenamiento ^1activado"
+
+REFERENCE           STRAT_FLY_OFF
+LANG_ENGLISH        "^3Training nade fly mode turned ^1off"
+LANG_SPANISH        "^3Vuelo de granada de entrenamiento ^1desactivado"
+
+REFERENCE           STRAT_NO_POSITION
+LANG_ENGLISH        "^1There is no previous ^3position ^1to load"
+LANG_SPANISH        "^1No hay ^3posición ^1guardada para cargar"
+
+REFERENCE           STRAT_POSITION_LOADED
+LANG_ENGLISH        "^3Position ^1loaded"
+LANG_SPANISH        "^3Posición ^1cargada"
+
+REFERENCE           STRAT_POSITION_SAVED
+LANG_ENGLISH        "^3Position ^1saved"
+LANG_SPANISH        "^3Posición ^1guardada"
+
+REFERENCE           STRAT_BOT_FAILED
+LANG_ENGLISH        "^1Bot adding failed"
+LANG_SPANISH        "^1No se pudo añadir el bot"
+
+REFERENCE           STRAT_MOVE_AWAY
+LANG_ENGLISH        "Move away to spawn a bot."
+LANG_SPANISH        "Apártate para que aparezca un bot."
+
+REFERENCE           STRAT_MOVE_TO_RECORD
+LANG_ENGLISH        "Move to start recording"
+LANG_SPANISH        "Muévete para empezar a grabar"
+
+REFERENCE           STRAT_GO
+LANG_ENGLISH        "^2Go Go Go!"
+LANG_SPANISH        "^2¡Vamos, vamos!"
+
+REFERENCE           STRAT_RECORDING_SLOT
+LANG_ENGLISH        "^2Recording to slot &&1..."
+LANG_SPANISH        "^2Grabando en la ranura &&1..."
+
+REFERENCE           STRAT_STOP_TO_END
+LANG_ENGLISH        "Dont move to stop recording"
+LANG_SPANISH        "Quédate quieto para dejar de grabar"
+
+REFERENCE           STRAT_RECORDING_SAVED
+LANG_ENGLISH        "^2Recording saved"
+LANG_SPANISH        "^2Grabación guardada"
+
+REFERENCE           STRAT_PLAY_WHILE_RECORDING
+LANG_ENGLISH        "^1Cannot play record while recording!"
+LANG_SPANISH        "^1¡No se puede reproducir mientras grabas!"
+
+REFERENCE           STRAT_NO_RECORD
+LANG_ENGLISH        "^1No record to play"
+LANG_SPANISH        "^1No hay grabación para reproducir"
+
+REFERENCE           STRAT_PLAYING
+LANG_ENGLISH        "Playing records..."
+LANG_SPANISH        "Reproduciendo grabaciones..."
+
+REFERENCE           STRAT_PLAYING_DONE
+LANG_ENGLISH        "Playing finished"
+LANG_SPANISH        "Reproducción terminada"
+
+REFERENCE           AIM_CONTROL
+LANG_ENGLISH        "Aim Trainer control:"
+LANG_SPANISH        "Control del entrenador de puntería:"
+
+REFERENCE           AIM_HOLD
+LANG_ENGLISH        "Hold ^3[{+melee_breath}] ^7to enable or switch modes."
+LANG_SPANISH        "Mantén ^3[{+melee_breath}] ^7para activar o cambiar de modo."
+
+REFERENCE           AIM_DOUBLE
+LANG_ENGLISH        "Double press ^3[{+melee_breath}] ^7to disable."
+LANG_SPANISH        "Pulsa dos veces ^3[{+melee_breath}] ^7para desactivar."
+
+REFERENCE           AIM_NOT_SUPPORTED
+LANG_ENGLISH        "^1This map does not support aim trainer targets!"
+LANG_SPANISH        "^1¡Este mapa no tiene dianas de entrenamiento!"
+
+REFERENCE           AIM_ENABLED
+LANG_ENGLISH        "Aim Trainer ^2Enabled"
+LANG_SPANISH        "Entrenador de puntería ^2activado"
+
+REFERENCE           AIM_MODE_1
+LANG_ENGLISH        "Mode 1: Static targets"
+LANG_SPANISH        "Modo 1: dianas quietas"
+
+REFERENCE           AIM_MODE_2
+LANG_ENGLISH        "Mode 2: Moving targets"
+LANG_SPANISH        "Modo 2: dianas en movimiento"
+
+REFERENCE           AIM_MODE_3
+LANG_ENGLISH        "Mode 3: Fast moving targets"
+LANG_SPANISH        "Modo 3: dianas rápidas"
+
+REFERENCE           AIM_MODE_4
+LANG_ENGLISH        "Mode 4: Reaction time"
+LANG_SPANISH        "Modo 4: tiempo de reacción"
+
+REFERENCE           AIM_DISABLED
+LANG_ENGLISH        "Aim Trainer ^1Disabled"
+LANG_SPANISH        "Entrenador de puntería ^1desactivado"
+
+REFERENCE           AIM_NO_TARGETS
+LANG_ENGLISH        "^1No available targets!"
+LANG_SPANISH        "^1¡No hay dianas disponibles!"
+
+REFERENCE           AIM_TOO_MANY_MISSES
+LANG_ENGLISH        "^3Too many missed shots!"
+LANG_SPANISH        "^3¡Demasiados disparos fallados!"
+
+REFERENCE           AIM_SCORE
+LANG_ENGLISH        "Score: &&1"
+LANG_SPANISH        "Puntos: &&1"
+
+REFERENCE           AIM_SCORE_RECORD
+LANG_ENGLISH        "^2Score: &&1"
+LANG_SPANISH        "^2Puntos: &&1"
+
+REFERENCE           AIM_TOO_SOON
+LANG_ENGLISH        "^1Too soon!"
+LANG_SPANISH        "^1¡Demasiado pronto!"
+
+REFERENCE           AIM_TIME_UP
+LANG_ENGLISH        "^3Time to shot the target elapsed!"
+LANG_SPANISH        "^3¡Se acabó el tiempo para disparar!"
+
+REFERENCE           AIM_REACTION
+LANG_ENGLISH        "Reaction time: &&1ms"
+LANG_SPANISH        "Tiempo de reacción: &&1ms"
+
+REFERENCE           AIM_REACTION_SCORE
+LANG_ENGLISH        "Reaction time: &&1ms  Score: &&2"
+LANG_SPANISH        "Tiempo de reacción: &&1ms  Puntos: &&2"
+
+REFERENCE           AIM_STEP_BACK
+LANG_ENGLISH        "^3Please step back from the obstacle."
+LANG_SPANISH        "^3Aléjate del obstáculo."
+
 ENDMARKER

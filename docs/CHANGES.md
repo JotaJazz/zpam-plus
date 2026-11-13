@@ -98,9 +98,10 @@ Changes since zPAM 3.38. Earlier history:
   language, with Spanish as the first translation. The match-flow messages and
   HUD texts follow too: time-out, pistol bash, ready-up lengths, round, half-time,
   over-time and end-of-map texts, players left, weapon drops, recording, score
-  changes, name warnings, the ladder and the forced download. Streamer, strat,
-  aim trainer, map vote, the `pam_mode` help and the server and match info are
-  still English.
+  changes, name warnings, the ladder and the forced download; then the
+  streamer system, strat, the aim trainer, map vote, the `pam_mode` help, cvar
+  change notices and the other gametypes' texts. The server info and match info
+  menus and the warnings at the top left are still English.
 - With `scr_ladder_match` set by rcon, `games_mp.log` gets `LadderStart;` when
   the first ready-up ends and `LadderEnd;` with each team's score and the winner
   at the end of the map, for an automatic ladder to read.

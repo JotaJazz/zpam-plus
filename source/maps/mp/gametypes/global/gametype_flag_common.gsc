@@ -113,7 +113,7 @@ respawn_wait_remaining()
 	self endon("end_respawn_wait");
 
 	remaining = int((self.respawnAt - getTime()) / 1000) + 1;
-	self iprintln("You will respawn in " + remaining + " seconds.");
+	self iprintln(&"ZPAM_RESPAWN_IN", remaining);
 	wait ((self.respawnAt - getTime()) / 1000);
 
 	while(level.in_timeout)

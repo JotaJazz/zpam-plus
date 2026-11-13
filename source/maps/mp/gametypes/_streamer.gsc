@@ -224,7 +224,7 @@ move_to_streamers()
 	// This will make sure it will be hided
 	self thread maps\mp\gametypes\_menu_scoreboard::hide_scoreboard(true); // true = distributed
 
-	self iprintlnbold("Streamer team auto-join...");
+	self iprintlnbold(&"ZPAM_STREAMER_AUTOJOIN");
 	self iprintlnbold(" ");
 	self iprintlnbold(" ");
 
@@ -596,7 +596,7 @@ openStreamerMenu()
 
 		if (retry >= 3)
 		{
-			self iprintln("^1Cannot open streamer system menu. Please press ^3[ESC]^1 key");
+			self iprintln(&"ZPAM_STREAMER_MENU_ESC");
 			retry = 0;
 		}
 		if (level.debug_spectator) self iprintln("^3Opening mp_quickmessage with streamer mode...");
@@ -802,7 +802,7 @@ handleAttackButtonPress()
 
 	if (!isDefined(player))
 	{
-		self iprintln("No player to follow");
+		self iprintln(&"ZPAM_STREAMER_NO_ONE");
 		self.streamerSystem_freeSpectating = true;
 	}
 
@@ -1507,7 +1507,7 @@ player_names()
 					if (name != player.name)
 					{
 						player iprintlnbold(" ");
-						player iprintlnbold("^3Double colors were removed from your nickname for stream purposes.");
+						player iprintlnbold(&"ZPAM_STREAMER_DOUBLE_COLORS");
 						player iprintlnbold(" ");
 						player setClientCvar("name", name);
 

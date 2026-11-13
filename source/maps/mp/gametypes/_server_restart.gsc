@@ -34,7 +34,7 @@ restartIfEmpty()
 		players = getentarray("player", "classname");
 		if (players.size == 0)
 		{
-			iprintln("Restarting server...");
+			iprintln(&"ZPAM_RESTARTING_SERVER");
 			// Will disable all comming map-restrat (so map can be changed correctly)
 			level.pam_mode_change = true;
 			map_restart(false);

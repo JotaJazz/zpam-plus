@@ -7,8 +7,8 @@ init()
 
 	if(game["firstInit"])
 	{
-		precacheString2("STRING_STREAMERSYSTEM_PRESS_ATTACT_TO_ENABLE", &"Press ^3[{+attack}]^7 to open streamer menu");
-		precacheString2("STRING_STREAMERSYSTEM_PRESS_ESC_WARNING", &"Press ^3[ESC]^7 to close streamer menu\n(binds are not working when streamer menu is opened)");
+		precacheString2("STRING_STREAMERSYSTEM_PRESS_ATTACT_TO_ENABLE", &"ZPAM_STREAMER_PRESS_ATTACK");
+		precacheString2("STRING_STREAMERSYSTEM_PRESS_ESC_WARNING", &"ZPAM_STREAMER_PRESS_ESC");
 	}
 
 	if (!isDefined(game["streamerSystem_scoreProgress"]))
@@ -643,7 +643,7 @@ HUD_PlayerBoxes_Loop()
 
 			if (isDefined(playerMaxKills) && playerMaxKills.pers["round_kills"] >= 4)
 			{
-				self iprintlnbold(playerMaxKills.name + "^7 with ^2" + playerMaxKills.pers["round_kills"] + "^7 kills in this round!");
+				self iprintlnbold(&"ZPAM_STREAMER_ROUND_KILLS", playerMaxKills, playerMaxKills.pers["round_kills"]);
 			}
 
 			round_kills_printed = true;
@@ -678,10 +678,10 @@ followPlayerByNum(num)
 			//self iprintln("Follow player " + num/* + ": " + player.name*/);
 		}
 		else
-			self iprintln("^3Player " + num + " is not alive");
+			self iprintln(&"ZPAM_STREAMER_PLAYER_DEAD", num);
 	}
 	else
-		self iprintln("^3Player " + num + " does not exists");
+		self iprintln(&"ZPAM_STREAMER_PLAYER_MISSING", num);
 }
 
 

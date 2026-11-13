@@ -389,8 +389,8 @@ ChangeTo(mode)
 	// Will disable all comming map-restrat (so pam_mode can be changed correctly)
 	level.pam_mode_change = true;
 
-	iprintlnbold("^3zPAM mode changing to ^2" + mode);
-	iprintlnbold("^3Please wait...");
+	iprintlnbold(&"ZPAM_PAMMODE_CHANGING", mode);
+	iprintlnbold(&"ZPAM_PLEASE_WAIT");
 
 	wait 3;
 

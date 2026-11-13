@@ -357,7 +357,7 @@ limitCvar(cvar, registerTime)
 	{
 		setCvar(cvar["name"], cvar["defaultValue"]);
 		if (!registerTime)
-			iprintln("^3DVAR change detected: ^2" + cvar["name"] + " ^3 was not defined");
+			iprintln(&"ZPAM_CVAR_NOT_DEFINED", cvar["name"]);
 		return false;
 	}
 	else if (cvar["type"] == "INT" || cvar["type"] == "FLOAT" || cvar["type"] == "BOOL") // string does not have min - max value
@@ -373,8 +373,8 @@ limitCvar(cvar, registerTime)
 				setCvar(cvar["name"], cvar["maxValue"]); // value before is same as before (register time)
 
 			if (!registerTime) {
-				iprintln("^3DVAR change detected: ^2" + value_now + "^3 is not a valid value for dvar ^2" + cvar["name"]);
-				iprintln("^3DVAR change detected: Domain is a value from ^2"+cvar["minValue"]+"^3 to ^2"+cvar["maxValue"]);
+				iprintln(&"ZPAM_CVAR_INVALID", value_now, cvar["name"]);
+				iprintln(&"ZPAM_CVAR_DOMAIN", cvar["minValue"], cvar["maxValue"]);
 			} else {
 				println("Cvar " + cvar["name"] + " has value '"+value_now+"' outside limit.");
 				println("Domain is a value from ^2"+cvar["minValue"]+"^3 to ^2"+cvar["maxValue"]);
@@ -389,8 +389,8 @@ limitCvar(cvar, registerTime)
 				setCvar(cvar["name"], cvar["minValue"]); // value before is same as before (register time)
 
 			if (!registerTime) {
-				iprintln("^3DVAR change detected: ^2" + value_now + "^3 is not a valid value for dvar ^2" + cvar["name"]);
-				iprintln("^3DVAR change detected: Domain is a value from ^2"+cvar["minValue"]+"^3 to ^2"+cvar["maxValue"]);
+				iprintln(&"ZPAM_CVAR_INVALID", value_now, cvar["name"]);
+				iprintln(&"ZPAM_CVAR_DOMAIN", cvar["minValue"], cvar["maxValue"]);
 			} else {
 				println("Cvar " + cvar["name"] + " has value '"+value_now+"' outside limit.");
 				println("Domain is a value from ^2"+cvar["minValue"]+"^3 to ^2"+cvar["maxValue"]);
@@ -460,7 +460,7 @@ monitorCvarChanges()
 						cancelCvarQuiet(cvar["name"]);
 
 					if (cvar["name"] != "pam_mode_custom")
-						iprintln("^3Server cvar ^2" + cvar["name"] + "^3 changed from ^2" + cvar["value"] + "^3 to ^2" + value_now);
+						iprintln(&"ZPAM_CVAR_CHANGED", cvar["name"], cvar["value"], value_now);
 
 					// Update value in global struct definition
 					game["cvars"][game["cvarnames"][i]]["value"] = value_now;

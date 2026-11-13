@@ -4,38 +4,38 @@ init()
 {
 	if(game["firstInit"])
 	{
-		precacheString2("STRING_STREAMERSYSTEM_HIT_HP", 		&"&&1 hp");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_HP", 		&"ZPAM_HIT_HP");
 
-		precacheString2("STRING_STREAMERSYSTEM_HIT_HEAD", 		&"Head");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_NECK", 		&"Neck");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_BODY", 		&"Torso");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_BODY_UPPER", 	&"Torso-up");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_BODY_LOWER", 	&"Torso-low");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_SHOULDER", 		&"Shoulder");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_ARM", 		&"Arm");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_HAND", 		&"Hand");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_LEG", 		&"Leg");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_LEG_UPPEER", 	&"Leg-up");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_LEG_LOWER", 		&"Leg-low");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_FOOT", 		&"Foot");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_GRENADE", 		&"Grenade");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_HEAD", 		&"ZPAM_HIT_HEAD");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_NECK", 		&"ZPAM_HIT_NECK");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_BODY", 		&"ZPAM_HIT_BODY");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_BODY_UPPER", 	&"ZPAM_HIT_BODY_UPPER");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_BODY_LOWER", 	&"ZPAM_HIT_BODY_LOWER");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_SHOULDER", 		&"ZPAM_HIT_SHOULDER");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_ARM", 		&"ZPAM_HIT_ARM");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_HAND", 		&"ZPAM_HIT_HAND");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_LEG", 		&"ZPAM_HIT_LEG");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_LEG_UPPEER", 	&"ZPAM_HIT_LEG_UPPER");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_LEG_LOWER", 		&"ZPAM_HIT_LEG_LOWER");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_FOOT", 		&"ZPAM_HIT_FOOT");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_GRENADE", 		&"ZPAM_HIT_GRENADE");
 
-		precacheString2("STRING_STREAMERSYSTEM_HIT_SHOTGUN_1p", 	&"1 pellet");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_SHOTGUN_2p", 	&"2 pellets");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_SHOTGUN_3p", 	&"3 pellets");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_SHOTGUN_4p", 	&"4 pellets");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_SHOTGUN_5p", 	&"5 pellets");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_SHOTGUN_6p", 	&"6 pellets");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_SHOTGUN_7p", 	&"7 pellets");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_SHOTGUN_8p", 	&"8 pellets");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_SHOTGUN_1p", 	&"ZPAM_HIT_PELLETS_1");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_SHOTGUN_2p", 	&"ZPAM_HIT_PELLETS_2");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_SHOTGUN_3p", 	&"ZPAM_HIT_PELLETS_3");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_SHOTGUN_4p", 	&"ZPAM_HIT_PELLETS_4");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_SHOTGUN_5p", 	&"ZPAM_HIT_PELLETS_5");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_SHOTGUN_6p", 	&"ZPAM_HIT_PELLETS_6");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_SHOTGUN_7p", 	&"ZPAM_HIT_PELLETS_7");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_SHOTGUN_8p", 	&"ZPAM_HIT_PELLETS_8");
 
-		precacheString2("STRING_STREAMERSYSTEM_HIT_INFO_SHOTGUN_1_KILL", 	&"Range 1   (1 pellet needed for kill)");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_INFO_SHOTGUN_1_HIT", 	&"Range 1   (2 pellets needed for kill (body not visible)");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_INFO_SHOTGUN_2", 		&"Range 2   (2 pellets needed for kill)");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_INFO_SHOTGUN_3", 		&"Range 3   (3 pellets needed for kill)");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_INFO_SHOTGUN_4", 		&"Range 4   (linear damage)");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_INFO_TORSO_HITBOX_FIX", 	&"Torso hitbox fix applied");
-		precacheString2("STRING_STREAMERSYSTEM_HIT_INFO_HAND_HITBOX_FIX", 	&"Hand hitbox fix applied");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_INFO_SHOTGUN_1_KILL", 	&"ZPAM_HIT_SHOTGUN_RANGE_1_KILL");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_INFO_SHOTGUN_1_HIT", 	&"ZPAM_HIT_SHOTGUN_RANGE_1_HIT");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_INFO_SHOTGUN_2", 		&"ZPAM_HIT_SHOTGUN_RANGE_2");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_INFO_SHOTGUN_3", 		&"ZPAM_HIT_SHOTGUN_RANGE_3");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_INFO_SHOTGUN_4", 		&"ZPAM_HIT_SHOTGUN_RANGE_4");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_INFO_TORSO_HITBOX_FIX", 	&"ZPAM_HIT_TORSO_FIX");
+		precacheString2("STRING_STREAMERSYSTEM_HIT_INFO_HAND_HITBOX_FIX", 	&"ZPAM_HIT_HAND_FIX");
 
 		precacheShader("headicon_dead");
 

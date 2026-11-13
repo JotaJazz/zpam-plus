@@ -187,7 +187,7 @@ onStartGameType()
 
 				if (allies > 0 && axis > 0)
 				{
-					iprintln("Match is starting");
+					iprintln(&"ZPAM_MATCH_STARTING");
 
 					wait 8;
 

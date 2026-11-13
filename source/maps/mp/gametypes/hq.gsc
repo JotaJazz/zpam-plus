@@ -161,7 +161,7 @@ precache()
 	precacheStatusIcon("compassping_enemyfiring"); // for streamers
 
 	// HUD: Strattime
-	precacheString2("STRING_STRAT_TIME", &"Strat Time");
+	precacheString2("STRING_STRAT_TIME", &"ZPAM_STRAT_TIME");
 }
 
 
@@ -319,7 +319,7 @@ onStartGameType()
 
 				if (allies > 0 && axis > 0)
 				{
-					iprintln("Match is starting");
+					iprintln(&"ZPAM_MATCH_STARTING");
 
 					wait 8;
 

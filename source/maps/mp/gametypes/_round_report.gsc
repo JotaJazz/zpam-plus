@@ -290,7 +290,7 @@ print()
 		self iprintln(" ");
 		self iprintln(" ");
 		self iprintln(" ");
-		self iprintln("Round report:");
+		self iprintln(&"ZPAM_ROUND_REPORT");
 	}
 
 

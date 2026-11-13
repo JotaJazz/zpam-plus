@@ -50,11 +50,11 @@ precache()
 	precacheShader("objectiveA");
 	precacheShader("objectiveB");
 
-	precacheString2("STRING_FLY_ENABLED", &"Enabled");
-	precacheString2("STRING_FLY_DISABLED", &"Disabled");
-	precacheString2("STRING_ENABLE_HOLD_SHIFT", &"Enable: Hold ^3Bash");
-	precacheString2("STRING_DISABLE_HOLD_SHIFT", &"Disable: Hold ^3Bash");
-	precacheString2("STRING_GRENADE_EXPLODES_IN", &"Grenade explodes in");
+	precacheString2("STRING_FLY_ENABLED", &"ZPAM_ENABLED");
+	precacheString2("STRING_FLY_DISABLED", &"ZPAM_DISABLED");
+	precacheString2("STRING_ENABLE_HOLD_SHIFT", &"ZPAM_STRAT_ENABLE_HOLD");
+	precacheString2("STRING_DISABLE_HOLD_SHIFT", &"ZPAM_STRAT_DISABLE_HOLD");
+	precacheString2("STRING_GRENADE_EXPLODES_IN", &"ZPAM_STRAT_GRENADE_EXPLODES");
 }
 
 // Called after the <gametype>.gsc::main() and <map>.gsc::main() scripts are called
@@ -256,7 +256,7 @@ onPlayerDamaging(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon
 		if (eAttacker == self)
 		{
 			// You inflicted 28 damage to yourself
-			self iprintln("^7You inflicted ^1" + iDamage + "^7 damage to yourself");
+			self iprintln(&"ZPAM_STRAT_DAMAGE_SELF", iDamage);
 			//self iprintln("^1Hit by-self for ^3" + iDamage + " ^1 damage^7"); // Hit Player damage notice
 		}
 		else
@@ -271,11 +271,11 @@ onPlayerDamaging(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon
 				info += ", " + eAttacker.hitData[self_num].adjustedBy;
 
 			// You inflicted 28 damage to BOT1
-			eAttacker iprintln("^7You inflicted ^2" + iDamage + "^7 damage to " + self.name + " (" + info + ")");
+			eAttacker iprintln(&"ZPAM_STRAT_DAMAGE_DEALT", iDamage, self, info);
 			//eAttacker iprintln("^2Hit ^7" + self.name + "^2 for ^1" + iDamage + " ^2 damage^7"); // Attacker damage notice
 
 			// Bot1 inflicted 12 damage to you
-			self iprintln(eAttacker.name + "^7 inflicted ^1" + iDamage + "^7 damage to you (" + info + ")");
+			self iprintln(&"ZPAM_STRAT_DAMAGE_TAKEN", eAttacker, iDamage, info);
 			//self iprintln("^1Hit by ^7" + eAttacker.name + "^1 for ^3" + iDamage + " ^1 damage^7"); // Hit Player damage notice
 		}
 	}
@@ -868,10 +868,10 @@ Key_Toggle_FlyMode()
 			if (waittime > 1.0)
 			{
 				if (!self.flaying_enabled) {
-					self iprintln("^3Training nade fly mode turned ^1on");
+					self iprintln(&"ZPAM_STRAT_FLY_ON");
 					self.flaying_enabled = 1;
 				} else {
-					self iprintln("^3Training nade fly mode turned ^1off");
+					self iprintln(&"ZPAM_STRAT_FLY_OFF");
 					self.flaying_enabled = 0;
 				}
 				break;
@@ -1189,14 +1189,14 @@ loadPos()
 {
 	if(!isDefined(self.saved_origin))
 		{
-			self iprintln("^1There is no previous ^3position ^1to load");
+			self iprintln(&"ZPAM_STRAT_NO_POSITION");
 			return;
 		}
 	else
 		{
 			self setPlayerAngles(self.saved_angles);
 			self setOrigin(self.saved_origin);
-			self iprintln("^3Position ^1loaded");
+			self iprintln(&"ZPAM_STRAT_POSITION_LOADED");
 		}
 
 }
@@ -1206,7 +1206,7 @@ savePos()
 {
 	self.saved_origin = self.origin;
 	self.saved_angles = self.angles;
-	self iprintln("^3Position ^1saved");
+	self iprintln(&"ZPAM_STRAT_POSITION_SAVED");
 }
 
 
@@ -1333,7 +1333,7 @@ add_bot()
 	bot = maps\mp\gametypes\_bots::addBot(true);
 
 	if (!isDefined(bot))
-		self iprintln("^1Bot adding failed");
+		self iprintln(&"ZPAM_STRAT_BOT_FAILED");
 	else
 	{
 		bot thread handle_bot(self); // spawn bot to actual players position
@@ -1351,7 +1351,7 @@ handle_bot(player)
 	// Wait untill player move from spawn position
 	pos = player.origin;
 	angle = player.angles;
-	player iprintlnbold("Move away to spawn a bot.");
+	player iprintlnbold(&"ZPAM_STRAT_MOVE_AWAY");
 	while (distance(pos, player.origin) < 50)
 		wait .1;
 
@@ -1517,15 +1517,15 @@ record(slot)
 	self.kc_bottombar.sort = 99;
 	self.kc_bottombar setShader("black", 640, 80);
 
-	self iprintlnbold("Move to start recording");
-	self iprintlnbold("^2Go Go Go!");
+	self iprintlnbold(&"ZPAM_STRAT_MOVE_TO_RECORD");
+	self iprintlnbold(&"ZPAM_STRAT_GO");
 
 	origin_old = self.origin;
 	for (;;)
 	{
 		if (distance(self.origin, origin_old) > 10)
 		{
-			self iprintlnbold("^2Recording to slot " + (slot+1) + "...");
+			self iprintlnbold(&"ZPAM_STRAT_RECORDING_SLOT", slot + 1);
 			break;
 		}
 		wait 0.1;
@@ -1557,13 +1557,13 @@ record(slot)
 			time_not_moving = 0;
 
 		if (time_not_moving == 1)
-			self iprintlnbold("Dont move to stop recording");
+			self iprintlnbold(&"ZPAM_STRAT_STOP_TO_END");
 
 		if (time_not_moving >= 4 || !isAlive(self))
 			self.recording = false;
 	}
 
-	self iprintlnbold("^2Recording saved");
+	self iprintlnbold(&"ZPAM_STRAT_RECORDING_SAVED");
 
 	self.kc_topbar destroy2();
 	self.kc_bottombar destroy2();
@@ -1587,13 +1587,13 @@ playRecords()
 
 	if (self.recording)
 	{
-		self iprintlnbold("^1Cannot play record while recording!");
+		self iprintlnbold(&"ZPAM_STRAT_PLAY_WHILE_RECORDING");
 		return;
 	}
 
 	if (records == 0)
 	{
-		self iprintlnbold("^1No record to play");
+		self iprintlnbold(&"ZPAM_STRAT_NO_RECORD");
 		return;
 	}
 
@@ -1612,7 +1612,7 @@ playRecords()
 	}
 
 
-	self iprintlnbold("Playing records...");
+	self iprintlnbold(&"ZPAM_STRAT_PLAYING");
 	self iprintlnbold(" ");
 	self iprintlnbold(" ");
 	self iprintlnbold(" ");
@@ -1639,7 +1639,7 @@ playRecords()
 
 	self.clock setTimer(0.001);
 
-	self iprintln("Playing finished");
+	self iprintln(&"ZPAM_STRAT_PLAYING_DONE");
 }
 
 playRecord(slotIndex, botIndex)

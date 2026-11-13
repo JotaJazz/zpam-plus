@@ -3,6 +3,12 @@
 Append-only. Newest first. Template in
 [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
 
+## 2026-11-13 — the rest of the texts in Spanish
+
+- 132 more references: streamer system, strat, aim trainer, map vote, `pam_mode` help, cvar change notices, bots, restarts and the other gametypes' texts; `zpam.str` has 258. Every gametype runs on the test server with no script error.
+- Left English: the server info and match info menus and the top-left warnings. The client translates a menu's cvar text only when the whole value is `@REF`, and translates on arrival only `cg_objectiveText`, so they need one menu item per line, checked in a client. Also left: debug output and `global/pam.gsc`'s install errors (admin, `ZPAM_RENAME` iwd names).
+- `LadderLeaver;` checked with bots: a roster bot kicked before the last round gives `LadderLeaver;m1;bot1;1` after `LadderEnd`. Bots cannot rejoin under the same name, so the leaver-comes-back path stays a self-test and play-test check.
+
 ## 2026-11-13 — match-flow texts in Spanish
 
 - 82 references in `zpam.str` (English and Spanish) for time-out, bash, ready-up lengths, rounds, half-time, over-time, end of map, players left, drops, recording, score, names, ladder and forced download; values go as `&&1` arguments. `iprintln` sends only the reference (no precache, no slot of the 256); HUD texts were already precached as literals, so the count did not change.

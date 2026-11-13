@@ -138,9 +138,12 @@ load and takes one of the engine's 256 localized-string slots; an `iprintln` or
 `iprintlnbold` sends only the reference, so it needs neither. Values go in as
 `&&1`, `&&2`: `iprintln(&"ZPAM_TO_CALLED", self, teamName)`, where a player
 entity prints his name and a localized string is translated too; a localized
-string cannot be joined with `+`. The ready-up and time-out HUD, the quick
-settings menu and the match-flow messages use it; streamer, strat, aim trainer,
-map vote, the `pam_mode` help, debug output and text the server builds and sends
-by cvar (`cg_objectiveText`, server info, match info) are still English.
+string cannot be joined with `+`. Every player-facing message and HUD text uses it; debug output, the install
+errors of `global/pam.gsc` (for the admin, with iwd names that change each
+release) and text the server builds and sends by cvar (server info, match info,
+the warnings at the top left) are still English. A menu shows a cvar's text
+translated only when the whole value is `@ZPAM_<REFERENCE>`, and the client
+translates only `cg_objectiveText` when it arrives, so those menus need one item
+per line to be translated.
 Portuguese waits for a language slot in the OpenCoD2-Plus client: CoD2's list
 (`loc_language` 0-13) has none.

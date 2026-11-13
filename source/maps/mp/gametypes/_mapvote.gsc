@@ -9,9 +9,9 @@ Init()
 
 	if(game["firstInit"])
 	{
-		precacheString2("STRING_MAPVOTE_PRESS_FIRE", &"Press ^2FIRE^7 to vote                           Votes");
-		precacheString2("STRING_MAPVOTE_TIME_LEFT", &"Time Left: ");
-		precacheString2("STRING_MAPVOTE_HEADER", &"Next Map Vote");
+		precacheString2("STRING_MAPVOTE_PRESS_FIRE", &"ZPAM_MAPVOTE_PRESS_FIRE");
+		precacheString2("STRING_MAPVOTE_TIME_LEFT", &"ZPAM_MAPVOTE_TIME_LEFT");
+		precacheString2("STRING_MAPVOTE_HEADER", &"ZPAM_MAPVOTE_HEADER");
 	}
 
 	level.mapvotetime = 13;
@@ -338,7 +338,7 @@ PlayerVote()
 			if (self.votechoice == 5)
 				self.votechoice = 0;
 
-			self iprintln("You have voted for ^2" + level.mapcandidate[self.votechoice]["mapname"] + " (" + level.mapcandidate[self.votechoice]["gametype"]+")");
+			self iprintln(&"ZPAM_MAPVOTE_VOTED", level.mapcandidate[self.votechoice]["mapname"], level.mapcandidate[self.votechoice]["gametype"]);
 			self.vote_indicator.y = level.mapvotehudoffset + 77 + self.votechoice * 16;
 			self.vote_indicator.color = colors[self.votechoice];
 
@@ -415,7 +415,7 @@ SetMapWinner(winner)
 	iprintlnbold(" ");
 	iprintlnbold(" ");
 	iprintlnbold(" ");
-	iprintlnbold("The winner is");
+	iprintlnbold(&"ZPAM_MAPVOTE_WINNER");
 	iprintlnbold("^2" + mapname);
 	iprintlnbold("^2" + GetGametypeName(gametype));
 
@@ -521,7 +521,7 @@ GetRandomMapRotation(random, current, number)
 
 			// If code get here, then the maprotation is corrupt so we have to fix it
 			default:
-				iprintlnbold("Warning: Error detected in map rotation");
+				iprintlnbold(&"ZPAM_MAPVOTE_ROTATION_ERROR");
 
 				if(isGametype(temparr[i]))
 					lastgt = temparr[i];

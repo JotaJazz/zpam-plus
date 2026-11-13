@@ -134,12 +134,12 @@ precache()
 	precacheString(&"RE_ATTACKER");
 	precacheString(&"RE_DEFENDER");
 
-	precacheString2("STRING_ROUND", &"Round");
-	precacheString2("STRING_ROUND_STARTING", &"Starting");
-	precacheString2("STRING_ROUND_FIRST", &"First Round");
-	precacheString2("STRING_ROUND_LAST_HALF", &"Last round before half");
-	precacheString2("STRING_ROUND_LAST", &"Last round");
-	precacheString2("STRING_STRAT_TIME", &"Strat Time");
+	precacheString2("STRING_ROUND", &"ZPAM_ROUND");
+	precacheString2("STRING_ROUND_STARTING", &"ZPAM_ROUND_STARTING");
+	precacheString2("STRING_ROUND_FIRST", &"ZPAM_ROUND_FIRST");
+	precacheString2("STRING_ROUND_LAST_HALF", &"ZPAM_ROUND_LAST_HALF");
+	precacheString2("STRING_ROUND_LAST", &"ZPAM_ROUND_LAST");
+	precacheString2("STRING_STRAT_TIME", &"ZPAM_STRAT_TIME");
 
 	precacheString(&"MP_MATCHSTARTING");
 	precacheString(&"MP_MATCHRESUMING");
@@ -763,7 +763,7 @@ onStartGameType()
 
 				if (allies > 0 && axis > 0)
 				{
-					iprintln("Match starting");
+					iprintln(&"ZPAM_MATCH_STARTING");
 
 					wait 8;
 

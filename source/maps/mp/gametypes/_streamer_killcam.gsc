@@ -7,15 +7,15 @@ init()
 
 	if(game["firstInit"])
 	{
-		precacheString2("STRING_STREAMERSYSTEM_KILLCAM_PROPOSAL_KEY_MULTIKILL", &"Press ^3[F]^7 to replay ^2multi-kill ^7 of:");
-		precacheString2("STRING_STREAMERSYSTEM_KILLCAM_PROPOSAL_KEY_MULTIKILL_2", &"Press ^3[F]^7 to replay ^22 kills ^7 of:");
-		precacheString2("STRING_STREAMERSYSTEM_KILLCAM_PROPOSAL_KEY_MULTIKILL_3", &"Press ^3[F]^7 to replay ^23 kills ^7 of:");
-		precacheString2("STRING_STREAMERSYSTEM_KILLCAM_PROPOSAL_KEY_MULTIKILL_4", &"Press ^3[F]^7 to replay ^24 kills ^7 of:");
-		precacheString2("STRING_STREAMERSYSTEM_KILLCAM_PROPOSAL_KEY_MULTIKILL_5", &"Press ^3[F]^7 to replay ^25 kills ^7 of:");
-		precacheString2("STRING_STREAMERSYSTEM_KILLCAM_PROPOSAL_KEY_NOZOOM", &"Press ^3[F]^7 to replay ^2nozoom ^7 of:");
-		precacheString2("STRING_STREAMERSYSTEM_KILLCAM_PROPOSAL_KEY_BASH", &"Press ^3[F]^7 to replay ^2bash ^7 of:");
+		precacheString2("STRING_STREAMERSYSTEM_KILLCAM_PROPOSAL_KEY_MULTIKILL", &"ZPAM_KILLCAM_MULTIKILL");
+		precacheString2("STRING_STREAMERSYSTEM_KILLCAM_PROPOSAL_KEY_MULTIKILL_2", &"ZPAM_KILLCAM_MULTIKILL_2");
+		precacheString2("STRING_STREAMERSYSTEM_KILLCAM_PROPOSAL_KEY_MULTIKILL_3", &"ZPAM_KILLCAM_MULTIKILL_3");
+		precacheString2("STRING_STREAMERSYSTEM_KILLCAM_PROPOSAL_KEY_MULTIKILL_4", &"ZPAM_KILLCAM_MULTIKILL_4");
+		precacheString2("STRING_STREAMERSYSTEM_KILLCAM_PROPOSAL_KEY_MULTIKILL_5", &"ZPAM_KILLCAM_MULTIKILL_5");
+		precacheString2("STRING_STREAMERSYSTEM_KILLCAM_PROPOSAL_KEY_NOZOOM", &"ZPAM_KILLCAM_NOZOOM");
+		precacheString2("STRING_STREAMERSYSTEM_KILLCAM_PROPOSAL_KEY_BASH", &"ZPAM_KILLCAM_BASH");
 
-		precacheString2("STRING_STREAMERSYSTEM_KILLCAM_REPLAY", &"Streamer killcam replay");
+		precacheString2("STRING_STREAMERSYSTEM_KILLCAM_REPLAY", &"ZPAM_KILLCAM_REPLAY");
 	}
 
 
@@ -83,7 +83,7 @@ onMenuResponse(menu, response)
 				if (i < self.streamerSystem_killcam_indexes.size)
 					replayAction(self.streamerSystem_killcam_indexes[i], true);
 				else
-					self iprintln("^1Not existing record");
+					self iprintln(&"ZPAM_KILLCAM_NO_RECORD");
 
 				return true;
 			}
@@ -561,25 +561,25 @@ replayAction(killId, print)
 
 	if (!isDefined(record))
 	{
-		if (print || level.debug_spectator) self iprintln("^1Invalid record");
+		if (print || level.debug_spectator) self iprintln(&"ZPAM_KILLCAM_INVALID");
 		return;
 	}
 
 	if (!isDefined(record.player))
 	{
-		if (print || level.debug_spectator) self iprintln("^1Selected player disconnects!");
+		if (print || level.debug_spectator) self iprintln(&"ZPAM_KILLCAM_DISCONNECTED");
 		return;
 	}
 
 	if ((gettime() - record.timeFirst) > 40000)
 	{
-		if (print || level.debug_spectator) self iprintln("^1Record is too old and can not be replayed");
+		if (print || level.debug_spectator) self iprintln(&"ZPAM_KILLCAM_TOO_OLD");
 
 		return;
 	}
 
 	if (level.debug_spectator)
-		self iprintln("Playing killcam for: " + record.player.name);
+		self iprintln(&"ZPAM_KILLCAM_PLAYING", record.player.name);
 
 	timeBeforeKill = 2.5;
 	timeAfterKill = 1.5;

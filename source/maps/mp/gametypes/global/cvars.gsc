@@ -216,7 +216,7 @@ onCvarChanged(cvar, value, isRegisterTime)
 
 restartMap()
 {
-	iprintln("Restarting map...");
+	iprintln(&"ZPAM_RESTARTING_MAP");
 	wait 2;
 	map(level.mapname, false);
 }

@@ -150,66 +150,66 @@ IsValidPAMMode(cvar, value_now, registerTime)
 		// Print not valid warning
 		if (!registerTime)
 		{
-			iprintln("^3DVAR change detected: ^2" + value_now + "^3 is not a valid value for dvar ^2" + cvar["name"]);
+			iprintln(&"ZPAM_CVAR_INVALID", value_now, cvar["name"]);
 
 			if (level.gametype == "sd")
 			{
-				iprintln("^3Following values are valid:");
+				iprintln(&"ZPAM_PAMMODE_VALID");
 				iprintln("^7pub, comp");
-				iprintln("^3Sub-modes:");
+				iprintln(&"ZPAM_PAMMODE_SUBMODES");
 				iprintln("^7_mr3, _mr10, _mr12, _mr15, _20rounds");
 				iprintln("^7_2v2, _rifle, _lan, _custom");
 			}
 			else if (level.gametype == "dm")
 			{
-				iprintln("^3Following values are valid:");
+				iprintln(&"ZPAM_PAMMODE_VALID");
 				iprintln("^7pub, comp, warmup");
-				iprintln("^3Sub-modes:");
+				iprintln(&"ZPAM_PAMMODE_SUBMODES");
 				iprintln("^710min, 15min, 30min, 60min, unlim");
 				iprintln("^7_2v2, _rifle, _lan, _custom");
 			}
 			else if (level.gametype == "tdm")
 			{
-				iprintln("^3Following values are valid:");
+				iprintln(&"ZPAM_PAMMODE_VALID");
 				iprintln("^7pub, comp");
-				iprintln("^3Sub-modes:");
+				iprintln(&"ZPAM_PAMMODE_SUBMODES");
 				iprintln("^710min, 15min, 30min, 60min, unlim");
 				iprintln("^7_2v2, _rifle, _lan, _custom");
 			}
 			else if (level.gametype == "ctf")
 			{
-				iprintln("^3Following values are valid:");
+				iprintln(&"ZPAM_PAMMODE_VALID");
 				iprintln("^7pub, comp");
-				iprintln("^3Sub-modes:");
+				iprintln(&"ZPAM_PAMMODE_SUBMODES");
 				iprintln("^710min, 15min, 30min, 60min, unlim");
 				iprintln("^7_2v2, _rifle, _lan, _custom");
 			}
 			else if (level.gametype == "hq")
 			{
-				iprintln("^3Following values are valid:");
+				iprintln(&"ZPAM_PAMMODE_VALID");
 				iprintln("^7pub, comp");
-				iprintln("^3Sub-modes:");
+				iprintln(&"ZPAM_PAMMODE_SUBMODES");
 				iprintln("^710min, 15min, 30min, 60min, unlim");
 				iprintln("^7_2v2, _rifle, _lan, _custom");
 			}
 			else if (level.gametype == "htf")
 			{
-				iprintln("^3Following values are valid:");
+				iprintln(&"ZPAM_PAMMODE_VALID");
 				iprintln("^7pub, comp");
-				iprintln("^3Sub-modes:");
+				iprintln(&"ZPAM_PAMMODE_SUBMODES");
 				iprintln("^710min, 15min, 30min, 60min, unlim");
 				iprintln("^7_2v2, _rifle, _lan, _custom");
 			}
 			else if (level.gametype == "re")
 			{
-				iprintln("^3Following values are valid:");
+				iprintln(&"ZPAM_PAMMODE_VALID");
 				iprintln("^7pub, comp");
-				iprintln("^3Sub-modes:");
+				iprintln(&"ZPAM_PAMMODE_SUBMODES");
 				iprintln("^7_mr3, _mr10, _mr12, _mr15, _20rounds");
 				iprintln("^7_2v2, _rifle, _lan, _custom");
 			}
 			else
-				iprintln("^3Change to other gametype!");
+				iprintln(&"ZPAM_PAMMODE_OTHER_GAMETYPE");
 
 		}
 	}

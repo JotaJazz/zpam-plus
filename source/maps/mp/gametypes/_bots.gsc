@@ -32,7 +32,7 @@ onCvarChanged(cvar, value, isRegisterTime)
 		case "scr_bots_add":
 			if (value > 0)
 			{
-				iprintln("Adding " + value + " bots to the server.");
+				iprintln(&"ZPAM_BOTS_ADDING", value);
 				thread addBots(value);
 				changeCvarQuiet("scr_bots_add", 0);
 			}
@@ -41,7 +41,7 @@ onCvarChanged(cvar, value, isRegisterTime)
 
 		case "scr_bots_remove":
 			if(value > 0) {
-				iprintln("Removing " + value + " bots from the server.");
+				iprintln(&"ZPAM_BOTS_REMOVING", value);
 				thread removeBots(value);
 				changeCvarQuiet("scr_bots_remove", 0);
 			}
@@ -51,7 +51,7 @@ onCvarChanged(cvar, value, isRegisterTime)
 		case "scr_bots_removeall":
 			if(value == 1)
 			{
-				iprintln("Removing all bots from the server.");
+				iprintln(&"ZPAM_BOTS_REMOVING_ALL");
 				thread removeBots(64);
 				changeCvarQuiet("scr_bots_removeAll", 0);
 			}
@@ -137,7 +137,7 @@ addBots(number)
 		// Maximum number of clients reached
 		if (!isDefined(ent[i]))
 		{
-			iprintln("Adding bot failed. (server restart is needed)");
+			iprintln(&"ZPAM_BOTS_ADD_FAILED");
 			break;
 		}
 

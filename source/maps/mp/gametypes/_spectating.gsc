@@ -35,7 +35,7 @@ onCvarChanged(cvar, value, isRegisterTime)
 			if (isRegisterTime)
 				level.streamerSystem = value;
 			else
-				iprintln("Map needs to be restarted to apply the changes.");
+				iprintln(&"ZPAM_RESTART_TO_APPLY");
 			return true;
 
 	}

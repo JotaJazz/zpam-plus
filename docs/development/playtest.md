@@ -43,7 +43,7 @@ look. Damage numbers per weapon and range are already checked by
 | 21 | Plant and defuse | Plant, then defuse; another round, let it explode | Bomb timer, sounds, `plants`/`defuses` in `Stats;` | screen, `games_mp.log` |
 | 22 | Strat | `g_gametype strat`: look at the compass, play a recorded bot, shoot a bot | A and B icons; clock at 0:00 when idle; damage messages with metres and the fix | screen |
 | 23 | Ladder by Plus ID | `rcon plusIdStatus` for your ID; `set scr_ladder_match m1`, `set scr_ladder_team1 "<your ID>"`, `map_restart`; join with another name | You join team1 only; a second player with your name only watches | screen |
-| 24 | Spanish | Set language 5 (Español) in the quick settings menu; ready up, call and cancel a time-out, play to half-time and to the end of the map | Messages and HUD in Spanish with names and numbers in place of `&&1`; nothing shows a raw `ZPAM_` reference | screen |
+| 24 | Spanish | Set language 5 (Español) in the quick settings menu; ready up, call and cancel a time-out, play to half-time and to the end of the map; as a streamer, open the streamer menu; in `g_gametype strat`, record and play a bot | Messages and HUD in Spanish with names and numbers in place of `&&1`; nothing shows a raw `ZPAM_` reference | screen |
 
 ## After the session
 
