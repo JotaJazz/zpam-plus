@@ -5,9 +5,9 @@ init()
 	// Precache
 	if (game["firstInit"])
 	{
-		precacheString2("STRING_FORCEDOWNLOAD_ERROR_1", &"You must download zPAM mod to play on this server.");
-		precacheString2("STRING_FORCEDOWNLOAD_ERROR_2", &"Downloading was enabled (/cl_allowDownload 1).");
-		precacheString2("STRING_FORCEDOWNLOAD_ERROR_3", &"Please reconnect to the server.");
+		precacheString2("STRING_FORCEDOWNLOAD_ERROR_1", &"ZPAM_FORCEDOWNLOAD_1");
+		precacheString2("STRING_FORCEDOWNLOAD_ERROR_2", &"ZPAM_FORCEDOWNLOAD_2");
+		precacheString2("STRING_FORCEDOWNLOAD_ERROR_3", &"ZPAM_FORCEDOWNLOAD_3");
 
 		precacheStatusIcon("icon_mod");
 	}

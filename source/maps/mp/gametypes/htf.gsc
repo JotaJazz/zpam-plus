@@ -120,7 +120,7 @@ precache()
 	precacheString(&"PLATFORM_PRESS_TO_SPAWN");
 
 	// HUD: Strattime
-	precacheString2("STRING_STRAT_TIME", &"Strat Time");
+	precacheString2("STRING_STRAT_TIME", &"ZPAM_STRAT_TIME");
 }
 
 

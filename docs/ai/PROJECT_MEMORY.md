@@ -3,6 +3,12 @@
 Append-only. Newest first. Template in
 [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
 
+## 2026-11-13 — match-flow texts in Spanish
+
+- 82 references in `zpam.str` (English and Spanish) for time-out, bash, ready-up lengths, rounds, half-time, over-time, end of map, players left, drops, recording, score, names, ladder and forced download; values go as `&&1` arguments. `iprintln` sends only the reference (no precache, no slot of the 256); HUD texts were already precached as literals, so the count did not change.
+- Checked on the server (comp match with halftime, ladder forfeit, pub round): no script error. How the client shows them is play test 24; time-out and bash calls were not exercised by bots.
+- Portuguese is not in CoD2's language list: the maintainer chose to add it in the OpenCoD2-Plus client first.
+
 ## 2026-11-13 — stats by Plus ID
 
 - A stats row keeps the player's Plus ID; a player with one finds his row by it alone (name, IP and slot ignored) and nobody else matches it; without one, name and IP as before. `Stats;` ends with `plusid=` for him.

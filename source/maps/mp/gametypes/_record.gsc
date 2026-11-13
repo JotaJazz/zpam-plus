@@ -9,7 +9,7 @@ init()
 	if(game["firstInit"])
 	{
 		// Precache
-		precacheString2("STRING_RECORDING_INFO", &"Recording will start automatically...");
+		precacheString2("STRING_RECORDING_INFO", &"ZPAM_RECORD_INFO");
 	}
 
 
@@ -386,7 +386,7 @@ execRecording(namesReady)
 	// Auto recording is turned off by player, print atleast warning message
 	if (!self isEnabled())
 	{
-		self iprintln("Don't forget to record!");
+		self iprintln(&"ZPAM_RECORD_REMINDER");
 		self.pers["recording_executed"] = true;
 		return;
 	}
@@ -394,7 +394,7 @@ execRecording(namesReady)
 
 	if (self.pers["recording_executed"])
 	{
-		self iprintln("Already recording");
+		self iprintln(&"ZPAM_RECORD_ALREADY");
 		return;
 	}
 
@@ -420,7 +420,7 @@ execRecording(namesReady)
 			wait .1;
 	}
 
-	self iprintln("Recording to 'main/demos/"+demoName+".dm_1'");
+	self iprintln(&"ZPAM_RECORD_TO", demoName);
 
   	self hide();
 }
@@ -478,7 +478,7 @@ stopRecording()
 			wait .1;
 	}
 
-	self iprintln("Recording stopped.");
+	self iprintln(&"ZPAM_RECORD_STOPPED");
 
 	self show(); // show recording will start automaticallly again
 }

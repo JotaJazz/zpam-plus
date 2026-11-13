@@ -11,7 +11,7 @@ init()
 		game["overtime_active"] = false;
 		game["overtime_score"] = 0;
 
-		precacheString2("STRING_GOING_TO_OVERTIME", &"Going to Over-time");
+		precacheString2("STRING_GOING_TO_OVERTIME", &"ZPAM_GOING_TO_OVERTIME");
 	}
 }
 

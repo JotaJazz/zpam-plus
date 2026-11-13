@@ -76,7 +76,7 @@ onCvarChanged(cvar, value, isRegisterTime)
 			if (value == 1)
 			{
 				clear();
-				iprintln("Info about teams was cleared via rcon.");
+				iprintln(&"ZPAM_MATCHINFO_CLEARED_RCON");
 
 				changeCvarQuiet(cvar, 0);
 			}
@@ -399,7 +399,7 @@ waitForPlayerOrClear(playersLast)
 		if (resetCount >= 4)
 		{
 			clear();
-			iprintln("Info about teams was cleared.");
+			iprintln(&"ZPAM_MATCHINFO_CLEARED");
 			return;
 		}
 

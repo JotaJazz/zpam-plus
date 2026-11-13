@@ -133,7 +133,14 @@ the stock `.str` files, and give each `REFERENCE` its `LANG_ENGLISH` line first:
 an English line after a translation hides it. A malformed `.str` stops the
 client from loading every `.str` after it, the stock ones too, so
 `tools/build-iwd.sh` refuses to build when `tools/check_str.py` finds one
-(encoding, order, `&&N` arguments, sizes, `ENDMARKER`). So far the ready-up and time-out HUD and the quick
-settings menu use it; text the server builds and sends by cvar
-(`cg_objectiveText`, server info, match info) and `iprintln` messages are still
-English.
+(encoding, order, `&&N` arguments, sizes, `ENDMARKER`). A HUD text (`setText`, a hud `label`) needs `precacheString` at map
+load and takes one of the engine's 256 localized-string slots; an `iprintln` or
+`iprintlnbold` sends only the reference, so it needs neither. Values go in as
+`&&1`, `&&2`: `iprintln(&"ZPAM_TO_CALLED", self, teamName)`, where a player
+entity prints his name and a localized string is translated too; a localized
+string cannot be joined with `+`. The ready-up and time-out HUD, the quick
+settings menu and the match-flow messages use it; streamer, strat, aim trainer,
+map vote, the `pam_mode` help, debug output and text the server builds and sends
+by cvar (`cg_objectiveText`, server info, match info) are still English.
+Portuguese waits for a language slot in the OpenCoD2-Plus client: CoD2's list
+(`loc_language` 0-13) has none.

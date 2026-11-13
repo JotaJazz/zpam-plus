@@ -6,8 +6,8 @@ init()
 	{
 		game["is_halftime"] = false;
 
-		precacheString2("STRING_HALFTIME", &"Half-time");
-		precacheString2("STRING_TEAM_AUTO_SWITCH", &"Team Auto-Switching");
+		precacheString2("STRING_HALFTIME", &"ZPAM_HALFTIME");
+		precacheString2("STRING_TEAM_AUTO_SWITCH", &"ZPAM_TEAM_AUTO_SWITCH");
 	}
 }
 

@@ -68,27 +68,27 @@ handle(team, roundsplayed, value)
 {
 	if (level.gametype != "sd" && level.gametype != "re")
 	{
-		iprintln("^1Score changing is available only in S&D and Retrieval gametypes.");
+		iprintln(&"ZPAM_SCORE_ONLY_SD_RE");
 		return false;
 	}
 	if (level.scr_score_change_mode == 0)
 	{
-		iprintln("^1Score changing is disabled by server rules.");
+		iprintln(&"ZPAM_SCORE_DISABLED");
 		return false;
 	}
 	if (level.scr_score_change_mode == 1 && !game["readyup_first_run"])
 	{
-		iprintln("^1Invalid attempt to change score. Score can be changed only in first ready-up time");
+		iprintln(&"ZPAM_SCORE_ONLY_FIRST_READYUP");
 		return false;
 	}
 	if (roundsplayed >= level.matchround && level.matchround > 0)
 	{
-		iprintln("^1Value " + value + " is not acceptable, because it must be less than the maximum playable rounds - " + level.matchround);
+		iprintln(&"ZPAM_SCORE_OVER_ROUNDS", value, level.matchround);
 		return false;
 	}
 	if (value >= level.scorelimit && level.scorelimit > 0)
 	{
-		iprintln("^1Value " + value + " is not acceptable, because its more than maximum score limit - " + level.scorelimit);
+		iprintln(&"ZPAM_SCORE_OVER_LIMIT", value, level.scorelimit);
 		return false;
 	}
 

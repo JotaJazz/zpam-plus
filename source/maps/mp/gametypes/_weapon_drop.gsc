@@ -120,7 +120,7 @@ playersWeaponDrop()
 				// We can drop weapon only if we have 2 weapons
 				if (slot[0] == "none" || slot[1] == "none")
 				{
-					self iprintln("^3Cannot drop your last weapon.");
+					self iprintln(&"ZPAM_DROP_LAST_WEAPON");
 					break;
 				}
 
@@ -131,14 +131,14 @@ playersWeaponDrop()
 				// Check if current weapon can be dropped (snipers are disabled for example in cg)
 				if (!maps\mp\gametypes\_weapon_limiter::isWeaponDropable(current))
 				{
-					self iprintln("^3This weapon can not be dropped.");
+					self iprintln(&"ZPAM_DROP_NOT_ALLOWED");
 					break;
 				}
 
 				// Drop primary weapon only if weapon in secondary slot is big weapon
 				if (current == slot[0] && !isDefined(level.weapons[slot[1]]))
 				{
-					self iprintln("^3Primary weapon can be dropped only if you have 2 primary weapons.");
+					self iprintln(&"ZPAM_DROP_NEEDS_TWO");
 					break;
 				}
 
@@ -304,7 +304,7 @@ dropped_weapon_think(weaponname)
 		// Check, if this picked up weapon is allowed to drop
 		if (!player maps\mp\gametypes\_weapon_limiter::isWeaponPickable(weaponname))
 		{
-			player iprintln("^3You cannot pickup this limited weapon!");
+			player iprintln(&"ZPAM_PICKUP_LIMITED");
 
 			// Drop back to ground
 			player dropItem(weaponname);

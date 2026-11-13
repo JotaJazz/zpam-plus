@@ -8,11 +8,11 @@ init()
 
 	if(game["firstInit"])
 	{
-		precacheString2("STRING_ALLIES_LEFT", &"Allies Left");
-		precacheString2("STRING_AXIS_LEFT", &"Axis Left");
+		precacheString2("STRING_ALLIES_LEFT", &"ZPAM_ALLIES_LEFT");
+		precacheString2("STRING_AXIS_LEFT", &"ZPAM_AXIS_LEFT");
 
-		precacheString2("STRING_ALLIES_ELIMINATED", &"Allies Eliminated");
-		precacheString2("STRING_AXIS_ELIMINATED", &"Axis Eliminated");
+		precacheString2("STRING_ALLIES_ELIMINATED", &"ZPAM_ALLIES_ELIMINATED");
+		precacheString2("STRING_AXIS_ELIMINATED", &"ZPAM_AXIS_ELIMINATED");
 	}
 
 

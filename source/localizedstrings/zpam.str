@@ -198,4 +198,332 @@ LANG_GERMAN         "7. Sprache: ^5Español"
 LANG_ITALIAN        "7. Lingua: ^5Español"
 LANG_SPANISH        "7. Idioma: ^5Español"
 
+REFERENCE           TO_WAIT
+LANG_ENGLISH        "Wait before calling or canceling a time-out again"
+LANG_SPANISH        "Espera antes de volver a pedir o cancelar un tiempo muerto"
+
+REFERENCE           TO_CALLED
+LANG_ENGLISH        "&&1 ^7called a time-out for team &&2"
+LANG_SPANISH        "&&1 ^7pidió un tiempo muerto para el equipo &&2"
+
+REFERENCE           TO_NOW
+LANG_ENGLISH        "Going to time-out mode now."
+LANG_SPANISH        "Pasando a tiempo muerto ahora."
+
+REFERENCE           TO_NEXT_ROUND
+LANG_ENGLISH        "Going to time-out mode in the next round."
+LANG_SPANISH        "Tiempo muerto en la próxima ronda."
+
+REFERENCE           TO_CANCELED
+LANG_ENGLISH        "&&1 ^7canceled time-out for team &&2"
+LANG_SPANISH        "&&1 ^7canceló el tiempo muerto del equipo &&2"
+
+REFERENCE           TO_ONLY_TEAMS
+LANG_ENGLISH        "Time-out can be called only for Allies or Axis"
+LANG_SPANISH        "Solo Aliados o Eje pueden pedir tiempo muerto"
+
+REFERENCE           TO_ALREADY_IN
+LANG_ENGLISH        "Already in time-out"
+LANG_SPANISH        "Ya están en tiempo muerto"
+
+REFERENCE           TO_NOT_GAMETYPE
+LANG_ENGLISH        "Time-out is not supported in this gametype"
+LANG_SPANISH        "Este modo de juego no admite tiempo muerto"
+
+REFERENCE           TO_NOT_RULES
+LANG_ENGLISH        "Time-out is not supported by the rules"
+LANG_SPANISH        "Las reglas no admiten tiempo muerto"
+
+REFERENCE           TO_NOT_READYUP
+LANG_ENGLISH        "Time-out can not be called in Ready-Up mode"
+LANG_SPANISH        "No se puede pedir tiempo muerto en el Ready-Up"
+
+REFERENCE           TO_NOT_BASH
+LANG_ENGLISH        "Time-out can not be called in pistol bash"
+LANG_SPANISH        "No se puede pedir tiempo muerto en el pistol bash"
+
+REFERENCE           TO_NONE_LEFT_HALF
+LANG_ENGLISH        "No more time-outs permitted for &&1 in this half"
+LANG_SPANISH        "&&1 no tiene más tiempos muertos en esta mitad"
+
+REFERENCE           TO_NONE_LEFT
+LANG_ENGLISH        "No more time-outs permitted for &&1"
+LANG_SPANISH        "&&1 no tiene más tiempos muertos"
+
+REFERENCE           TO_NOT_BEFORE_HALF
+LANG_ENGLISH        "Time-out can not be called before half-time"
+LANG_SPANISH        "No se puede pedir tiempo muerto antes del descanso"
+
+REFERENCE           TO_NOT_LAST_ROUND
+LANG_ENGLISH        "Time-out can not be called in last round"
+LANG_SPANISH        "No se puede pedir tiempo muerto en la última ronda"
+
+REFERENCE           TO_NOT_NOW
+LANG_ENGLISH        "Time-out can not be called"
+LANG_SPANISH        "No se puede pedir tiempo muerto"
+
+REFERENCE           TO_ALREADY_CALLED
+LANG_ENGLISH        "Time-out already called."
+LANG_SPANISH        "El tiempo muerto ya fue pedido."
+
+REFERENCE           BASH_TITLE
+LANG_ENGLISH        "^3Pistol bash"
+LANG_SPANISH        "^3Pistol bash"
+
+REFERENCE           BASH_CANCELED_BOLD
+LANG_ENGLISH        "^9&&1 ^7canceled a pistol bash"
+LANG_SPANISH        "^9&&1 ^7canceló el pistol bash"
+
+REFERENCE           BASH_CALLED
+LANG_ENGLISH        "&&1 ^7called a pistol bash"
+LANG_SPANISH        "&&1 ^7pidió un pistol bash"
+
+REFERENCE           BASH_AFTER_READYUP
+LANG_ENGLISH        "Going to pistol bash after the Ready-Up"
+LANG_SPANISH        "Pistol bash después del Ready-Up"
+
+REFERENCE           BASH_CALLED_BOLD
+LANG_ENGLISH        "^3&&1 ^7called a pistol bash"
+LANG_SPANISH        "^3&&1 ^7pidió un pistol bash"
+
+REFERENCE           BASH_ONLY_TEAMS
+LANG_ENGLISH        "Pistol bash can be called only for allies or axis"
+LANG_SPANISH        "Solo Aliados o Eje pueden pedir un pistol bash"
+
+REFERENCE           BASH_ALREADY_IN
+LANG_ENGLISH        "Already in pistol bash"
+LANG_SPANISH        "Ya están en pistol bash"
+
+REFERENCE           BASH_NOT_GAMETYPE
+LANG_ENGLISH        "Pistol bash is not supported in this gametype"
+LANG_SPANISH        "Este modo de juego no admite pistol bash"
+
+REFERENCE           BASH_NOT_RULES
+LANG_ENGLISH        "Pistol bash is not supported by the rules"
+LANG_SPANISH        "Las reglas no admiten pistol bash"
+
+REFERENCE           BASH_ONLY_READYUP
+LANG_ENGLISH        "Pistol bash can be called only in Ready-Up"
+LANG_SPANISH        "El pistol bash solo se puede pedir en el Ready-Up"
+
+REFERENCE           BASH_ONLY_FIRST_READYUP
+LANG_ENGLISH        "Pistol bash can be called only in first Ready-Up"
+LANG_SPANISH        "El pistol bash solo se puede pedir en el primer Ready-Up"
+
+REFERENCE           BASH_NONE_LEFT
+LANG_ENGLISH        "&&1 cannot call a pistol bash anymore"
+LANG_SPANISH        "&&1 ya no puede pedir más pistol bash"
+
+REFERENCE           BASH_CANCELED
+LANG_ENGLISH        "&&1 ^7canceled pistol bash"
+LANG_SPANISH        "&&1 ^7canceló el pistol bash"
+
+REFERENCE           BASH_MODE
+LANG_ENGLISH        "Pistol bash"
+LANG_SPANISH        "Pistol bash"
+
+REFERENCE           TEAM_ALLIES
+LANG_ENGLISH        "Allies"
+LANG_SPANISH        "Aliados"
+
+REFERENCE           TEAM_AXIS
+LANG_ENGLISH        "Axis"
+LANG_SPANISH        "Eje"
+
+REFERENCE           READYUP_KILLING_WAS_DISABLED
+LANG_ENGLISH        "Killing was disabled"
+LANG_SPANISH        "Se desactivó matar"
+
+REFERENCE           READYUP_LENGTH_TIMEOUT
+LANG_ENGLISH        "Timeout length: ^1&&1 ^7min"
+LANG_SPANISH        "Duración del tiempo muerto: ^1&&1 ^7min"
+
+REFERENCE           READYUP_LENGTH_HALF
+LANG_ENGLISH        "Half-time length: ^1&&1 ^7min"
+LANG_SPANISH        "Duración del descanso: ^1&&1 ^7min"
+
+REFERENCE           READYUP_LENGTH_MAP
+LANG_ENGLISH        "Ready-Up length: ^1&&1 ^7min"
+LANG_SPANISH        "Duración del Ready-Up: ^1&&1 ^7min"
+
+REFERENCE           MATCH_STARTING
+LANG_ENGLISH        "Match is starting"
+LANG_SPANISH        "La partida está empezando"
+
+REFERENCE           ROUND
+LANG_ENGLISH        "Round"
+LANG_SPANISH        "Ronda"
+
+REFERENCE           ROUND_STARTING
+LANG_ENGLISH        "Starting"
+LANG_SPANISH        "Empezando"
+
+REFERENCE           ROUND_FIRST
+LANG_ENGLISH        "First Round"
+LANG_SPANISH        "Primera ronda"
+
+REFERENCE           ROUND_LAST_HALF
+LANG_ENGLISH        "Last round before half"
+LANG_SPANISH        "Última ronda antes del descanso"
+
+REFERENCE           ROUND_LAST
+LANG_ENGLISH        "Last round"
+LANG_SPANISH        "Última ronda"
+
+REFERENCE           STRAT_TIME
+LANG_ENGLISH        "Strat Time"
+LANG_SPANISH        "Tiempo de estrategia"
+
+REFERENCE           SCORE_ONLY_SD_RE
+LANG_ENGLISH        "^1Score changing is available only in S&D and Retrieval gametypes."
+LANG_SPANISH        "^1El marcador solo se puede cambiar en Buscar y destruir y Retrieval."
+
+REFERENCE           SCORE_DISABLED
+LANG_ENGLISH        "^1Score changing is disabled by server rules."
+LANG_SPANISH        "^1Las reglas del servidor no permiten cambiar el marcador."
+
+REFERENCE           SCORE_ONLY_FIRST_READYUP
+LANG_ENGLISH        "^1Invalid attempt to change score. Score can be changed only in first ready-up time"
+LANG_SPANISH        "^1No se puede cambiar el marcador ahora: solo en el primer Ready-Up"
+
+REFERENCE           SCORE_OVER_ROUNDS
+LANG_ENGLISH        "^1Value &&1 is not acceptable, because it must be less than the maximum playable rounds - &&2"
+LANG_SPANISH        "^1El valor &&1 no vale: debe ser menor que el máximo de rondas, &&2"
+
+REFERENCE           SCORE_OVER_LIMIT
+LANG_ENGLISH        "^1Value &&1 is not acceptable, because its more than maximum score limit - &&2"
+LANG_SPANISH        "^1El valor &&1 no vale: supera el límite de puntos, &&2"
+
+REFERENCE           DROP_LAST_WEAPON
+LANG_ENGLISH        "^3Cannot drop your last weapon."
+LANG_SPANISH        "^3No puedes soltar tu última arma."
+
+REFERENCE           DROP_NOT_ALLOWED
+LANG_ENGLISH        "^3This weapon can not be dropped."
+LANG_SPANISH        "^3Esta arma no se puede soltar."
+
+REFERENCE           DROP_NEEDS_TWO
+LANG_ENGLISH        "^3Primary weapon can be dropped only if you have 2 primary weapons."
+LANG_SPANISH        "^3Solo puedes soltar el arma principal si llevas 2 armas principales."
+
+REFERENCE           PICKUP_LIMITED
+LANG_ENGLISH        "^3You cannot pickup this limited weapon!"
+LANG_SPANISH        "^3¡No puedes recoger esta arma limitada!"
+
+REFERENCE           RECORD_REMINDER
+LANG_ENGLISH        "Don't forget to record!"
+LANG_SPANISH        "¡No te olvides de grabar!"
+
+REFERENCE           RECORD_ALREADY
+LANG_ENGLISH        "Already recording"
+LANG_SPANISH        "Ya estás grabando"
+
+REFERENCE           RECORD_TO
+LANG_ENGLISH        "Recording to 'main/demos/&&1.dm_1'"
+LANG_SPANISH        "Grabando en 'main/demos/&&1.dm_1'"
+
+REFERENCE           RECORD_STOPPED
+LANG_ENGLISH        "Recording stopped."
+LANG_SPANISH        "Grabación detenida."
+
+REFERENCE           RECORD_INFO
+LANG_ENGLISH        "Recording will start automatically..."
+LANG_SPANISH        "La grabación empezará automáticamente..."
+
+REFERENCE           MATCHINFO_CLEARED_RCON
+LANG_ENGLISH        "Info about teams was cleared via rcon."
+LANG_SPANISH        "La info de los equipos se borró por rcon."
+
+REFERENCE           MATCHINFO_CLEARED
+LANG_ENGLISH        "Info about teams was cleared."
+LANG_SPANISH        "La info de los equipos se borró."
+
+REFERENCE           LADDER_FORFEIT
+LANG_ENGLISH        "^3Ladder match not played: &&1 did not join and ready up in time."
+LANG_SPANISH        "^3Partida de ladder no jugada: &&1 no entró y se puso listo a tiempo."
+
+REFERENCE           LADDER_ROSTER_ONLY
+LANG_ENGLISH        "^3This ladder match is for its roster only: you can watch."
+LANG_SPANISH        "^3Esta partida de ladder es solo para su plantel: puedes mirar."
+
+REFERENCE           NAME_EMPTY_KICKED
+LANG_ENGLISH        "Player ID &&1 kicked due to using empty name!"
+LANG_SPANISH        "¡Jugador &&1 expulsado por usar un nombre vacío!"
+
+REFERENCE           NAME_EMPTY_WARNING
+LANG_ENGLISH        "^1Using empty name would lead to kick!"
+LANG_SPANISH        "^1¡Un nombre vacío lleva a la expulsión!"
+
+REFERENCE           NAME_BIND_PATTERN
+LANG_ENGLISH        "^1Using [{}] in name is not allowed!"
+LANG_SPANISH        "^1¡No se permite [{}] en el nombre!"
+
+REFERENCE           HALFTIME
+LANG_ENGLISH        "Half-time"
+LANG_SPANISH        "Descanso"
+
+REFERENCE           TEAM_AUTO_SWITCH
+LANG_ENGLISH        "Team Auto-Switching"
+LANG_SPANISH        "Cambio de lado automático"
+
+REFERENCE           GOING_TO_OVERTIME
+LANG_ENGLISH        "Going to Over-time"
+LANG_SPANISH        "Vamos al overtime"
+
+REFERENCE           FORCEDOWNLOAD_1
+LANG_ENGLISH        "You must download zPAM mod to play on this server."
+LANG_SPANISH        "Debes descargar el mod zPAM para jugar en este servidor."
+
+REFERENCE           FORCEDOWNLOAD_2
+LANG_ENGLISH        "Downloading was enabled (/cl_allowDownload 1)."
+LANG_SPANISH        "Se activaron las descargas (/cl_allowDownload 1)."
+
+REFERENCE           FORCEDOWNLOAD_3
+LANG_ENGLISH        "Please reconnect to the server."
+LANG_SPANISH        "Vuelve a conectarte al servidor."
+
+REFERENCE           ALLIES_LEFT
+LANG_ENGLISH        "Allies Left"
+LANG_SPANISH        "Aliados vivos"
+
+REFERENCE           AXIS_LEFT
+LANG_ENGLISH        "Axis Left"
+LANG_SPANISH        "Eje vivos"
+
+REFERENCE           ALLIES_ELIMINATED
+LANG_ENGLISH        "Allies Eliminated"
+LANG_SPANISH        "Aliados eliminados"
+
+REFERENCE           AXIS_ELIMINATED
+LANG_ENGLISH        "Axis Eliminated"
+LANG_SPANISH        "Eje eliminado"
+
+REFERENCE           BLACKOUT_PROTECTION
+LANG_ENGLISH        "Blackout Protection"
+LANG_SPANISH        "Protección de blackout"
+
+REFERENCE           BLACKOUT_INFO
+LANG_ENGLISH        "You see this map background because match is in progress."
+LANG_SPANISH        "Ves este fondo porque la partida está en curso."
+
+REFERENCE           ASSIST
+LANG_ENGLISH        "assist"
+LANG_SPANISH        "asistencia"
+
+REFERENCE           ALLIES_WIN
+LANG_ENGLISH        "Allies Win!"
+LANG_SPANISH        "¡Ganan los Aliados!"
+
+REFERENCE           AXIS_WIN
+LANG_ENGLISH        "Axis Win!"
+LANG_SPANISH        "¡Gana el Eje!"
+
+REFERENCE           ITS_TIE
+LANG_ENGLISH        "Its a TIE!"
+LANG_SPANISH        "¡EMPATE!"
+
+REFERENCE           GOING_TO_SCOREBOARD
+LANG_ENGLISH        "Going to Scoreboard"
+LANG_SPANISH        "Vamos al marcador"
+
 ENDMARKER

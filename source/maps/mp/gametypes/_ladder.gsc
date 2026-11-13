@@ -152,7 +152,7 @@ forfeitWatch()
 		team = "team1";
 	game["ladder_forfeit"] = true;
 	logPrint("LadderForfeit;" + logSafe(getCvar("scr_ladder_match")) + ";" + team + "\n");
-	iprintlnbold("^3Ladder match not played: " + team + " did not join and ready up in time.");
+	iprintlnbold(&"ZPAM_LADDER_FORFEIT", team);
 }
 
 // With a roster, who is in which team decides the first ready-up, and a team change from

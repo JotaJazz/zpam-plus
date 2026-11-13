@@ -9,8 +9,8 @@ init()
 
 	if (game["firstInit"])
 	{
-		precacheString2("STRING_BLACKOUT_PROTECTION", &"Blackout Protection");
-		precacheString2("STRING_BLACKOUT_INFO", &"You see this map background because match is in progress.");
+		precacheString2("STRING_BLACKOUT_PROTECTION", &"ZPAM_BLACKOUT_PROTECTION");
+		precacheString2("STRING_BLACKOUT_INFO", &"ZPAM_BLACKOUT_INFO");
 
 		//precacheStatusIcon("icon_blackout"); // removed due to max 8 precached status icons for streamers icon
 	}

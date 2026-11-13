@@ -109,8 +109,8 @@ onMenuResponse(menu, response)
 
 getTeamName(team)
 {
-	if (team == "allies") return "Allies";
-	if (team == "axis") return "Axis";
+	if (team == "allies") return &"ZPAM_TEAM_ALLIES";
+	if (team == "axis") return &"ZPAM_TEAM_AXIS";
 	return team;
 }
 
@@ -119,7 +119,7 @@ callTimeout()
 {
 	if (!self maps\mp\gametypes\global\player::actionAllowed("timeout", 2000))
 	{
-		self iprintln("Wait before calling or canceling a time-out again");
+		self iprintln(&"ZPAM_TO_WAIT");
 		return;
 	}
 
@@ -132,14 +132,14 @@ callTimeout()
 	{
 		game["timeout_called_team"] = self.pers["team"];
 
-		iprintln(self.name + " ^7called a time-out for team " + getTeamName(self.pers["team"]));
+		iprintln(&"ZPAM_TO_CALLED", self, getTeamName(self.pers["team"]));
 
 		if (level.gametype == "sd" || level.gametype == "re")
 		{
 			if (level.in_timeout)
-				iprintln("Going to time-out mode now.");
+				iprintln(&"ZPAM_TO_NOW");
 			else if(game["do_timeout"])
-				iprintln("Going to time-out mode in the next round.");
+				iprintln(&"ZPAM_TO_NEXT_ROUND");
 		}
 
 		logPrint("TO_CALL;" + self.pers["team"] + ";" + logSafe(self.name) + "\n");
@@ -179,7 +179,7 @@ callTimeout()
 
 		Cancel();
 
-		iprintln(self.name + " ^7canceled time-out for team " + getTeamName(self.pers["team"]));
+		iprintln(&"ZPAM_TO_CANCELED", self, getTeamName(self.pers["team"]));
 
 		logPrint("TO_CANCEL;" + self.pers["team"] + ";" + logSafe(self.name) + "\n");
 	}
@@ -213,14 +213,14 @@ Validate_Timeout(print)
 	// Only for Allies and Axis
 	if (self.pers["team"] != "axis" && self.pers["team"] != "allies")
 	{
-		if (print) { self iprintln("Time-out can be called only for Allies or Axis"); return "notallowed"; }
+		if (print) { self iprintln(&"ZPAM_TO_ONLY_TEAMS"); return "notallowed"; }
 		else return 0; // 0 - invisible
 	}
 
 	// We are in timeout
 	if (level.in_timeout == true)
 	{
-		if (print) { self iprintln("Already in time-out"); return "notallowed"; }
+		if (print) { self iprintln(&"ZPAM_TO_ALREADY_IN"); return "notallowed"; }
 		else return 4; // In timeout (disabled)
 	}
 
@@ -230,28 +230,28 @@ Validate_Timeout(print)
 		// Is is supported game type
 		if (!(level.gametype == "sd" || level.gametype == "ctf" || level.gametype == "tdm" || level.gametype == "dm" || level.gametype == "hq" || level.gametype == "htf" || level.gametype == "re"))
 		{
-			if (print) { self iprintln("Time-out is not supported in this gametype"); return "notallowed"; }
+			if (print) { self iprintln(&"ZPAM_TO_NOT_GAMETYPE"); return "notallowed"; }
 			else return 0; // Invisible
 		}
 
 		// Is allowed by rules?
 		if(level.scr_timeouts < 1)
 		{
-			if (print) { self iprintln("Time-out is not supported by the rules"); return "notallowed"; }
+			if (print) { self iprintln(&"ZPAM_TO_NOT_RULES"); return "notallowed"; }
 			else return 0; // Invisible
 		}
 
 		// If is readyup
 		if (level.in_readyup)
 		{
-			if (print) { self iprintln("Time-out can not be called in Ready-Up mode"); return "notallowed"; }
+			if (print) { self iprintln(&"ZPAM_TO_NOT_READYUP"); return "notallowed"; }
 			else return 2; // Call timeout (disabled)
 		}
 
 		// If is bash mode
 		if (level.in_bash)
 		{
-			if (print) { self iprintln("Time-out can not be called in pistol bash"); return "notallowed"; }
+			if (print) { self iprintln(&"ZPAM_TO_NOT_BASH"); return "notallowed"; }
 			else return 2; // Call timeout (disabled)
 		}
 
@@ -260,13 +260,13 @@ Validate_Timeout(print)
 		{
 			if (game[self.pers["team"] + "_called_timeouts_half"] >= level.scr_timeouts_half)
 			{
-				if (print) { self iprintln("No more time-outs permitted for "+getTeamName(self.pers["team"])+" in this half"); return "notallowed"; }
+				if (print) { self iprintln(&"ZPAM_TO_NONE_LEFT_HALF", getTeamName(self.pers["team"])); return "notallowed"; }
 				else return 2; // Call timeout (disabled)
 			}
 		}
 		else
 		{
-			if (print) { self iprintln("No more time-outs permitted for "+getTeamName(self.pers["team"])); return "notallowed"; }
+			if (print) { self iprintln(&"ZPAM_TO_NONE_LEFT", getTeamName(self.pers["team"])); return "notallowed"; }
 			else return 2; // Call timeout (disabled)
 		}
 
@@ -285,14 +285,14 @@ Validate_Timeout(print)
 			// Last half round
 			if (level.halfround > 0 && !game["is_halftime"] && game["round"] >= level.halfround)
 			{
-				if (print) { self iprintln("Time-out can not be called before half-time"); return "notallowed"; }
+				if (print) { self iprintln(&"ZPAM_TO_NOT_BEFORE_HALF"); return "notallowed"; }
 				else return 2; // Call timeout (disabled)
 			}
 
 			// Last match round
 			if (level.matchround > 0 && game["is_halftime"] && game["round"] >= level.matchround)
 			{
-				if (print) { self iprintln("Time-out can not be called in last round"); return "notallowed"; }
+				if (print) { self iprintln(&"ZPAM_TO_NOT_LAST_ROUND"); return "notallowed"; }
 				else return 2; // Call timeout (disabled)
 			}
 
@@ -313,7 +313,7 @@ Validate_Timeout(print)
 			}
 			if (level.mapended)
 			{
-				if (print) { self iprintln("Time-out can not be called"); return "notallowed"; }
+				if (print) { self iprintln(&"ZPAM_TO_NOT_NOW"); return "notallowed"; }
 				else return 2; // Call timeout (disabled)
 			}
 
@@ -335,7 +335,7 @@ Validate_Timeout(print)
 
 	// Timeout called, but we are not able to cancel it
 	else {
-		if (print) { self iprintln("Time-out already called."); return "notallowed"; }
+		if (print) { self iprintln(&"ZPAM_TO_ALREADY_CALLED"); return "notallowed"; }
 		else return 3; // Timeout called (disabled)
 	}
 

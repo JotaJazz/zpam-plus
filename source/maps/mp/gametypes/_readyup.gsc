@@ -561,7 +561,7 @@ playerReadyUpThread()
 				{
 					if (self.aimTrainerMode == 0)
 					{
-						self iprintln("Killing was disabled");
+						self iprintln(&"ZPAM_READYUP_KILLING_WAS_DISABLED");
 					}
 					else
 					{
@@ -781,18 +781,18 @@ PrintTeamAndHowToUse()
 	in_mapswitch = !in_halftime && (game["scr_matchinfo"] == 2 && game["match_exists"]);
 
 	if (in_timeout)
-		self iprintlnbold("Timeout Ready-Up Mode");
+		self iprintlnbold(game["STRING_READYUP_MODE_TIMEOUT"]);
 	else if (in_halftime)
 	{
 		if (game["overtime_active"])
-			self iprintlnbold("Half-time Overtime Ready-Up Mode");
+			self iprintlnbold(game["STRING_READYUP_MODE_OVERTIME"]);
 		else
-			self iprintlnbold("Half-time Ready-Up Mode");
+			self iprintlnbold(game["STRING_READYUP_MODE_HALF"]);
 	}
 	//else if (in_mapswitch)
 	//	self iprintlnbold("Ready-Up Mode");
 	else
-		self iprintlnbold("Ready-Up Mode");
+		self iprintlnbold(game["STRING_READYUP_MODE"]);
 
 
 	// Dont print more for streamers
@@ -818,18 +818,15 @@ PrintTeamAndHowToUse()
 	// Length of readyup
 	if (in_timeout && level.scr_timeout_length != 0)
 	{
-		text = "Timeout length: ^1" + level.scr_timeout_length + " ^7min"; if (level.scr_timeout_length >= 2) text += "s";
-		self iprintlnbold(text);
+		self iprintlnbold(&"ZPAM_READYUP_LENGTH_TIMEOUT", level.scr_timeout_length);
 	}
 	else if (in_halftime && level.scr_readyup_autoresume_half > 0)
 	{
-		text = "Half-time length: ^1" + level.scr_readyup_autoresume_half + " ^7min"; if (level.scr_readyup_autoresume_half >= 2) text += "s";
-		self iprintlnbold(text);
+		self iprintlnbold(&"ZPAM_READYUP_LENGTH_HALF", level.scr_readyup_autoresume_half);
 	}
 	else if (in_mapswitch && level.scr_readyup_autoresume_map > 0)
 	{
-		text = "Ready-Up length: ^1" + level.scr_readyup_autoresume_map + " ^7min"; if (level.scr_readyup_autoresume_map >= 2) text += "s";
-		self iprintlnbold(text);
+		self iprintlnbold(&"ZPAM_READYUP_LENGTH_MAP", level.scr_readyup_autoresume_map);
 	}
 }
 

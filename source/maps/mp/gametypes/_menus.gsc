@@ -294,7 +294,7 @@ onMenuResponse(menu, response)
 		if (isDefined(rosterTeam) && (response == "allies" || response == "axis" || response == "autoassign"))
 		{
 			if (rosterTeam == "spectator")
-				self iprintln("^3This ladder match is for its roster only: you can watch.");
+				self iprintln(&"ZPAM_LADDER_ROSTER_ONLY");
 			response = rosterTeam;
 		}
 

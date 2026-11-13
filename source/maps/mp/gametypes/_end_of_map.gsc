@@ -5,11 +5,11 @@ init()
 	// HUD: Matchover
 	if (game["firstInit"])
 	{
-		precacheString2("STRING_ALLIES_WIN", &"Allies Win!");
-		precacheString2("STRING_AXIS_WIN", &"Axis Win!");
-		precacheString2("STRING_ITS_TIE", &"Its a TIE!");
+		precacheString2("STRING_ALLIES_WIN", &"ZPAM_ALLIES_WIN");
+		precacheString2("STRING_AXIS_WIN", &"ZPAM_AXIS_WIN");
+		precacheString2("STRING_ITS_TIE", &"ZPAM_ITS_TIE");
 
-		precacheString2("STRING_GOING_TO_SCOREBOARD", &"Going to Scoreboard");
+		precacheString2("STRING_GOING_TO_SCOREBOARD", &"ZPAM_GOING_TO_SCOREBOARD");
 	}
 }
 

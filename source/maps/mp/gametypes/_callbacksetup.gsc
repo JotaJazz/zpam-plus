@@ -202,13 +202,13 @@ emptyName()
 		{
 			if (isDefined(self.pers["name_empty_warned"]))
 			{
-				iprintln("Player ID " + id + " kicked due to using empty name!");
+				iprintln(&"ZPAM_NAME_EMPTY_KICKED", id);
 				kick(id);
 			}
 			else
 			{
 				self.pers["name_empty_warned"] = true;
-				self iprintlnbold("^1Using empty name would lead to kick!");
+				self iprintlnbold(&"ZPAM_NAME_EMPTY_WARNING");
 			}
 			self setClientCvar("name", "Unnamed player");
 			wait 3; // wait untill the name is trully renamed
@@ -217,7 +217,7 @@ emptyName()
 		// "[{x}]" in a name is drawn as a key binding ("Unbound"), which hides who the player is
 		if (maps\mp\gametypes\global\string::hasBindPattern(self.name))
 		{
-			self iprintlnbold("^1Using [{}] in name is not allowed!");
+			self iprintlnbold(&"ZPAM_NAME_BIND_PATTERN");
 
 			safeName = "";
 			for (i = 0; i < self.name.size; i++)

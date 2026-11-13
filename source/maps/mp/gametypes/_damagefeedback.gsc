@@ -11,7 +11,7 @@ init()
 		precacheShader("damage_feedback");
 		precacheRumble("damage_heavy");
 
-		precacheString2("STRING_ASSIST", &"assist");
+		precacheString2("STRING_ASSIST", &"ZPAM_ASSIST");
 	}
 }
 
