@@ -74,12 +74,19 @@ removeOld()
   }
 }
 
-findData(name, entityId, ip)
+// A row with a Plus ID belongs only to that ID, verified by the server at connect:
+// its owner is found by it whatever his name, IP or slot, and nobody else takes it
+findData(name, entityId, ip, plusId)
 {
   for (i = 0; i < game["playerstats"].size; i++)
   {
     data = game["playerstats"][i];
     if (data["deleted"]) continue;
+    if (isDefined(plusId))
+    {
+      if (data["plusId"] != plusId) continue;
+      if (plusId != "") return i;
+    }
     if (isDefined(ip) && data["ip"] != ip) continue;
 
     if (isDefined(entityId))
@@ -103,7 +110,7 @@ handleRename()
     if (self.pers["lastName"] != self.name)
     {
 
-      dataId = findData(self.pers["lastName"], self getEntityNumber(), self getip());
+      dataId = findData(self.pers["lastName"], self getEntityNumber(), self getip(), self getPlusId());
       if (dataId >= 0)
       {
         // A disconnected player owns the new name: keep our stats under the old name, so neither loses them
@@ -126,7 +133,7 @@ getStatId()
 {
   handleRename();
 
-  return findData(self.pers["lastName"], self getEntityNumber(), self getip());
+  return findData(self.pers["lastName"], self getEntityNumber(), self getip(), self getPlusId());
 }
 
 onConnected()
@@ -135,7 +142,7 @@ onConnected()
 
 	id = self getEntityNumber();
 
-	dataId = findData(self.pers["lastName"], id, self getip());
+	dataId = findData(self.pers["lastName"], id, self getip(), self getPlusId());
 	if (dataId >= 0 && game["playerstats"][dataId]["isConnected"] == false) // note: isConnected is reseted every map_restart
 	{
 		game["playerstats"][dataId]["player"] = self;
@@ -150,7 +157,7 @@ onConnected()
 		// Player was not found via name and id, give other players connecting in same time time to identified them via name and id before this player will be found only by name.. (to avoid stat steal by duplicating name)
 		waittillframeend;
 
-		dataId = findData(self.pers["lastName"], undefined, self getip());
+		dataId = findData(self.pers["lastName"], undefined, self getip(), self getPlusId());
 		// same name from another IP is another player; in the middle of a map, a row still connected
 		// with the same name and IP is this player's old connection waiting for sv_timeout (999 ping)
 		if (dataId >= 0 && (game["playerstats"][dataId]["isConnected"] == false || isDefined(level.allPlayersConnected)))
@@ -166,7 +173,7 @@ onConnected()
 		else
 		{
 			// Create new entry
-			createStatRow(game["playerstats"].size, self, id, self getip(), self.pers["lastName"], self.sessionteam);
+			createStatRow(game["playerstats"].size, self, id, self getip(), self getPlusId(), self.pers["lastName"], self.sessionteam);
 		}
 	}
 
@@ -174,13 +181,14 @@ onConnected()
 
 
 // New stats row at index i (also used by statsSelfTest with fake rows)
-createStatRow(i, player, entityId, ip, name, team)
+createStatRow(i, player, entityId, ip, plusId, name, team)
 {
 	game["playerstats"][i]["id"] = i;
 	game["playerstats"][i]["player"] = player;
 	game["playerstats"][i]["deleted"] = false;
 	game["playerstats"][i]["entityId"] = entityId;
 	game["playerstats"][i]["ip"] = ip;
+	game["playerstats"][i]["plusId"] = plusId; // "" without one
 	game["playerstats"][i]["name"] = name;
 	game["playerstats"][i]["team"] = team;
 	game["playerstats"][i]["isConnected"] = true;
@@ -222,7 +230,7 @@ createStatRow(i, player, entityId, ip, name, team)
 
 onJoinedTeam(team)
 {
-	dataId = findData(self.pers["lastName"], self getEntityNumber(), self getip());
+	dataId = findData(self.pers["lastName"], self getEntityNumber(), self getip(), self getPlusId());
 	if (dataId >= 0)
 	{
 		game["playerstats"][dataId]["team"] = team;
@@ -234,7 +242,7 @@ onDisconnect()
 {
   handleRename();
 
-  dataId = findData(self.pers["lastName"], self getEntityNumber(), self getip());
+  dataId = findData(self.pers["lastName"], self getEntityNumber(), self getip(), self getPlusId());
   if (dataId >= 0)
   {
     game["playerstats"][dataId]["isConnected"] = false;
@@ -686,7 +694,7 @@ RoundEnded(roundwinner)
 
 
 // One "Stats;" line per player row in games_mp.log, with the match totals so far (read the last one)
-// Format: Stats;<name>;<team>;key=value;...
+// Format: Stats;<name>;<team>;key=value;... ending with plusid=<Plus ID> when the player has one
 logStats()
 {
     keys = [];
@@ -712,6 +720,8 @@ logStats()
       for (c = 1; c <= data["clutches_max"]; c++)
         if (isDefined(data["clutches_won_1v" + c]))
           line += ";clutches_1v" + c + "=" + data["clutches_won_1v" + c] + "/" + data["clutches_attempts_1v" + c];
+      if (data["plusId"] != "")
+        line += ";plusid=" + data["plusId"];
       logPrint(line + "\n");
     }
 }
@@ -723,9 +733,9 @@ statsSelfTest()
 
     saved = game["playerstats"];
     game["playerstats"] = [];
-    createStatRow(0, undefined, 0, "0", "A", "allies");
-    createStatRow(1, undefined, 1, "0", "B", "axis");
-    createStatRow(2, undefined, 2, "0", "C", "axis");
+    createStatRow(0, undefined, 0, "0", "", "A", "allies");
+    createStatRow(1, undefined, 1, "0", "", "B", "axis");
+    createStatRow(2, undefined, 2, "0", "", "C", "axis");
 
     // Round 1: A kills B, C kills A (trades B's death), C plays a 1v1 and axis wins; A killed both axis players
     RoundStarted();
@@ -746,7 +756,19 @@ statsSelfTest()
     RoundEnded("allies");
 
     a = game["playerstats"][0]; b = game["playerstats"][1]; c = game["playerstats"][2];
+
+    // Identity: a row with a Plus ID goes to that ID only; without one, name and IP as before
+    id = "P-ABCD-EFGH-IJKL-MNOP";
+    game["playerstats"] = [];
+    createStatRow(0, undefined, 0, "1.2.3.4", id, "A", "allies");
+    createStatRow(1, undefined, 1, "1.2.3.4", "", "A", "allies");
+    renamed = findData("Z", 5, "9.9.9.9", id);
+    sameName = findData("A", undefined, "1.2.3.4", "");
+    otherId = findData("A", undefined, "1.2.3.4", "P-ZZZZ-EFGH-IJKL-MNOP");
     game["playerstats"] = saved;
+    if (renamed != 0)		assertMsg("stats selfTest: ID row not found after rename " + renamed);
+    if (sameName != 1)		assertMsg("stats selfTest: no-ID player took an ID row " + sameName);
+    if (otherId != -1)		assertMsg("stats selfTest: other ID took a row " + otherId);
     level.stat_round_active = false;
 
     if (c["trade_kills"] != 1)		assertMsg("stats selfTest: C trade_kills " + c["trade_kills"]);

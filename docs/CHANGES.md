@@ -109,6 +109,9 @@ Changes since zPAM 3.38. Earlier history:
   auto-resume is logged with `LadderLeaver;`.
 - A ladder roster entry `P-XXXX-XXXX-XXXX-XXXX` is a Plus ID: only the player
   the server verified with that ID matches it, whatever his name.
+- A player with a Plus ID gets his stats back by that ID after a reconnect,
+  even with another name or IP, and no one else can take them; `Stats;` lines
+  end with `plusid=<ID>` for him. Players without one keep the name and IP rule.
 - Bots that watch no longer count as axis when the bots are balanced, which
   moved a bot out of its ladder team.
 - A ladder match whose roster players all stayed no longer stops the map end

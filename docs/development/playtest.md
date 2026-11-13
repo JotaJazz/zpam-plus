@@ -33,7 +33,7 @@ look. Damage numbers per weapon and range are already checked by
 | 11 | Time-out | Call a time-out; in its ready-up switch from a scope to the shotgun | Next round: shotgun and no scope; one `TO_CALL;` per call | inventory, `games_mp.log` |
 | 12 | Kar bug | End a round with the kar98k in the second slot | Next round the kar is the first weapon | inventory |
 | 13 | Names | Rename to `a;b`, then to `x[{+attack}]y` | Log shows `a:b`; the second becomes `x__+attack__y` with a message | `games_mp.log`, scoreboard |
-| 14 | Reconnect | Mid-map, reconnect without waiting for the old slot (999 ping) | Kills and deaths come back at once; one `Stats;` line for the player | scoreboard, `games_mp.log` |
+| 14 | Reconnect | Mid-map, reconnect without waiting for the old slot (999 ping); then again with another name | Kills and deaths come back both times (the second by Plus ID); one `Stats;` line for the player, with `plusid=` | scoreboard, `games_mp.log` |
 | 15 | Different IP | A second player takes the name of a disconnected one | He does not get the other player's stats | scoreboard |
 | 16 | Kick | `rcon kick <name>`, then he reconnects | He can join again at once (`sv_kickBanTime 0`) | client |
 | 17 | Score | Change the score from the rcon map menu in the first ready-up; then try after round 3 in `comp`, then in `comp_lan` | Allowed in the first ready-up; refused later in `comp`; allowed in `comp_lan` | screen |

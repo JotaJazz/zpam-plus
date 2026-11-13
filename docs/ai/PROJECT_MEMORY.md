@@ -3,6 +3,11 @@
 Append-only. Newest first. Template in
 [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
 
+## 2026-11-13 — stats by Plus ID
+
+- A stats row keeps the player's Plus ID; a player with one finds his row by it alone (name, IP and slot ignored) and nobody else matches it; without one, name and IP as before. `Stats;` ends with `plusid=` for him.
+- Checked by `statsSelfTest` (rename with a new IP and slot, a no-ID player with the same name and IP, another ID) and a bot round; a real reconnect by ID is not checked.
+
 ## 2026-11-13 — ladder phase D, by Plus ID
 
 - The server already verifies a signed key per Plus client (Plus ID, server ADR 0019), so ADR 0004 replaces ADR 0003's service token: a roster entry `P-...` matches only `getPlusId()`; checked by `ladderSelfTest` and by bots (no ID: an ID roster for team1 gives `LadderForfeit;m1;team1`). A real client joining by ID is play test 23.
