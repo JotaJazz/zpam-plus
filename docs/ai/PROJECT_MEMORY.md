@@ -7,7 +7,7 @@ Append-only. Newest first. Template in
 
 - `dev_duel` takes `mg` (the shooter mounts a map turret, `misc_turret` or `misc_mg42`; `mp_toujane` has only the latter) and `neck`; checked on `mp_toujane_fix`: MG 100 head and neck, 75 torso; a neck hit is `neck` and 90 with an M1 Garand with `scr_hitbox_neck_kill 0`, a head kill with 1.
 - The MG barrel is about 50 units ahead of the eye, so the duel aims from the turret pivot at eye height; aimed from the eye the bullets missed. The `J_Neck` tag lies in the head box; 2 units lower is the neck.
-- The server repo moved to `~/OpenCoD2-Plus-Server`, now the default of `tools/run-server.sh`; its `bin/` held a 1.0 build until rebuilt with `make PLUS=1`.
+- The server repo moved to `~/OpenCoD2-Plus-Server`, now the default of `tools/run-server.sh`; its `bin/` held a 1.0 build until rebuilt with `make PLUS=1`. On that build (`64f12d2`) `re` runs on `mp_toujane_fix` and `mp_burgundy_fix` with bots: the segfault is gone from the debt table.
 
 ## 2026-11-07 — ladder phase C
 
