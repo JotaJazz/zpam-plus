@@ -15,7 +15,7 @@ game folder stays untouched.
 | Variable | Default | Meaning |
 |---|---|---|
 | `COD2_GAME_DIR` | none, required | CoD2 folder with stock iwds only |
-| `COD2_SERVER_BIN` | `~/CoD2rev_Server/bin/cod2rev_lnxded` | server binary; a Plus build is needed to pass the Plus check |
+| `COD2_SERVER_BIN` | `~/OpenCoD2-Plus-Server/bin/cod2rev_lnxded` | server binary; a Plus build is needed to pass the Plus check |
 | `COD2_MAPS_IWD` | none, required | map pack; the script stops if it is missing |
 | `COD2_PORT` | 28960 | UDP port |
 
@@ -52,16 +52,24 @@ error, script error, failed self-test or busy port in the console (kept in
 `--seconds` and `-- +set ...` choose the run; `python3 tools/test_server.py --help`
 lists them.
 
-`--duel weapon,distance,head|torso[,expect]` makes one bot shoot another once
+`--duel weapon,distance,head|torso|neck[,expect]` makes one bot shoot another once
 (`dev_duel` in `global/developer.gsc`, `developer_script 1` only): it finds a
 clear line, places the target, aims, fires, and checks `kill`, a damage or a
-range `lo-hi`. Duels need a live round, and the damage fixes need their cvars:
+range `lo-hi`. Weapon `mg` mounts a turret of the map (`misc_turret` or
+`misc_mg42`) and fires one bullet; on `mp_toujane_fix` only 200 units has a
+clear line. `neck` aims 2 units below the neck tag: the tag itself hits the head
+box. Duels need a live round, and the damage fixes need their cvars:
 
     python3 tools/test_server.py --pam-mode pub --bots 2 --seconds 5 \
         --duel kar98k_mp,600,head,kill --duel kar98k_mp,600,torso,kill \
         --duel thompson_mp,500,torso,35 --duel shotgun_mp,200,torso,kill \
-        --duel shotgun_mp,650,torso,15-17 -- +set scr_sd_strat_time 0 \
-        +set scr_bots_freeze 0 +set scr_shotgun_consistent 1 +set g_shotgun_spread_fix 1
+        --duel shotgun_mp,650,torso,15-17 --duel m1garand_mp,500,neck,kill \
+        --duel mg,200,head,kill --duel mg,200,torso,75 -- +set scr_sd_strat_time 0 \
+        +set scr_bots_freeze 0 +set scr_shotgun_consistent 1 +set g_shotgun_spread_fix 1 \
+        +set scr_hitbox_neck_kill 1
+
+With `scr_hitbox_neck_kill 0` the M1 Garand neck shot does 90 and reports
+`hitloc=neck`.
 
 The `Stats;` lines in `.server/main/games_mp.log` then hold the kills, headshots
 and damage of those shots.

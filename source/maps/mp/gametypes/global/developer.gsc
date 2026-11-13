@@ -17,6 +17,7 @@ init()
 	thread maps\mp\gametypes\_player_stat::statsSelfTest();
 	thread timingSelfTest();
 	thread devDuelLoop();
+	addEventListener("onPlayerDamaged", ::devDuelOnDamaged);
 	thread devBotsAutoReady();
 	#/
 }
@@ -109,8 +110,9 @@ showWaypoint(player, size)
 	waypoint destroy2();
 }
 
-// developer_script 1: "rcon dev_duel <weapon> <distance> <head|torso>" places a live bot in front of
+// developer_script 1: "rcon dev_duel <weapon> <distance> <head|torso|neck>" places a live bot in front of
 // a live enemy bot at that distance, with a clear line, gives it the weapon and fires one shot.
+// Weapon "mg" mounts a turret of the map instead and fires one bullet.
 // Prints "DUEL done ..." with the target's health; tools/test_server.py --duel reads it.
 devDuelLoop()
 {
@@ -125,7 +127,7 @@ devDuelLoop()
 
 		args = maps\mp\gametypes\global\string::splitString(cmd, " ");
 		if (args.size < 3)
-			println("DUEL error: usage dev_duel <weapon> <distance> <head|torso>");
+			println("DUEL error: usage dev_duel <weapon> <distance> <head|torso|neck>");
 		else
 			devDuel(args[0], int(args[1]), args[2]);
 	}
@@ -163,22 +165,58 @@ devDuel(weapon, dist, aim)
 		return;
 	}
 
-	// A direction from the shooter with nothing in the way at eye height, and the floor there
-	start = shooter.origin;
-	yaw = -1;
-	for (y = 0; y < 360; y += 30)
+	// "mg": the shooter mounts a turret of the map and the target stands in front of it
+	yaws = [];
+	turret = undefined;
+	if (weapon == "mg")
 	{
-		f = anglesToForward((0, y, 0));
-		end = start + (f[0] * dist, f[1] * dist, 0);
-		if (bulletTrace(start + (0, 0, 60), end + (0, 0, 60), false, undefined)["fraction"] == 1)
+		turrets = getentarray("misc_turret", "classname");
+		mg42s = getentarray("misc_mg42", "classname"); // mp_toujane has only these
+		for (i = 0; i < mg42s.size; i++)
+			turrets[turrets.size] = mg42s[i];
+		for (i = 0; i < turrets.size && !isDefined(turret); i++)
 		{
-			yaw = y;
-			break;
+			f = anglesToForward((0, turrets[i].angles[1], 0));
+			behind = turrets[i].origin - (f[0] * 30, f[1] * 30, 0); // useTurret needs the player behind it
+			shooter setOrigin(bulletTrace(behind, behind + (0, 0, -100), false, undefined)["position"]);
+			shooter setPlayerAngles((0, turrets[i].angles[1], 0));
+			wait level.frame; // on the ground before mounting
+			if (shooter useTurret(turrets[i]))
+				turret = turrets[i];
+		}
+		if (!isDefined(turret))
+		{
+			println("DUEL error: no turret the shooter can mount");
+			return;
+		}
+		start = turret.origin + (0, 0, -60); // lines are traced at start + 60
+		for (y = 0; y <= 30; y += 10)
+		{
+			yaws[yaws.size] = turret.angles[1] + y;
+			yaws[yaws.size] = turret.angles[1] - y;
 		}
 	}
-	if (yaw < 0)
+	else
+	{
+		start = shooter.origin;
+		for (y = 0; y < 360; y += 30)
+			yaws[yaws.size] = y;
+	}
+
+	// A direction from the shooter with nothing in the way at eye height, and the floor there
+	yaw = undefined;
+	for (i = 0; i < yaws.size && !isDefined(yaw); i++)
+	{
+		f = anglesToForward((0, yaws[i], 0));
+		end = start + (f[0] * dist, f[1] * dist, 0);
+		if (bulletTrace(start + (0, 0, 60), end + (0, 0, 60), false, undefined)["fraction"] == 1)
+			yaw = yaws[i];
+	}
+	if (!isDefined(yaw))
 	{
 		println("DUEL error: no clear line of " + dist + " units around the shooter");
+		if (weapon == "mg")
+			shooter stopUseTurret();
 		return;
 	}
 	f = anglesToForward((0, yaw, 0));
@@ -188,19 +226,34 @@ devDuel(weapon, dist, aim)
 	target setOrigin(floor);
 	target setPlayerAngles((0, yaw + 180, 0));
 	target.health = target.maxhealth;
+	target.devDuelHitLoc = "none";
 
-	shooter setWeaponSlotWeapon("primary", weapon);
-	shooter giveMaxAmmo(weapon);
-	shooter setWeaponSlotClipAmmo("primary", 999); // a new slot weapon may come with an empty clip; the game caps it
-	shooter setSpawnWeapon(weapon); // a bot fires its ps->weapon; switchToWeapon does not change it
-	shooter adsaim(1);
+	if (weapon != "mg")
+	{
+		shooter setWeaponSlotWeapon("primary", weapon);
+		shooter giveMaxAmmo(weapon);
+		shooter setWeaponSlotClipAmmo("primary", 999); // a new slot weapon may come with an empty clip; the game caps it
+		shooter setSpawnWeapon(weapon); // a bot fires its ps->weapon; switchToWeapon does not change it
+		shooter adsaim(1);
+	}
 	wait 1.5; // weapon raise and zoom
 
 	if (aim == "head")
 		point = target.headTag getOrigin();
+	else if (aim == "neck")
+	{
+		tag = spawn("script_origin", (0, 0, 0));
+		tag linkto(target, "J_Neck", (0, 0, 0), (0, 0, 0));
+		wait level.frame;
+		point = tag getOrigin() - (0, 0, 2);
+		tag delete();
+	}
 	else
 		point = target.pelvisTag getOrigin() + (0, 0, 12);
-	angles = vectorToAngles(point - shooter getViewOrigin());
+	eye = shooter getViewOrigin();
+	if (weapon == "mg")
+		eye = (turret.origin[0], turret.origin[1], eye[2]); // the barrel turns there, about 50 units ahead of the eye, at eye height
+	angles = vectorToAngles(point - eye);
 	pitch = angles[0];
 	if (pitch > 180)
 		pitch -= 360;
@@ -209,12 +262,24 @@ devDuel(weapon, dist, aim)
 
 	clip = shooter getWeaponSlotClipAmmo("primary");
 	shooter fireweapon(1);
-	wait 0.1;
+	if (weapon == "mg")
+		wait level.frame; // one bullet
+	else
+		wait 0.1;
 	shooter fireweapon(0);
 	shooter adsaim(0);
 	wait 0.5;
+	if (weapon == "mg")
+		shooter stopUseTurret();
 
-	println("DUEL done weapon=" + weapon + " dist=" + int(distance(shooter getViewOrigin(), point)) + " aim=" + aim + " health=" + target.health + " alive=" + isAlive(target) + " held=" + shooter getCurrentWeapon() + " shots=" + (clip - shooter getWeaponSlotClipAmmo("primary")));
+	println("DUEL done weapon=" + weapon + " dist=" + int(distance(shooter getViewOrigin(), point)) + " aim=" + aim + " hitloc=" + target.devDuelHitLoc + " health=" + target.health + " alive=" + isAlive(target) + " held=" + shooter getCurrentWeapon() + " shots=" + (clip - shooter getWeaponSlotClipAmmo("primary")));
+}
+
+// The hit location the damage code ended with (a neck hit counts as head with scr_hitbox_neck_kill)
+devDuelOnDamaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset)
+{
+	if (isDefined(self.devDuelHitLoc) && self.devDuelHitLoc == "none")
+		self.devDuelHitLoc = sHitLoc;
 }
 
 // developer_script 1: "rcon set dev_bots_autoready 1" makes bots ready up in every ready-up,

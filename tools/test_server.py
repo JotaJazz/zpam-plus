@@ -4,7 +4,7 @@
 Usage:
   python3 tools/test_server.py [--gametype sd] [--map mp_toujane_fix]
       [--pam-mode comp] [--bots 4] [--seconds 20] [--port 28990]
-      [--expect cvar=value ...] [--duel weapon,distance,head|torso[,kill|damage|lo-hi] ...]
+      [--expect cvar=value ...] [--duel weapon,distance,head|torso|neck[,kill|damage|lo-hi] ...]
       [--rcon command ...] [--log regex ...] [-- +set name value ...]
 
 It runs tools/run-server.sh on a free port, waits for the map, checks that the
@@ -136,7 +136,7 @@ def main():
     ap.add_argument("--seconds", type=float, default=20)
     ap.add_argument("--port", type=int, default=28990)
     ap.add_argument("--expect", action="append", default=[], metavar="CVAR=VALUE")
-    ap.add_argument("--duel", action="append", default=[], metavar="WEAPON,DIST,head|torso[,EXPECT]")
+    ap.add_argument("--duel", action="append", default=[], metavar="WEAPON,DIST,head|torso|neck[,EXPECT]")
     ap.add_argument("--rcon", action="append", default=[], metavar="COMMAND", help="sent in order once the map loads; \"sleep N\" waits N seconds")
     ap.add_argument("--log", action="append", default=[], metavar="REGEX", help="games_mp.log of this run must match, within 30 s")
     ap.add_argument("extra", nargs="*", help="more +set arguments, after --")

@@ -8,7 +8,7 @@
 # Environment (or the same names in .server/env, a local file git ignores):
 #   COD2_GAME_DIR    folder with main/iw_*.iwd (stock files only), required
 #   COD2_MAPS_IWD    zPAM map pack, required
-#   COD2_SERVER_BIN  dedicated server binary, default ~/CoD2rev_Server/bin/cod2rev_lnxded
+#   COD2_SERVER_BIN  dedicated server binary, default ~/OpenCoD2-Plus-Server/bin/cod2rev_lnxded
 #   COD2_PORT        UDP port, default 28960
 #
 # The game folder stays read-only: the mod and every file the server writes
@@ -25,7 +25,7 @@ if [ -f "$ROOT/.server/env" ]; then
 	done < "$ROOT/.server/env"
 fi
 GAME_DIR="${COD2_GAME_DIR:-}"
-SERVER_BIN="${COD2_SERVER_BIN:-$HOME/CoD2rev_Server/bin/cod2rev_lnxded}"
+SERVER_BIN="${COD2_SERVER_BIN:-$HOME/OpenCoD2-Plus-Server/bin/cod2rev_lnxded}"
 MAPS_IWD="${COD2_MAPS_IWD:-}"
 PORT="${COD2_PORT:-28960}"
 GAMETYPE="${1:-sd}"

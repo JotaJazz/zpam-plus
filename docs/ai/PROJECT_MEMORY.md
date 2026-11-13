@@ -3,6 +3,12 @@
 Append-only. Newest first. Template in
 [DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md#memory-entry).
 
+## 2026-11-13 — MG and neck duels
+
+- `dev_duel` takes `mg` (the shooter mounts a map turret, `misc_turret` or `misc_mg42`; `mp_toujane` has only the latter) and `neck`; checked on `mp_toujane_fix`: MG 100 head and neck, 75 torso; a neck hit is `neck` and 90 with an M1 Garand with `scr_hitbox_neck_kill 0`, a head kill with 1.
+- The MG barrel is about 50 units ahead of the eye, so the duel aims from the turret pivot at eye height; aimed from the eye the bullets missed. The `J_Neck` tag lies in the head box; 2 units lower is the neck.
+- The server repo moved to `~/OpenCoD2-Plus-Server`, now the default of `tools/run-server.sh`; its `bin/` held a 1.0 build until rebuilt with `make PLUS=1`.
+
 ## 2026-11-07 — ladder phase C
 
 - The first ready-up of a ladder match waits for both rosters (`_ladder::rosterReady` in `areAllPlayersReady`); a missing team after `scr_ladder_ready_timeout` gives `LadderForfeit;`; a roster player away longer than the halftime auto-resume gives `LadderLeaver;` (system time, so map restarts do not reset it). Checked: forfeit, a full roster that starts, and a leaver at map end.
